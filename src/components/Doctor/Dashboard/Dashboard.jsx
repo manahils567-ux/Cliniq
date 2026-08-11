@@ -26,6 +26,7 @@ import '../DashboardLayout/DashboardLayout.css';
 import './DashboardHome.css';
 import MedicalRecords from '../../MedicalRecords/MedicalRecords';
 import Reminders from '../../Reminders/Reminders';
+import NearbyHospitals from '../../NearbyHospitals/NearbyHospitals';
 
 const { Text } = Typography;
 
@@ -424,9 +425,10 @@ const PatientDashboard = () => {
 	);
 
 	const tabItems = [
-		{ key: '1', label: 'Overview',        children: overviewContent },
-		{ key: '2', label: 'Medical Records', children: <MedicalRecords /> },
-		{ key: '3', label: 'Reminders',       children: <Reminders /> },
+		{ key: '1', label: 'Overview',          children: overviewContent },
+		{ key: '2', label: 'Medical Records',   children: <MedicalRecords /> },
+		{ key: '3', label: 'Reminders',         children: <Reminders /> },
+		{ key: '4', label: '📍 Nearby',         children: <NearbyHospitals /> },
 	];
 
 	return <Tabs defaultActiveKey="1" items={tabItems} />;
