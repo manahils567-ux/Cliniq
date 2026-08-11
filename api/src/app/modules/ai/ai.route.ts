@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post('/chat', auth('patient', 'doctor', 'admin'), AiController.chat);
 router.post('/medical-history', auth('patient'), AiController.generateMedicalHistory);
+router.post('/scan-prescription', auth('patient', 'doctor', 'admin'), AiController.scanPrescription);
 router.use(ChatHistoryRouter);
 
 export const AiRouter = router;

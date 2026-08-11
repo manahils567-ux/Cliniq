@@ -2,12 +2,12 @@ import React, { useRef, useState, useMemo } from 'react';
 import {
     Button, Card, Tag, Popconfirm, Empty, Spin,
     message, Select, Typography, Row, Col, Tooltip,
-    Input, Modal, Checkbox, Space
+    Input, Modal, Checkbox, Space, Tabs
 } from 'antd';
 import {
     UploadOutlined, DeleteOutlined, EyeOutlined,
     DownloadOutlined, FileOutlined, MedicineBoxOutlined,
-    RobotOutlined, ShareAltOutlined, SearchOutlined
+    RobotOutlined, ShareAltOutlined, SearchOutlined, ScanOutlined
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import {
@@ -18,6 +18,7 @@ import {
     useShareMedicalRecordsMutation,
 } from '../../redux/api/medicalRecordApi';
 import { useGetPatientAppointmentsQuery } from '../../redux/api/appointmentApi';
+import PrescriptionScanner from './PrescriptionScanner';
 
 const { Option } = Select;
 const { Title, Text, Paragraph } = Typography;
@@ -189,212 +190,186 @@ const MedicalRecords = () => {
         }
     };
 
-    return (
-        <div>
-            {/* Header section */}
-            <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                <Title level={5} style={{ margin: 0 }}>
-                    <MedicineBoxOutlined className="me-2" />
-                    Medical Records & Reports
-                </Title>
-                <div className="d-flex align-items-center gap-2 flex-wrap">
-                    <Button
-                        type="default"
-                        style={{ borderColor: '#722ed1', color: '#722ed1', fontWeight: 500 }}
-                        icon={<RobotOutlined />}
-                        onClick={handleGenerateHistory}
-                    >
-                        Generate Medical History
-                    </Button>
-                    <Select
-                        value={uploadCategory}
-                        onChange={setUploadCategory}
-                        style={{ width: 140 }}
-                        disabled={uploading}
-                    >
-                        {CATEGORIES.map((c) => (
-                            <Option key={c} value={c}>{c}</Option>
-                        ))}
-                    </Select>
-                    <Button
-                        type="primary"
-                        icon={<UploadOutlined />}
-                        loading={uploading}
-                        onClick={() => fileInputRef.current?.click()}
-                    >
-                        {uploading ? 'Uploading…' : 'Upload File'}
-                    </Button>
-                    <input
-                        ref={fileInputRef}
-                        type="file"
-                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                        style={{ display: 'none' }}
-                        onChange={handleFileChange}
-                    />
-                </div>
-            </div>
-
-            {/* Toolbar: Search, Filter, Sort & Bulk Share */}
-            <Card size="small" style={{ marginBottom: 16, backgroundColor: '#fafafa' }}>
-                <Row gutter={[12, 12]} align="middle">
-                    <Col xs={24} sm={10} md={8}>
-                        <Input
-                            placeholder="Search by title, notes, type..."
-                            prefix={<SearchOutlined />}
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            allowClear
-                        />
-                    </Col>
-                    <Col xs={12} sm={7} md={5}>
-                        <Select
-                            style={{ width: '100%' }}
-                            value={selectedCategory}
-                            onChange={setSelectedCategory}
-                        >
-                            <Option value="ALL">All Categories</Option>
-                            {CATEGORIES.map((c) => (
-                                <Option key={c} value={c}>{c}</Option>
-                            ))}
-                        </Select>
-                    </Col>
-                    <Col xs={12} sm={7} md={5}>
-                        <Select
-                            style={{ width: '100%' }}
-                            value={sortOrder}
-                            onChange={setSortOrder}
-                        >
-                            <Option value="desc">Newest First</Option>
-                            <Option value="asc">Oldest First</Option>
-                        </Select>
-                    </Col>
-                    <Col xs={24} md={6} style={{ textAlign: 'right' }}>
-                        {selectedRecordIds.length > 0 && (
+    const tabItems = [
+        {
+            key: 'records',
+            label: <span><MedicineBoxOutlined /> My Records</span>,
+            children: (
+                <div>
+                    {/* Header section */}
+                    <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                        <Title level={5} style={{ margin: 0 }}>
+                            <MedicineBoxOutlined className="me-2" />
+                            Medical Records & Reports
+                        </Title>
+                        <div className="d-flex align-items-center gap-2 flex-wrap">
+                            <Button
+                                type="default"
+                                style={{ borderColor: '#722ed1', color: '#722ed1', fontWeight: 500 }}
+                                icon={<RobotOutlined />}
+                                onClick={handleGenerateHistory}
+                            >
+                                Generate Medical History
+                            </Button>
+                            <Select
+                                value={uploadCategory}
+                                onChange={setUploadCategory}
+                                style={{ width: 140 }}
+                                disabled={uploading}
+                            >
+                                {CATEGORIES.map((c) => (
+                                    <Option key={c} value={c}>{c}</Option>
+                                ))}
+                            </Select>
                             <Button
                                 type="primary"
-                                style={{ backgroundColor: '#52c41a', borderColor: '#52c41a' }}
-                                icon={<ShareAltOutlined />}
-                                onClick={() => setShareModalVisible(true)}
+                                icon={<UploadOutlined />}
+                                loading={uploading}
+                                onClick={() => fileInputRef.current?.click()}
                             >
-                                Share ({selectedRecordIds.length}) with Doctor
+                                {uploading ? 'Uploading…' : 'Upload File'}
                             </Button>
-                        )}
-                    </Col>
-                </Row>
-            </Card>
+                            <input
+                                ref={fileInputRef}
+                                type="file"
+                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                style={{ display: 'none' }}
+                                onChange={handleFileChange}
+                            />
+                        </div>
+                    </div>
 
-            <div className="d-flex justify-content-between align-items-center mb-2">
-                <Text type="secondary" style={{ fontSize: 12 }}>
-                    Supported: PDF, DOC, DOCX, JPG, PNG
-                </Text>
-                {filteredRecords.length > 0 && (
-                    <Checkbox
-                        checked={selectedRecordIds.length === filteredRecords.length && filteredRecords.length > 0}
-                        onChange={(e) => handleSelectAll(e.target.checked)}
-                    >
-                        Select All Filtered ({filteredRecords.length})
-                    </Checkbox>
-                )}
-            </div>
-
-            {/* Records Grid */}
-            <div className="mt-2">
-                {isLoading ? (
-                    <div className="text-center py-4"><Spin /></div>
-                ) : filteredRecords.length === 0 ? (
-                    <Empty description={records.length === 0 ? "No medical records yet. Upload your first document." : "No records match your search/filter criteria."} />
-                ) : (
-                    <Row gutter={[16, 16]}>
-                        {filteredRecords.map((record) => {
-                            const isSelected = selectedRecordIds.includes(record.id);
-                            return (
-                                <Col xs={24} sm={12} lg={8} key={record.id}>
-                                    <Card
-                                        size="small"
-                                        hoverable
-                                        style={{
-                                            border: isSelected ? '2px solid #1677ff' : undefined,
-                                            backgroundColor: isSelected ? '#e6f4ff' : undefined,
-                                        }}
-                                        onClick={() => handleView(record.fileUrl)}
-                                        extra={
-                                            <Space onClick={(e) => e.stopPropagation()}>
-                                                <Checkbox
-                                                    checked={isSelected}
-                                                    onChange={(e) => handleSelectRecord(record.id, e.target.checked)}
-                                                />
-                                                <Popconfirm
-                                                    title="Delete this record?"
-                                                    onConfirm={(e) => { e.stopPropagation(); handleDelete(record.id); }}
-                                                    onCancel={(e) => e.stopPropagation()}
-                                                    okText="Yes"
-                                                    cancelText="No"
-                                                >
-                                                    <Button
-                                                        danger size="small"
-                                                        icon={<DeleteOutlined />}
-                                                    />
-                                                </Popconfirm>
-                                            </Space>
-                                        }
+                    {/* Toolbar */}
+                    <Card size="small" style={{ marginBottom: 16, backgroundColor: '#fafafa' }}>
+                        <Row gutter={[12, 12]} align="middle">
+                            <Col xs={24} sm={10} md={8}>
+                                <Input
+                                    placeholder="Search by title, notes, type..."
+                                    prefix={<SearchOutlined />}
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    allowClear
+                                />
+                            </Col>
+                            <Col xs={12} sm={7} md={5}>
+                                <Select style={{ width: '100%' }} value={selectedCategory} onChange={setSelectedCategory}>
+                                    <Option value="ALL">All Categories</Option>
+                                    {CATEGORIES.map((c) => (<Option key={c} value={c}>{c}</Option>))}
+                                </Select>
+                            </Col>
+                            <Col xs={12} sm={7} md={5}>
+                                <Select style={{ width: '100%' }} value={sortOrder} onChange={setSortOrder}>
+                                    <Option value="desc">Newest First</Option>
+                                    <Option value="asc">Oldest First</Option>
+                                </Select>
+                            </Col>
+                            <Col xs={24} md={6} style={{ textAlign: 'right' }}>
+                                {selectedRecordIds.length > 0 && (
+                                    <Button
+                                        type="primary"
+                                        style={{ backgroundColor: '#52c41a', borderColor: '#52c41a' }}
+                                        icon={<ShareAltOutlined />}
+                                        onClick={() => setShareModalVisible(true)}
                                     >
-                                        <div className="d-flex align-items-start gap-2 mb-2">
-                                            <FileOutlined style={{ fontSize: 24, color: '#1677ff', marginTop: 2 }} />
-                                            <div style={{ flex: 1, minWidth: 0 }}>
-                                                <Text
-                                                    strong
-                                                    style={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
-                                                    title={record.title}
-                                                >
-                                                    {record.title}
-                                                </Text>
-                                                {record.description && (
-                                                    <p className="form-text mb-1">{record.description}</p>
-                                                )}
-                                            </div>
-                                        </div>
-                                        <div className="d-flex justify-content-between align-items-center">
-                                            <Tag color={CATEGORY_COLORS[record.category] ?? 'default'}>
-                                                {record.category}
-                                            </Tag>
-                                            <Text type="secondary" style={{ fontSize: 11 }}>
-                                                {dayjs(record.date).format('MMM D, YYYY')}
-                                            </Text>
-                                        </div>
-                                        <div className="d-flex justify-content-between align-items-center mt-2" onClick={(e) => e.stopPropagation()}>
-                                            <div className="d-flex gap-1">
-                                                <Tooltip title="View">
-                                                    <Button
-                                                        size="small" icon={<EyeOutlined />}
-                                                        onClick={() => handleView(record.fileUrl)}
-                                                    />
-                                                </Tooltip>
-                                                <Tooltip title="Download">
-                                                    <Button
-                                                        size="small" icon={<DownloadOutlined />}
-                                                        onClick={() => handleDownload(record.fileUrl, record.title)}
-                                                    />
-                                                </Tooltip>
-                                            </div>
-                                            <Button
+                                        Share ({selectedRecordIds.length}) with Doctor
+                                    </Button>
+                                )}
+                            </Col>
+                        </Row>
+                    </Card>
+
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                        <Text type="secondary" style={{ fontSize: 12 }}>Supported: PDF, DOC, DOCX, JPG, PNG</Text>
+                        {filteredRecords.length > 0 && (
+                            <Checkbox
+                                checked={selectedRecordIds.length === filteredRecords.length && filteredRecords.length > 0}
+                                onChange={(e) => handleSelectAll(e.target.checked)}
+                            >
+                                Select All Filtered ({filteredRecords.length})
+                            </Checkbox>
+                        )}
+                    </div>
+
+                    {/* Records Grid */}
+                    <div className="mt-2">
+                        {isLoading ? (
+                            <div className="text-center py-4"><Spin /></div>
+                        ) : filteredRecords.length === 0 ? (
+                            <Empty description={records.length === 0 ? "No medical records yet. Upload your first document." : "No records match your search/filter criteria."} />
+                        ) : (
+                            <Row gutter={[16, 16]}>
+                                {filteredRecords.map((record) => {
+                                    const isSelected = selectedRecordIds.includes(record.id);
+                                    return (
+                                        <Col xs={24} sm={12} lg={8} key={record.id}>
+                                            <Card
                                                 size="small"
-                                                type={isSelected ? "primary" : "default"}
-                                                icon={<ShareAltOutlined />}
-                                                onClick={() => {
-                                                    setSelectedRecordIds([record.id]);
-                                                    setShareModalVisible(true);
+                                                hoverable
+                                                style={{
+                                                    border: isSelected ? '2px solid #1677ff' : undefined,
+                                                    backgroundColor: isSelected ? '#e6f4ff' : undefined,
                                                 }}
+                                                onClick={() => handleView(record.fileUrl)}
+                                                extra={
+                                                    <Space onClick={(e) => e.stopPropagation()}>
+                                                        <Checkbox
+                                                            checked={isSelected}
+                                                            onChange={(e) => handleSelectRecord(record.id, e.target.checked)}
+                                                        />
+                                                        <Popconfirm
+                                                            title="Delete this record?"
+                                                            onConfirm={(e) => { e.stopPropagation(); handleDelete(record.id); }}
+                                                            onCancel={(e) => e.stopPropagation()}
+                                                            okText="Yes" cancelText="No"
+                                                        >
+                                                            <Button danger size="small" icon={<DeleteOutlined />} />
+                                                        </Popconfirm>
+                                                    </Space>
+                                                }
                                             >
-                                                Share
-                                            </Button>
-                                        </div>
-                                    </Card>
-                                </Col>
-                            );
-                        })}
-                    </Row>
-                )}
-            </div>
+                                                <div className="d-flex align-items-start gap-2 mb-2">
+                                                    <FileOutlined style={{ fontSize: 24, color: '#1677ff', marginTop: 2 }} />
+                                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                                        <Text strong style={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={record.title}>
+                                                            {record.title}
+                                                        </Text>
+                                                        {record.description && <p className="form-text mb-1">{record.description}</p>}
+                                                    </div>
+                                                </div>
+                                                <div className="d-flex justify-content-between align-items-center">
+                                                    <Tag color={CATEGORY_COLORS[record.category] ?? 'default'}>{record.category}</Tag>
+                                                    <Text type="secondary" style={{ fontSize: 11 }}>{dayjs(record.date).format('MMM D, YYYY')}</Text>
+                                                </div>
+                                                <div className="d-flex justify-content-between align-items-center mt-2" onClick={(e) => e.stopPropagation()}>
+                                                    <div className="d-flex gap-1">
+                                                        <Tooltip title="View"><Button size="small" icon={<EyeOutlined />} onClick={() => handleView(record.fileUrl)} /></Tooltip>
+                                                        <Tooltip title="Download"><Button size="small" icon={<DownloadOutlined />} onClick={() => handleDownload(record.fileUrl, record.title)} /></Tooltip>
+                                                    </div>
+                                                    <Button size="small" type={isSelected ? "primary" : "default"} icon={<ShareAltOutlined />}
+                                                        onClick={() => { setSelectedRecordIds([record.id]); setShareModalVisible(true); }}>
+                                                        Share
+                                                    </Button>
+                                                </div>
+                                            </Card>
+                                        </Col>
+                                    );
+                                })}
+                            </Row>
+                        )}
+                    </div>
+                </div>
+            ),
+        },
+        {
+            key: 'scanner',
+            label: <span><ScanOutlined /> Prescription Scanner</span>,
+            children: <PrescriptionScanner />,
+        },
+    ];
+
+    return (
+        <div>
+            <Tabs defaultActiveKey="records" items={tabItems} />
 
             {/* AI Medical History Modal */}
             <Modal

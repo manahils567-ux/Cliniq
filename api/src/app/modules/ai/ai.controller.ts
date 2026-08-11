@@ -40,4 +40,17 @@ const generateMedicalHistory = async (req: Request, res: Response, next: NextFun
     }
 };
 
-export const AiController = { chat, generateMedicalHistory };
+const scanPrescription = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { imageBase64, mimeType = 'image/jpeg' } = req.body;
+        if (!imageBase64) {
+            return res.status(400).json({ success: false, message: 'imageBase64 is required' });
+        }
+        const result = await AiService.scanPrescription(imageBase64, mimeType);
+        return res.status(200).json({ success: !result.error, data: result });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const AiController = { chat, generateMedicalHistory, scanPrescription };

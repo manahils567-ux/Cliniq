@@ -285,4 +285,97 @@ Generate a concise and organized Medical History Summary:`;
     }
 };
 
-export const AiService = { chat, generateMedicalHistory };
+// ── Prescription Scanner (Gemini Vision) ─────────────────────────────────
+export type ScannedMedicine = {
+    name: string;
+    dosage: string;
+    frequency: string;
+    duration: string;
+    instructions: string;
+};
+
+export type ScanResult = {
+    medicines: ScannedMedicine[];
+    doctorName?: string;
+    patientName?: string;
+    date?: string;
+    diagnosis?: string;
+    rawText: string;
+    error?: string;
+};
+
+const scanPrescription = async (imageBase64: string, mimeType: string): Promise<ScanResult> => {
+    const client = initGemini();
+    if (!client) {
+        return { medicines: [], rawText: '', error: 'SERVICE_UNAVAILABLE' };
+    }
+
+    const prompt = `You are a medical prescription OCR assistant. Analyze this prescription image carefully and extract all information.
+
+Return a JSON object with this EXACT structure (no markdown, no code blocks, just raw JSON):
+{
+  "doctorName": "doctor name or null",
+  "patientName": "patient name or null",
+  "date": "prescription date or null",
+  "diagnosis": "diagnosis or condition if mentioned or null",
+  "medicines": [
+    {
+      "name": "medicine name",
+      "dosage": "dosage e.g. 500mg",
+      "frequency": "e.g. twice daily",
+      "duration": "e.g. 7 days",
+      "instructions": "e.g. take after meals"
+    }
+  ],
+  "rawText": "full text extracted from the prescription"
+}
+
+Rules:
+- Extract ALL medicines visible in the prescription
+- If a field is not visible, use null
+- medicines array must never be null, use empty array if no medicines found
+- Return ONLY the JSON, nothing else`;
+
+    try {
+        const result = await client.models.generateContent({
+            model: 'gemini-3.5-flash',
+            contents: [
+                {
+                    role: 'user',
+                    parts: [
+                        {
+                            inlineData: {
+                                mimeType,
+                                data: imageBase64,
+                            },
+                        },
+                        { text: prompt },
+                    ],
+                },
+            ],
+        });
+
+        const raw = result.text ?? '';
+        // Strip markdown code blocks if present
+        const cleaned = raw.replace(/```json\n?/gi, '').replace(/```\n?/gi, '').trim();
+
+        try {
+            const parsed = JSON.parse(cleaned);
+            return {
+                medicines: parsed.medicines || [],
+                doctorName: parsed.doctorName || undefined,
+                patientName: parsed.patientName || undefined,
+                date: parsed.date || undefined,
+                diagnosis: parsed.diagnosis || undefined,
+                rawText: parsed.rawText || raw,
+            };
+        } catch {
+            return { medicines: [], rawText: raw, error: 'PARSE_ERROR' };
+        }
+    } catch (error: any) {
+        console.error('[AI] Prescription scan error:', error?.message);
+        return { medicines: [], rawText: '', error: 'API_ERROR' };
+    }
+};
+
+export const AiService = { chat, generateMedicalHistory, scanPrescription };
