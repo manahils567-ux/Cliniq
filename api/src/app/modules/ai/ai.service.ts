@@ -191,4 +191,90 @@ const chat = async (
     }
 };
 
-export const AiService = { chat };
+const generateMedicalHistory = async (userId: string): Promise<{ summary: string; error?: string }> => {
+    const client = initGemini();
+
+    if (!client) {
+        return {
+            summary: 'The AI service is currently unavailable. Please try again later.',
+            error: 'SERVICE_UNAVAILABLE',
+        };
+    }
+
+    try {
+        const patient = await prisma.patient.findUnique({
+            where: { id: userId },
+            select: {
+                firstName: true,
+                lastName: true,
+                bloodGroup: true,
+                gender: true,
+                medicalRecords: {
+                    orderBy: { date: 'desc' },
+                    select: {
+                        id: true,
+                        title: true,
+                        category: true,
+                        date: true,
+                        description: true,
+                    },
+                },
+            },
+        });
+
+        if (!patient) {
+            return { summary: 'Patient profile not found.' };
+        }
+
+        const records = patient.medicalRecords;
+
+        if (!records || records.length === 0) {
+            return {
+                summary: 'Insufficient medical records available. No stored medical records were found for your account to generate a summary history.',
+            };
+        }
+
+        const recordsContext = records.map((r, i) => (
+            `Record #${i + 1}:
+• Title: ${r.title}
+• Report Type/Category: ${r.category}
+• Date: ${r.date ? r.date.toISOString().split('T')[0] : 'N/A'}
+• Notes/Description: ${r.description || 'No additional notes provided.'}`
+        )).join('\n\n');
+
+        const prompt = `You are a clinical assistant summarizing patient medical records.
+
+Rules:
+- Summarize the patient's medical history strictly based on the provided records below.
+- Highlight key report types, dates, titles, and relevant medical notes.
+- Do NOT invent, assume, or extrapolate any medical condition or details not explicitly mentioned in these records.
+- If the records lack detail on specific conditions or procedures, state clearly that information is limited.
+- Format the response using clean Markdown with sections (e.g. Overview, Timeline of Records, Key Summary Notes).
+
+Patient Profile:
+- Name: ${patient.firstName} ${patient.lastName}
+- Blood Group: ${patient.bloodGroup || 'Not recorded'}
+- Gender: ${patient.gender || 'Not recorded'}
+
+Stored Medical Records (${records.length} total):
+${recordsContext}
+
+Generate a concise and organized Medical History Summary:`;
+
+        const result = await client.models.generateContent({
+            model: 'gemini-3.5-flash',
+            contents: prompt,
+        });
+
+        const summary = result.text ?? 'Unable to generate summary at this time.';
+        return { summary };
+    } catch (error: any) {
+        console.error('[AI] Medical history error:', error);
+        return {
+            summary: 'An error occurred while generating your medical history. Please try again.',
+            error: 'API_ERROR',
+        };
+    }
+};
+
+export const AiService = { chat, generateMedicalHistory };

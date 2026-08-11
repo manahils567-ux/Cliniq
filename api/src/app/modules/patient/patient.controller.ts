@@ -5,11 +5,12 @@ import { PatientService } from "./patient.service";
 import { Patient } from "@prisma/client";
 
 const createPatient = catchAsync(async (req: Request, res: Response) => {
-    await PatientService.createPatient(req.body);
+    const result = await PatientService.createPatient(req.body);
     sendResponse(res, {
         statusCode: 200,
         message: 'Successfully Patient Created !!',
-        success: true
+        success: true,
+        data: result
     })
 })
 

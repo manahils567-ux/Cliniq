@@ -9,34 +9,34 @@ export const create = async (payload: any): Promise<any> => {
         const data = await prisma.$transaction(async (tx) => {
             const { password, ...othersData } = payload;
 
+            // Check Email existing before creating records
+            const existEmail = await tx.auth.findUnique({ where: { email: othersData.email } });
+            const existPatient = await tx.patient.findUnique({ where: { email: othersData.email } });
+            if (existEmail || existPatient) {
+                throw new ApiError(httpStatus.BAD_REQUEST, "Email Already Exist !!");
+            }
+
             const patient = await tx.patient.create({
                 data: othersData,
             });
 
-            if (patient) {
-                // Check Email existing
-                const existEmail = await tx.auth.findUnique({ where: { email: patient.email } });
-                if (existEmail) {
-                    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Email Already Exist !!")
-                } else {
-                    const auth = await tx.auth.create({
-                        data: {
-                            email: patient.email,
-                            password: password && await bcrypt.hashSync(password, 12),
-                            role: UserRole.patient,
-                            userId: patient.id
-                        },
-                    });
-                    return {
-                        patient,
-                        auth,
-                    };
-                }
-            }
+            const auth = await tx.auth.create({
+                data: {
+                    email: patient.email,
+                    password: password && await bcrypt.hashSync(password, 12),
+                    role: UserRole.patient,
+                    userId: patient.id
+                },
+            });
+
+            return {
+                patient,
+                auth,
+            };
         });
 
         return data;
     } catch (error: any) {
-        throw new ApiError(httpStatus.BAD_REQUEST, error.message)
+        throw new ApiError(httpStatus.BAD_REQUEST, error.message);
     }
 };

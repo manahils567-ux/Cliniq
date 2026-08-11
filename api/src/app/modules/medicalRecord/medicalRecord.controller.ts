@@ -34,4 +34,25 @@ const deleteRecord = catchAsync(async (req: Request, res: Response) => {
     sendResponse(res, { statusCode: httpStatus.OK, success: true, message: 'Record deleted', data: result });
 });
 
-export const MedicalRecordController = { uploadRecord, getRecords, getRecord, deleteRecord };
+const shareRecords = catchAsync(async (req: Request, res: Response) => {
+    const patientId = getPatientId(req);
+    const result = await MedicalRecordService.shareRecords(patientId, req.body);
+    sendResponse(res, { statusCode: httpStatus.OK, success: true, message: 'Records shared successfully', data: result });
+});
+
+const getSharedRecordsForAppointment = catchAsync(async (req: Request, res: Response) => {
+    const userId = (req.user as any)?.userId;
+    const role = (req.user as any)?.role;
+    const { appointmentId } = req.params;
+    const result = await MedicalRecordService.getSharedRecordsForAppointment(appointmentId, userId, role);
+    sendResponse(res, { statusCode: httpStatus.OK, success: true, message: 'Shared records fetched', data: result });
+});
+
+export const MedicalRecordController = {
+    uploadRecord,
+    getRecords,
+    getRecord,
+    deleteRecord,
+    shareRecords,
+    getSharedRecordsForAppointment,
+};

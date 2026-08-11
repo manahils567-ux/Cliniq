@@ -26,4 +26,18 @@ const chat = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-export const AiController = { chat };
+const generateMedicalHistory = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = (req.user as any)?.userId;
+        const result = await AiService.generateMedicalHistory(userId);
+
+        return res.status(httpStatus.OK).json({
+            success: !result.error,
+            data: { summary: result.summary },
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const AiController = { chat, generateMedicalHistory };

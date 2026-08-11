@@ -21,7 +21,8 @@ const SignUp = ({ setSignUp }) => {
 
     useEffect(() => {
         if (dIsError || pIsError) {
-            message.error('Email already exists!');
+            const errorMsg = pError?.data?.message || dError?.data?.message || 'Email already exists!';
+            message.error(errorMsg);
         }
         if (dIsSuccess) {
             swal({ icon: 'success', text: 'Account created! Please verify your email.', timer: 4000 });
@@ -32,7 +33,7 @@ const SignUp = ({ setSignUp }) => {
             setUser({ firstName: '', lastName: '', email: '', password: '' });
             setSignUp(false);
         }
-    }, [dIsError, pIsError, dIsSuccess, pIsSuccess, setSignUp]);
+    }, [dIsError, pIsError, dIsSuccess, pIsSuccess, dError, pError, setSignUp]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

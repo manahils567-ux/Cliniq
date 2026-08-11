@@ -35,6 +35,27 @@ export const medicalRecordApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [tagTypes.medicalRecord],
         }),
+        generateMedicalHistory: build.mutation({
+            query: () => ({
+                url: `/ai/medical-history`,
+                method: 'POST',
+            }),
+        }),
+        shareMedicalRecords: build.mutation({
+            query: (data) => ({
+                url: `${MEDICAL_RECORD_URL}/share`,
+                method: 'POST',
+                data,
+            }),
+            invalidatesTags: [tagTypes.medicalRecord],
+        }),
+        getSharedRecordsForAppointment: build.query({
+            query: (appointmentId) => ({
+                url: `${MEDICAL_RECORD_URL}/shared/appointment/${appointmentId}`,
+                method: 'GET',
+            }),
+            providesTags: [tagTypes.medicalRecord],
+        }),
     }),
 });
 
@@ -43,4 +64,7 @@ export const {
     useGetMedicalRecordsQuery,
     useGetMedicalRecordQuery,
     useDeleteMedicalRecordMutation,
+    useGenerateMedicalHistoryMutation,
+    useShareMedicalRecordsMutation,
+    useGetSharedRecordsForAppointmentQuery,
 } = medicalRecordApi;

@@ -100,8 +100,24 @@ model MedicalRecord {
   publicId    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  sharedWith  SharedMedicalRecord[]
 
   @@map("MedicalRecord")
+}
+
+model SharedMedicalRecord {
+  id              String        @id @default(uuid())
+  medicalRecordId String
+  medicalRecord   MedicalRecord @relation(fields: [medicalRecordId], references: [id], onDelete: Cascade)
+  appointmentId   String?
+  appointment     Appointments? @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  doctorId        String?
+  doctor          Doctor?       @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  patientId       String
+  createdAt       DateTime      @default(now())
+
+  @@unique([medicalRecordId, appointmentId])
+  @@map("SharedMedicalRecord")
 }
 
 model Doctor {
@@ -146,6 +162,7 @@ model Doctor {
   DoctorTimeSlot         DoctorTimeSlot[]
   blogs                  Blogs[]
   reviews                Reviews[]
+  sharedRecords          SharedMedicalRecord[]
 
   @@map("Doctor")
 }
@@ -177,6 +194,7 @@ model Appointments {
   updatedAt    DateTime       @updatedAt
   prescription Prescription[]
   payment      Payment[]
+  sharedRecords SharedMedicalRecord[]
 
   @@map("Appointments")
 }

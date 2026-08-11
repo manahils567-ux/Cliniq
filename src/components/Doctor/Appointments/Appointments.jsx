@@ -1,13 +1,46 @@
 import React, { useState, useMemo } from 'react';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
-import { Table, Tag, Button, Input, Select, DatePicker, Space, Modal, message, Card } from 'antd';
+import { Table, Tag, Button, Input, Select, DatePicker, Space, Modal, message, Card, Spin } from 'antd';
 import { FaEye, FaCheck, FaTimes, FaBriefcaseMedical, FaSearch } from 'react-icons/fa';
 import { useGetDoctorAppointmentsQuery, useUpdateAppointmentMutation } from '../../../redux/api/appointmentApi';
+import { useGetSharedRecordsForAppointmentQuery } from '../../../redux/api/medicalRecordApi';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import './Appointments.css';
 
 const { RangePicker } = DatePicker;
+
+const SharedMedicalRecordsSection = ({ appointmentId }) => {
+    const { data: recordsData, isLoading } = useGetSharedRecordsForAppointmentQuery(appointmentId, {
+        skip: !appointmentId,
+    });
+    const records = recordsData?.data ?? [];
+
+    if (isLoading) return <div className="my-2"><Spin size="small" /> Loading shared records...</div>;
+    if (records.length === 0) return <p className="text-muted small my-2">No medical records explicitly shared for this appointment.</p>;
+
+    return (
+        <div className="mt-3">
+            <h5 className="mb-2">Explicitly Shared Medical Records ({records.length})</h5>
+            <div className="d-flex flex-column gap-2">
+                {records.map((r) => (
+                    <Card key={r.id} size="small" style={{ backgroundColor: '#f6ffed', borderColor: '#b7eb8f' }}>
+                        <div className="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>{r.title}</strong> <Tag color="blue">{r.category}</Tag>
+                                {r.description && <div className="text-muted small">{r.description}</div>}
+                                <div className="text-muted style-11">{moment(r.date).format('MMM DD, YYYY')}</div>
+                            </div>
+                            <Button size="small" type="primary" ghost icon={<FaEye />} onClick={() => window.open(r.fileUrl, '_blank')}>
+                                View File
+                            </Button>
+                        </div>
+                    </Card>
+                ))}
+            </div>
+        </div>
+    );
+};
 
 const Appointments = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -16,8 +49,10 @@ const Appointments = () => {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
 
+    const [selectedAppointment, setSelectedAppointment] = useState(null);
+
     const { data, isLoading, refetch } = useGetDoctorAppointmentsQuery({});
-    const [updateAppointment, { isLoading: isUpdating }] = useUpdateAppointmentMutation();
+    const [updateAppointment] = useUpdateAppointmentMutation();
 
     const appointments = data || [];
 
@@ -62,31 +97,6 @@ const Appointments = () => {
         } catch (error) {
             message.error('Failed to update appointment status');
         }
-    };
-
-    const handleViewDetails = (record) => {
-        Modal.info({
-            title: 'Appointment Details',
-            width: 700,
-            content: (
-                <div className="appointment-details-modal">
-                    <h4>Patient Information</h4>
-                    <p><strong>Name:</strong> {record.firstName} {record.lastName}</p>
-                    <p><strong>Email:</strong> {record.email}</p>
-                    <p><strong>Phone:</strong> {record.phone}</p>
-                    <p><strong>Address:</strong> {record.address || 'N/A'}</p>
-                    <hr />
-                    <h4>Appointment Details</h4>
-                    <p><strong>Tracking ID:</strong> {record.trackingId}</p>
-                    <p><strong>Date:</strong> {moment(record.scheduleDate).format('MMM DD, YYYY')}</p>
-                    <p><strong>Time:</strong> {record.scheduleTime}</p>
-                    <p><strong>Reason:</strong> {record.reasonForVisit}</p>
-                    <p><strong>Status:</strong> <Tag color="blue">{record.status}</Tag></p>
-                    <p><strong>Payment Status:</strong> <Tag color="green">{record.paymentStatus}</Tag></p>
-                    <p><strong>Prescription Status:</strong> <Tag color="orange">{record.prescriptionStatus}</Tag></p>
-                </div>
-            ),
-        });
     };
 
     const columns = [
@@ -149,7 +159,7 @@ const Appointments = () => {
                     <Button
                         type="link"
                         icon={<FaEye />}
-                        onClick={() => handleViewDetails(record)}
+                        onClick={() => setSelectedAppointment(record)}
                         size="small"
                     >
                         View
@@ -274,6 +284,40 @@ const Appointments = () => {
                     scroll={{ x: 1200 }}
                 />
             </div>
+
+            {/* Appointment Details Modal */}
+            <Modal
+                title="Appointment Details & Shared Records"
+                open={!!selectedAppointment}
+                onCancel={() => setSelectedAppointment(null)}
+                footer={[
+                    <Button key="close" type="primary" onClick={() => setSelectedAppointment(null)}>
+                        Close
+                    </Button>
+                ]}
+                width={700}
+            >
+                {selectedAppointment && (
+                    <div className="appointment-details-modal">
+                        <h4>Patient Information</h4>
+                        <p><strong>Name:</strong> {selectedAppointment.firstName} {selectedAppointment.lastName}</p>
+                        <p><strong>Email:</strong> {selectedAppointment.email}</p>
+                        <p><strong>Phone:</strong> {selectedAppointment.phone}</p>
+                        <p><strong>Address:</strong> {selectedAppointment.address || 'N/A'}</p>
+                        <hr />
+                        <h4>Appointment Details</h4>
+                        <p><strong>Tracking ID:</strong> {selectedAppointment.trackingId}</p>
+                        <p><strong>Date:</strong> {moment(selectedAppointment.scheduleDate).format('MMM DD, YYYY')}</p>
+                        <p><strong>Time:</strong> {selectedAppointment.scheduleTime}</p>
+                        <p><strong>Reason:</strong> {selectedAppointment.reasonForVisit}</p>
+                        <p><strong>Status:</strong> <Tag color="blue">{selectedAppointment.status}</Tag></p>
+                        <p><strong>Payment Status:</strong> <Tag color="green">{selectedAppointment.paymentStatus}</Tag></p>
+                        <p><strong>Prescription Status:</strong> <Tag color="orange">{selectedAppointment.prescriptionStatus}</Tag></p>
+                        <hr />
+                        <SharedMedicalRecordsSection appointmentId={selectedAppointment.id} />
+                    </div>
+                )}
+            </Modal>
         </DashboardLayout>
     );
 };
