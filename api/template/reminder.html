@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reminder – Cliniq</title>
+  <style>
+    body { margin: 0; padding: 0; background: #f4f6f9; font-family: 'Segoe UI', Arial, sans-serif; }
+    .wrapper { max-width: 560px; margin: 40px auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .header { background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%); padding: 36px 32px; text-align: center; }
+    .header h1 { color: #fff; margin: 0; font-size: 24px; letter-spacing: 0.5px; }
+    .header p  { color: rgba(255,255,255,0.85); margin: 6px 0 0; font-size: 14px; }
+    .body { padding: 32px; }
+    .greeting { font-size: 16px; color: #1e293b; margin-bottom: 20px; }
+    .card { background: #f8fafc; border-left: 4px solid #0ea5e9; border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; }
+    .card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 4px; }
+    .card .value { font-size: 15px; color: #1e293b; font-weight: 600; }
+    .detail-row { display: flex; justify-content: space-between; margin-bottom: 12px; }
+    .detail-row .key   { color: #64748b; font-size: 14px; }
+    .detail-row .val   { color: #1e293b; font-size: 14px; font-weight: 500; }
+    .footer { background: #f8fafc; padding: 20px 32px; text-align: center; font-size: 12px; color: #94a3b8; }
+    .footer a { color: #0ea5e9; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <h1>⏰ Reminder</h1>
+      <p>Cliniq Health Platform</p>
+    </div>
+    <div class="body">
+      <p class="greeting">Hi <strong>{{patientName}}</strong>,</p>
+      <p style="color:#475569;font-size:14px;margin-bottom:24px;">
+        This is your scheduled reminder from Cliniq.
+      </p>
+      <div class="card">
+        <div class="label">Reminder</div>
+        <div class="value">{{title}}</div>
+      </div>
+      {{#if description}}
+      <div class="detail-row">
+        <span class="key">Details</span>
+        <span class="val">{{description}}</span>
+      </div>
+      {{/if}}
+      <div class="detail-row">
+        <span class="key">Type</span>
+        <span class="val">{{type}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="key">Scheduled</span>
+        <span class="val">{{startDate}}</span>
+      </div>
+      <div class="detail-row">
+        <span class="key">Frequency</span>
+        <span class="val">{{frequency}}</span>
+      </div>
+      <p style="color:#64748b;font-size:13px;margin-top:24px;">
+        If you have any questions, please contact your healthcare provider.
+      </p>
+    </div>
+    <div class="footer">
+      &copy; 2025 Cliniq &nbsp;|&nbsp; <a href="#">Unsubscribe</a>
+    </div>
+  </div>
+</body>
+</html>

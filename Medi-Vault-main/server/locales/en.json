@@ -1,0 +1,23 @@
+{
+  "greeting": "Hello! How can I help you today?",
+  "farewell": "Goodbye! Take care.",
+  "error": "I'm sorry, I couldn't understand that. Could you please rephrase?",
+  "medical_terms": {
+    "symptoms": "What symptoms are you experiencing?",
+    "medication": "Are you currently taking any medication?",
+    "allergies": "Do you have any known allergies?",
+    "history": "Could you tell me about your medical history?"
+  },
+  "responses": {
+    "acknowledge": "I understand.",
+    "clarify": "Could you please provide more details?",
+    "confirm": "Is this correct?",
+    "suggest": "Based on your symptoms, I suggest:"
+  },
+  "commands": {
+    "help": "How can I help you?",
+    "reminder": "Would you like me to set a reminder?",
+    "record": "Would you like to add this to your medical records?",
+    "doctor": "Would you like me to connect you with a doctor?"
+  }
+} 

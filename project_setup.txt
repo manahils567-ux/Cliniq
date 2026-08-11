@@ -1,0 +1,16 @@
+## Cliniq — Project Setup
+
+### Clone
+git clone <your-repo-url>
+cd cliniq
+
+### Install & run backend (api/)
+cd api
+npm install
+npx prisma db push
+npm run start
+
+### Install & run frontend (root)
+cd ..
+npm install
+npm start

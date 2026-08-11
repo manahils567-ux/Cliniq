@@ -1,0 +1,169 @@
+{
+  "common": {
+    "home": "Home",
+    "features": "Features",
+    "security": "Security",
+    "contact": "Contact",
+    "login": "Login",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "welcome": "Welcome",
+    "quickLinks": "Quick Links"
+  },
+  "home": {
+    "title": "Secure Healthcare Management Platform",
+    "subtitle": "Your medical records, secure and accessible anywhere",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "goToDashboard": "Go to Dashboard",
+    "keyFeatures": "Key Features",
+    "features": {
+      "records": {
+        "title": "Patient Medical Record Management",
+        "item1": "Upload/view encrypted medical history",
+        "item2": "Medicine prescriptions management",
+        "item3": "AES-256 encryption for secure storage",
+        "item4": "Export reports"
+      },
+      "reminders": {
+        "title": "Smart Reminders",
+        "item1": "Medicine reminders from prescriptions",
+        "item2": "Scheduled health checkup alerts",
+        "item3": "Push notifications via Firebase"
+      },
+      "chatbot": {
+        "title": "AI-Powered Chatbot",
+        "item1": "Health-related FAQs",
+        "item2": "Prescription/medicine guidance",
+        "item3": "Powered by GPT API"
+      },
+      "access": {
+        "title": "Secure Doctor Access",
+        "item1": "QR code-based access requests",
+        "item2": "Role-based permissions",
+        "item3": "Temporary access management"
+      },
+      "export": {
+        "title": "Export & Share Records",
+        "item1": "Encrypted PDF export",
+        "item2": "Download options",
+        "item3": "Access control management"
+      },
+      "future": {
+        "title": "Future-Ready Platform",
+        "item1": "Modular architecture",
+        "item2": "Healthcare ecosystem integration",
+        "item3": "Advanced admin dashboard",
+        "item4": "Scalable infrastructure"
+      }
+    },
+    "security": {
+      "title": "Enterprise-Grade Security",
+      "encryption": {
+        "title": "AES-256 Encryption",
+        "description": "Military-grade encryption for all stored data"
+      },
+      "compliance": {
+        "title": "HIPAA Compliant",
+        "description": "Following healthcare data protection standards"
+      }
+    }
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "loginButton": "Login",
+    "registerButton": "Register",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "register": "Register",
+    "name": "Full Name",
+    "confirmPassword": "Confirm Password",
+    "dateOfBirth": "Date of Birth",
+    "gender": "Gender",
+    "selectGender": "Select Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "phoneNumber": "Phone Number",
+    "passwordMismatch": "Passwords do not match",
+    "registrationFailed": "Registration failed",
+    "registering": "Registering...",
+    "loggingIn": "Logging in...",
+    "loginFailed": "Login failed",
+    "joinMessage": "Join MediVault to securely manage your medical records"
+  },
+  "dashboard": {
+    "uploadRecord": "Upload New Record",
+    "medicalRecords": "Medical Records",
+    "quickActions": "Quick Actions",
+    "shareAccess": "Share Access",
+    "shareRecords": "Share Records",
+    "reminders": "Reminders",
+    "manageReminders": "Manage Reminders",
+    "aiAssistant": "AI Health Assistant",
+    "startChat": "Start Chat",
+    "loading": "Loading...",
+    "errorLoadingData": "Error loading data",
+    "logout": "Logout",
+    "uploading": "Uploading...",
+    "uploadedRecordDescription": "Uploaded medical record",
+    "errorUploadingFile": "Error uploading file",
+    "supportedFormats": "Supported formats: PDF, DOC, DOCX, JPG, JPEG, PNG",
+    "noRecords": "No records found",
+    "uploadedDate": "Uploaded on {{date}}",
+    "download": "Download",
+    "delete": "Delete",
+    "view": "View",
+    "confirmDelete": "Are you sure you want to delete this record?",
+    "errorDownloadingFile": "Error downloading file",
+    "errorDeletingFile": "Error deleting file",
+    "categories": {
+      "prescription": "Prescription",
+      "lab report": "Lab Report",
+      "vaccination": "Vaccination",
+      "surgery": "Surgery",
+      "other": "Other"
+    }
+  },
+  "reminders": {
+    "title": "Reminders",
+    "description": "Description",
+    "type": "Type",
+    "medicine": "Medicine",
+    "checkup": "Checkup",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "frequency": "Frequency",
+    "once": "Once",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "notificationMethod": "Notification Method",
+    "pushNotification": "Push Notification",
+    "sms": "SMS",
+    "both": "Both",
+    "createReminder": "Create Reminder",
+    "yourReminders": "Your Reminders",
+    "noReminders": "No reminders set",
+    "delete": "Delete",
+    "start": "Start",
+    "alert": "Reminder Alert",
+    "errorFetching": "Error fetching reminders",
+    "errorCreating": "Error creating reminder",
+    "errorDeleting": "Error deleting reminder",
+    "creating": "Creating reminder...",
+    "loading": "Loading reminders...",
+    "addReminder": "Add Reminder",
+    "hideForm": "Hide Form",
+    "optional": "optional"
+  },
+  "chatbot": {
+    "title": "AI Health Assistant",
+    "placeholder": "Ask me anything about health...",
+    "send": "Send",
+    "thinking": "Thinking...",
+    "error": "Sorry, I couldn't process your request. Please try again."
+  }
+}
