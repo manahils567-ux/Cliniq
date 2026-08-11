@@ -34,4 +34,6 @@ export default {
     backendLiveUrl: process.env.BACKEND_LIVE_URL,
     backendLocalUrl: process.env.BACKEND_LOCAL_URL,
     geminiApiKey: process.env.GEMINI_API_KEY,
+    googleClientId: process.env.GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
 }

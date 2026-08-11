@@ -1,43 +1,36 @@
 import React, { useState } from 'react';
-import { FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import log from '../../images/doc/info.svg';
-import register from '../../images/doc/register.svg';
+import { FaTimes } from 'react-icons/fa';
 import SignIn from './SignIn';
-import './SignInForm.css';
 import SignUp from './SignUp';
+import './SignInForm.css';
+import stethoscope from '../../images/doc/info.svg';
 
 const SignInForm = () => {
     const [isSignUp, setSignUp] = useState(false);
+
     return (
-        <div className={`${isSignUp ? "signin-signup-container sign-up-mode" : "signin-signup-container"}`}>
-            <Link to="/">
-                <span className="pageCloseBtn"><FaTimes /></span>
-            </Link>
-            <div className="forms-container">
-                <div className="signIn-singUp">
-                    <SignIn />
-                    <SignUp setSignUp={setSignUp} />
-                </div>
-            </div>
+        <div className="auth-page">
+            <div className="auth-card">
+                {/* Close */}
+                <Link to="/" className="auth-close" title="Back to home">
+                    <FaTimes size={12} />
+                </Link>
 
-            <div className="panels-container">
-                <div className="panel left-panel">
-                    <div className="content">
-                        <h3 className='text-white'>New here ?</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae quas magnam!</p>
-                        <button className="iBtn transparent" onClick={() => setSignUp(true)}>Sign Up</button>
-                    </div>
-                    <img src={`${log}`} alt="" className="pImg" />
+                {/* Left panel */}
+                <div className="auth-left">
+                    <div className="auth-left-logo">🏥</div>
+                    <h2>We at Cliniq are always fully focused on your health.</h2>
+                    <img src={stethoscope} alt="cliniq" className="auth-left-img" />
                 </div>
 
-                <div className="panel right-panel">
-                    <div className="content">
-                        <h3 className='text-white'>One of us ?</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi beatae quas magnam!</p>
-                        <button className="iBtn transparent" onClick={() => setSignUp(false)}>Sign In</button>
-                    </div>
-                    <img src={`${register}`} alt="" className="pImg" />
+                {/* Right panel */}
+                <div className="auth-right">
+                    <span className="auth-lang">English(US) ▾</span>
+                    {isSignUp
+                        ? <SignUp setSignUp={setSignUp} />
+                        : <SignIn setSignUp={setSignUp} />
+                    }
                 </div>
             </div>
         </div>

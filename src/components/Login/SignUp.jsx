@@ -1,217 +1,145 @@
 import React, { useEffect, useState } from 'react';
-import { FaCheck, FaEnvelope, FaLock, FaTimes, FaUser } from 'react-icons/fa';
-import SocialSignUp from './SocialSignUp';
-import Spinner from 'react-bootstrap/Spinner'
+import { FaCheck, FaTimes, FaEye, FaEyeSlash } from 'react-icons/fa';
+import Spinner from 'react-bootstrap/Spinner';
 import swal from 'sweetalert';
 import { useDoctorSignUpMutation, usePatientSignUpMutation } from '../../redux/api/authApi';
 import { message } from 'antd';
-
-// password regex
-// ^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$
-// At least one upper case English letter, (?=.*?[A-Z])
-// At least one lower case English letter, (?=.*?[a-z])
-// At least one digit, (?=.*?[0-9])
-// At least one special character, (?=.*?[#?!@$%^&*-])
-// Minimum eight in length .{8,} (with the anchors)
+import GoogleSignInButton from './GoogleSignInButton';
 
 const SignUp = ({ setSignUp }) => {
-    const [error, setError] = useState({});
-    const [infoError, setInfoError] = useState('');
-    const [loading, setLoading] = useState(false);
-    const formField = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-    }
-    const [user, setUser] = useState(formField)
+    const [showPassword, setShowPassword] = useState(false);
     const [userType, setUserType] = useState('patient');
-    const [doctorSignUp, { data: dData, isSuccess: dIsSuccess, isError: dIsError, error: dError, isLoading: dIsLoading }] = useDoctorSignUpMutation();
-    const [patientSignUp, { data: pData, isSuccess: pIsSuccess, isError: pIsError, error: pError, isLoading: pIsLoading }] = usePatientSignUpMutation();
+    const [user, setUser] = useState({ firstName: '', lastName: '', email: '', password: '' });
     const [passwordValidation, setPasswordValidation] = useState({
-        carLength: false,
-        specailChar: false,
-        upperLowerCase: false,
-        numeric: false
-    })
+        carLength: false, specailChar: false, upperLowerCase: false, numeric: false,
+    });
+    const [emailValid, setEmailValid] = useState(false);
 
-    const handleSignUpSuccess = () => {
-        setLoading(false);
-        setUser(formField)
-    }
+    const [doctorSignUp, { isSuccess: dIsSuccess, isError: dIsError, error: dError, isLoading: dIsLoading }] = useDoctorSignUpMutation();
+    const [patientSignUp, { isSuccess: pIsSuccess, isError: pIsError, error: pError, isLoading: pIsLoading }] = usePatientSignUpMutation();
+    const isLoading = dIsLoading || pIsLoading;
+
     useEffect(() => {
-        // doctor account
-        if (dIsError && dError) {
-            message.error("Email Already Exist !!")
-            setLoading(false);
+        if (dIsError || pIsError) {
+            message.error('Email already exists!');
         }
-
-        if (!dIsError && dIsSuccess) {
-            handleSignUpSuccess();
-            setLoading(false);
-            setLoading(false);
-            swal({
-                icon: 'success',
-                text: `Successfully Account Created Please Verify Your email`,
-                timer: 5000
-            })
+        if (dIsSuccess) {
+            swal({ icon: 'success', text: 'Account created! Please verify your email.', timer: 4000 });
+            setUser({ firstName: '', lastName: '', email: '', password: '' });
         }
-
-        // Patient account
-        if (pIsError && pError) {
-            message.error("Email Already Exist !!")
-            setLoading(false);
-        }
-        if (!pIsError && pIsSuccess) {
-            handleSignUpSuccess();
-            setLoading(false);
+        if (pIsSuccess) {
+            swal({ icon: 'success', text: 'Account created! You can now sign in.', timer: 2000 });
+            setUser({ firstName: '', lastName: '', email: '', password: '' });
             setSignUp(false);
-            swal({
-                icon: 'success',
-                text: `Successfully ${userType === 'doctor' ? 'Doctor' : 'Patient'} Account Created Please Login`,
-                timer: 2000
-            })
         }
+    }, [dIsError, pIsError, dIsSuccess, pIsSuccess, setSignUp]);
 
-    }, [dIsError, dError, pError, pIsError, , pIsLoading, dIsLoading, pData, dData, setSignUp, setLoading, dIsSuccess])
-
-    const [emailError, setEmailError] = useState({
-        emailError: false
-    })
-
-    const handleEmailError = (name, value) => {
-        if (name === 'email') {
-            setEmailError({
-                emailError: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-            })
-        }
-    }
-    const hanldeValidation = (name, value) => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUser((prev) => ({ ...prev, [name]: value }));
+        if (name === 'email') setEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
         if (name === 'password') {
             setPasswordValidation({
-                carLength: (value.length > 8),
-                specailChar: /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(value),
-                upperLowerCase: /^(?=.*[a-z])(?=.*[A-Z])/.test(value),
-                numeric: /^(?=.*\d)/.test(value),
-            })
+                carLength: value.length >= 8,
+                specailChar: /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(value),
+                upperLowerCase: /(?=.*[a-z])(?=.*[A-Z])/.test(value),
+                numeric: /(?=.*\d)/.test(value),
+            });
         }
-    }
+    };
 
-    const hanldeOnChange = (e) => {
-        let { name, value } = e.target;
-        hanldeValidation(name, value)
-        handleEmailError(name, value)
-        let isPassValid = true;
+    const isFormValid = emailValid &&
+        passwordValidation.carLength &&
+        passwordValidation.specailChar &&
+        passwordValidation.upperLowerCase &&
+        passwordValidation.numeric;
 
-        if (value === 'email') {
-            isPassValid = /\S+@\S+\.\S+/.test(value);
-        }
-        if (value === 'password') {
-            isPassValid = ((value.length > 8)
-                && /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(value)
-                && /^(?=.*[a-z])(?=.*[A-Z])/.test(value)
-                && /^(?=.*\d)/.test(value))
-        }
-        if (isPassValid) {
-            const newPass = { ...user };
-            newPass[name] = value
-            setUser(newPass)
-        }
-    }
-
-    const handleUserTypeChange = (e) => {
-        setUserType(e.target.value);
-    }
-    const hanldeOnSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setLoading(true);
-        if (userType === "doctor") {
-            doctorSignUp(user);
-        } else {
-            patientSignUp(user)
-        }
-    }
+        if (userType === 'doctor') doctorSignUp(user);
+        else patientSignUp(user);
+    };
+
+    const hints = [
+        { key: 'carLength',      label: '8+ characters' },
+        { key: 'specailChar',    label: 'Special character' },
+        { key: 'upperLowerCase', label: 'Upper & lower case' },
+        { key: 'numeric',        label: 'Number' },
+    ];
 
     return (
-        <form className="sign-up-form" onSubmit={hanldeOnSubmit}>
-            <div className="alert alert-warning small text-start mb-3" role="alert">
-                <strong>Fair use:</strong> Do not misuse this app or create accounts you do not need. Patient sign-up uses email +
-                password only. Doctor accounts must verify email before login. Admin accounts are not created here — they are added
-                in the database with <code>role = admin</code>. For a public demo admin, set <code>isDemo = true</code> so the
-                account stays read-only.
-            </div>
-            <h2 className="title">Sign Up</h2>
-            <div className="input-field">
-                <span className="fIcon"><FaUser /></span>
-                <input placeholder="First Name" name="firstName" type="text" onChange={(e) => hanldeOnChange(e)} value={user.firstName} />
-            </div>
-            <div className="input-field">
-                <span className="fIcon"><FaUser /></span>
-                <input placeholder="Last Name" name="lastName" type="text" onChange={(e) => hanldeOnChange(e)} value={user.lastName} />
-            </div>
-            <div className="input-field">
-                <span className="fIcon"><FaEnvelope /></span>
-                <input placeholder="Email" name="email" type="email" onChange={(e) => hanldeOnChange(e)} value={user.email} />
-            </div>
-            <div className="input-field">
-                <span className="fIcon"><FaLock /></span>
-                <input type="password" name="password" placeholder="password" onChange={(e) => hanldeOnChange(e)} value={user.password} />
-            </div>
-            <div className='input-field d-flex align-items-center gap-2 justify-content-center'>
-                <div className='text-nowrap'>I'M A</div>
-                <select
-                    className="form-select w-50"
-                    aria-label="select"
-                    onChange={(e) => handleUserTypeChange(e)}
-                    defaultValue='patient'
-                >
-                    <option value="patient">Patient</option>
-                    <option value="doctor">Doctor</option>
-                </select>
-            </div>
-            {error.length && <h6 className="text-danger text-center">{error}</h6>}
-            {infoError && <h6 className="text-danger text-center">{infoError}</h6>}
-            <button type="submit"
-                className="btn btn-primary btn-block mt-2 iBtn"
-                disabled={
-                    passwordValidation.carLength && passwordValidation.numeric && passwordValidation.upperLowerCase && passwordValidation.specailChar && emailError.emailError ? "" : true
-                }
-            >
-                {loading ? <Spinner animation="border" variant="info" /> : "Sign Up"}
-            </button>
+        <>
+            <h2>Create Account</h2>
 
-            <div className="password-validatity mx-auto">
+            {/* Social buttons */}
+            <div className="auth-social-row">
+                <GoogleSignInButton label="Sign up with Google" />
+            </div>
 
-                <div style={emailError.emailError ? { color: "green" } : { color: "red" }}>
-                    <p>{passwordValidation.numeric ? <FaCheck /> : <FaTimes />}
-                        <span className="ms-2">Must Have Valid Email.</span></p>
+            <div className="auth-divider">–OR–</div>
+
+            <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+                <div className="auth-field-row">
+                    <div className="auth-field">
+                        <label>First Name</label>
+                        <input name="firstName" placeholder="John" value={user.firstName} onChange={handleChange} required />
+                    </div>
+                    <div className="auth-field">
+                        <label>Last Name</label>
+                        <input name="lastName" placeholder="Doe" value={user.lastName} onChange={handleChange} required />
+                    </div>
                 </div>
 
-                <div style={passwordValidation.carLength ? { color: "green" } : { color: "red" }}>
-                    <p>{passwordValidation.numeric ? <FaCheck /> : <FaTimes />}
-                        <span className="ms-2">Password Must Have atlast 8 character.</span></p>
+                <div className="auth-field">
+                    <label>Email</label>
+                    <input name="email" type="email" placeholder="you@example.com" value={user.email} onChange={handleChange} required />
                 </div>
 
-                <div style={passwordValidation.specailChar ? { color: "green" } : { color: "red" }}>
-                    <p>{passwordValidation.numeric ? <FaCheck /> : <FaTimes />}
-                        <span className="ms-2">Password Must Have a special cracter.</span></p>
+                <div className="auth-field">
+                    <label>Password</label>
+                    <div className="auth-input-wrap">
+                        <input
+                            name="password"
+                            type={showPassword ? 'text' : 'password'}
+                            placeholder="••••••••"
+                            value={user.password}
+                            onChange={handleChange}
+                            required
+                        />
+                        <span className="auth-eye" onClick={() => setShowPassword(!showPassword)}>
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </span>
+                    </div>
+                    {/* Password hints */}
+                    {user.password.length > 0 && (
+                        <div className="auth-pass-hints">
+                            {hints.map(({ key, label }) => (
+                                <span key={key} className={`auth-pass-hint ${passwordValidation[key] ? 'ok' : 'bad'}`}>
+                                    {passwordValidation[key] ? <FaCheck size={9} /> : <FaTimes size={9} />} {label}
+                                </span>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
-                <div style={passwordValidation.upperLowerCase ? { color: "green" } : { color: "red" }}>
-                    <p>{passwordValidation.numeric ? <FaCheck /> : <FaTimes />}
-                        <span className="ms-2">Password Must Have uppercase and lower case.</span></p>
+                <div className="auth-field">
+                    <label>I am a</label>
+                    <select value={userType} onChange={(e) => setUserType(e.target.value)}>
+                        <option value="patient">Patient</option>
+                        <option value="doctor">Doctor</option>
+                    </select>
                 </div>
 
-                <div style={passwordValidation.numeric ? { color: "green" } : { color: "red" }}>
-                    <p>{passwordValidation.numeric ? <FaCheck /> : <FaTimes />}
-                        <span className="ms-2">Password Must Have Number.</span></p>
-                </div>
+                <button className="auth-submit-btn" type="submit" disabled={!isFormValid || isLoading}>
+                    {isLoading ? <Spinner animation="border" size="sm" /> : 'Create Account'}
+                </button>
+            </form>
+
+            <div className="auth-footer">
+                Already have an account?{' '}
+                <span onClick={() => setSignUp(false)}>Log in</span>
             </div>
-
-            <p className="social-text">Or Sign up with social account</p>
-            <SocialSignUp />
-        </form>
-
+        </>
     );
 };
 
