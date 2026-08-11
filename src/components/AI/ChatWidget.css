@@ -349,3 +349,60 @@
         right: 12px;
     }
 }
+
+/* ── Specialist recommendation button ── */
+.cw-specialist-btn {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 8px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #0ea5e9, #2563eb);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.cw-specialist-btn:hover {
+    opacity: 0.88;
+}
+
+/* ── Voice button ── */
+.cw-voice-btn {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #f1f5f9;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.cw-voice-btn:hover { background: #e2e8f0; }
+.cw-voice-btn.listening {
+    background: #fee2e2;
+    color: #ef4444;
+    animation: pulse 1s infinite;
+}
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
+    50%       { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
+}
+
+/* ── Clear history icon button ── */
+.cw-icon-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    padding: 4px 6px;
+    border-radius: 6px;
+    transition: color 0.2s;
+}
+.cw-icon-btn:hover { color: #fff; }

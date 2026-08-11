@@ -62,7 +62,12 @@ const create = async (payload: any): Promise<any> => {
     });
 
     if (data.id) {
-        await sendVerificationEmail(data)
+        try {
+            await sendVerificationEmail(data);
+        } catch (err) {
+            console.error('[Doctor Signup] Verification email failed:', err);
+            // Don't block signup if email fails — doctor can still be created
+        }
     }
     return data;
 

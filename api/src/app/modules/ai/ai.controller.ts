@@ -19,7 +19,7 @@ const chat = async (req: Request, res: Response, next: NextFunction) => {
 
         return res.status(httpStatus.OK).json({
             success: !result.error,
-            data: { reply: result.reply },
+            data: { reply: result.reply, specialist: result.specialist ?? null },
         });
     } catch (error) {
         next(error);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '../../Shared/Footer/Footer';
 import SearchSidebar from './SearchSidebar';
 import SearchContent from './SearchContent';
@@ -7,9 +7,11 @@ import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 import { Empty, Pagination, Spin } from 'antd';
 import Header from '../../Shared/Header/Header';
 import SubHeader from '../../Shared/SubHeader';
+import { useLocation } from 'react-router-dom';
 import './SearchDoctor.css';
 
 const SearchDoctor = () => {
+	const location = useLocation();
 	const [page, setPage] = useState(1);
 	const [size, setSize] = useState(10);
 	const [sortBy, setSortBy] = useState('');
@@ -18,6 +20,13 @@ const SearchDoctor = () => {
 	const [sortByGender, setSortByGender] = useState('');
 	const [specialist, setSpecialist] = useState('');
 	const [priceRange, setPriceRange] = useState({});
+
+	// Pre-fill specialist from URL query param (e.g. from AI chatbot recommendation)
+	useEffect(() => {
+		const params = new URLSearchParams(location.search);
+		const spec = params.get('specialization');
+		if (spec) setSpecialist(spec);
+	}, [location.search]);
 
 	const query = {
 		limit: size,

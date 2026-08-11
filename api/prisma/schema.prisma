@@ -43,7 +43,7 @@ model ForgotPassword {
 }
 
 model Patient {
-  id             String          @id @default(uuid())
+                                    id             String          @id @default(uuid())
   firstName      String
   lastName       String
   dateOfBirth    DateTime?
@@ -65,6 +65,7 @@ model Patient {
   favourites     Favourites[]
   reminders      Reminder[]
   medicalRecords MedicalRecord[]
+  chatMessages   ChatMessage[]
 
   @@map("Patient")
 }
@@ -329,6 +330,17 @@ enum UserRole {
   doctor
 }
 
+model ChatMessage {
+  id         String   @id @default(uuid())
+  patientId  String
+  patient    Patient  @relation(fields: [patientId], references: [id])
+  role       String   // "user" | "bot"
+  text       String
+  specialist String?
+  createdAt  DateTime @default(now())
+
+  @@map("ChatMessage")
+}
 enum Day {
   saturday
   sunday
