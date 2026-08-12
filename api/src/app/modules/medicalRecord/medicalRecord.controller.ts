@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { MedicalRecordService } from './medicalRecord.service';
+import { RecordAnalysisService } from './recordAnalysis.service';
 import ApiError from '../../../errors/apiError';
 
 const getPatientId = (req: Request): string => (req.user as any)?.userId;
@@ -48,6 +49,64 @@ const getSharedRecordsForAppointment = catchAsync(async (req: Request, res: Resp
     sendResponse(res, { statusCode: httpStatus.OK, success: true, message: 'Shared records fetched', data: result });
 });
 
+// ── AI analysis ───────────────────────────────────────────────────────────
+const getAnalysis = catchAsync(async (req: Request, res: Response) => {
+    const patientId = getPatientId(req);
+    const result = await RecordAnalysisService.getAnalysis(req.params.id, patientId);
+    if (!result) throw new ApiError(httpStatus.NOT_FOUND, 'No analysis found for this record');
+    sendResponse(res, { statusCode: httpStatus.OK, success: true, message: 'Analysis fetched', data: result });
+});
+
+const reanalyzeRecord = catchAsync(async (req: Request, res: Response) => {
+    const patientId = getPatientId(req);
+    const result = await RecordAnalysisService.reanalyze(req.params.id, patientId);
+    if (!result) throw new ApiError(httpStatus.NOT_FOUND, 'Record not found or analysis failed');
+    sendResponse(res, { statusCode: httpStatus.OK, success: true, message: 'Record re-analyzed', data: result });
+});
+
+const getInsights = catchAsync(async (req: Request, res: Response) => {
+    const patientId = getPatientId(req);
+    const status = typeof req.query.status === 'string' ? req.query.status : undefined;
+    const result = await RecordAnalysisService.getInsights(patientId, status);
+    sendResponse(res, { statusCode: httpStatus.OK, success: true, message: 'Insights fetched', data: result });
+});
+
+const getInsightSummary = catchAsync(async (req: Request, res: Response) => {
+    const patientId = getPatientId(req);
+    const result = await RecordAnalysisService.getInsightSummary(patientId);
+    sendResponse(res, { statusCode: httpStatus.OK, success: true, message: 'Summary fetched', data: result });
+});
+
+const updateInsight = catchAsync(async (req: Request, res: Response) => {
+    const patientId = getPatientId(req);
+    const { status } = req.body;
+    if (!['new', 'read', 'dismissed'].includes(status)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'status must be new, read or dismissed');
+    }
+    const result = await RecordAnalysisService.updateInsightStatus(req.params.id, patientId, status);
+    if (!result) throw new ApiError(httpStatus.NOT_FOUND, 'Insight not found');
+    sendResponse(res, { statusCode: httpStatus.OK, success: true, message: 'Insight updated', data: result });
+});
+
+const acceptInsightReminder = catchAsync(async (req: Request, res: Response) => {
+    const patientId = getPatientId(req);
+    const result = await RecordAnalysisService.acceptInsightReminder(req.params.id, patientId);
+    if (!result) throw new ApiError(httpStatus.NOT_FOUND, 'Insight not found');
+    sendResponse(res, {
+        statusCode: httpStatus.CREATED,
+        success: true,
+        message: 'Reminder created from insight',
+        data: result,
+    });
+});
+
+const getMetricTrends = catchAsync(async (req: Request, res: Response) => {
+    const patientId = getPatientId(req);
+    const key = typeof req.query.key === 'string' ? req.query.key : undefined;
+    const result = await RecordAnalysisService.getMetricTrends(patientId, key);
+    sendResponse(res, { statusCode: httpStatus.OK, success: true, message: 'Trends fetched', data: result });
+});
+
 export const MedicalRecordController = {
     uploadRecord,
     getRecords,
@@ -55,4 +114,11 @@ export const MedicalRecordController = {
     deleteRecord,
     shareRecords,
     getSharedRecordsForAppointment,
+    getAnalysis,
+    reanalyzeRecord,
+    getInsights,
+    getInsightSummary,
+    updateInsight,
+    acceptInsightReminder,
+    getMetricTrends,
 };

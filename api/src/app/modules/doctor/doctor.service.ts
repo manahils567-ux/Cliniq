@@ -181,10 +181,45 @@ const updateDoctor = async (req: Request): Promise<Doctor> => {
     return result;
 }
 
+/**
+ * Public counters for the landing page trust strip.
+ * `star` is stored as a String, so the average is computed in JS rather than
+ * with an aggregate — the column cannot be averaged in SQL as-is.
+ */
+const getPlatformStats = async () => {
+    const [doctors, patients, specialisations, reviews] = await Promise.all([
+        prisma.doctor.count(),
+        prisma.patient.count(),
+        prisma.doctor.findMany({
+            where: { specialization: { not: null } },
+            select: { specialization: true },
+            distinct: ['specialization'],
+        }),
+        prisma.reviews.findMany({ select: { star: true } }),
+    ]);
+
+    const stars = reviews
+        .map((r) => Number(r.star))
+        .filter((n) => Number.isFinite(n) && n > 0);
+
+    const avgRating = stars.length
+        ? Number((stars.reduce((a, b) => a + b, 0) / stars.length).toFixed(1))
+        : null;
+
+    return {
+        doctors,
+        patients,
+        specialities: specialisations.filter((s) => (s.specialization || '').trim()).length,
+        avgRating,
+        reviews: stars.length,
+    };
+};
+
 export const DoctorService = {
     create,
     updateDoctor,
     deleteDoctor,
     getAllDoctors,
-    getDoctor
+    getDoctor,
+    getPlatformStats
 }

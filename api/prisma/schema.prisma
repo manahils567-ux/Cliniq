@@ -66,6 +66,8 @@ model Patient {
   reminders      Reminder[]
   medicalRecords MedicalRecord[]
   chatMessages   ChatMessage[]
+  healthInsights HealthInsight[]
+  healthMetrics  HealthMetric[]
 
   @@map("Patient")
 }
@@ -103,7 +105,114 @@ model MedicalRecord {
   updatedAt   DateTime @updatedAt
   sharedWith  SharedMedicalRecord[]
 
+  /// pending | processing | completed | failed | skipped
+  analysisStatus String          @default("pending")
+  analysis       RecordAnalysis?
+  metrics        HealthMetric[]
+  insights       HealthInsight[]
+
   @@map("MedicalRecord")
+}
+
+/// AI analysis of an uploaded medical document (lab report, prescription, imaging, etc.)
+model RecordAnalysis {
+  id        String        @id @default(uuid())
+  recordId  String        @unique
+  record    MedicalRecord @relation(fields: [recordId], references: [id], onDelete: Cascade)
+  patientId String
+
+  /// lab_report | prescription | imaging | discharge_summary | vaccination | other
+  documentType String  @default("other")
+  /// Clinical-register summary
+  summary      String
+  /// Plain-language summary written for the patient
+  plainSummary String?
+  /// string[] — notable findings pulled from the document
+  findings     Json?
+  /// string[] — things that warrant attention
+  concerns     Json?
+  /// string[] — lifestyle / follow-up suggestions
+  suggestions  Json?
+  /// Full OCR text
+  rawText      String?
+
+  modelUsed String  @default("gemini-3.5-flash")
+  /// completed | failed
+  status    String  @default("completed")
+  errorCode String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  metrics  HealthMetric[]
+  insights HealthInsight[]
+
+  @@index([patientId])
+  @@map("RecordAnalysis")
+}
+
+/// A single measurable value extracted from a document, kept for trending over time
+model HealthMetric {
+  id         String         @id @default(uuid())
+  analysisId String
+  analysis   RecordAnalysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  recordId   String
+  record     MedicalRecord  @relation(fields: [recordId], references: [id], onDelete: Cascade)
+  patientId  String
+  patient    Patient        @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  /// Canonical lowercase key used for trending, e.g. "hemoglobin"
+  key            String
+  /// Display name as printed on the report
+  name           String
+  value          String
+  numericValue   Float?
+  unit           String?
+  referenceRange String?
+  /// normal | low | high | critical | unknown
+  status         String  @default("unknown")
+
+  measuredAt DateTime
+  createdAt  DateTime @default(now())
+
+  @@index([patientId, key])
+  @@index([analysisId])
+  @@map("HealthMetric")
+}
+
+/// Alerts, suggestions and reminder proposals derived from a patient's reports
+model HealthInsight {
+  id         String          @id @default(uuid())
+  patientId  String
+  patient    Patient         @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  analysisId String?
+  analysis   RecordAnalysis? @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+  recordId   String?
+  record     MedicalRecord?  @relation(fields: [recordId], references: [id], onDelete: Cascade)
+
+  /// alert | suggestion | followup | reminder
+  type     String
+  /// info | low | moderate | high | critical
+  severity String @default("info")
+  title    String
+  message  String
+  category String?
+
+  /// Reminder proposal the patient can accept in one click:
+  /// { type, title, description, frequency, startOffsetDays, endOffsetDays }
+  suggestedReminder Json?
+  /// Set once the patient accepts the proposal
+  reminderId        String?
+
+  /// new | read | accepted | dismissed
+  status String @default("new")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([patientId, status])
+  @@index([analysisId])
+  @@map("HealthInsight")
 }
 
 model SharedMedicalRecord {

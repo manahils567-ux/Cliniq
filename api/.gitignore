@@ -1,4 +1,7 @@
 node_modules/
 .vercel
 .env*.local
-.env**
+.env
+.env.*
+# The template IS meant to be committed — README tells you to copy it.
+!.env.example

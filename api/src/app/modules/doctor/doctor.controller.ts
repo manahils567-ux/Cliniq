@@ -58,10 +58,21 @@ const updateDoctor = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+const getPlatformStats = catchAsync(async (req: Request, res: Response) => {
+    const result = await DoctorService.getPlatformStats();
+    sendResponse(res, {
+        statusCode: 200,
+        message: 'Successfully Retrieved Platform Stats !!',
+        success: true,
+        data: result,
+    })
+})
+
 export const DoctorController = {
     createDoctor,
     updateDoctor,
     deleteDoctor,
     getAllDoctors,
-    getDoctor
+    getDoctor,
+    getPlatformStats
 }
