@@ -45,12 +45,15 @@
 }
 
 .dashboard-stat-card {
-  background: linear-gradient(135deg, var(--n-700) 0%, var(--n-800) 100%);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
   border-radius: var(--r-lg);
-  padding: 1.5rem;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(125, 64, 71, 0.3);
-  transition: all 0.3s ease;
+  padding: var(--sp-5);
+  color: var(--c-ink);
+  box-shadow: none;
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -63,13 +66,13 @@
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-  transition: all 0.5s ease;
+  background: none;
 }
 
 .dashboard-stat-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 24px rgba(125, 64, 71, 0.4);
+  border-color: var(--c-accent);
+  box-shadow: var(--sh-md);
 }
 
 .dashboard-stat-card:hover::before {
@@ -77,44 +80,49 @@
   right: -30%;
 }
 
-.dashboard-stat-card.stat-card--primary {
-  background: linear-gradient(135deg, var(--n-700) 0%, var(--n-800) 100%);
-}
+.dashboard-stat-card.stat-card--primary .dashboard-stat-icon { color: var(--n-800); }
 
-.dashboard-stat-card.stat-card--success {
-  background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-hover) 100%);
-}
+.dashboard-stat-card.stat-card--success .dashboard-stat-icon { color: var(--c-accent); }
 
-.dashboard-stat-card.stat-card--warning {
-  background: linear-gradient(135deg, var(--n-300) 0%, var(--n-400) 100%);
-}
+.dashboard-stat-card.stat-card--warning .dashboard-stat-icon { color: var(--c-signal); }
 
-.dashboard-stat-card.stat-card--info {
-  background: linear-gradient(135deg, var(--n-100) 0%, var(--n-200) 100%);
-}
+.dashboard-stat-card.stat-card--info .dashboard-stat-icon { color: var(--c-positive); }
 
 .dashboard-stat-icon {
-  font-size: 2.5rem;
-  opacity: 0.9;
-  margin-bottom: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-md);
+  background: var(--c-bg);
+  font-size: 1.15rem;
+  margin-bottom: var(--sp-4);
 }
 
 .dashboard-stat-value {
+  font-family: var(--font-display);
   font-size: 2.25rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--c-ink);
+  margin-bottom: var(--sp-1);
   line-height: 1;
 }
 
 .dashboard-stat-label {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  font-weight: 500;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--c-text-muted);
 }
 
 .dashboard-stat-trend {
-  font-size: 0.85rem;
-  margin-top: 0.75rem;
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+  margin-top: var(--sp-3);
   opacity: 0.85;
   display: flex;
   align-items: center;
@@ -148,4 +156,24 @@
   .dashboard-card-title {
     font-size: 1.15rem;
   }
+}
+
+/* Dashboard tab bar lifted into a sticky header strip, so switching sections
+   reads as page navigation rather than a control adrift in the content. */
+.dashboard-tabbar {
+  position: sticky;
+  top: 84px;
+  z-index: 15;
+  margin: 0 0 var(--sp-5);
+  padding: var(--sp-2) var(--sp-4);
+  background: rgba(241, 236, 230, 0.86);
+  -webkit-backdrop-filter: saturate(150%) blur(12px);
+  backdrop-filter: saturate(150%) blur(12px);
+  border: 1px solid var(--c-border-subtle);
+  border-radius: var(--r-full);
+}
+.dashboard-tabbar .ant-tabs-nav { margin: 0; }
+.dashboard-tabbar .ant-tabs-nav::before { border: none; }
+@media (max-width: 760px) {
+  .dashboard-tabbar { border-radius: var(--r-lg); top: 76px; }
 }

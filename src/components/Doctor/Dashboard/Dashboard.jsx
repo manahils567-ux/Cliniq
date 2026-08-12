@@ -431,7 +431,18 @@ const PatientDashboard = () => {
 		{ key: '4', label: '📍 Nearby',         children: <NearbyHospitals /> },
 	];
 
-	return <Tabs defaultActiveKey="1" items={tabItems} />;
+	return (
+		<Tabs
+			defaultActiveKey="1"
+			items={tabItems}
+			className="dashboard-tabs"
+			renderTabBar={(props, DefaultTabBar) => (
+				<div className="dashboard-tabbar">
+					<DefaultTabBar {...props} />
+				</div>
+			)}
+		/>
+	);
 };
 
 export default Dashboard;

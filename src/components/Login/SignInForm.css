@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #e8e8f0;
+  background: var(--c-border);
   padding: 1rem;
   font-family: var(--font-ui);
 }
@@ -24,7 +24,7 @@
 /* ── Left panel ───────────────────────────────────────────────────────── */
 .auth-left {
   width: 38%;
-  background: linear-gradient(160deg, #c5c8e8 0%, #a8acdb 100%);
+  background: linear-gradient(160deg, var(--n-200) 0%, var(--n-300) 100%);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -44,7 +44,7 @@
   justify-content: center;
   margin-bottom: 1.5rem;
   font-size: 1.4rem;
-  color: #4a4fb5;
+  color: var(--c-accent);
 }
 
 .auth-left h2 {
@@ -114,8 +114,8 @@
 }
 
 .auth-social-btn:hover {
-  border-color: #7355F7;
-  background: #f5f3ff;
+  border-color: var(--c-accent);
+  background: var(--c-accent-wash);
 }
 
 .auth-social-btn:disabled {
@@ -138,7 +138,7 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: #e5e5e5;
+  background: var(--c-border);
 }
 
 /* ── Form fields ──────────────────────────────────────────────────────── */
@@ -159,7 +159,7 @@
 .auth-field select {
   width: 100%;
   padding: 0.6rem 0.85rem;
-  border: 1.5px solid #e5e5e5;
+  border: 1.5px solid var(--c-border);
   border-radius: var(--r-md);
   font-size: 0.9rem;
   color: #222;
@@ -170,7 +170,7 @@
 
 .auth-field input:focus,
 .auth-field select:focus {
-  border-color: #7355F7;
+  border-color: var(--c-accent);
 }
 
 .auth-field-row {
@@ -204,7 +204,7 @@
 .auth-submit-btn {
   width: 100%;
   padding: 0.75rem;
-  background: #4a4fb5;
+  background: var(--c-accent);
   color: #fff;
   border: none;
   border-radius: var(--r-md);
@@ -216,11 +216,11 @@
 }
 
 .auth-submit-btn:hover {
-  background: #3a3fa0;
+  background: var(--c-accent-hover);
 }
 
 .auth-submit-btn:disabled {
-  background: #a0a3cc;
+  background: var(--c-text-faint);
   cursor: not-allowed;
 }
 
@@ -234,7 +234,7 @@
 
 .auth-footer a,
 .auth-footer span {
-  color: #4a4fb5;
+  color: var(--c-accent);
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
@@ -261,11 +261,11 @@
 }
 
 .auth-pass-hint.ok  { color: var(--c-positive); }
-.auth-pass-hint.bad { color: #ef4444; }
+.auth-pass-hint.bad { color: var(--c-danger); }
 
 /* ── Error text ───────────────────────────────────────────────────────── */
 .auth-error {
-  color: #ef4444;
+  color: var(--c-danger);
   font-size: 0.8rem;
   margin: 0.25rem 0;
 }
@@ -273,7 +273,7 @@
 /* ── Forgot password link ─────────────────────────────────────────────── */
 .auth-forgot {
   font-size: 0.8rem;
-  color: #4a4fb5;
+  color: var(--c-accent);
   cursor: pointer;
   text-align: right;
   margin-bottom: 0.5rem;
