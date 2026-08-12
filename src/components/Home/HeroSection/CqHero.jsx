@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import CqNavbar from '../../Shared/CqNavbar/CqNavbar';
 
 /**
  * Editorial hero for the landing page. Styled entirely by styles/base.css
@@ -21,44 +21,8 @@ const HERO_IMG = `${process.env.PUBLIC_URL}/hero.jpg`;
 const HERO_VIDEO = `${process.env.PUBLIC_URL}/hero.mp4`;
 
 const CqHero = () => {
-    const navigate = useNavigate();
     const videoRef = useRef(null);
-    const [stuck, setStuck] = useState(false);
-    const [hidden, setHidden] = useState(false);
     const [allowMotion, setAllowMotion] = useState(true);
-
-    // Float the bar over the page: give it a ground once it leaves the hero,
-    // and hide it while scrolling down so it never covers what you are reading.
-    // It comes straight back on the first upward scroll.
-    useEffect(() => {
-        let lastY = window.scrollY;
-        let ticking = false;
-
-        const update = () => {
-            const y = window.scrollY;
-            const delta = y - lastY;
-
-            setStuck(y > 24);
-
-            // Ignore sub-pixel jitter and rubber-banding at the very top.
-            if (Math.abs(delta) > 6) {
-                setHidden(delta > 0 && y > 140);
-                lastY = y;
-            }
-            ticking = false;
-        };
-
-        const onScroll = () => {
-            if (!ticking) {
-                ticking = true;
-                window.requestAnimationFrame(update);
-            }
-        };
-
-        update();
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
-    }, []);
 
     // Some browsers will not start a muted autoplaying video that was mounted
     // by React until it is explicitly told to. Kick it once it can play.
@@ -83,6 +47,7 @@ const CqHero = () => {
 
     return (
         <section className="cq-hero">
+            <CqNavbar />
             <div className="cq-hero__media">
                 {allowMotion && (
                     <video
@@ -101,18 +66,6 @@ const CqHero = () => {
                 )}
             </div>
 
-            <div className={`cq-hero__bar${stuck ? ' is-stuck' : ''}${hidden ? ' is-hidden' : ''}`}>
-                <Link to="/" className="cq-hero__mark">Cliniq</Link>
-
-                <nav className="cq-hero__nav">
-                    <Link to="/service">Services</Link>
-                    <Link to="/blog">Blog</Link>
-                    <Link to="/contact">Contact</Link>
-                    <Link to="/login" className="cq-hero__nav-cta">Login</Link>
-                </nav>
-
-                <a className="cq-hero__tel" href="tel:+923108112860">+92 310 8112860</a>
-            </div>
 
             <div className="cq-hero__body">
                 <h1 className="cq-hero__title">Because your health deserves the record</h1>

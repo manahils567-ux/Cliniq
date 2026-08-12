@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   FaHeart, FaPlay, FaChevronRight, FaUserMd, FaCalendarAlt,
@@ -7,7 +7,8 @@ import {
   FaArrowRight, FaCheck, FaStar, FaCamera, FaBell
 } from 'react-icons/fa';
 import CqHero from '../Home/HeroSection/CqHero';
-import { useGetPlatformStatsQuery } from '../../redux/api/doctorApi';
+import CqFooter from '../Shared/CqFooter/CqFooter';
+import { getBaseUrl } from '../../helpers/config/envConfig';
 import './Landing.css';
 
 /* ── small reusable icon-bubble ── */
@@ -29,8 +30,18 @@ const fmt = (n) => {
 };
 
 export default function LandingPage() {
-  const { data: statsData } = useGetPlatformStatsQuery();
-  const stats = statsData ?? {};
+  // Fetched directly rather than through RTK Query: this counter is public,
+  // needs no auth header and no cache invalidation, and the shared axios
+  // baseQuery was leaving the request stuck in `pending` on this route.
+  const [stats, setStats] = useState({});
+  useEffect(() => {
+    let alive = true;
+    fetch(`${getBaseUrl()}/doctor/stats`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => { if (alive && j?.data) setStats(j.data); })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
 
   return (
     <div className="landing">
@@ -215,15 +226,7 @@ export default function LandingPage() {
       </section>
 
       {/* ══════════════ FOOTER ══════════════ */}
-      <footer className="footer">
-        <div className="footer-logo">Cliniq</div>
-        <span>© {new Date().getFullYear()} Cliniq. All rights reserved.</span>
-        <div style={{ display: 'flex', gap: 20 }}>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <Link to="/contact" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Contact</Link>
-        </div>
-      </footer>
+      <CqFooter />
 
     </div>
   );

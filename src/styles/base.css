@@ -549,8 +549,10 @@ a:hover { opacity: 0.62; color: inherit; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-4);
-  padding: var(--sp-6) var(--sp-7);
-  background: var(--c-bg);
+  padding: var(--sp-6) var(--sp-7) var(--sp-7);
+  /* Continues the hero's dark block instead of cutting straight to cream —
+     the colour change then lands at the end of a band rather than mid-air. */
+  background: var(--d-bg);
 }
 .cq-trust__item {
   display: flex;
@@ -565,7 +567,7 @@ a:hover { opacity: 0.62; color: inherit; }
   font-size: var(--fs-xl);
   font-weight: var(--fw-bold);
   letter-spacing: var(--tr-tight);
-  color: var(--c-ink);
+  color: var(--d-text);
   font-variant-numeric: tabular-nums;
 }
 .cq-trust__label {
@@ -573,7 +575,7 @@ a:hover { opacity: 0.62; color: inherit; }
   font-weight: var(--fw-medium);
   letter-spacing: var(--tr-wide);
   text-transform: uppercase;
-  color: var(--c-text-faint);
+  color: var(--d-text-faint);
 }
 
 @media (max-width: 700px) {
