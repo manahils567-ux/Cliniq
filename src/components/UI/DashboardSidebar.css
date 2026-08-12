@@ -1,7 +1,8 @@
 /* Modern Dashboard Sidebar */
 .dashboard-sidebar {
   position: sticky;
-  top: 100px;
+  top: 88px;
+  margin-top: -76px;
   background: #fff;
   border-radius: var(--r-lg);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);

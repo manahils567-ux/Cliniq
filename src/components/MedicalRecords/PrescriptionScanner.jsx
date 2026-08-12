@@ -78,7 +78,7 @@ const PrescriptionScanner = () => {
             title: 'Medicine',
             dataIndex: 'name',
             key: 'name',
-            render: (v) => <Text strong style={{ color: '#1677ff' }}>{v || '—'}</Text>,
+            render: (v) => <Text strong style={{ color: 'var(--c-accent)' }}>{v || '—'}</Text>,
         },
         {
             title: 'Dosage',
@@ -110,7 +110,7 @@ const PrescriptionScanner = () => {
         <div>
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <Title level={5} style={{ margin: 0 }}>
-                    <ScanOutlined className="me-2" style={{ color: '#722ed1' }} />
+                    <ScanOutlined className="me-2" style={{ color: 'var(--c-accent)' }} />
                     AI Prescription Scanner
                 </Title>
                 <Tag color="purple">Powered by Gemini Vision</Tag>
@@ -126,12 +126,12 @@ const PrescriptionScanner = () => {
             {/* Upload area */}
             <Card
                 style={{
-                    border: '2px dashed #d9d9d9',
+                    border: '2px dashed var(--c-border)',
                     borderRadius: 12,
                     textAlign: 'center',
                     marginBottom: 20,
                     cursor: 'pointer',
-                    background: '#fafafa',
+                    background: 'var(--c-bg)',
                 }}
                 onClick={() => !scanning && fileInputRef.current?.click()}
             >
@@ -145,7 +145,7 @@ const PrescriptionScanner = () => {
                 {scanning ? (
                     <div className="py-4">
                         <Spin size="large" />
-                        <p className="mt-3" style={{ color: '#722ed1', fontWeight: 500 }}>
+                        <p className="mt-3" style={{ color: 'var(--c-accent)', fontWeight: 500 }}>
                             🔍 Gemini is reading your prescription...
                         </p>
                     </div>
@@ -162,7 +162,7 @@ const PrescriptionScanner = () => {
                     </div>
                 ) : (
                     <div className="py-4">
-                        <ScanOutlined style={{ fontSize: 48, color: '#722ed1', marginBottom: 12, display: 'block' }} />
+                        <ScanOutlined style={{ fontSize: 48, color: 'var(--c-accent)', marginBottom: 12, display: 'block' }} />
                         <Text strong style={{ fontSize: 16 }}>Click to upload prescription</Text>
                         <p style={{ color: '#999', marginTop: 4, fontSize: 13 }}>
                             JPG, PNG or WEBP — photo of a handwritten or printed prescription
@@ -183,18 +183,18 @@ const PrescriptionScanner = () => {
             {result && (
                 <div>
                     {/* Prescription meta info */}
-                    <Card size="small" style={{ marginBottom: 16, background: '#f9f0ff', border: '1px solid #d3adf7' }}>
+                    <Card size="small" style={{ marginBottom: 16, background: 'var(--c-accent-wash)', border: '1px solid var(--c-accent-line)' }}>
                         <div className="d-flex flex-wrap gap-3">
                             {result.doctorName && (
                                 <div>
-                                    <UserOutlined style={{ color: '#722ed1', marginRight: 6 }} />
+                                    <UserOutlined style={{ color: 'var(--c-accent)', marginRight: 6 }} />
                                     <Text strong>Doctor: </Text>
                                     <Text>{result.doctorName}</Text>
                                 </div>
                             )}
                             {result.patientName && (
                                 <div>
-                                    <UserOutlined style={{ color: '#1677ff', marginRight: 6 }} />
+                                    <UserOutlined style={{ color: 'var(--c-accent)', marginRight: 6 }} />
                                     <Text strong>Patient: </Text>
                                     <Text>{result.patientName}</Text>
                                 </div>
@@ -208,7 +208,7 @@ const PrescriptionScanner = () => {
                             )}
                             {result.diagnosis && (
                                 <div>
-                                    <MedicineBoxOutlined style={{ color: '#fa8c16', marginRight: 6 }} />
+                                    <MedicineBoxOutlined style={{ color: 'var(--c-signal)', marginRight: 6 }} />
                                     <Text strong>Diagnosis: </Text>
                                     <Text>{result.diagnosis}</Text>
                                 </div>

@@ -249,7 +249,7 @@ const MedicalRecords = () => {
                         <div className="d-flex align-items-center gap-2 flex-wrap">
                             <Button
                                 type="default"
-                                style={{ borderColor: '#722ed1', color: '#722ed1', fontWeight: 500 }}
+                                style={{ borderColor: 'var(--c-accent)', color: 'var(--c-accent)', fontWeight: 500 }}
                                 icon={<RobotOutlined />}
                                 onClick={handleGenerateHistory}
                             >
@@ -284,7 +284,7 @@ const MedicalRecords = () => {
                     </div>
 
                     {/* Toolbar */}
-                    <Card size="small" style={{ marginBottom: 16, backgroundColor: '#fafafa' }}>
+                    <Card size="small" style={{ marginBottom: 16, backgroundColor: 'var(--c-bg)' }}>
                         <Row gutter={[12, 12]} align="middle">
                             <Col xs={24} sm={10} md={8}>
                                 <Input
@@ -405,7 +405,7 @@ const MedicalRecords = () => {
                                                     {record.analysisStatus === 'completed' && record.analysis && (
                                                         <div>
                                                             <Space size={4} wrap>
-                                                                <Tag color="purple" icon={<ExperimentOutlined />}>
+                                                                <Tag color="magenta" icon={<ExperimentOutlined />}>
                                                                     {record.analysis._count?.metrics ?? 0} values
                                                                 </Tag>
                                                                 {(record.analysis._count?.insights ?? 0) > 0 && (
@@ -417,7 +417,7 @@ const MedicalRecords = () => {
                                                             {record.analysis.plainSummary && (
                                                                 <Paragraph
                                                                     ellipsis={{ rows: 2 }}
-                                                                    style={{ fontSize: 12, marginTop: 6, marginBottom: 0, color: '#595959' }}
+                                                                    style={{ fontSize: 12, marginTop: 6, marginBottom: 0, color: 'var(--c-text)' }}
                                                                 >
                                                                     {record.analysis.plainSummary}
                                                                 </Paragraph>
@@ -480,7 +480,7 @@ const MedicalRecords = () => {
             <Modal
                 title={
                     <span>
-                        <RobotOutlined style={{ color: '#722ed1', marginRight: 8 }} />
+                        <RobotOutlined style={{ color: 'var(--c-accent)', marginRight: 8 }} />
                         AI Medical History Summary
                     </span>
                 }
@@ -511,7 +511,7 @@ const MedicalRecords = () => {
             <Modal
                 title={
                     <span>
-                        <ExperimentOutlined style={{ color: '#722ed1', marginRight: 8 }} />
+                        <ExperimentOutlined style={{ color: 'var(--c-accent)', marginRight: 8 }} />
                         AI Analysis — {analysisRecord?.title}
                     </span>
                 }
@@ -540,7 +540,7 @@ const MedicalRecords = () => {
             <Modal
                 title={
                     <span>
-                        <ShareAltOutlined style={{ color: '#1677ff', marginRight: 8 }} />
+                        <ShareAltOutlined style={{ color: 'var(--c-accent)', marginRight: 8 }} />
                         Share Selected Records with Doctor
                     </span>
                 }

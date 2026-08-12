@@ -18,11 +18,11 @@ import {
 const { Title, Text, Paragraph } = Typography;
 
 const SEVERITY_COLOR = {
-    critical: '#cf1322',
-    high: '#d4380d',
-    moderate: '#d46b08',
-    low: '#1677ff',
-    info: '#8c8c8c',
+    critical: 'var(--c-danger)',
+    high: 'var(--c-accent)',
+    moderate: 'var(--c-signal)',
+    low: 'var(--c-accent)',
+    info: 'var(--c-text-muted)',
 };
 
 const SEVERITY_TAG = {
@@ -49,7 +49,7 @@ const InsightCard = ({ insight, onAccept, onDismiss, accepting }) => {
         <Card
             size="small"
             style={{
-                borderLeft: `4px solid ${SEVERITY_COLOR[insight.severity] ?? '#8c8c8c'}`,
+                borderLeft: `4px solid ${SEVERITY_COLOR[insight.severity] ?? 'var(--c-text-muted)'}`,
                 opacity: isDismissed ? 0.55 : 1,
             }}
         >
@@ -170,7 +170,7 @@ const HealthInsights = () => {
                 </Col>
                 <Col xs={12} md={6}>
                     <Card size="small">
-                        <Statistic title="Unread" value={summary.unread ?? 0} valueStyle={{ color: '#1677ff' }} />
+                        <Statistic title="Unread" value={summary.unread ?? 0} valueStyle={{ color: 'var(--c-accent)' }} />
                     </Card>
                 </Col>
                 <Col xs={12} md={6}>
@@ -178,7 +178,7 @@ const HealthInsights = () => {
                         <Statistic
                             title="Needs attention"
                             value={summary.critical ?? 0}
-                            valueStyle={{ color: summary.critical ? '#cf1322' : undefined }}
+                            valueStyle={{ color: summary.critical ? 'var(--c-danger)' : undefined }}
                             prefix={<ExclamationCircleOutlined />}
                         />
                     </Card>
