@@ -24,16 +24,28 @@
     top: 0 !important;
     transition: 1ms!important;
 }
+/* Floats as an inset rounded bar, matching the landing navbar, rather than
+   sitting flush edge-to-edge. */
 #header {
-    background: #fff;
-    transition: all 0.5s;
+    background: var(--c-surface);
+    transition: top 0.4s var(--ease), box-shadow 0.4s var(--ease);
     z-index: 997;
-    top: 40px;
-    box-shadow: 0px 2px 15px rgba(125, 64, 71, 0.1);
+    top: var(--sp-4);
+    left: var(--sp-4);
+    right: var(--sp-4);
+    width: auto;
+    border: 1px solid var(--c-border-subtle);
+    border-radius: var(--r-full);
+    box-shadow: 0 6px 24px rgba(46, 46, 46, 0.08);
 }
 
 #header.header-scrolled {
-    top: 0;
+    top: var(--sp-2);
+    box-shadow: 0 10px 30px rgba(46, 46, 46, 0.12);
+}
+
+@media (max-width: 760px) {
+    #header { border-radius: var(--r-lg); }
 }
 
 #header .logo {
