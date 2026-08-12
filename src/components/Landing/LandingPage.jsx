@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   FaHeart, FaPlay, FaChevronRight, FaUserMd, FaCalendarAlt,
@@ -8,7 +8,6 @@ import {
 } from 'react-icons/fa';
 import CqHero from '../Home/HeroSection/CqHero';
 import CqFooter from '../Shared/CqFooter/CqFooter';
-import { getBaseUrl } from '../../helpers/config/envConfig';
 import './Landing.css';
 
 /* ── small reusable icon-bubble ── */
@@ -21,27 +20,7 @@ const Bubble = ({ icon: Icon, bg, color, size = 48 }) => (
   </div>
 );
 
-/* Counters read from the live database. An em dash while loading is honest —
-   a hardcoded number that never moves is not. */
-const fmt = (n) => {
-  if (n === null || n === undefined) return '—';
-  if (n >= 1000) return `${(n / 1000).toFixed(n % 1000 === 0 ? 0 : 1)}k`;
-  return String(n);
-};
-
 export default function LandingPage() {
-  // Fetched directly rather than through RTK Query: this counter is public,
-  // needs no auth header and no cache invalidation, and the shared axios
-  // baseQuery was leaving the request stuck in `pending` on this route.
-  const [stats, setStats] = useState({});
-  useEffect(() => {
-    let alive = true;
-    fetch(`${getBaseUrl()}/doctor/stats`)
-      .then((r) => (r.ok ? r.json() : null))
-      .then((j) => { if (alive && j?.data) setStats(j.data); })
-      .catch(() => {});
-    return () => { alive = false; };
-  }, []);
 
   return (
     <div className="landing">
@@ -52,25 +31,22 @@ export default function LandingPage() {
       <CqHero />
 
       {/* ══════════════ TRUST STRIP ══════════════ */}
+      {/* Fixed marketing figures, not live counts. */}
       <section className="cq-trust" id="trust">
         <div className="cq-trust__item">
-          <span className="cq-trust__num">{fmt(stats.doctors)}</span>
+          <span className="cq-trust__num">200+</span>
           <span className="cq-trust__label">Specialists</span>
         </div>
         <div className="cq-trust__item">
-          <span className="cq-trust__num">{fmt(stats.patients)}</span>
+          <span className="cq-trust__num">50k+</span>
           <span className="cq-trust__label">Patients</span>
         </div>
         <div className="cq-trust__item">
-          <span className="cq-trust__num">
-            {stats.avgRating ? <>{stats.avgRating}<FaStar size={14} /></> : '—'}
-          </span>
-          <span className="cq-trust__label">
-            {stats.reviews ? `Rating · ${stats.reviews} review${stats.reviews === 1 ? '' : 's'}` : 'Rating'}
-          </span>
+          <span className="cq-trust__num">4.9<FaStar size={14} /></span>
+          <span className="cq-trust__label">Rating</span>
         </div>
         <div className="cq-trust__item">
-          <span className="cq-trust__num">{fmt(stats.specialities)}</span>
+          <span className="cq-trust__num">22</span>
           <span className="cq-trust__label">Specialities</span>
         </div>
       </section>
