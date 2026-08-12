@@ -62,7 +62,11 @@ function saveRecentId(id) {
 	return next;
 }
 
-const TrackAppointment = () => {
+/**
+ * Rendered both as a public page (guests can track without an account) and
+ * inside the patient dashboard, where the shell already supplies the chrome.
+ */
+const TrackAppointment = ({ embedded = false }) => {
 	const [trackAppointment, { data, isSuccess, isLoading, isError, error, reset }] = useTrackAppointmentMutation();
 	const [showInfo, setShowInfo] = useState(false);
 	const [searchValue, setSearchValue] = useState('');
@@ -121,11 +125,13 @@ const TrackAppointment = () => {
 
 	return (
 		<>
-			<Header />
-			<SubHeader
+			{!embedded && <Header />}
+			{!embedded && (
+				<SubHeader
 				title="Track your appointment"
 				subtitle="Look up status, schedule, and clinician details with your tracking ID — secure and instant."
-			/>
+				/>
+			)}
 
 			<div className="track-page">
 				{showInfo ? (
@@ -408,7 +414,7 @@ const TrackAppointment = () => {
 				)}
 			</div>
 
-			<Footer />
+			{!embedded && <Footer />}
 		</>
 	);
 };

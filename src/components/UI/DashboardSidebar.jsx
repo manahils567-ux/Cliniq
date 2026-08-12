@@ -57,7 +57,7 @@ const DashboardSidebar = () => {
         { path: '/dashboard/favourite', icon: <FaHeart />, label: 'Favourite Doctors' },
         { path: '/dashboard/invoices', icon: <FaFileInvoiceDollar />, label: 'Invoices & payments' },
         { path: '/dashboard/prescription', icon: <FaPills />, label: 'Prescriptions & medicines' },
-        { path: '/track-appointment', icon: <FaSearch />, label: 'Track appointment' },
+        { path: '/dashboard/track', icon: <FaSearch />, label: 'Track appointment' },
     ];
 
     const menuItems = role === 'doctor' ? doctorMenuItems : patientMenuItems;
