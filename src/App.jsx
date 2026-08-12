@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './components/Landing/LandingPage';
 import MedicalRecords from './components/MedicalRecords/MedicalRecords';
 import DashboardLayout from './components/Doctor/DashboardLayout/DashboardLayout';
+import AppSidebar from './components/UI/AppSidebar';
 import SignInForm from './components/Login/SignInForm';
 import DoctorBooking from './components/Booking/DoctorBooking/DoctorBooking';
 import BookingSuccess from './components/Booking/BookingSuccess';
@@ -49,6 +50,7 @@ import NotFound from './components/UI/NotFound';
 function App() {
   return (
     <Router>
+      <AppSidebar />
       <Routes>
         <Route element={<PrivateOutlet />}>
           <Route path='/dashboard/blogs' element={<Blogs />} />

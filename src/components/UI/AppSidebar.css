@@ -1,0 +1,43 @@
+/* Global nav rail. Fixed to the viewport so it survives every page's own
+   layout, and it reserves its own width via a body padding rule below. */
+
+.app-sidebar {
+  position: fixed;
+  top: 96px;
+  left: var(--sp-4);
+  bottom: var(--sp-4);
+  z-index: 90;
+  display: flex;
+  align-items: flex-start;
+  pointer-events: none;          /* only the rail itself is interactive */
+}
+.app-sidebar > * { pointer-events: auto; }
+
+/* The rail is sticky inside the dashboard grid, but fixed here — reset the
+   offset it uses in that context. */
+.app-sidebar .dashboard-sidebar {
+  position: static;
+  margin-top: 0;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Give page content room for the collapsed rail. Scoped to top-level page
+   wrappers only — .container is used nested throughout the app, so padding it
+   compounds and squeezes tables until columns collide. */
+body:has(.app-sidebar) .dashboard-wrapper,
+body:has(.app-sidebar) .track-page,
+body:has(.app-sidebar) > #root > .about-us,
+body:has(.app-sidebar) .search-doctor-page,
+body:has(.app-sidebar) .cq-page {
+  padding-left: 88px;
+}
+
+@media (max-width: 992px) {
+  .app-sidebar { display: none; }
+  body:has(.app-sidebar) .dashboard-wrapper,
+  body:has(.app-sidebar) .track-page,
+  body:has(.app-sidebar) .search-doctor-page,
+  body:has(.app-sidebar) .cq-page { padding-left: 0; }
+}

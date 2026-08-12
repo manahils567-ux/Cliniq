@@ -168,7 +168,7 @@
 
 .dashboard-sidebar--rail {
   --rail-w: 72px;
-  --rail-open-w: 268px;
+  --rail-open-w: 296px;
 
   width: var(--rail-w);
   min-width: var(--rail-w);
@@ -192,6 +192,9 @@
 
 /* Labels fade and slide in; icons stay put so nothing jumps. */
 .dashboard-sidebar--rail .label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   opacity: 0;
   transform: translateX(-6px);
   white-space: nowrap;
