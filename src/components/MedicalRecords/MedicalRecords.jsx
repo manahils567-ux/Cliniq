@@ -65,6 +65,7 @@ const MedicalRecords = () => {
 
     // AI document analysis states
     const [analysisRecord, setAnalysisRecord] = useState(null);
+    const [activeTab, setActiveTab] = useState('records');
 
     // Queries & Mutations. Poll while any record is still being analysed so the
     // card flips from "Analyzing…" to a result without a manual refresh.
@@ -463,13 +464,13 @@ const MedicalRecords = () => {
                     )}
                 </span>
             ),
-            children: <HealthInsights />,
+            children: <HealthInsights onGoToRecords={() => setActiveTab('records')} />,
         },
     ];
 
     return (
         <div>
-            <Tabs defaultActiveKey="records" items={tabItems} />
+            <Tabs activeKey={activeTab} onChange={setActiveTab} items={tabItems} />
 
             {/* AI Medical History Modal */}
             <Modal

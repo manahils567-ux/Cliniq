@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import CqNavbar from '../../Shared/CqNavbar/CqNavbar';
 
 /**
  * Editorial hero for the landing page. Styled entirely by styles/base.css
@@ -47,7 +46,6 @@ const CqHero = () => {
 
     return (
         <section className="cq-hero">
-            <CqNavbar />
             <div className="cq-hero__media">
                 {allowMotion && (
                     <video

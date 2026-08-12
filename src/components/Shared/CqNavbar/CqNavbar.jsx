@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import './CqNavbar.css';
 
 /**
@@ -32,6 +33,8 @@ const AnimatedNavLink = ({ to, children, onClick }) => (
 );
 
 const CqNavbar = () => {
+    const { authChecked, data: authUser } = useAuthCheck();
+    const signedIn = authChecked && !!authUser;
     const [isOpen, setIsOpen] = useState(false);
     const [squared, setSquared] = useState(false);
     const [hidden, setHidden] = useState(false);
@@ -89,11 +92,25 @@ const CqNavbar = () => {
                 </nav>
 
                 <div className="cqnav__actions">
-                    <Link to="/login" className="cqnav__btn cqnav__btn--ghost">Log in</Link>
-                    <div className="cqnav__cta-wrap">
-                        <span className="cqnav__cta-glow" aria-hidden />
-                        <Link to="/login" className="cqnav__btn cqnav__btn--solid">Sign up</Link>
-                    </div>
+                    {signedIn ? (
+                        <>
+                            <Link to="/dashboard" className="cqnav__btn cqnav__btn--ghost">Dashboard</Link>
+                            <div className="cqnav__cta-wrap">
+                                <span className="cqnav__cta-glow" aria-hidden />
+                                <Link to="/dashboard/scanner" className="cqnav__btn cqnav__btn--solid">
+                                    Scan a document
+                                </Link>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/login" className="cqnav__btn cqnav__btn--ghost">Log in</Link>
+                            <div className="cqnav__cta-wrap">
+                                <span className="cqnav__cta-glow" aria-hidden />
+                                <Link to="/login" className="cqnav__btn cqnav__btn--solid">Sign up</Link>
+                            </div>
+                        </>
+                    )}
                 </div>
 
                 <button
@@ -122,8 +139,17 @@ const CqNavbar = () => {
                     ))}
                 </nav>
                 <div className="cqnav__drawer-actions">
-                    <Link to="/login" className="cqnav__btn cqnav__btn--ghost" onClick={close}>Log in</Link>
-                    <Link to="/login" className="cqnav__btn cqnav__btn--solid" onClick={close}>Sign up</Link>
+                    {signedIn ? (
+                        <>
+                            <Link to="/dashboard" className="cqnav__btn cqnav__btn--ghost" onClick={close}>Dashboard</Link>
+                            <Link to="/dashboard/scanner" className="cqnav__btn cqnav__btn--solid" onClick={close}>Scan a document</Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/login" className="cqnav__btn cqnav__btn--ghost" onClick={close}>Log in</Link>
+                            <Link to="/login" className="cqnav__btn cqnav__btn--solid" onClick={close}>Sign up</Link>
+                        </>
+                    )}
                 </div>
             </div>
         </header>

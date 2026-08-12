@@ -913,3 +913,87 @@ a:hover { opacity: 0.62; color: inherit; }
 @media (max-width: 767.98px) {
   .footer-copyright { white-space: normal; text-align: center; }
 }
+
+/* ==========================================================================
+   Stat row + empty state used by Health Insights
+   ========================================================================== */
+
+.cq-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+.cq-stat {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4);
+}
+.cq-stat__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: var(--r-md);
+  background: var(--c-bg);
+  font-size: 0.95rem;
+  margin-bottom: var(--sp-3);
+}
+.cq-stat__icon--ink    { color: var(--n-700); }
+.cq-stat__icon--accent { color: var(--c-accent); background: var(--c-accent-wash); }
+.cq-stat__icon--danger { color: var(--c-danger); background: var(--c-danger-wash); }
+
+.cq-stat__label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+.cq-stat__value {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  color: var(--c-ink);
+  margin-top: var(--sp-1);
+}
+.cq-stat__value--accent { color: var(--c-accent); }
+.cq-stat__value--danger { color: var(--c-danger); }
+
+.cq-insights-empty {
+  text-align: center;
+  max-width: 52ch;
+  margin: var(--sp-8) auto;
+  padding: var(--sp-7) var(--sp-5);
+  background: var(--c-surface);
+  border: 1px dashed var(--c-border);
+  border-radius: var(--r-lg);
+}
+.cq-insights-empty__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  color: var(--c-ink);
+}
+.cq-insights-empty__body {
+  color: var(--c-text-muted);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  margin: var(--sp-3) 0 var(--sp-5);
+}
+
+@media (max-width: 900px) { .cq-stats { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .cq-stats { grid-template-columns: 1fr; } }
+
+/* The floating pill (CqNavbar) is the header everywhere now. The legacy
+   white bar still ships inside ~20 page components and DashboardLayout, so
+   it is retired here rather than deleted from each one. */
+#header,
+#topbar {
+  display: none !important;
+}

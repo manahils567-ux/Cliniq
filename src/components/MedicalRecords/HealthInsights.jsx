@@ -115,7 +115,7 @@ const InsightCard = ({ insight, onAccept, onDismiss, accepting }) => {
 };
 
 /** Feed of AI-derived alerts, suggestions and reminder proposals from a patient's reports. */
-const HealthInsights = () => {
+const HealthInsights = ({ onGoToRecords = () => {} }) => {
     const [filter, setFilter] = useState('active');
 
     const { data: insightsData, isLoading } = useGetHealthInsightsQuery(undefined);
@@ -157,33 +157,20 @@ const HealthInsights = () => {
 
     return (
         <div>
-            <Row gutter={[16, 16]} className="mb-3">
-                <Col xs={12} md={6}>
-                    <Card size="small">
-                        <Statistic title="Reports analyzed" value={summary.analyzedRecords ?? 0} prefix={<HeartOutlined />} />
-                    </Card>
-                </Col>
-                <Col xs={12} md={6}>
-                    <Card size="small">
-                        <Statistic title="Total insights" value={summary.total ?? 0} prefix={<BulbOutlined />} />
-                    </Card>
-                </Col>
-                <Col xs={12} md={6}>
-                    <Card size="small">
-                        <Statistic title="Unread" value={summary.unread ?? 0} valueStyle={{ color: 'var(--c-accent)' }} />
-                    </Card>
-                </Col>
-                <Col xs={12} md={6}>
-                    <Card size="small">
-                        <Statistic
-                            title="Needs attention"
-                            value={summary.critical ?? 0}
-                            valueStyle={{ color: summary.critical ? 'var(--c-danger)' : undefined }}
-                            prefix={<ExclamationCircleOutlined />}
-                        />
-                    </Card>
-                </Col>
-            </Row>
+            <div className="cq-stats">
+                {[
+                    { key: 'analyzed', label: 'Reports analyzed', value: summary.analyzedRecords ?? 0, icon: <HeartOutlined />, tone: 'ink' },
+                    { key: 'total',    label: 'Total insights',   value: summary.total ?? 0,           icon: <BulbOutlined />, tone: 'ink' },
+                    { key: 'unread',   label: 'Unread',           value: summary.unread ?? 0,          icon: <BellOutlined />, tone: 'accent' },
+                    { key: 'critical', label: 'Needs attention',  value: summary.critical ?? 0,        icon: <ExclamationCircleOutlined />, tone: summary.critical ? 'danger' : 'ink' },
+                ].map((s) => (
+                    <div key={s.key} className="cq-stat">
+                        <span className={`cq-stat__icon cq-stat__icon--${s.tone}`}>{s.icon}</span>
+                        <div className="cq-stat__label">{s.label}</div>
+                        <div className={`cq-stat__value cq-stat__value--${s.tone}`}>{s.value}</div>
+                    </div>
+                ))}
+            </div>
 
             <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                 <Title level={5} style={{ margin: 0 }}>
@@ -203,13 +190,21 @@ const HealthInsights = () => {
             </div>
 
             {visible.length === 0 ? (
-                <Empty
-                    description={
-                        insights.length === 0
-                            ? 'No insights yet. Upload a lab report or prescription and the AI will analyse it automatically.'
-                            : 'Nothing in this view.'
-                    }
-                />
+                insights.length === 0 ? (
+                    <div className="cq-insights-empty">
+                        <div className="cq-insights-empty__title">Nothing to review yet</div>
+                        <p className="cq-insights-empty__body">
+                            Upload a lab report, prescription or discharge summary and it is analysed
+                            on arrival. Values outside their reference range are flagged here, with
+                            reminders for anything that needs following up.
+                        </p>
+                        <Button type="primary" icon={<BellOutlined />} onClick={onGoToRecords}>
+                            Upload your first document
+                        </Button>
+                    </div>
+                ) : (
+                    <Empty description="Nothing in this view." />
+                )
             ) : (
                 <Space direction="vertical" size={12} style={{ width: '100%' }}>
                     {visible.map((insight) => (

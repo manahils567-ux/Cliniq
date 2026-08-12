@@ -161,19 +161,16 @@
 /* Dashboard tab bar lifted into a sticky header strip, so switching sections
    reads as page navigation rather than a control adrift in the content. */
 .dashboard-tabbar {
-  position: sticky;
-  top: 84px;
-  z-index: 15;
+  /* Static: it scrolls away with the content rather than following. */
+  position: static;
   margin: 0 0 var(--sp-5);
   padding: var(--sp-2) var(--sp-4);
-  background: rgba(241, 236, 230, 0.86);
-  -webkit-backdrop-filter: saturate(150%) blur(12px);
-  backdrop-filter: saturate(150%) blur(12px);
+  background: var(--c-bg);
   border: 1px solid var(--c-border-subtle);
   border-radius: var(--r-full);
 }
 .dashboard-tabbar .ant-tabs-nav { margin: 0; }
 .dashboard-tabbar .ant-tabs-nav::before { border: none; }
 @media (max-width: 760px) {
-  .dashboard-tabbar { border-radius: var(--r-lg); top: 76px; }
+  .dashboard-tabbar { border-radius: var(--r-lg); }
 }

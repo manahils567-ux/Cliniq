@@ -140,9 +140,6 @@ const DoctorDashboard = () => {
 
 			<div className="dashboard-stats-grid">
 				<div className="dashboard-stat-card stat-card--primary">
-					<div className="dashboard-stat-icon">
-						<FaCalendarCheck />
-					</div>
 					<div className="dashboard-stat-value">{stats.totalAppointments}</div>
 					<div className="dashboard-stat-label">Total Appointments</div>
 					<div className="dashboard-stat-trend">
@@ -151,25 +148,16 @@ const DoctorDashboard = () => {
 				</div>
 
 				<div className="dashboard-stat-card stat-card--success">
-					<div className="dashboard-stat-icon">
-						<FaUserInjured />
-					</div>
 					<div className="dashboard-stat-value">{stats.totalPatients}</div>
 					<div className="dashboard-stat-label">Total Patients</div>
 				</div>
 
 				<div className="dashboard-stat-card stat-card--warning">
-					<div className="dashboard-stat-icon">
-						<FaClock />
-					</div>
 					<div className="dashboard-stat-value">{stats.pendingAppointments}</div>
 					<div className="dashboard-stat-label">Pending Appointments</div>
 				</div>
 
 				<div className="dashboard-stat-card stat-card--info">
-					<div className="dashboard-stat-icon">
-						<FaDollarSign />
-					</div>
 					<div className="dashboard-stat-value">${stats.totalRevenue.toFixed(0)}</div>
 					<div className="dashboard-stat-label">Total Revenue</div>
 				</div>
@@ -381,33 +369,21 @@ const PatientDashboard = () => {
 
 			<div className="dashboard-stats-grid">
 				<div className="dashboard-stat-card stat-card--primary">
-					<div className="dashboard-stat-icon">
-						<FaCalendarCheck />
-					</div>
 					<div className="dashboard-stat-value">{stats.totalAppointments}</div>
 					<div className="dashboard-stat-label">Total Appointments</div>
 				</div>
 
 				<div className="dashboard-stat-card stat-card--success">
-					<div className="dashboard-stat-icon">
-						<FaClock />
-					</div>
 					<div className="dashboard-stat-value">{stats.upcomingAppointments}</div>
 					<div className="dashboard-stat-label">Upcoming</div>
 				</div>
 
 				<div className="dashboard-stat-card stat-card--warning">
-					<div className="dashboard-stat-icon">
-						<FaStar />
-					</div>
 					<div className="dashboard-stat-value">{stats.completedAppointments}</div>
 					<div className="dashboard-stat-label">Completed</div>
 				</div>
 
 				<div className="dashboard-stat-card stat-card--info">
-					<div className="dashboard-stat-icon">
-						<FaDollarSign />
-					</div>
 					<div className="dashboard-stat-value">${stats.totalSpent.toFixed(0)}</div>
 					<div className="dashboard-stat-label">Total Spent</div>
 				</div>

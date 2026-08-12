@@ -2,8 +2,10 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './components/Landing/LandingPage';
 import MedicalRecords from './components/MedicalRecords/MedicalRecords';
+import PrescriptionScanner from './components/MedicalRecords/PrescriptionScanner';
 import DashboardLayout from './components/Doctor/DashboardLayout/DashboardLayout';
 import AppSidebar from './components/UI/AppSidebar';
+import CqNavbar from './components/Shared/CqNavbar/CqNavbar';
 import SignInForm from './components/Login/SignInForm';
 import DoctorBooking from './components/Booking/DoctorBooking/DoctorBooking';
 import BookingSuccess from './components/Booking/BookingSuccess';
@@ -50,6 +52,7 @@ import NotFound from './components/UI/NotFound';
 function App() {
   return (
     <Router>
+      <CqNavbar />
       <AppSidebar />
       <Routes>
         <Route element={<PrivateOutlet />}>
@@ -67,6 +70,7 @@ function App() {
           <Route path='/dashboard/change-password' element={<ChangePassword />} />
           <Route path='/dashboard/profile-setting' element={<ProfileSetting />} />
           <Route path='/dashboard/documents' element={<DashboardLayout><MedicalRecords /></DashboardLayout>} />
+          <Route path='/dashboard/scanner' element={<DashboardLayout><PrescriptionScanner /></DashboardLayout>} />
           <Route path='/dashboard/track' element={<DashboardLayout><TrackAppointment embedded /></DashboardLayout>} />
           <Route path='/dashboard/favourite' element={<PatientFavouriteDoctor />} />
           <Route path='/dashboard/invoices' element={<DoctorInvoice />} />
