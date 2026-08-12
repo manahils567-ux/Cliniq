@@ -141,7 +141,7 @@ const ImageUploadWithCrop = ({ onImageCropped, aspect = 1, maxSizeMB = 1, cropSh
                     accept="image/*"
                 >
                     <p className="ant-upload-drag-icon">
-                        <FaUpload style={{ fontSize: '3rem', color: '#1977cc' }} />
+                        <FaUpload style={{ fontSize: '3rem', color: 'var(--c-action)' }} />
                     </p>
                     <p className="ant-upload-text">Click or drag image to upload</p>
                     <p className="ant-upload-hint">

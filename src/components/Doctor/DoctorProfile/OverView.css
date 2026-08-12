@@ -33,24 +33,24 @@
 .overview-section__title {
 	font-size: 1.35rem;
 	font-weight: 700;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin-bottom: 1.25rem;
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	padding-bottom: 0.75rem;
-	border-bottom: 2px solid #f0f0f0;
+	border-bottom: 2px solid var(--c-border-subtle);
 }
 
 .overview-section__icon {
-	color: #1977cc;
+	color: var(--c-action);
 	font-size: 1.25rem;
 }
 
 .overview-section__text {
 	font-size: 1rem;
 	line-height: 1.7;
-	color: #5a6c7d;
+	color: var(--c-text-muted);
 	margin-bottom: 1rem;
 }
 
@@ -71,7 +71,7 @@
 	top: 8px;
 	bottom: 8px;
 	width: 2px;
-	background: linear-gradient(180deg, #1977cc 0%, #e0e0e0 100%);
+	background: linear-gradient(180deg, var(--c-action) 0%, var(--c-border) 100%);
 }
 
 .timeline-item {
@@ -90,16 +90,16 @@
 	width: 12px;
 	height: 12px;
 	border-radius: 50%;
-	background: #1977cc;
+	background: var(--c-action);
 	border: 3px solid #fff;
-	box-shadow: 0 0 0 3px rgba(25, 119, 204, 0.2);
+	box-shadow: 0 0 0 3px rgba(125, 64, 71, 0.2);
 }
 
 .timeline-content {
-	background: #f8fafc;
-	border-radius: 12px;
+	background: var(--c-bg);
+	border-radius: var(--r-lg);
 	padding: 1.25rem;
-	border-left: 3px solid #1977cc;
+	border-left: 3px solid var(--c-action);
 	transition: all 0.3s;
 }
 
@@ -121,44 +121,44 @@
 .timeline-header h4 {
 	font-size: 1.1rem;
 	font-weight: 600;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin: 0;
 }
 
 .timeline-year {
 	font-size: 0.85rem;
 	font-weight: 600;
-	color: #1977cc;
-	background: rgba(25, 119, 204, 0.1);
+	color: var(--c-action);
+	background: rgba(125, 64, 71, 0.1);
 	padding: 4px 12px;
-	border-radius: 20px;
+	border-radius: var(--r-lg);
 	white-space: nowrap;
 }
 
 .timeline-institution {
 	font-size: 0.95rem;
 	font-weight: 600;
-	color: #374151;
+	color: var(--c-text);
 	margin: 0 0 0.25rem 0;
 }
 
 .timeline-location {
 	font-size: 0.85rem;
-	color: #6c757d;
+	color: var(--c-text-muted);
 	margin: 0 0 0.75rem 0;
 }
 
 .timeline-description {
 	font-size: 0.9rem;
 	line-height: 1.6;
-	color: #5a6c7d;
+	color: var(--c-text-muted);
 	margin: 0;
 }
 
 /* Sidebar Cards */
 .overview-card {
 	background: #fff;
-	border-radius: 16px;
+	border-radius: var(--r-lg);
 	padding: 1.5rem;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 	border: 1px solid rgba(0, 0, 0, 0.04);
@@ -167,7 +167,7 @@
 .overview-card__title {
 	font-size: 1.1rem;
 	font-weight: 700;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin: 0 0 1.25rem 0;
 	display: flex;
 	align-items: center;
@@ -175,7 +175,7 @@
 }
 
 .overview-card__icon {
-	color: #1977cc;
+	color: var(--c-action);
 	font-size: 1rem;
 }
 
@@ -191,7 +191,7 @@
 	gap: 12px;
 	align-items: flex-start;
 	padding-bottom: 1rem;
-	border-bottom: 1px solid #f0f0f0;
+	border-bottom: 1px solid var(--c-border-subtle);
 }
 
 .award-item:last-child {
@@ -202,7 +202,7 @@
 .award-icon {
 	width: 40px;
 	height: 40px;
-	border-radius: 10px;
+	border-radius: var(--r-md);
 	background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
 	display: flex;
 	align-items: center;
@@ -215,19 +215,19 @@
 .award-item h5 {
 	font-size: 0.95rem;
 	font-weight: 600;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin: 0 0 0.25rem 0;
 }
 
 .award-item p {
 	font-size: 0.85rem;
-	color: #6c757d;
+	color: var(--c-text-muted);
 	margin: 0 0 0.25rem 0;
 }
 
 .award-item span {
 	font-size: 0.8rem;
-	color: #1977cc;
+	color: var(--c-action);
 	font-weight: 600;
 }
 
@@ -243,7 +243,7 @@
 
 .services-list li {
 	font-size: 0.9rem;
-	color: #374151;
+	color: var(--c-text);
 	padding: 0.5rem 0;
 	padding-left: 1.5rem;
 	position: relative;
@@ -253,7 +253,7 @@
 	content: '✓';
 	position: absolute;
 	left: 0;
-	color: #22c55e;
+	color: var(--c-positive);
 	font-weight: 700;
 }
 
@@ -269,8 +269,8 @@
 	font-size: 0.85rem;
 	padding: 6px 14px;
 	background: #f0f4f8;
-	color: #374151;
-	border-radius: 20px;
+	color: var(--c-text);
+	border-radius: var(--r-lg);
 	font-weight: 500;
 	border: 1px solid #e5e7eb;
 }

@@ -6,7 +6,7 @@
 
 .stat-mini-card {
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: var(--r-lg);
     border: none;
     transition: all 0.3s ease;
 }
@@ -17,7 +17,7 @@
 }
 
 .stat-mini-card-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--n-700) 0%, var(--n-800) 100%);
     color: white;
 }
 
@@ -60,7 +60,7 @@
 .rating-bar {
     flex: 1;
     height: 10px;
-    background: #e0e0e0;
+    background: var(--c-border);
     border-radius: 5px;
     overflow: hidden;
 }
@@ -85,8 +85,8 @@
 
 .review-card {
     padding: 1.5rem;
-    background: #f8f9fa;
-    border-radius: 12px;
+    background: var(--c-bg);
+    border-radius: var(--r-lg);
     transition: all 0.3s ease;
 }
 
@@ -101,11 +101,11 @@
     align-items: flex-start;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--c-border);
 }
 
 .review-body {
-    color: #495057;
+    color: var(--c-text-muted);
     line-height: 1.6;
 }
 

@@ -10,8 +10,8 @@
     gap: 1rem;
     margin-bottom: 1.75rem;
     padding: 1.5rem 1.75rem;
-    border-radius: 16px;
-    background: linear-gradient(125deg, #0f172a 0%, #1e3a5f 55%, #1977cc 100%);
+    border-radius: var(--r-lg);
+    background: linear-gradient(125deg, var(--c-ink) 0%, #1e3a5f 55%, var(--c-action) 100%);
     color: #fff;
     box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.4);
 }
@@ -33,7 +33,7 @@
 .favourite-page__count {
     font-weight: 700;
     padding: 0.35rem 0.85rem;
-    border-radius: 999px;
+    border-radius: var(--r-full);
     border: none;
     background: rgba(255, 255, 255, 0.2) !important;
     color: #fff !important;
@@ -42,7 +42,7 @@
 .favourite-page__empty {
     text-align: center;
     padding: 3rem 1.5rem;
-    border-radius: 16px;
+    border-radius: var(--r-lg);
 }
 
 .favourite-doctors-grid {
@@ -62,7 +62,7 @@
 
 .favourite-doctor-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 40px rgba(25, 119, 204, 0.15) !important;
+    box-shadow: 0 16px 40px rgba(125, 64, 71, 0.15) !important;
 }
 
 .favourite-doctor-card__top {
@@ -70,7 +70,7 @@
     display: flex;
     justify-content: center;
     padding: 1.5rem 1.25rem 0.5rem;
-    background: linear-gradient(180deg, #f0f7ff 0%, #fff 100%);
+    background: linear-gradient(180deg, var(--n-050) 0%, #fff 100%);
 }
 
 .favourite-doctor-card__avatar {
@@ -99,7 +99,7 @@
 }
 
 .doctor-name a {
-    color: #1977cc;
+    color: var(--c-action);
     text-decoration: none;
 }
 
@@ -108,13 +108,13 @@
 }
 
 .verified-icon {
-    color: #52c41a;
+    color: var(--c-positive);
     font-size: 1rem;
 }
 
 .doctor-specialty {
     text-align: center;
-    color: #6c757d;
+    color: var(--c-text-muted);
     margin-bottom: 0.75rem;
     font-size: 0.9rem;
 }
@@ -128,7 +128,7 @@
 }
 
 .rating-count {
-    color: #6c757d;
+    color: var(--c-text-muted);
     font-size: 0.875rem;
 }
 
@@ -141,12 +141,12 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0;
-    color: #495057;
+    color: var(--c-text-muted);
     font-size: 0.875rem;
 }
 
 .info-icon {
-    color: #1977cc;
+    color: var(--c-action);
     font-size: 0.875rem;
 }
 

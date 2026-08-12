@@ -1,6 +1,6 @@
 .dashboard-wrapper {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f0f7ff 0%, #fff 15%);
+  background: linear-gradient(180deg, var(--n-050) 0%, #fff 15%);
   padding: 140px 0 4rem;
 }
 
@@ -10,7 +10,7 @@
 
 .dashboard-card {
   background: #fff;
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -27,13 +27,13 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid var(--c-border-subtle);
 }
 
 .dashboard-card-title {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #2c4964;
+  color: var(--c-ink);
   margin: 0;
 }
 
@@ -45,11 +45,11 @@
 }
 
 .dashboard-stat-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 12px;
+  background: linear-gradient(135deg, var(--n-700) 0%, var(--n-800) 100%);
+  border-radius: var(--r-lg);
   padding: 1.5rem;
   color: #fff;
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 16px rgba(125, 64, 71, 0.3);
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
@@ -69,7 +69,7 @@
 
 .dashboard-stat-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 24px rgba(125, 64, 71, 0.4);
 }
 
 .dashboard-stat-card:hover::before {
@@ -78,7 +78,7 @@
 }
 
 .dashboard-stat-card.stat-card--primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--n-700) 0%, var(--n-800) 100%);
 }
 
 .dashboard-stat-card.stat-card--success {

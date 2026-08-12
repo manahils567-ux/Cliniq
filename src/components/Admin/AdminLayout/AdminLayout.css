@@ -1,7 +1,7 @@
 /* Modern Admin Layout Styles */
 .main-wrapper {
   min-height: 100vh;
-  background: #f8f9fa;
+  background: var(--c-bg);
 }
 
 .page-wrapper {
@@ -18,13 +18,13 @@
 .page-header {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid var(--c-border-subtle);
 }
 
 .page-header .page-title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 0.5rem;
 }
 
@@ -38,11 +38,11 @@
 }
 
 .breadcrumb-item {
-  color: #6c757d;
+  color: var(--c-text-muted);
 }
 
 .breadcrumb-item.active {
-  color: #1977cc;
+  color: var(--c-action);
   font-weight: 500;
 }
 
@@ -55,7 +55,7 @@
 .page-header__hint {
   margin: 0.75rem 0 0;
   font-size: 0.9rem;
-  color: #64748b;
+  color: var(--c-text-muted);
   max-width: 52rem;
   line-height: 1.55;
   display: flex;
@@ -64,7 +64,7 @@
 }
 
 .page-header__hint-icon {
-  color: #1977cc;
+  color: var(--c-action);
   margin-top: 3px;
   flex-shrink: 0;
 }
@@ -79,8 +79,8 @@
   padding: 1rem 1.25rem;
   margin-bottom: 1.75rem;
   background: #fff;
-  border-radius: 14px;
-  border: 1px solid #e9ecef;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--c-border-subtle);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
@@ -96,7 +96,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.45rem 0.85rem;
-  border-radius: 10px;
+  border-radius: var(--r-md);
   font-size: 0.82rem;
   font-weight: 600;
   color: #475569;
@@ -105,13 +105,13 @@
 }
 
 .admin-quick-nav__link:hover {
-  background: #f1f5f9;
-  color: #1977cc;
+  background: var(--c-bg-alt);
+  color: var(--c-action);
 }
 
 .admin-quick-nav__link.is-active {
-  background: rgba(25, 119, 204, 0.1);
-  color: #1977cc;
+  background: rgba(125, 64, 71, 0.1);
+  color: var(--c-action);
 }
 
 .admin-quick-nav__icon {
@@ -131,24 +131,24 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 0.95rem;
-  border-radius: 10px;
+  border-radius: var(--r-md);
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--c-border);
   color: #334155;
-  background: #f8fafc;
+  background: var(--c-bg);
   transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .admin-quick-nav__btn:hover {
-  border-color: #1977cc;
-  color: #1977cc;
+  border-color: var(--c-action);
+  color: var(--c-action);
   background: #fff;
 }
 
 .admin-quick-nav__btn--primary {
-  background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+  background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
   color: #fff;
   border-color: transparent;
 }
@@ -156,7 +156,7 @@
 .admin-quick-nav__btn--primary:hover {
   color: #fff;
   opacity: 0.95;
-  box-shadow: 0 4px 14px rgba(25, 119, 204, 0.35);
+  box-shadow: 0 4px 14px rgba(125, 64, 71, 0.35);
 }
 
 .admin-quick-nav__btn--ghost {
@@ -176,7 +176,7 @@
 /* Admin Cards */
 .admin-card {
   background: #fff;
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -194,34 +194,34 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--c-border-subtle);
 }
 
 .admin-card-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #2c4964;
+  color: var(--c-ink);
   margin: 0;
 }
 
 /* Stats Cards */
 .stats-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 12px;
+  background: linear-gradient(135deg, var(--n-700) 0%, var(--n-800) 100%);
+  border-radius: var(--r-lg);
   padding: 1.5rem;
   color: #fff;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(125, 64, 71, 0.3);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .stats-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(125, 64, 71, 0.4);
 }
 
 .stats-card.stats-card--primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--n-700) 0%, var(--n-800) 100%);
 }
 
 .stats-card.stats-card--success {
@@ -230,12 +230,12 @@
 
 .stats-card.stats-card--warning {
   background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
-  color: #2c4964;
+  color: var(--c-ink);
 }
 
 .stats-card.stats-card--info {
   background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  color: #2c4964;
+  color: var(--c-ink);
 }
 
 .stats-card-icon {

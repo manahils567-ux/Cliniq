@@ -17,17 +17,17 @@
     font-weight: 700;
     line-height: 56px;
     text-transform: uppercase;
-    color: #2c4964;
+    color: var(--c-ink);
   }
   
   #hero h2 {
-    color: #2c4964;
+    color: var(--c-ink);
     margin: 10px 0 0 0;
     font-size: 24px;
   }
   
   #hero .btn-get-started {
-    font-family: "Raleway", sans-serif;
+    font-family: var(--font-ui);
     text-transform: uppercase;
     font-weight: 500;
     font-size: 14px;
@@ -35,14 +35,14 @@
     display: inline-block;
     padding: 12px 35px;
     margin-top: 30px;
-    border-radius: 50px;
+    border-radius: var(--r-full);
     transition: 0.5s;
     color: #fff;
-    background: #1977cc;
+    background: var(--c-action);
   }
   
   #hero .btn-get-started:hover {
-    background: #3291e6;
+    background: var(--n-600);
   }
   
   @media (min-width: 1024px) {

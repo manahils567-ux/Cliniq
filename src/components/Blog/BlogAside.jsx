@@ -53,7 +53,7 @@ const BlogAside = ({ setSearchTerm }) => {
 
 
     return (
-        <div className='p-3' style={{ background: '#f8f9fa' }}>
+        <div className='p-3' style={{ background: 'var(--c-bg)' }}>
 
             <div className="mb-4">
                 <h5 className="blog-title">SEARCH</h5>

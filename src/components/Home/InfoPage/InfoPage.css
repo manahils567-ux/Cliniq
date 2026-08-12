@@ -4,18 +4,18 @@
 	padding: calc(2.5rem + var(--why-us-overlap) * 0.35) 0 4rem;
 	position: relative;
 	z-index: 2;
-	background: linear-gradient(180deg, #f0f7ff 0%, #fff 100%);
+	background: linear-gradient(180deg, var(--n-050) 0%, #fff 100%);
 }
 
 .why-us-card {
-	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
 	color: #fff;
 	padding: 2.25rem;
-	border-radius: 16px;
+	border-radius: var(--r-lg);
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	box-shadow: 0 20px 50px -12px rgba(25, 119, 204, 0.35);
+	box-shadow: 0 20px 50px -12px rgba(125, 64, 71, 0.35);
 }
 
 .why-us-badge {
@@ -77,7 +77,7 @@
 	height: 100%;
 	box-shadow:
 		0 4px 6px -1px rgba(15, 23, 42, 0.06),
-		0 20px 40px -12px rgba(25, 119, 204, 0.12);
+		0 20px 40px -12px rgba(125, 64, 71, 0.12);
 	border: 1px solid rgba(255, 255, 255, 0.85);
 	transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
 }
@@ -85,17 +85,17 @@
 .info-box:hover {
 	box-shadow:
 		0 8px 16px -4px rgba(15, 23, 42, 0.08),
-		0 24px 48px -16px rgba(25, 119, 204, 0.18);
+		0 24px 48px -16px rgba(125, 64, 71, 0.18);
 	transform: translateY(-4px);
-	border-color: rgba(25, 119, 204, 0.12);
+	border-color: rgba(125, 64, 71, 0.12);
 }
 
 .info-box-icon {
 	width: 52px;
 	height: 52px;
-	border-radius: 14px;
-	background: rgba(25, 119, 204, 0.12);
-	color: #1977cc;
+	border-radius: var(--r-lg);
+	background: rgba(125, 64, 71, 0.12);
+	color: var(--c-action);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -111,20 +111,20 @@
 .info-box h4 {
 	font-size: 1.15rem;
 	font-weight: 700;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin-bottom: 0.25rem;
 }
 
 .info-box-sub {
 	font-size: 0.8rem;
-	color: #6c757d;
+	color: var(--c-text-muted);
 	display: block;
 	margin-bottom: 0.75rem;
 }
 
 .info-box p {
 	font-size: 0.9rem;
-	color: #5a6c7d;
+	color: var(--c-text-muted);
 	line-height: 1.55;
 	margin: 0;
 }
@@ -141,8 +141,8 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 0.4rem 0;
-	border-bottom: 1px solid #f0f0f0;
-	color: #5a6c7d;
+	border-bottom: 1px solid var(--c-border-subtle);
+	color: var(--c-text-muted);
 }
 
 .info-box-schedule li:last-child {
@@ -151,7 +151,7 @@
 
 .info-box-schedule li span:first-child {
 	font-weight: 500;
-	color: #1a1a2e;
+	color: var(--c-ink);
 }
 
 @media (max-width: 991.98px) {

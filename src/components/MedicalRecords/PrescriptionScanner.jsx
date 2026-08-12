@@ -201,7 +201,7 @@ const PrescriptionScanner = () => {
                             )}
                             {result.date && (
                                 <div>
-                                    <CalendarOutlined style={{ color: '#52c41a', marginRight: 6 }} />
+                                    <CalendarOutlined style={{ color: 'var(--c-positive)', marginRight: 6 }} />
                                     <Text strong>Date: </Text>
                                     <Text>{result.date}</Text>
                                 </div>
@@ -218,7 +218,7 @@ const PrescriptionScanner = () => {
 
                     {/* Medicines table */}
                     <Title level={5}>
-                        <MedicineBoxOutlined style={{ color: '#52c41a', marginRight: 8 }} />
+                        <MedicineBoxOutlined style={{ color: 'var(--c-positive)', marginRight: 8 }} />
                         Extracted Medicines ({result.medicines?.length || 0})
                     </Title>
 
@@ -240,7 +240,7 @@ const PrescriptionScanner = () => {
                             <Divider />
                             <div>
                                 <Text strong><FileTextOutlined className="me-2" />Raw Extracted Text</Text>
-                                <Card size="small" style={{ marginTop: 8, background: '#f5f5f5' }}>
+                                <Card size="small" style={{ marginTop: 8, background: 'var(--c-bg-alt)' }}>
                                     <Paragraph style={{ whiteSpace: 'pre-wrap', fontSize: 12, margin: 0, color: '#555' }}>
                                         {result.rawText}
                                     </Paragraph>

@@ -9,17 +9,17 @@
 }
 .booking-doc-img a {
     font-weight: 600;
-    color: #1977cc;
+    color: var(--c-action);
 }
 
 .booking-doc-img {
-    background: #f8f9fa;
+    background: var(--c-bg);
     display: flex;
     align-items: center;
     gap: 10px;
 }
 .date-card{
-    background: #f8f9fa;
+    background: var(--c-bg);
     height: 50vh;
     overflow: hidden;
     overflow-y: scroll;

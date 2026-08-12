@@ -3,7 +3,7 @@
   position: sticky;
   top: 100px;
   background: #fff;
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
@@ -11,7 +11,7 @@
 .dashboard-profile-header {
   padding: 2rem 1.5rem;
   text-align: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--n-700) 0%, var(--n-800) 100%);
   color: #fff;
 }
 
@@ -41,7 +41,7 @@
   display: inline-block;
   padding: 0.25rem 0.75rem;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   font-size: 0.85rem;
   font-weight: 500;
   margin-top: 0.5rem;
@@ -65,7 +65,7 @@
   display: flex;
   align-items: center;
   padding: 0.875rem 1.5rem;
-  color: #495057;
+  color: var(--c-text-muted);
   text-decoration: none;
   transition: all 0.2s ease;
   border-left: 3px solid transparent;
@@ -76,29 +76,29 @@
 .dashboard-nav a .icon {
   margin-right: 0.875rem;
   font-size: 1.1rem;
-  color: #6c757d;
+  color: var(--c-text-muted);
   transition: color 0.2s;
 }
 
 .dashboard-nav a:hover {
-  background: rgba(25, 119, 204, 0.06);
-  color: #1977cc;
-  border-left-color: #1977cc;
+  background: rgba(125, 64, 71, 0.06);
+  color: var(--c-action);
+  border-left-color: var(--c-action);
 }
 
 .dashboard-nav a:hover .icon {
-  color: #1977cc;
+  color: var(--c-action);
 }
 
 .dashboard-nav a.active {
-  background: rgba(25, 119, 204, 0.1);
-  color: #1977cc;
-  border-left-color: #1977cc;
+  background: rgba(125, 64, 71, 0.1);
+  color: var(--c-action);
+  border-left-color: var(--c-action);
   font-weight: 600;
 }
 
 .dashboard-nav a.active .icon {
-  color: #1977cc;
+  color: var(--c-action);
 }
 
 .dashboard-nav-logout {
@@ -130,7 +130,7 @@
 
 .dashboard-nav-divider {
   height: 1px;
-  background: #e9ecef;
+  background: var(--c-border-subtle);
   margin: 0.5rem 0;
 }
 

@@ -6,7 +6,7 @@
   justify-content: center;
   background: #e8e8f0;
   padding: 1rem;
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  font-family: var(--font-ui);
 }
 
 .auth-card {
@@ -14,7 +14,7 @@
   width: 100%;
   max-width: 900px;
   min-height: 560px;
-  border-radius: 20px;
+  border-radius: var(--r-lg);
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   background: #fff;
@@ -38,7 +38,7 @@
   width: 48px;
   height: 48px;
   background: rgba(255,255,255,0.35);
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,7 +84,7 @@
 .auth-right h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--c-ink);
   margin-bottom: 1.2rem;
 }
 
@@ -102,12 +102,12 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 0.55rem 0.5rem;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 8px;
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--r-md);
   background: #fff;
   font-size: 0.82rem;
   font-weight: 500;
-  color: #333;
+  color: var(--c-text);
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
   white-space: nowrap;
@@ -160,7 +160,7 @@
   width: 100%;
   padding: 0.6rem 0.85rem;
   border: 1.5px solid #e5e5e5;
-  border-radius: 8px;
+  border-radius: var(--r-md);
   font-size: 0.9rem;
   color: #222;
   background: #fff;
@@ -207,7 +207,7 @@
   background: #4a4fb5;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--r-md);
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
@@ -260,7 +260,7 @@
   gap: 0.25rem;
 }
 
-.auth-pass-hint.ok  { color: #22c55e; }
+.auth-pass-hint.ok  { color: var(--c-positive); }
 .auth-pass-hint.bad { color: #ef4444; }
 
 /* ── Error text ───────────────────────────────────────────────────────── */
@@ -287,8 +287,8 @@
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  background: #f0f0f0;
-  border: 1px solid #ddd;
+  background: var(--c-border-subtle);
+  border: 1px solid var(--c-border);
   border-radius: 50%;
   width: 28px;
   height: 28px;
@@ -301,7 +301,7 @@
   transition: background 0.2s;
 }
 
-.auth-close:hover { background: #e0e0e0; }
+.auth-close:hover { background: var(--c-border); }
 
 /* ── Responsive ───────────────────────────────────────────────────────── */
 @media (max-width: 640px) {

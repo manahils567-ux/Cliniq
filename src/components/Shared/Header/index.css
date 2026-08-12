@@ -13,7 +13,7 @@
     object-fit: cover;
     object-position: top;
     margin-left: 11px;
-    border: 2px #1977cc solid;
+    border: 2px var(--c-action) solid;
     cursor: pointer;
 }
 .hideTopHeader{
@@ -29,7 +29,7 @@
     transition: all 0.5s;
     z-index: 997;
     top: 40px;
-    box-shadow: 0px 2px 15px rgba(25, 119, 204, 0.1);
+    box-shadow: 0px 2px 15px rgba(125, 64, 71, 0.1);
 }
 
 #header.header-scrolled {
@@ -43,11 +43,11 @@
     line-height: 1;
     font-weight: 700;
     letter-spacing: 0.5px;
-    font-family: "Poppins", sans-serif;
+    font-family: var(--font-ui);
 }
 
 #header .logo a {
-    color: #2c4964;
+    color: var(--c-ink);
 }
 
 #header .logo img {
@@ -83,7 +83,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
-    color: #2c4964;
+    color: var(--c-ink);
     white-space: nowrap;
     transition: 0.3s;
     border-bottom: 2px solid #fff;
@@ -101,8 +101,8 @@
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-    color: #1977cc;
-    border-color: #1977cc;
+    color: var(--c-action);
+    border-color: var(--c-action);
 }
 
 .navbar .dropdown ul {
@@ -140,7 +140,7 @@
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover>a {
-    color: #1977cc;
+    color: var(--c-action);
 }
 
 .navbar .dropdown:hover>ul {
@@ -173,7 +173,7 @@
 }
 
 .mobile-nav-toggle {
-    color: #2c4964;
+    color: var(--c-ink);
     font-size: 28px;
     cursor: pointer;
     display: none;
@@ -194,9 +194,9 @@
 
 .appointment-btn {
     margin-left: 25px;
-    background: #1977cc;
+    background: var(--c-action);
     color: #fff;
-    border-radius: 50px;
+    border-radius: var(--r-full);
     padding: 8px 25px;
     white-space: nowrap;
     transition: 0.3s;
@@ -219,7 +219,7 @@
 .mobile-menu-nav {
     list-style: none;
     font-size: 1.2rem;
-    color: #1977cc !important;
+    color: var(--c-action) !important;
 }
 .mobile-menu-nav .icon{
     font-size: 1.3rem;
@@ -239,15 +239,15 @@
 
 /* User menu popover (hover) — role + profile */
 .header-user-popover .ant-popover-inner {
-    border-radius: 12px;
-    box-shadow: 0 12px 40px rgba(25, 119, 204, 0.15);
+    border-radius: var(--r-lg);
+    box-shadow: 0 12px 40px rgba(125, 64, 71, 0.15);
     overflow: hidden;
 }
 
 .header-user-popover .ant-popover-title {
     margin: 0;
     padding: 10px 14px;
-    border-bottom: 1px solid rgba(25, 119, 204, 0.12);
+    border-bottom: 1px solid rgba(125, 64, 71, 0.12);
     background: linear-gradient(135deg, #f8fbff 0%, #eef6fc 100%);
 }
 
@@ -270,7 +270,7 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     padding: 4px 10px;
-    border-radius: 999px;
+    border-radius: var(--r-full);
     line-height: 1.2;
 }
 
@@ -304,7 +304,7 @@
 .nav-popover-body .nav-popover-name {
     font-size: 17px;
     font-weight: 600;
-    color: #2c4964;
+    color: var(--c-ink);
     word-break: break-word;
 }
 
@@ -315,7 +315,7 @@
 .nav-popover-dashboard-link {
     font-size: 14px;
     font-weight: 500;
-    color: #1977cc;
+    color: var(--c-action);
 }
 
 .nav-popover-dashboard-link:hover {
@@ -324,7 +324,7 @@
 }
 
 .profileImage:focus-visible {
-    outline: 2px solid #1977cc;
+    outline: 2px solid var(--c-action);
     outline-offset: 2px;
     border-radius: 50%;
 }

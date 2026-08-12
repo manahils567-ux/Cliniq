@@ -6,7 +6,7 @@
     position: relative;
     font-size: 14px;
     font-weight: 500;
-    color: #272b41;
+    color: var(--c-ink);
     text-transform: capitalize;
     margin-bottom: 15px;
 }
@@ -20,7 +20,7 @@
     position: relative;
     font-size: 14px;
     font-weight: 500;
-    color: #272b41;
+    color: var(--c-ink);
     text-transform: capitalize;
     margin-bottom: 15px;
 }
@@ -39,7 +39,7 @@
 .booking-total ul li span {
     font-size: 18px;
     font-weight: 600;
-    color: #272b41;
+    color: var(--c-ink);
 }
 .booking-total .total-cost {
     font-size: 16px;

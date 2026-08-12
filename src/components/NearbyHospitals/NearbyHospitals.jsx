@@ -37,7 +37,7 @@ const TYPE_ICONS = {
 
 // Create custom coloured markers
 const createIcon = (type) => {
-    const colors = { hospital: '#ef4444', clinic: '#3b82f6', pharmacy: '#22c55e', doctors: '#a855f7' };
+    const colors = { hospital: '#ef4444', clinic: '#3b82f6', pharmacy: 'var(--c-positive)', doctors: '#a855f7' };
     const color = colors[type] || '#6b7280';
     return L.divIcon({
         className: '',
@@ -216,7 +216,7 @@ const NearbyHospitals = () => {
                                 key={place.id}
                                 style={{
                                     cursor: 'pointer',
-                                    background: selected?.id === place.id ? '#f0f7ff' : 'transparent',
+                                    background: selected?.id === place.id ? 'var(--n-050)' : 'transparent',
                                     borderRadius: 8,
                                     padding: '8px 12px',
                                 }}

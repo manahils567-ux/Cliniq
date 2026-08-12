@@ -7,5 +7,5 @@
 .tracking-id {
   font-family: 'Courier New', monospace;
   font-weight: 600;
-  color: #667eea;
+  color: var(--n-700);
 }

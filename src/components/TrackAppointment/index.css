@@ -1,7 +1,7 @@
 .track-detail {
     padding: 30px 0;
     margin-bottom: 8rem;
-    background-color: #f8f9fa;
+    background-color: var(--c-bg);
 }
 .img-div{
     width: 50px;
@@ -145,7 +145,7 @@
 }
 
 .track-page__title-icon {
-	color: #1977cc;
+	color: var(--c-action);
 	font-size: 1.35rem;
 }
 
@@ -181,25 +181,25 @@
 .track-page__info-card {
 	height: 100%;
 	border-radius: 16px !important;
-	border: 1px solid #e9ecef !important;
+	border: 1px solid var(--c-border-subtle) !important;
 	transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .track-page__info-card:hover {
-	box-shadow: 0 12px 32px rgba(25, 119, 204, 0.12);
+	box-shadow: 0 12px 32px rgba(125, 64, 71, 0.12);
 	transform: translateY(-4px);
 }
 
 .track-page__info-icon {
 	font-size: 1.75rem;
-	color: #1977cc;
+	color: var(--c-action);
 	margin-bottom: 0.75rem;
 	display: block;
 }
 
 .track-page__link {
 	font-weight: 600;
-	color: #1977cc;
+	color: var(--c-action);
 	text-decoration: none;
 }
 
@@ -224,7 +224,7 @@
 .track-page__side-card {
 	height: 100%;
 	border-radius: 20px !important;
-	background: linear-gradient(165deg, #0f172a 0%, #1e3a5f 55%, #1a4d7a 100%) !important;
+	background: linear-gradient(165deg, var(--c-ink) 0%, #1e3a5f 55%, #1a4d7a 100%) !important;
 	border: none !important;
 	color: #fff;
 	box-shadow: 0 20px 50px -20px rgba(15, 23, 42, 0.45) !important;
@@ -286,7 +286,7 @@
 .track-page__recent {
 	margin-top: 1.35rem;
 	padding-top: 1.25rem;
-	border-top: 1px solid #f1f5f9;
+	border-top: 1px solid var(--c-bg-alt);
 }
 
 .track-page__recent-label {
@@ -315,8 +315,8 @@
 }
 
 .track-page__recent-tag:hover {
-	color: #1977cc !important;
-	border-color: #1977cc !important;
+	color: var(--c-action) !important;
+	border-color: var(--c-action) !important;
 }
 
 .track-page__banner-error {
@@ -343,7 +343,7 @@
 
 .track-page__how-card:hover {
 	transform: translateY(-4px);
-	box-shadow: 0 12px 32px rgba(25, 119, 204, 0.1) !important;
+	box-shadow: 0 12px 32px rgba(125, 64, 71, 0.1) !important;
 }
 
 .track-page__how-num {
@@ -351,7 +351,7 @@
 	height: 36px;
 	margin: 0 auto 0.75rem;
 	border-radius: 50%;
-	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
 	color: #fff;
 	font-weight: 800;
 	font-size: 1rem;
@@ -366,16 +366,16 @@
 
 .track-page__faq {
 	padding: 2rem 0 1rem;
-	background: linear-gradient(180deg, transparent 0%, #f8fafc 40%);
+	background: linear-gradient(180deg, transparent 0%, var(--c-bg) 40%);
 }
 
 .track-page__collapse {
 	border-radius: 12px !important;
 	overflow: hidden;
-	border: 1px solid #e9ecef !important;
+	border: 1px solid var(--c-border-subtle) !important;
 	background: #fff;
 }
 
 .track-page__collapse .ant-collapse-item {
-	border-color: #f1f5f9 !important;
+	border-color: var(--c-bg-alt) !important;
 }

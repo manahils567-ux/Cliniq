@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo, useEffect } from 'react';
 import {
     Button, Card, Tag, Popconfirm, Empty, Spin,
     message, Select, Typography, Row, Col, Tooltip,
@@ -7,7 +7,8 @@ import {
 import {
     UploadOutlined, DeleteOutlined, EyeOutlined,
     DownloadOutlined, FileOutlined, MedicineBoxOutlined,
-    RobotOutlined, ShareAltOutlined, SearchOutlined, ScanOutlined
+    RobotOutlined, ShareAltOutlined, SearchOutlined, ScanOutlined,
+    ExperimentOutlined, BellOutlined, ReloadOutlined, LoadingOutlined
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import {
@@ -16,9 +17,13 @@ import {
     useDeleteMedicalRecordMutation,
     useGenerateMedicalHistoryMutation,
     useShareMedicalRecordsMutation,
+    useReanalyzeRecordMutation,
+    useGetInsightSummaryQuery,
 } from '../../redux/api/medicalRecordApi';
 import { useGetPatientAppointmentsQuery } from '../../redux/api/appointmentApi';
 import PrescriptionScanner from './PrescriptionScanner';
+import RecordAnalysisView from './RecordAnalysisView';
+import HealthInsights from './HealthInsights';
 
 const { Option } = Select;
 const { Title, Text, Paragraph } = Typography;
@@ -32,6 +37,13 @@ const CATEGORY_COLORS = {
     'Surgery': 'red',
     'Other': 'default',
 };
+
+/**
+ * A slip gets the amber binding rule only when its analysis produced something
+ * actionable. Amber stays rare so a wall of slips reads at a glance.
+ */
+const recordHasFollowUp = (record) =>
+    record?.analysisStatus === 'completed' && (record?.analysis?._count?.insights ?? 0) > 0;
 
 const MedicalRecords = () => {
     const fileInputRef = useRef(null);
@@ -51,8 +63,15 @@ const MedicalRecords = () => {
     const [historyModalVisible, setHistoryModalVisible] = useState(false);
     const [generatedHistory, setGeneratedHistory] = useState('');
 
-    // Queries & Mutations
-    const { data: recordsData, isLoading } = useGetMedicalRecordsQuery();
+    // AI document analysis states
+    const [analysisRecord, setAnalysisRecord] = useState(null);
+
+    // Queries & Mutations. Poll while any record is still being analysed so the
+    // card flips from "Analyzing…" to a result without a manual refresh.
+    const [pollingInterval, setPollingInterval] = useState(0);
+    const { data: recordsData, isLoading } = useGetMedicalRecordsQuery(undefined, { pollingInterval });
+    const { data: insightSummaryData } = useGetInsightSummaryQuery();
+    const [reanalyzeRecord, { isLoading: reanalyzing }] = useReanalyzeRecordMutation();
     const { data: appointmentsData, isLoading: isLoadingAppointments } = useGetPatientAppointmentsQuery();
     const [uploadRecord, { isLoading: uploading }] = useUploadMedicalRecordMutation();
     const [deleteRecord] = useDeleteMedicalRecordMutation();
@@ -61,6 +80,17 @@ const MedicalRecords = () => {
 
     const records = recordsData?.data ?? [];
     const appointments = appointmentsData ?? [];
+    const insightSummary = insightSummaryData?.data ?? {};
+
+    // Keep polling only while something is actually in flight.
+    const pendingAnalysisCount = useMemo(
+        () => records.filter((r) => r.analysisStatus === 'pending' || r.analysisStatus === 'processing').length,
+        [records]
+    );
+
+    useEffect(() => {
+        setPollingInterval(pendingAnalysisCount > 0 ? 4000 : 0);
+    }, [pendingAnalysisCount]);
 
     // Filter and sort records
     const filteredRecords = useMemo(() => {
@@ -100,12 +130,26 @@ const MedicalRecords = () => {
         formData.append('category', uploadCategory);
 
         try {
-            await uploadRecord(formData).unwrap();
-            message.success('File uploaded successfully.');
+            const res = await uploadRecord(formData).unwrap();
+            const willAnalyze = res?.data?.analysisStatus === 'pending';
+            message.success(
+                willAnalyze
+                    ? 'Uploaded. AI is analysing this document now — results will appear shortly.'
+                    : 'File uploaded successfully.'
+            );
         } catch {
             message.error('Upload failed. Please check your Cloudinary settings.');
         } finally {
             e.target.value = '';
+        }
+    };
+
+    const handleReanalyze = async (id) => {
+        try {
+            await reanalyzeRecord(id).unwrap();
+            message.success('Document re-analysed.');
+        } catch {
+            message.error('Re-analysis failed. The stored file may be unreadable.');
         }
     };
 
@@ -267,7 +311,7 @@ const MedicalRecords = () => {
                                 {selectedRecordIds.length > 0 && (
                                     <Button
                                         type="primary"
-                                        style={{ backgroundColor: '#52c41a', borderColor: '#52c41a' }}
+                                        style={{ backgroundColor: 'var(--c-positive)', borderColor: 'var(--c-positive)' }}
                                         icon={<ShareAltOutlined />}
                                         onClick={() => setShareModalVisible(true)}
                                     >
@@ -302,15 +346,26 @@ const MedicalRecords = () => {
                                     const isSelected = selectedRecordIds.includes(record.id);
                                     return (
                                         <Col xs={24} sm={12} lg={8} key={record.id}>
-                                            <Card
-                                                size="small"
-                                                hoverable
+                                            <article
+                                                className={`cq-slip${recordHasFollowUp(record) ? ' cq-slip--due' : ''}`}
                                                 style={{
-                                                    border: isSelected ? '2px solid #1677ff' : undefined,
-                                                    backgroundColor: isSelected ? '#e6f4ff' : undefined,
+                                                    height: '100%',
+                                                    cursor: 'pointer',
+                                                    outline: isSelected ? '2px solid var(--c-ink)' : undefined,
                                                 }}
                                                 onClick={() => handleView(record.fileUrl)}
-                                                extra={
+                                            >
+                                                <div className="d-flex justify-content-between align-items-start gap-2">
+                                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                                        <div className="cq-slip__type">{record.category}</div>
+                                                        <div
+                                                            className="cq-slip__title"
+                                                            style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                                                            title={record.title}
+                                                        >
+                                                            {record.title}
+                                                        </div>
+                                                    </div>
                                                     <Space onClick={(e) => e.stopPropagation()}>
                                                         <Checkbox
                                                             checked={isSelected}
@@ -325,20 +380,58 @@ const MedicalRecords = () => {
                                                             <Button danger size="small" icon={<DeleteOutlined />} />
                                                         </Popconfirm>
                                                     </Space>
-                                                }
-                                            >
-                                                <div className="d-flex align-items-start gap-2 mb-2">
-                                                    <FileOutlined style={{ fontSize: 24, color: '#1677ff', marginTop: 2 }} />
-                                                    <div style={{ flex: 1, minWidth: 0 }}>
-                                                        <Text strong style={{ display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={record.title}>
-                                                            {record.title}
-                                                        </Text>
-                                                        {record.description && <p className="form-text mb-1">{record.description}</p>}
-                                                    </div>
                                                 </div>
-                                                <div className="d-flex justify-content-between align-items-center">
-                                                    <Tag color={CATEGORY_COLORS[record.category] ?? 'default'}>{record.category}</Tag>
-                                                    <Text type="secondary" style={{ fontSize: 11 }}>{dayjs(record.date).format('MMM D, YYYY')}</Text>
+
+                                                <div className="cq-slip__meta d-flex justify-content-between align-items-center">
+                                                    <span>{dayjs(record.date).format('MMM D, YYYY')}</span>
+                                                    {recordHasFollowUp(record) && <span className="cq-due">Follow-up</span>}
+                                                </div>
+
+                                                {/* AI analysis status */}
+                                                <div className="mt-2" onClick={(e) => e.stopPropagation()}>
+                                                    {(record.analysisStatus === 'pending' || record.analysisStatus === 'processing') && (
+                                                        <Tag icon={<LoadingOutlined />} color="processing">AI analysing…</Tag>
+                                                    )}
+                                                    {record.analysisStatus === 'failed' && (
+                                                        <Space size={4}>
+                                                            <Tag color="warning">Analysis failed</Tag>
+                                                            <Button size="small" type="link" icon={<ReloadOutlined />}
+                                                                loading={reanalyzing}
+                                                                onClick={() => handleReanalyze(record.id)}>
+                                                                Retry
+                                                            </Button>
+                                                        </Space>
+                                                    )}
+                                                    {record.analysisStatus === 'completed' && record.analysis && (
+                                                        <div>
+                                                            <Space size={4} wrap>
+                                                                <Tag color="purple" icon={<ExperimentOutlined />}>
+                                                                    {record.analysis._count?.metrics ?? 0} values
+                                                                </Tag>
+                                                                {(record.analysis._count?.insights ?? 0) > 0 && (
+                                                                    <Tag color="gold" icon={<BellOutlined />}>
+                                                                        {record.analysis._count.insights} insight(s)
+                                                                    </Tag>
+                                                                )}
+                                                            </Space>
+                                                            {record.analysis.plainSummary && (
+                                                                <Paragraph
+                                                                    ellipsis={{ rows: 2 }}
+                                                                    style={{ fontSize: 12, marginTop: 6, marginBottom: 0, color: '#595959' }}
+                                                                >
+                                                                    {record.analysis.plainSummary}
+                                                                </Paragraph>
+                                                            )}
+                                                            <Button
+                                                                size="small"
+                                                                type="link"
+                                                                style={{ paddingLeft: 0 }}
+                                                                onClick={() => setAnalysisRecord(record)}
+                                                            >
+                                                                View full AI analysis →
+                                                            </Button>
+                                                        </div>
+                                                    )}
                                                 </div>
                                                 <div className="d-flex justify-content-between align-items-center mt-2" onClick={(e) => e.stopPropagation()}>
                                                     <div className="d-flex gap-1">
@@ -350,7 +443,7 @@ const MedicalRecords = () => {
                                                         Share
                                                     </Button>
                                                 </div>
-                                            </Card>
+                                            </article>
                                         </Col>
                                     );
                                 })}
@@ -359,6 +452,18 @@ const MedicalRecords = () => {
                     </div>
                 </div>
             ),
+        },
+        {
+            key: 'insights',
+            label: (
+                <span>
+                    <BellOutlined /> Health Insights
+                    {insightSummary.unread > 0 && (
+                        <Tag color="red" style={{ marginLeft: 6 }}>{insightSummary.unread}</Tag>
+                    )}
+                </span>
+            ),
+            children: <HealthInsights />,
         },
         {
             key: 'scanner',
@@ -400,6 +505,35 @@ const MedicalRecords = () => {
                         </Paragraph>
                     </div>
                 )}
+            </Modal>
+
+            {/* AI Document Analysis Modal */}
+            <Modal
+                title={
+                    <span>
+                        <ExperimentOutlined style={{ color: '#722ed1', marginRight: 8 }} />
+                        AI Analysis — {analysisRecord?.title}
+                    </span>
+                }
+                open={!!analysisRecord}
+                onCancel={() => setAnalysisRecord(null)}
+                footer={[
+                    <Button
+                        key="reanalyze"
+                        icon={<ReloadOutlined />}
+                        loading={reanalyzing}
+                        onClick={() => handleReanalyze(analysisRecord.id)}
+                    >
+                        Re-analyse
+                    </Button>,
+                    <Button key="close" type="primary" onClick={() => setAnalysisRecord(null)}>
+                        Close
+                    </Button>,
+                ]}
+                width={900}
+                styles={{ body: { maxHeight: '70vh', overflowY: 'auto' } }}
+            >
+                {analysisRecord && <RecordAnalysisView recordId={analysisRecord.id} />}
             </Modal>
 
             {/* Share with Doctor Modal */}

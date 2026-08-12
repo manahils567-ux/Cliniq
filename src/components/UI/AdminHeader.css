@@ -1,6 +1,6 @@
 .header {
 	background: #fff;
-	border-bottom: 1px solid #f0f0f0;
+	border-bottom: 1px solid var(--c-border-subtle);
 	left: 0;
 	position: fixed;
 	right: 0;
@@ -38,8 +38,8 @@
 .header .has-arrow .dropdown-toggle:after {
 	border-top: 0;
 	border-left: 0;
-	border-bottom: 2px solid #333;
-	border-right: 2px solid #333;
+	border-bottom: 2px solid var(--c-text);
+	border-right: 2px solid var(--c-text);
 	content: '';
 	height: 8px;
 	display: inline-block;
@@ -67,7 +67,7 @@
     z-index: 99;
 }
 .user-menu.nav > li > a {
-	color: #333;
+	color: var(--c-text);
 	font-size: 14px;
 	line-height: 58px;
 	padding: 0 15px;
@@ -79,7 +79,7 @@
 }
 .user-menu.nav > li > a:hover i,
 .user-menu.nav > li > a:focus i {
-	color: #333;
+	color: var(--c-text);
 }
 .user-img {
 	display: inline-block;
@@ -155,7 +155,7 @@
 }
 .app-dropdown-menu .app-item {
     border: 1px solid transparent;
-    border-radius: 3px;
+    border-radius: var(--r-sm);
     color: #737373;
     display: block;
     padding: 10px 0;
@@ -235,15 +235,15 @@ html.menu-opened body {
 .top-nav-search .form-control {
   
     border-color: rgba(0, 0, 0, 0.1);
-    border-radius: 50px;
-    color: #333;
+    border-radius: var(--r-full);
+    color: var(--c-text);
     height: 40px;
     padding: 10px 50px 10px 15px;
 }
 .top-nav-search .btn {
     background-color: transparent;
     border-color: transparent;
-    color: #333;
+    color: var(--c-text);
     min-height: 40px;
     padding: 7px 15px;
     position: absolute;
@@ -251,19 +251,19 @@ html.menu-opened body {
     top: 0;
 }
 .top-nav-search .form-control::-webkit-input-placeholder {
-	color: #333;
+	color: var(--c-text);
 }
 .top-nav-search .form-control::-moz-placeholder {
-	color: #333;
+	color: var(--c-text);
 }
 .top-nav-search .form-control:-ms-input-placeholder {
-	color: #333;
+	color: var(--c-text);
 }
 .top-nav-search .form-control::-ms-input-placeholder {
-	color: #333;
+	color: var(--c-text);
 }
 .top-nav-search .form-control::placeholder {
-	color: #333;
+	color: var(--c-text);
 }
 .top-nav-search.active form {
     display: block;

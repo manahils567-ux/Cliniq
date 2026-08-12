@@ -185,7 +185,7 @@ const DoctorDashboard = () => {
 						<YAxis />
 						<Tooltip />
 						<Legend />
-						<Bar dataKey="appointments" fill="#667eea" radius={[6, 6, 0, 0]} />
+						<Bar dataKey="appointments" fill="var(--n-700)" radius={[6, 6, 0, 0]} />
 					</BarChart>
 				</ResponsiveContainer>
 			</div>

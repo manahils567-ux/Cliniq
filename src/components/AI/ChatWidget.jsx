@@ -20,6 +20,7 @@ const WELCOME_MSG = (lang) => ({
     id: 'welcome',
     text: WELCOME[lang],
     sender: 'bot',
+    language: lang,
     timestamp: new Date(),
 });
 
@@ -59,6 +60,9 @@ export default function ChatWidget() {
                         text: m.text,
                         sender: m.role,
                         specialist: m.specialist || null,
+                        // History rows predate per-message language; infer from the
+                        // text so old Urdu replies still render RTL.
+                        language: m.language || (/[؀-ۿ]/.test(m.text || '') ? 'ur' : 'en'),
                         timestamp: new Date(m.createdAt),
                     }));
                     setMessages(mapped);
@@ -76,7 +80,7 @@ export default function ChatWidget() {
     // ── Update welcome message language ─────────────────────────────
     useEffect(() => {
         setMessages((prev) =>
-            prev.map((m) => m.id === 'welcome' ? { ...m, text: WELCOME[language] } : m)
+            prev.map((m) => m.id === 'welcome' ? { ...m, text: WELCOME[language], language } : m)
         );
     }, [language]);
 
@@ -125,7 +129,7 @@ export default function ChatWidget() {
         const text = input.trim();
         if (!text || isTyping) return;
 
-        const userMsg = { id: Date.now(), text, sender: 'user', timestamp: new Date() };
+        const userMsg = { id: Date.now(), text, sender: 'user', language, timestamp: new Date() };
         setMessages((prev) => [...prev, userMsg]);
         setInput('');
         setIsTyping(true);
@@ -140,7 +144,7 @@ export default function ChatWidget() {
             const reply     = res.data?.data?.reply || 'No response received.';
             const specialist = res.data?.data?.specialist || null;
 
-            const botMsg = { id: Date.now() + 1, text: reply, specialist, sender: 'bot', timestamp: new Date() };
+            const botMsg = { id: Date.now() + 1, text: reply, specialist, sender: 'bot', language, timestamp: new Date() };
             setMessages((prev) => [...prev, botMsg]);
 
             // Save to DB (fire and forget)
@@ -155,7 +159,7 @@ export default function ChatWidget() {
             if (status === 429) errorText = language === 'ur' ? 'بہت زیادہ درخواستیں۔ تھوڑی دیر بعد کوشش کریں۔' : 'Too many requests. Please wait a moment.';
             if (status === 503) errorText = language === 'ur' ? 'سروس ابھی دستیاب نہیں۔' : 'Service temporarily unavailable.';
 
-            setMessages((prev) => [...prev, { id: Date.now() + 2, text: errorText, sender: 'bot', isError: true, timestamp: new Date() }]);
+            setMessages((prev) => [...prev, { id: Date.now() + 2, text: errorText, sender: 'bot', isError: true, language, timestamp: new Date() }]);
         } finally {
             setIsTyping(false);
         }
@@ -203,12 +207,18 @@ export default function ChatWidget() {
                     </div>
 
                     {/* Messages */}
-                    <div className="cw-messages" dir={language === 'ur' ? 'rtl' : 'ltr'}>
+                    <div className="cw-messages">
                         {messages.map((msg) => (
-                            <div key={msg.id} className={`cw-msg ${msg.sender === 'user' ? 'cw-msg--user' : 'cw-msg--bot'} ${msg.isError ? 'cw-msg--error' : ''}`}>
+                            <div
+                                key={msg.id}
+                                className={`cw-msg ${msg.sender === 'user' ? 'cw-msg--user' : 'cw-msg--bot'} ${msg.isError ? 'cw-msg--error' : ''}`}
+                                dir={msg.language === 'ur' ? 'rtl' : 'ltr'}
+                            >
                                 {msg.sender === 'bot' && <div className="cw-msg-avatar"><FaRobot /></div>}
                                 <div className="cw-msg-body">
-                                    <p className="cw-msg-text">{msg.text}</p>
+                                    {/* Per message, not on a wrapper — one Urdu reply in an English
+                                        thread needs its own RTL and Nastaliq line-height. */}
+                                    <p className="cw-msg-text" lang={msg.language === 'ur' ? 'ur' : 'en'}>{msg.text}</p>
                                     {msg.specialist && (
                                         <button className="cw-specialist-btn" onClick={() => { setIsOpen(false); navigate(`/doctors?specialization=${encodeURIComponent(msg.specialist)}`); }}>
                                             <FaUserMd style={{ marginRight: 6 }} />

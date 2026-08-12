@@ -56,6 +56,60 @@ export const medicalRecordApi = baseApi.injectEndpoints({
             }),
             providesTags: [tagTypes.medicalRecord],
         }),
+
+        // ── AI document analysis ──────────────────────────────────────────
+        getRecordAnalysis: build.query({
+            query: (id) => ({
+                url: `${MEDICAL_RECORD_URL}/${id}/analysis`,
+                method: 'GET',
+            }),
+            providesTags: [tagTypes.medicalRecord],
+        }),
+        reanalyzeRecord: build.mutation({
+            query: (id) => ({
+                url: `${MEDICAL_RECORD_URL}/${id}/analyze`,
+                method: 'POST',
+            }),
+            invalidatesTags: [tagTypes.medicalRecord, tagTypes.healthInsight],
+        }),
+        getHealthInsights: build.query({
+            query: (status) => ({
+                url: `${MEDICAL_RECORD_URL}/insights`,
+                method: 'GET',
+                params: status ? { status } : undefined,
+            }),
+            providesTags: [tagTypes.healthInsight],
+        }),
+        getInsightSummary: build.query({
+            query: () => ({
+                url: `${MEDICAL_RECORD_URL}/insights/summary`,
+                method: 'GET',
+            }),
+            providesTags: [tagTypes.healthInsight],
+        }),
+        updateInsight: build.mutation({
+            query: ({ id, status }) => ({
+                url: `${MEDICAL_RECORD_URL}/insights/${id}`,
+                method: 'PATCH',
+                data: { status },
+            }),
+            invalidatesTags: [tagTypes.healthInsight],
+        }),
+        acceptInsightReminder: build.mutation({
+            query: (id) => ({
+                url: `${MEDICAL_RECORD_URL}/insights/${id}/accept-reminder`,
+                method: 'POST',
+            }),
+            invalidatesTags: [tagTypes.healthInsight, tagTypes.reminder],
+        }),
+        getMetricTrends: build.query({
+            query: (key) => ({
+                url: `${MEDICAL_RECORD_URL}/trends`,
+                method: 'GET',
+                params: key ? { key } : undefined,
+            }),
+            providesTags: [tagTypes.healthInsight],
+        }),
     }),
 });
 
@@ -67,4 +121,11 @@ export const {
     useGenerateMedicalHistoryMutation,
     useShareMedicalRecordsMutation,
     useGetSharedRecordsForAppointmentQuery,
+    useGetRecordAnalysisQuery,
+    useReanalyzeRecordMutation,
+    useGetHealthInsightsQuery,
+    useGetInsightSummaryQuery,
+    useUpdateInsightMutation,
+    useAcceptInsightReminderMutation,
+    useGetMetricTrendsQuery,
 } = medicalRecordApi;

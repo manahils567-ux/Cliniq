@@ -24,7 +24,7 @@
 
 .sidebar::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
+  border-radius: var(--r-sm);
 }
 
 .sidebar-inner {
@@ -122,7 +122,7 @@
   border: none;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: var(--r-md);
   font-size: 1.25rem;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
