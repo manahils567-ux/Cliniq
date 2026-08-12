@@ -256,7 +256,7 @@
 }
 
 .our-doctor-card--skeleton .our-doctor-card__avatar {
-	background: linear-gradient(90deg, #1a2a40 25%, #243550 50%, #1a2a40 75%);
+	background: linear-gradient(90deg, #0A0A0A 25%, #1F1F1F 50%, #0A0A0A 75%);
 	background-size: 200% 100%;
 	animation: doctorSkeleton 1.4s ease-in-out infinite;
 }
@@ -264,7 +264,7 @@
 .our-doctor-card--skeleton .our-doctor-card__name-skeleton,
 .our-doctor-card--skeleton .our-doctor-card__meta-skeleton {
 	height: 16px;
-	background: linear-gradient(90deg, #1a2a40 25%, #243550 50%, #1a2a40 75%);
+	background: linear-gradient(90deg, #0A0A0A 25%, #1F1F1F 50%, #0A0A0A 75%);
 	background-size: 200% 100%;
 	border-radius: var(--r-md);
 	margin: 0 auto 10px;

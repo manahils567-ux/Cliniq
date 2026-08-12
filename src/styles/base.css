@@ -171,7 +171,7 @@ a:hover { opacity: 0.62; color: inherit; }
               opacity var(--dur-fast) var(--ease);
 }
 .cq-hero__bar.is-stuck {
-  background: rgba(35, 35, 34, 0.82);
+  background: rgba(10, 10, 10, 0.82);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
   backdrop-filter: saturate(140%) blur(14px);
   border-color: var(--d-border);
@@ -624,7 +624,7 @@ a:hover { opacity: 0.62; color: inherit; }
   .cq-panel:hover { transform: none; }
 }
 
-.cq-panel--ink    { background: var(--n-800); color: rgba(241,236,230,0.78); }
+.cq-panel--ink    { background: var(--d-bg); color: rgba(241,236,230,0.78); }
 .cq-panel--accent { background: var(--c-accent); color: rgba(241,236,230,0.82); }
 .cq-panel--greige { background: var(--n-200); color: var(--n-600); }
 .cq-panel--cream  { background: var(--n-000); color: var(--c-text); border-color: var(--c-border); }

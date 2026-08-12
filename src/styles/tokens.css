@@ -81,9 +81,11 @@
 
   /* ---- Semantic: dark surfaces (landing, hero, footer, login) ---------
      Charcoal Espresso is the dark ground, cream the text on it. */
-  --d-bg:            var(--n-800);
-  --d-surface:       var(--n-900);
-  --d-surface-alt:   var(--n-700);
+  /* Black is the dark ground across the app. Espresso stays in the ramp for
+     borders, icons and text; it is no longer the dark surface itself. */
+  --d-bg:            #0A0A0A;
+  --d-surface:       #141414;
+  --d-surface-alt:   #1F1F1F;
   --d-border:        rgba(241, 236, 230, 0.14);
   --d-border-strong: rgba(241, 236, 230, 0.30);
   --d-text:          var(--n-100);
@@ -91,7 +93,7 @@
   --d-text-faint:    rgba(241, 236, 230, 0.40);
   --d-action:        var(--n-100);
   --d-action-hover:  var(--n-200);
-  --d-action-text:   var(--n-800);
+  --d-action-text:   #0A0A0A;
 
   /* ---- Type -----------------------------------------------------------
      Inter Tight for display — tight apertures, near-Helvetica skeleton,

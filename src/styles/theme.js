@@ -100,20 +100,20 @@ export const cliniqDarkTheme = {
     colorTextHeading:   mono.n100,
     colorTextSecondary: 'rgba(241, 236, 230, 0.64)',
 
-    colorBgBase:      mono.n800,
-    colorBgLayout:    mono.n800,
-    colorBgContainer: mono.n900,
-    colorBgElevated:  mono.n700,
+    colorBgBase:      '#0A0A0A',
+    colorBgLayout:    '#0A0A0A',
+    colorBgContainer: '#141414',
+    colorBgElevated:  '#1F1F1F',
 
     colorBorder:          'rgba(241, 236, 230, 0.14)',
     colorBorderSecondary: 'rgba(241, 236, 230, 0.09)',
   },
   components: {
     ...sharedComponents,
-    Button: { ...sharedComponents.Button, primaryColor: mono.n800 },
-    Table:  { headerBg: mono.n900, rowHoverBg: mono.n900, borderColor: 'rgba(241,236,230,0.09)' },
+    Button: { ...sharedComponents.Button, primaryColor: '#0A0A0A' },
+    Table:  { headerBg: '#141414', rowHoverBg: '#141414', borderColor: 'rgba(241,236,230,0.09)' },
     Input:  { paddingBlock: 9, activeShadow: '0 0 0 3px rgba(241, 236, 230, 0.34)' },
-    Segmented: { itemSelectedBg: mono.n100, itemSelectedColor: mono.n800 },
+    Segmented: { itemSelectedBg: mono.n100, itemSelectedColor: '#0A0A0A' },
   },
 };
 

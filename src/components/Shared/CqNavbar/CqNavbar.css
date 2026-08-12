@@ -13,7 +13,7 @@
 
   padding: var(--sp-3) var(--sp-5);
   border: 1px solid var(--d-border);
-  background: rgba(35, 35, 34, 0.62);
+  background: rgba(10, 10, 10, 0.66);
   -webkit-backdrop-filter: saturate(150%) blur(14px);
   backdrop-filter: saturate(150%) blur(14px);
   border-radius: var(--r-full);
