@@ -71,7 +71,7 @@ const DoctorPrescriptions = () => {
 			key: 'status',
 			width: 120,
 			render: (_, record) => (
-				<Tag color={record?.isArchived ? '#f50' : 'var(--c-positive)'}>{record?.isArchived ? 'Archived' : 'Active'}</Tag>
+				<Tag color={record?.isArchived ? 'var(--c-danger)' : 'var(--c-positive)'}>{record?.isArchived ? 'Archived' : 'Active'}</Tag>
 			),
 		},
 		{

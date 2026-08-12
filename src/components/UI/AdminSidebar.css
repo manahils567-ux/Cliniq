@@ -5,7 +5,7 @@
   left: 0;
   width: 260px;
   height: 100vh;
-  background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
+  background: linear-gradient(180deg, var(--c-accent-hover) 0%, var(--c-accent) 100%);
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   transition: all 0.3s ease;
@@ -91,7 +91,7 @@
 .sidebar-menu li a:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  border-left-color: #60a5fa;
+  border-left-color: var(--c-accent-line);
 }
 
 .sidebar-menu li.active a {
@@ -117,7 +117,7 @@
   top: 1rem;
   left: 1rem;
   z-index: 1001;
-  background: #1e3a8a;
+  background: var(--c-accent-hover);
   color: #fff;
   border: none;
   width: 40px;
@@ -130,7 +130,7 @@
 }
 
 .sidebar-toggle-mobile:hover {
-  background: #1e40af;
+  background: var(--c-accent);
   transform: scale(1.05);
 }
 

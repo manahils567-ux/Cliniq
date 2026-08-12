@@ -134,7 +134,7 @@
 	padding-left: 1rem;
 	padding-right: 1rem;
 	border-radius: var(--r-md);
-	border-bottom: 1px solid #d0e7ff;
+	border-bottom: 1px solid var(--n-200);
 }
 
 .availability-item--closed {
@@ -192,7 +192,7 @@
 
 /* Note */
 .availability-note {
-	background: #fef9f3;
+	background: var(--n-000);
 	border-left: 4px solid #f59e0b;
 	border-radius: var(--r-md);
 	padding: 1rem 1.25rem;
@@ -206,7 +206,7 @@
 }
 
 .availability-note strong {
-	color: #78350f;
+	color: var(--c-signal-dim);
 }
 
 @media (max-width: 767.98px) {

@@ -103,7 +103,7 @@ const PatientDashboard = () => {
                 return (
                     <Tooltip title="Copy Tracking Id">
                             <Button>
-                                <h6><Tag color="#87d068" className='ms-2 text-uppercase' onClick={() => clickToCopyClipBoard(trackingId)}>{trackingId}</Tag></h6>
+                                <h6><Tag color="var(--c-positive)" className='ms-2 text-uppercase' onClick={() => clickToCopyClipBoard(trackingId)}>{trackingId}</Tag></h6>
                             </Button>
                         </Tooltip>
                 )
@@ -123,7 +123,7 @@ const PatientDashboard = () => {
             dataIndex: "followUpdate",
             key: 4,
             render: function (data) {
-                return <Tag color="#87d068">{dayjs(data).format('MMM D, YYYY hh:mm A')}</Tag>;
+                return <Tag color="var(--c-positive)">{dayjs(data).format('MMM D, YYYY hh:mm A')}</Tag>;
             }
         },
         {
@@ -131,7 +131,7 @@ const PatientDashboard = () => {
             dataIndex: "isArchived",
             key: 4,
             render: function ({isArchived}) {
-                return <Tag color={isArchived ? "#f50" : "#108ee9"}>{isArchived ? "Yes" :"Under Treatment"}</Tag>;
+                return <Tag color={isArchived ? "var(--c-danger)" : "var(--c-accent)"}>{isArchived ? "Yes" :"Under Treatment"}</Tag>;
             }
         },
         {
@@ -201,7 +201,7 @@ const PatientDashboard = () => {
             key: 24,
             width: 100,
             render: function (data) {
-                return <Tag color="#f50">{data?.status}</Tag>
+                return <Tag color="var(--c-danger)">{data?.status}</Tag>
             }
         },
         {

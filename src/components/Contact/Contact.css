@@ -45,7 +45,7 @@
 	padding: 1.75rem;
 	background: var(--c-bg);
 	border-radius: var(--r-lg);
-	border: 1px solid #e5e7eb;
+	border: 1px solid var(--n-100);
 	transition: all 0.3s;
 }
 
@@ -135,7 +135,7 @@
 
 .contact-form .form-control {
 	border-radius: var(--r-lg);
-	border: 1px solid #e5e7eb;
+	border: 1px solid var(--n-100);
 	padding: 12px 16px;
 	font-size: 0.95rem;
 	transition: border-color 0.2s, box-shadow 0.2s;

@@ -115,7 +115,7 @@ const BookDoctor = () => {
 							<div className="book-doctor-card__rating">
 								<StarRatings
 									rating={5}
-									starRatedColor="#f4c150"
+									starRatedColor="var(--c-signal)"
 									numberOfStars={5}
 									name="rating"
 									starDimension="16px"

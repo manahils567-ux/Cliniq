@@ -47,7 +47,7 @@ const DoctorProfileHero = ({ data }) => {
 								<div className="doctor-hero__rating-number">{rating}</div>
 								<StarRatings
 									rating={rating}
-									starRatedColor="#f4c150"
+									starRatedColor="var(--c-signal)"
 									numberOfStars={5}
 									name="rating"
 									starDimension="16px"

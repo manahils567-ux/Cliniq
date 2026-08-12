@@ -183,7 +183,7 @@
 
 .our-doctor-card__specialization {
 	font-size: 0.88rem;
-	color: #4a5568;
+	color: var(--n-700);
 	line-height: 1.5;
 	flex: 1;
 	margin: 0 0 1.1rem;

@@ -294,7 +294,7 @@ const TreatmentEdit = () => {
 
                             {addMedicine.length > 0 &&
                                 <>
-                                    <div className="card p-3 mb-3" style={{ background: "#e8e8e8" }}>
+                                    <div className="card p-3 mb-3" style={{ background: "var(--n-100)" }}>
                                         <h5>Add New Medicine</h5>
                                         {
                                             addMedicine?.map((item, index) => (

@@ -268,11 +268,11 @@
 	display: inline-block;
 	font-size: 0.85rem;
 	padding: 6px 14px;
-	background: #f0f4f8;
+	background: var(--n-050);
 	color: var(--c-text);
 	border-radius: var(--r-lg);
 	font-weight: 500;
-	border: 1px solid #e5e7eb;
+	border: 1px solid var(--n-100);
 }
 
 @media (max-width: 767.98px) {

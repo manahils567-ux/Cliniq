@@ -37,8 +37,8 @@ const TYPE_ICONS = {
 
 // Create custom coloured markers
 const createIcon = (type) => {
-    const colors = { hospital: '#ef4444', clinic: '#3b82f6', pharmacy: 'var(--c-positive)', doctors: '#a855f7' };
-    const color = colors[type] || '#6b7280';
+    const colors = { hospital: '#ef4444', clinic: 'var(--c-accent)', pharmacy: 'var(--c-positive)', doctors: '#a855f7' };
+    const color = colors[type] || 'var(--n-600)';
     return L.divIcon({
         className: '',
         html: `<div style="
@@ -56,7 +56,7 @@ const createIcon = (type) => {
 const userIcon = L.divIcon({
     className: '',
     html: `<div style="
-        background:#0ea5e9;width:16px;height:16px;
+        background:var(--c-accent);width:16px;height:16px;
         border-radius:50%;border:3px solid white;
         box-shadow:0 0 0 4px rgba(14,165,233,0.3);
     "></div>`,
@@ -172,7 +172,7 @@ const NearbyHospitals = () => {
                             <Circle
                                 center={location}
                                 radius={radius}
-                                pathOptions={{ color: '#0ea5e9', fillColor: '#0ea5e9', fillOpacity: 0.08 }}
+                                pathOptions={{ color: 'var(--c-accent)', fillColor: 'var(--c-accent)', fillOpacity: 0.08 }}
                             />
                         </>
                     )}
@@ -186,7 +186,7 @@ const NearbyHospitals = () => {
                             <Popup>
                                 <strong>{TYPE_ICONS[place.type] || '📍'} {place.name}</strong>
                                 <br />
-                                <span style={{ color: '#6b7280', fontSize: 12 }}>{place.address}</span>
+                                <span style={{ color: 'var(--n-600)', fontSize: 12 }}>{place.address}</span>
                                 {place.phone && <><br /><span>📞 {place.phone}</span></>}
                             </Popup>
                         </Marker>
@@ -253,7 +253,7 @@ const NearbyHospitals = () => {
                     />
                 </>
             ) : (
-                <div className="text-center py-5" style={{ color: '#94a3b8' }}>
+                <div className="text-center py-5" style={{ color: 'var(--n-400)' }}>
                     <MedicineBoxOutlined style={{ fontSize: 48, marginBottom: 12, display: 'block' }} />
                     <Text type="secondary">Click "Find Near Me" to discover hospitals, clinics, and pharmacies near you.</Text>
                 </div>

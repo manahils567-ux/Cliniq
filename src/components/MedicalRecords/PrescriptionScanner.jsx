@@ -156,7 +156,7 @@ const PrescriptionScanner = () => {
                             alt="prescription preview"
                             style={{ maxHeight: 220, maxWidth: '100%', borderRadius: 8, marginBottom: 12 }}
                         />
-                        <p style={{ color: '#666', fontSize: 13 }}>
+                        <p style={{ color: 'var(--n-600)', fontSize: 13 }}>
                             <UploadOutlined /> Click to scan a different prescription
                         </p>
                     </div>
@@ -164,7 +164,7 @@ const PrescriptionScanner = () => {
                     <div className="py-4">
                         <ScanOutlined style={{ fontSize: 48, color: 'var(--c-accent)', marginBottom: 12, display: 'block' }} />
                         <Text strong style={{ fontSize: 16 }}>Click to upload prescription</Text>
-                        <p style={{ color: '#999', marginTop: 4, fontSize: 13 }}>
+                        <p style={{ color: 'var(--n-400)', marginTop: 4, fontSize: 13 }}>
                             JPG, PNG or WEBP — photo of a handwritten or printed prescription
                         </p>
                         <Button type="primary" icon={<UploadOutlined />} style={{ marginTop: 8 }}>
@@ -241,7 +241,7 @@ const PrescriptionScanner = () => {
                             <div>
                                 <Text strong><FileTextOutlined className="me-2" />Raw Extracted Text</Text>
                                 <Card size="small" style={{ marginTop: 8, background: 'var(--c-bg-alt)' }}>
-                                    <Paragraph style={{ whiteSpace: 'pre-wrap', fontSize: 12, margin: 0, color: '#555' }}>
+                                    <Paragraph style={{ whiteSpace: 'pre-wrap', fontSize: 12, margin: 0, color: 'var(--n-700)' }}>
                                         {result.rawText}
                                     </Paragraph>
                                 </Card>

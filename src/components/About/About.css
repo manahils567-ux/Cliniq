@@ -218,7 +218,7 @@
 	position: relative;
 	aspect-ratio: 4/5;
 	overflow: hidden;
-	background: linear-gradient(145deg, #e8f4fc 0%, #cfe8f9 100%);
+	background: linear-gradient(145deg, var(--n-050) 0%, var(--n-200) 100%);
 }
 
 .about-doctor-card__photo img {
@@ -324,7 +324,7 @@
 	align-items: center;
 	gap: 0.35rem 0.5rem;
 	font-size: 0.78rem;
-	color: #94a3b8;
+	color: var(--n-400);
 	margin-bottom: 1rem;
 	margin-top: auto;
 }
@@ -333,7 +333,7 @@
 	width: 4px;
 	height: 4px;
 	border-radius: 50%;
-	background: #cbd5e1;
+	background: var(--n-200);
 }
 
 .about-doctor-card__cta {

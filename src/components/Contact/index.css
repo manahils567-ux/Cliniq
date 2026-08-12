@@ -3,7 +3,7 @@
     font-size: 22px;
     color: var(--c-action);
     padding: 5px;
-    background: #d6e9fa;
+    background: var(--n-100);
     display: flex;
     justify-content: center;
     align-items: center;

@@ -105,7 +105,7 @@
 
 .info-box-icon--emergency {
 	background: rgba(220, 53, 69, 0.12);
-	color: #dc3545;
+	color: var(--c-danger);
 }
 
 .info-box h4 {

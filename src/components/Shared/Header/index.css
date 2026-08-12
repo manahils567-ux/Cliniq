@@ -246,7 +246,7 @@
     padding: 5px;
 }
 .ant-drawer-body{
-    background-color: #d2d2ff;
+    background-color: var(--n-200);
 }
 
 /* User menu popover (hover) — role + profile */
@@ -260,7 +260,7 @@
     margin: 0;
     padding: 10px 14px;
     border-bottom: 1px solid rgba(125, 64, 71, 0.12);
-    background: linear-gradient(135deg, #f8fbff 0%, #eef6fc 100%);
+    background: linear-gradient(135deg, var(--n-000) 0%, var(--n-050) 100%);
 }
 
 .header-user-popover .ant-popover-inner-content {

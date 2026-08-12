@@ -88,13 +88,13 @@
 
 .dash-home__quick-arrow {
 	margin-left: auto;
-	color: #94a3b8;
+	color: var(--n-400);
 	font-size: 0.85rem;
 }
 
 .dash-home__fav-card {
 	border-radius: 14px !important;
-	border: 1px solid #eef2f6 !important;
+	border: 1px solid var(--n-050) !important;
 }
 
 .dash-home__treatment {

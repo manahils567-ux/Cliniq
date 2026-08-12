@@ -107,7 +107,7 @@
 .review-card__rating-text {
 	font-size: 0.9rem;
 	font-weight: 600;
-	color: #f4c150;
+	color: var(--c-signal);
 }
 
 .review-card__body {
@@ -135,12 +135,12 @@
 }
 
 .review-card__recommendation--yes {
-	background: #dcfce7;
+	background: var(--n-050);
 	color: #16a34a;
 }
 
 .review-card__recommendation--no {
-	background: #fee2e2;
+	background: var(--n-100);
 	color: var(--c-danger);
 }
 
@@ -213,7 +213,7 @@
 .review-form__textarea {
 	width: 100%;
 	padding: 12px;
-	border: 1px solid #e5e7eb;
+	border: 1px solid var(--n-100);
 	border-radius: var(--r-md);
 	font-size: 0.95rem;
 	font-family: inherit;
@@ -228,7 +228,7 @@
 }
 
 .review-form__textarea::placeholder {
-	color: #9ca3af;
+	color: var(--n-400);
 }
 
 .review-form__submit.ant-btn-primary {

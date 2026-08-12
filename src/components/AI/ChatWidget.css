@@ -162,7 +162,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background: #f8f9ff;
+    background: var(--n-050);
 }
 
 .cw-messages::-webkit-scrollbar {
@@ -170,7 +170,7 @@
 }
 .cw-messages::-webkit-scrollbar-track { background: transparent; }
 .cw-messages::-webkit-scrollbar-thumb {
-    background: #d0d4ff;
+    background: var(--n-200);
     border-radius: var(--r-sm);
 }
 
@@ -234,14 +234,14 @@
 }
 
 .cw-msg--error .cw-msg-text {
-    background: #fff1f1;
+    background: var(--n-050);
     color: #b91c1c;
-    border: 1px solid #fecaca;
+    border: 1px solid var(--n-200);
 }
 
 .cw-msg-time {
     font-size: 10px;
-    color: #a0a4bc;
+    color: var(--n-400);
     padding: 0 4px;
 }
 
@@ -289,8 +289,8 @@
 
 .cw-input {
     flex: 1;
-    background: #f4f5ff;
-    border: 1.5px solid #e4e6fb;
+    background: var(--n-050);
+    border: 1.5px solid var(--n-100);
     border-radius: var(--r-lg);
     padding: 10px 14px;
     font-size: 13px;
@@ -306,7 +306,7 @@
     box-shadow: 0 0 0 3px rgba(125, 64, 71, 0.1);
 }
 
-.cw-input::placeholder { color: #a0a4bc; }
+.cw-input::placeholder { color: var(--n-400); }
 
 .cw-send {
     width: 40px;
@@ -330,7 +330,7 @@
 }
 
 .cw-send:disabled {
-    background: #c5caff;
+    background: var(--n-300);
     cursor: not-allowed;
 }
 
@@ -356,7 +356,7 @@
     align-items: center;
     margin-top: 8px;
     padding: 6px 14px;
-    background: linear-gradient(135deg, #0ea5e9, #2563eb);
+    background: linear-gradient(135deg, var(--c-accent), var(--c-accent));
     color: #fff;
     border: none;
     border-radius: var(--r-lg);
@@ -386,7 +386,7 @@
 }
 .cw-voice-btn:hover { background: var(--c-border); }
 .cw-voice-btn.listening {
-    background: #fee2e2;
+    background: var(--n-100);
     color: #ef4444;
     animation: pulse 1s infinite;
 }

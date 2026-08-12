@@ -15,7 +15,7 @@
 
 .blog-search-input.ant-input-affix-wrapper {
 	border-radius: var(--r-full);
-	border: 2px solid #e5e7eb;
+	border: 2px solid var(--n-100);
 	padding: 12px 24px;
 	font-size: 1rem;
 }

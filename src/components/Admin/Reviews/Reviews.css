@@ -44,6 +44,6 @@
 }
 
 .reply-text {
-  background: #e7f3ff;
+  background: var(--n-050);
   border-left: 3px solid var(--c-action);
 }

@@ -49,7 +49,7 @@
 .breadcrumb-item + .breadcrumb-item::before {
   content: "/";
   margin-right: 0.5rem;
-  color: #adb5bd;
+  color: var(--n-300);
 }
 
 .page-header__hint {
@@ -99,7 +99,7 @@
   border-radius: var(--r-md);
   font-size: 0.82rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--n-700);
   text-decoration: none;
   transition: background 0.2s, color 0.2s;
 }
@@ -136,7 +136,7 @@
   font-weight: 600;
   text-decoration: none;
   border: 1px solid var(--c-border);
-  color: #334155;
+  color: var(--n-700);
   background: var(--c-bg);
   transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
@@ -225,16 +225,16 @@
 }
 
 .stats-card.stats-card--success {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, var(--n-300) 0%, #f5576c 100%);
 }
 
 .stats-card.stats-card--warning {
-  background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+  background: linear-gradient(135deg, var(--n-200) 0%, var(--n-200) 100%);
   color: var(--c-ink);
 }
 
 .stats-card.stats-card--info {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  background: linear-gradient(135deg, var(--n-200) 0%, var(--n-200) 100%);
   color: var(--c-ink);
 }
 

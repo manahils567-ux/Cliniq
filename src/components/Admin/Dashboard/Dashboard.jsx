@@ -8,7 +8,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import './Dashboard.css';
 import moment from 'moment';
 
-const COLORS = ['var(--n-700)', '#f093fb', '#fad0c4', '#a8edea', '#fed6e3'];
+const COLORS = ['var(--n-700)', 'var(--n-300)', 'var(--n-200)', 'var(--n-200)', 'var(--n-200)'];
 
 const AdminDashboard = () => {
     const { data: doctorsData, isLoading: doctorsLoading } = useGetDoctorsQuery({ limit: 100 });
@@ -208,7 +208,7 @@ const AdminDashboard = () => {
                                             labelLine={false}
                                             label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                                             outerRadius={80}
-                                            fill="#8884d8"
+                                            fill="var(--n-500)"
                                             dataKey="value"
                                         >
                                             {appointmentsByStatus.map((entry, index) => (

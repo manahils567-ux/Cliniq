@@ -90,7 +90,7 @@ const Review = ({ doctorId }) => {
 						<div className="review-card__stars">
 							<StarRatings
 								rating={5}
-								starRatedColor="#f4c150"
+								starRatedColor="var(--c-signal)"
 								numberOfStars={5}
 								name="rating"
 								starDimension="18px"

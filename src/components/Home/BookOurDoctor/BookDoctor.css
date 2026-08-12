@@ -175,7 +175,7 @@
 }
 
 .book-doctor-card__favourite:hover {
-	color: #dc3545;
+	color: var(--c-danger);
 	background: #fff;
 	transform: scale(1.08);
 }

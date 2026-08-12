@@ -102,7 +102,7 @@ const Reminders = () => {
                                     <Tag color="orange">{r.frequency}</Tag>
                                 </div>
                                 <div className="d-flex align-items-center gap-1">
-                                    <ClockCircleOutlined style={{ color: '#8c8c8c', fontSize: 12 }} />
+                                    <ClockCircleOutlined style={{ color: 'var(--n-500)', fontSize: 12 }} />
                                     <Text type="secondary" style={{ fontSize: 12 }}>
                                         {dayjs(r.startDate).format('MMM D, YYYY h:mm A')}
                                     </Text>

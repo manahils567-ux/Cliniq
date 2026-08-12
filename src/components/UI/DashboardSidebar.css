@@ -110,7 +110,7 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  color: #c0392b;
+  color: var(--c-danger);
   font-size: 0.95rem;
   font-weight: 500;
   font-family: inherit;
@@ -126,7 +126,7 @@
 
 .dashboard-nav-logout:hover {
   background: rgba(192, 57, 43, 0.08);
-  border-left-color: #c0392b;
+  border-left-color: var(--c-danger);
 }
 
 .dashboard-nav-divider {

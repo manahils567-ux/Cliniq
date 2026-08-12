@@ -64,7 +64,7 @@
 
 .prescription-page .prescription-table-card {
     border-radius: var(--r-lg);
-    border: 1px solid #eef2f6;
+    border: 1px solid var(--n-050);
 }
 
 .prescription-expand {
@@ -80,7 +80,7 @@
 .prescription-meds-list {
     margin: 0.5rem 0 0;
     padding-left: 1.1rem;
-    color: #475569;
+    color: var(--n-700);
 }
 
 .prescription-meds-list li {
