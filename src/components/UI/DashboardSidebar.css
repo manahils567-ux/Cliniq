@@ -158,3 +158,105 @@
     font-size: 0.9rem;
   }
 }
+
+/* ==========================================================================
+   Rail mode — a hover sidebar in the manner of Supabase's.
+   Collapsed to an icon rail; hovering (or focusing a link inside) expands it
+   over the content rather than pushing it, so the layout never reflows.
+   ========================================================================== */
+
+.dashboard-sidebar--rail {
+  --rail-w: 72px;
+  --rail-open-w: 268px;
+
+  width: var(--rail-w);
+  min-width: var(--rail-w);
+  position: relative;
+  z-index: 20;
+  overflow: visible;
+  transition: width 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dashboard-sidebar--rail:hover,
+.dashboard-sidebar--rail:focus-within {
+  width: var(--rail-open-w);
+  box-shadow: var(--sh-lg);
+}
+
+/* The panel floats above page content while expanded. */
+.dashboard-sidebar--rail > * {
+  width: var(--rail-open-w);
+  max-width: var(--rail-open-w);
+}
+
+/* Labels fade and slide in; icons stay put so nothing jumps. */
+.dashboard-sidebar--rail .label {
+  opacity: 0;
+  transform: translateX(-6px);
+  white-space: nowrap;
+  transition: opacity 180ms var(--ease), transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dashboard-sidebar--rail:hover .label,
+.dashboard-sidebar--rail:focus-within .label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Profile block collapses to just the avatar. */
+.dashboard-sidebar--rail .dashboard-profile-name,
+.dashboard-sidebar--rail .dashboard-profile-meta,
+.dashboard-sidebar--rail .dashboard-profile-role {
+  opacity: 0;
+  transition: opacity 160ms var(--ease);
+  white-space: nowrap;
+}
+.dashboard-sidebar--rail:hover .dashboard-profile-name,
+.dashboard-sidebar--rail:hover .dashboard-profile-meta,
+.dashboard-sidebar--rail:hover .dashboard-profile-role,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-name,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-meta,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-role { opacity: 1; }
+
+.dashboard-sidebar--rail .dashboard-profile-header {
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+}
+.dashboard-sidebar--rail .dashboard-profile-avatar {
+  width: 44px;
+  height: 44px;
+  transition: width 260ms cubic-bezier(0.16, 1, 0.3, 1), height 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dashboard-sidebar--rail:hover .dashboard-profile-avatar,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-avatar { width: 96px; height: 96px; }
+
+/* Nav rows: icon centred in the rail, then left-aligned once open. */
+.dashboard-sidebar--rail .dashboard-nav a,
+.dashboard-sidebar--rail .dashboard-nav-logout {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-left: 26px;
+  overflow: hidden;
+}
+.dashboard-sidebar--rail .dashboard-nav .icon {
+  flex: none;
+  width: 20px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+@media (max-width: 992px) {
+  /* No hover on touch — stay expanded rather than trapping labels. */
+  .dashboard-sidebar--rail { width: 100%; min-width: 0; }
+  .dashboard-sidebar--rail > * { width: 100%; max-width: none; }
+  .dashboard-sidebar--rail .label,
+  .dashboard-sidebar--rail .dashboard-profile-name,
+  .dashboard-sidebar--rail .dashboard-profile-meta,
+  .dashboard-sidebar--rail .dashboard-profile-role { opacity: 1; transform: none; }
+  .dashboard-sidebar--rail .dashboard-profile-avatar { width: 96px; height: 96px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-sidebar--rail,
+  .dashboard-sidebar--rail .label,
+  .dashboard-sidebar--rail .dashboard-profile-avatar { transition: none; }
+}

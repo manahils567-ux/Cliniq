@@ -63,7 +63,7 @@ const DashboardSidebar = () => {
     const menuItems = role === 'doctor' ? doctorMenuItems : patientMenuItems;
 
     return (
-        <div className="dashboard-sidebar">
+        <div className="dashboard-sidebar dashboard-sidebar--rail">
             <div className="dashboard-profile-header">
                 <img 
                     src={data?.img || img} 
@@ -97,7 +97,7 @@ const DashboardSidebar = () => {
                                 className={({ isActive }) => isActive ? 'active' : ''}
                             >
                                 <span className="icon">{item.icon}</span>
-                                <span>{item.label}</span>
+                                <span className="label">{item.label}</span>
                             </NavLink>
                         </li>
                     ))}
@@ -107,19 +107,19 @@ const DashboardSidebar = () => {
                     <li>
                         <NavLink to="/dashboard/profile-setting">
                             <span className="icon"><FaUserCog /></span>
-                            <span>Profile Settings</span>
+                            <span className="label">Profile Settings</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/change-password">
                             <span className="icon"><FaLock /></span>
-                            <span>Change Password</span>
+                            <span className="label">Change Password</span>
                         </NavLink>
                     </li>
                     <li>
                         <button type="button" className="dashboard-nav-logout" onClick={handleLogout}>
                             <span className="icon"><FaSignOutAlt /></span>
-                            <span>Logout</span>
+                            <span className="label">Logout</span>
                         </button>
                     </li>
                 </ul>
