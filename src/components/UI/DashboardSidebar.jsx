@@ -64,29 +64,6 @@ const DashboardSidebar = () => {
 
     return (
         <div className="dashboard-sidebar dashboard-sidebar--rail">
-            <div className="dashboard-profile-header">
-                <img 
-                    src={data?.img || img} 
-                    alt={`${data?.firstName} ${data?.lastName}`}
-                    className="dashboard-profile-avatar"
-                />
-                <h5 className="dashboard-profile-name">
-                    {role === 'doctor' && 'Dr. '}
-                    {data?.firstName} {data?.lastName}
-                </h5>
-                {role === 'doctor' ? (
-                    <div className="dashboard-profile-meta">{data?.designation}</div>
-                ) : (
-                    <div className="dashboard-profile-meta">{data?.email}</div>
-                )}
-                <span className="dashboard-profile-role">
-                    {role === 'doctor' ? 'Healthcare Provider' : 'Patient'}
-                </span>
-                {role === 'doctor' && doctorProfile && !doctorProfile.complete && (
-                    <span className="badge bg-warning text-dark mt-2 d-inline-block">Profile incomplete — inactive listing</span>
-                )}
-            </div>
-
             <nav className="dashboard-nav">
                 <ul>
                     {menuItems.map((item, index) => (
