@@ -43,11 +43,6 @@ const Contact = () => {
 			title: 'Email us',
 			content: 'contact@cliniq.app',
 			link: 'mailto:contact@cliniq.app'
-		},
-		{
-			icon: <FaClock />,
-			title: 'Working hours',
-			content: 'Mon - Sat: 9:00 AM - 6:00 PM'
 		}
 	];
 

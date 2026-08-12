@@ -23,7 +23,6 @@
     background: var(--c-surface);
     border: 1px solid var(--c-border);
     color: var(--c-ink);
-    color: white;
 }
 
 .stat-mini-card-success .stat-mini-icon { color: var(--c-accent); }
@@ -31,7 +30,6 @@
     background: var(--c-surface);
     border: 1px solid var(--c-border);
     color: var(--c-ink);
-    color: white;
 }
 
 .stat-mini-card-warning .stat-mini-icon { color: var(--c-signal); }
@@ -39,7 +37,6 @@
     background: var(--c-surface);
     border: 1px solid var(--c-border);
     color: var(--c-ink);
-    color: white;
 }
 
 .stat-mini-icon {
