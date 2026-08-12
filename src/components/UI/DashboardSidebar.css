@@ -173,12 +173,17 @@
   min-width: var(--rail-w);
   position: relative;
   z-index: 20;
-  overflow: visible;
-  transition: width 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Children are laid out at the open width so nothing reflows while the rail
+     animates — they must be clipped to the current width or the profile block
+     and the active row bleed past the rail. */
+  overflow: hidden;
+  transition: width 260ms cubic-bezier(0.16, 1, 0.3, 1),
+              min-width 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .dashboard-sidebar--rail:hover,
 .dashboard-sidebar--rail:focus-within {
   width: var(--rail-open-w);
+  min-width: var(--rail-open-w);
   box-shadow: var(--sh-lg);
 }
 
