@@ -430,7 +430,7 @@ const PatientDashboard = () => {
 		{ key: '2', label: 'Medical Records',   children: <MedicalRecords /> },
 		{ key: '3', label: 'Reminders',         children: <Reminders /> },
 		{ key: '4', label: 'Prescription Scanner', children: <PrescriptionScanner /> },
-		{ key: '5', label: '📍 Nearby',         children: <NearbyHospitals /> },
+		{ key: '5', label: 'Nearby',            children: <NearbyHospitals /> },
 	];
 
 	return (
