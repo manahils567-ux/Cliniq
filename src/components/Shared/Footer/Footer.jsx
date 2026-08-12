@@ -1,6 +1,5 @@
 import React from 'react';
 import './Footer.css';
-import logo from '../../../images/logo.png';
 import { Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaChevronRight } from 'react-icons/fa';
 
@@ -14,7 +13,7 @@ const Footer = () => {
 							<div className="footer-widget footer-about">
 								<div className="footer-logo">
 									<Link to="/">
-										<img src={logo} alt="Logo" className="footer-logo__img" />
+										<span className="cq-wordmark cq-wordmark--footer">Cliniq</span>
 									</Link>
 								</div>
 								<p className="footer-about__text">
@@ -54,11 +53,11 @@ const Footer = () => {
 								</div>
 								<div className="footer-contact__item">
 									<FaPhoneAlt className="footer-contact__icon" />
-									<p><a href="tel:+1 (555) 123-4567">+1 (555) 123-4567</a></p>
+									<p><a href="tel:+923108112860">+92 310 8112860</a></p>
 								</div>
 								<div className="footer-contact__item">
 									<FaEnvelope className="footer-contact__icon" />
-									<p><a href="mailto:ujjalzaman@gmail.com">ujjalzaman@gmail.com</a></p>
+									<p><a href="mailto:contact@cliniq.app">contact@cliniq.app</a></p>
 								</div>
 							</div>
 						</div>

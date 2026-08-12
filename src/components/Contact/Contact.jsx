@@ -35,14 +35,14 @@ const Contact = () => {
 		{
 			icon: <FaPhoneAlt />,
 			title: 'Call us',
-			content: '+1 (555) 123-4567',
-			link: 'tel:+1 (555) 123-4567'
+			content: '+92 310 8112860',
+			link: 'tel:+923108112860'
 		},
 		{
 			icon: <FaEnvelope />,
 			title: 'Email us',
-			content: 'ujjalzaman@gmail.com',
-			link: 'mailto:ujjalzaman@gmail.com'
+			content: 'contact@cliniq.app',
+			link: 'mailto:contact@cliniq.app'
 		},
 		{
 			icon: <FaClock />,

@@ -105,11 +105,10 @@ const CqHero = () => {
                 <Link to="/" className="cq-hero__mark">Cliniq</Link>
 
                 <nav className="cq-hero__nav">
-                    <Link to="/doctors">Doctors</Link>
                     <Link to="/service">Services</Link>
                     <Link to="/blog">Blog</Link>
                     <Link to="/contact">Contact</Link>
-                    <Link to="/login">Login</Link>
+                    <Link to="/login" className="cq-hero__nav-cta">Login</Link>
                 </nav>
 
                 <a className="cq-hero__tel" href="tel:+923108112860">+92 310 8112860</a>

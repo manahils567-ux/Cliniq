@@ -76,7 +76,6 @@ export default function LandingPage() {
           <article className="cq-panel cq-panel--ink">
             <div className="cq-panel__head">
               <span className="cq-panel__label">Step 01 · Capture</span>
-              <span className="cq-panel__glyph"><FaCamera /></span>
             </div>
             <div className="cq-panel__value">Photograph your documents</div>
             <p className="cq-panel__body">
@@ -93,7 +92,6 @@ export default function LandingPage() {
           <article className="cq-panel cq-panel--accent">
             <div className="cq-panel__head">
               <span className="cq-panel__label">Step 02 · Analyse</span>
-              <span className="cq-panel__glyph"><FaFlask /></span>
             </div>
             <div className="cq-panel__value">AI reads every value</div>
             <p className="cq-panel__body">
@@ -110,7 +108,6 @@ export default function LandingPage() {
           <article className="cq-panel cq-panel--greige">
             <div className="cq-panel__head">
               <span className="cq-panel__label">Step 03 · Act</span>
-              <span className="cq-panel__glyph"><FaBell /></span>
             </div>
             <div className="cq-panel__value">Reminders, then the right doctor</div>
             <p className="cq-panel__body">
@@ -120,8 +117,8 @@ export default function LandingPage() {
             </p>
             <hr className="cq-panel__rule" />
             <div className="cq-panel__foot">
-              <Link to="/doctors" className="cq-panel__link">
-                Find a doctor <FaArrowRight size={11} />
+              <Link to="/login" className="cq-panel__link">
+                Sign in to start <FaArrowRight size={11} />
               </Link>
             </div>
           </article>
@@ -140,7 +137,6 @@ export default function LandingPage() {
           <article className="cq-panel cq-panel--cream">
             <div className="cq-panel__head">
               <span className="cq-panel__label">Credentials</span>
-              <span className="cq-panel__glyph"><FaShieldAlt /></span>
             </div>
             <div className="cq-panel__value">Doctor Credentials</div>
             <p className="cq-panel__body">
@@ -157,7 +153,6 @@ export default function LandingPage() {
           <article className="cq-panel cq-panel--ink">
             <div className="cq-panel__head">
               <span className="cq-panel__label">Scheduling</span>
-              <span className="cq-panel__glyph"><FaClock /></span>
             </div>
             <div className="cq-panel__value">Flexible Scheduling</div>
             <p className="cq-panel__body">
@@ -174,7 +169,6 @@ export default function LandingPage() {
           <article className="cq-panel cq-panel--accent">
             <div className="cq-panel__head">
               <span className="cq-panel__label">Diagnostics</span>
-              <span className="cq-panel__glyph"><FaFlask /></span>
             </div>
             <div className="cq-panel__value">Modern Diagnostics</div>
             <p className="cq-panel__body">
@@ -187,6 +181,36 @@ export default function LandingPage() {
               <span className="cq-panel__pill">Imaging</span>
             </div>
           </article>
+        </div>
+      </section>
+
+      {/* ══════════════ CLOSING CTA ══════════════ */}
+      <section className="section" id="get-started">
+        <div className="cq-close">
+          <div className="cq-close__text">
+            <p className="cq-eyebrow" style={{ color: 'var(--d-text-faint)' }}>Get started</p>
+            <h2 className="cq-close__title">Start with the report in your hand</h2>
+            <p className="cq-close__sub">
+              Photograph it, and Cliniq reads the values, explains what they mean and
+              schedules whatever needs following up. Free to try, in Urdu or English.
+            </p>
+            <div className="cq-close__actions">
+              <Link to="/login" className="cq-cta">
+                Upload a report
+                <span className="cq-cta__well" aria-hidden>↙</span>
+              </Link>
+              <Link to="/login" className="cq-close__link">
+                Already have an account? Sign in <FaArrowRight size={11} />
+              </Link>
+            </div>
+          </div>
+
+          <ul className="cq-close__list">
+            <li><FaCheck size={11} /> Photos and PDFs, no scanner needed</li>
+            <li><FaCheck size={11} /> Values checked against reference ranges</li>
+            <li><FaCheck size={11} /> Reminders created from your own reports</li>
+            <li><FaCheck size={11} /> Records shared per appointment, not wholesale</li>
+          </ul>
         </div>
       </section>
 

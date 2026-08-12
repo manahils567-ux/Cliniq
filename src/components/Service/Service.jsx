@@ -1,10 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Empty, Spin } from 'antd';
-import {
-  FaCamera, FaFlask, FaBell, FaFolderOpen, FaCommentDots,
-  FaMapMarkerAlt, FaCalendarCheck, FaArrowRight, FaUserMd,
-} from 'react-icons/fa';
+import { Spin } from 'antd';
+import { FaArrowRight, FaUserMd } from 'react-icons/fa';
 import Header from '../Shared/Header/Header';
 import SubHeader from '../Shared/SubHeader';
 import Footer from '../Shared/Footer/Footer';
@@ -16,7 +13,6 @@ const CAPABILITIES = [
     key: 'capture',
     tone: 'ink',
     label: 'Records',
-    icon: <FaCamera />,
     title: 'Capture any document',
     body: 'Photograph a prescription, lab report, imaging result or discharge summary with your phone, or upload a PDF. No scanner and no typing.',
     tags: ['Phone camera', 'PDF'],
@@ -26,7 +22,6 @@ const CAPABILITIES = [
     key: 'analyse',
     tone: 'accent',
     label: 'AI analysis',
-    icon: <FaFlask />,
     title: 'Every value read and checked',
     body: 'Each upload is analysed automatically. Measurements are extracted with their reference ranges, and anything outside normal is flagged with an explanation.',
     tags: ['Lab values', 'Medicines', 'Findings'],
@@ -36,7 +31,6 @@ const CAPABILITIES = [
     key: 'reminders',
     tone: 'greige',
     label: 'Follow-through',
-    icon: <FaBell />,
     title: 'Reminders that come from your reports',
     body: 'A prescribed course becomes a daily reminder. A recheck in three months becomes a dated one. You accept a suggestion and it is scheduled for you.',
     tags: ['Alerts', 'Follow-ups'],
@@ -46,7 +40,6 @@ const CAPABILITIES = [
     key: 'vault',
     tone: 'cream',
     label: 'Sharing',
-    icon: <FaFolderOpen />,
     title: 'Share only what a visit needs',
     body: 'Your records stay private by default. Release specific documents to a specific appointment, so a doctor sees what is relevant rather than everything.',
     tags: ['Per-appointment', 'Revocable'],
@@ -56,7 +49,6 @@ const CAPABILITIES = [
     key: 'assistant',
     tone: 'cream',
     label: 'Assistant',
-    icon: <FaCommentDots />,
     title: 'Ask questions in Urdu or English',
     body: 'The assistant answers with your own records for context, by typing or by voice, and points you to the right kind of specialist when it matters.',
     tags: ['Urdu', 'English', 'Voice'],
@@ -66,7 +58,6 @@ const CAPABILITIES = [
     key: 'nearby',
     tone: 'greige',
     label: 'Nearby',
-    icon: <FaMapMarkerAlt />,
     title: 'Find the nearest hospital',
     body: 'Hospitals and clinics near your current location, on a map, for the moment you need one quickly.',
     tags: ['Map', 'Location'],
@@ -76,7 +67,6 @@ const CAPABILITIES = [
     key: 'appointments',
     tone: 'ink',
     label: 'Appointments',
-    icon: <FaCalendarCheck />,
     title: 'Book, track and pay',
     body: 'Pick a doctor and a time slot, get confirmation, follow the appointment through to prescription and invoice — all in one thread.',
     tags: ['Booking', 'Prescriptions', 'Invoices'],
@@ -112,7 +102,6 @@ const Service = () => {
             <article key={c.key} className={`cq-panel cq-panel--${c.tone}`}>
               <div className="cq-panel__head">
                 <span className="cq-panel__label">{c.label}</span>
-                <span className="cq-panel__glyph">{c.icon}</span>
               </div>
               <div className="cq-panel__value">{c.title}</div>
               <p className="cq-panel__body">{c.body}</p>
@@ -143,8 +132,8 @@ const Service = () => {
               Specialities appear here as soon as doctors set one on their profile.
               {stats.doctors ? ` ${stats.doctors} doctor${stats.doctors === 1 ? '' : 's'} registered so far.` : ''}
             </p>
-            <Link to="/doctors" className="cq-panel__link" style={{ color: 'var(--c-accent)' }}>
-              Browse all doctors <FaArrowRight size={11} />
+            <Link to="/login" className="cq-panel__link" style={{ color: 'var(--c-accent)' }}>
+              Sign in to browse doctors <FaArrowRight size={11} />
             </Link>
           </div>
         ) : (
@@ -152,7 +141,7 @@ const Service = () => {
             {specialities.map((s) => (
               <Link
                 key={s.name}
-                to={`/doctors?specialization=${encodeURIComponent(s.name)}`}
+                to={`/login?next=${encodeURIComponent(`/doctors?specialization=${s.name}`)}`}
                 className="cq-spec"
               >
                 <span className="cq-spec__icon"><FaUserMd /></span>
@@ -175,8 +164,8 @@ const Service = () => {
             It is analysed within seconds, and anything that needs following up becomes a reminder.
           </p>
         </div>
-        <Link to="/doctors" className="cq-cta">
-          Find a doctor
+        <Link to="/login" className="cq-cta">
+          Sign in to get started
           <span className="cq-cta__well" aria-hidden>↙</span>
         </Link>
       </section>

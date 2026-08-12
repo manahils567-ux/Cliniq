@@ -551,7 +551,6 @@ a:hover { opacity: 0.62; color: inherit; }
   gap: var(--sp-4);
   padding: var(--sp-6) var(--sp-7);
   background: var(--c-bg);
-  border-bottom: 1px solid var(--c-border);
 }
 .cq-trust__item {
   display: flex;
@@ -641,19 +640,6 @@ a:hover { opacity: 0.62; color: inherit; }
   text-transform: uppercase;
   opacity: 0.75;
 }
-.cq-panel__glyph {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px; height: 34px;
-  border-radius: var(--r-full);
-  background: rgba(241,236,230,0.14);
-  font-size: 15px;
-  flex: none;
-}
-.cq-panel--greige .cq-panel__glyph,
-.cq-panel--cream  .cq-panel__glyph { background: rgba(46,46,46,0.08); }
-
 .cq-panel__value {
   font-family: var(--font-display);
   font-size: var(--fs-lg);
@@ -809,4 +795,101 @@ a:hover { opacity: 0.62; color: inherit; }
 @media (max-width: 860px) {
   .cq-cta-band { margin: 0 24px var(--sp-7); padding: var(--sp-6); }
   .cq-service-grid, .cq-spec-grid { gap: var(--sp-3); }
+}
+
+/* ==========================================================================
+   Closing call to action — last section before the footer
+   ========================================================================== */
+
+.cq-close {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: var(--sp-7);
+  align-items: center;
+  padding: var(--sp-8) var(--sp-7);
+  background: var(--d-bg);
+  border-radius: var(--r-lg);
+}
+.cq-close__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-hero);
+  line-height: var(--lh-tight);
+  color: var(--d-text);
+  margin-top: var(--sp-3);
+  max-width: 18ch;
+  text-wrap: balance;
+}
+.cq-close__sub {
+  color: var(--d-text-muted);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  margin-top: var(--sp-4);
+  max-width: 48ch;
+}
+.cq-close__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+  margin-top: var(--sp-6);
+}
+.cq-close__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--d-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+.cq-close__link:hover { color: var(--d-text); opacity: 1; }
+
+.cq-close__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.cq-close__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  color: var(--d-text-muted);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--d-border);
+}
+.cq-close__list li:last-child { border-bottom: none; padding-bottom: 0; }
+.cq-close__list svg { color: var(--c-accent); margin-top: 4px; flex: none; }
+
+@media (max-width: 900px) {
+  .cq-close { grid-template-columns: 1fr; gap: var(--sp-6); padding: var(--sp-7) var(--sp-5); }
+}
+
+/* Wordmark — replaces the old raster logo, so it inherits the palette */
+.cq-wordmark {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  color: var(--c-ink);
+}
+.cq-wordmark--footer { color: var(--d-text); }
+
+/* Login is the only action in the hero bar — the landing page is
+   informational, so it reads as a button rather than another nav link. */
+.cq-hero__nav-cta {
+  padding: 0.35em 1.1em;
+  border: 1px solid var(--d-border-strong);
+  border-radius: var(--r-full);
+  color: var(--d-text);
+}
+.cq-hero__nav-cta:hover {
+  background: var(--d-text);
+  color: var(--n-800);
+  opacity: 1;
 }

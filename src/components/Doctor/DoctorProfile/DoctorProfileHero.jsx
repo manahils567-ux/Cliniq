@@ -84,7 +84,7 @@ const DoctorProfileHero = ({ data }) => {
 								<FaMapMarkerAlt /> {address}
 							</div>
 							<div className="doctor-hero__contact-item">
-								<FaPhoneAlt /> +1 (555) 123-4567
+								<FaPhoneAlt /> +92 310 8112860
 							</div>
 							<div className="doctor-hero__contact-item">
 								<FaEnvelope /> {data.email || 'contact@doctor.com'}
