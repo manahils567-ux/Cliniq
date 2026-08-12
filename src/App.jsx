@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './components/Landing/LandingPage';
+import MedicalRecords from './components/MedicalRecords/MedicalRecords';
 import SignInForm from './components/Login/SignInForm';
 import DoctorBooking from './components/Booking/DoctorBooking/DoctorBooking';
 import BookingSuccess from './components/Booking/BookingSuccess';
@@ -62,6 +63,7 @@ function App() {
           <Route path='/dashboard/appointment/treatment/edit/:id' element={<TreatmentEdit />} />
           <Route path='/dashboard/change-password' element={<ChangePassword />} />
           <Route path='/dashboard/profile-setting' element={<ProfileSetting />} />
+          <Route path='/dashboard/documents' element={<MedicalRecords />} />
           <Route path='/dashboard/favourite' element={<PatientFavouriteDoctor />} />
           <Route path='/dashboard/invoices' element={<DoctorInvoice />} />
         </Route>

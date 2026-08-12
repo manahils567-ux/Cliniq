@@ -7,6 +7,7 @@ import { loggedOut, getUserInfo } from '../../service/auth.service';
 import { useGetDoctorQuery } from '../../redux/api/doctorApi';
 import { getDoctorProfileProgress } from '../../utils/doctorProfileCompletion';
 import {
+    FaFolderOpen,
     FaTable,
     FaCalendarCheck,
     FaUserInjured,
@@ -52,6 +53,7 @@ const DashboardSidebar = () => {
     const patientMenuItems = [
         { path: '/dashboard', icon: <FaTable />, label: 'Dashboard', exact: true },
         { path: '/dashboard/appointments', icon: <FaCalendarCheck />, label: 'My Appointments' },
+        { path: '/dashboard/documents', icon: <FaFolderOpen />, label: 'Documents' },
         { path: '/dashboard/favourite', icon: <FaHeart />, label: 'Favourite Doctors' },
         { path: '/dashboard/invoices', icon: <FaFileInvoiceDollar />, label: 'Invoices & payments' },
         { path: '/dashboard/prescription', icon: <FaPills />, label: 'Prescriptions & medicines' },

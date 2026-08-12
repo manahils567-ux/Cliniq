@@ -24,26 +24,6 @@ const HeaderNav = ({ open, setOpen, isLoggedIn, data, avatar, content, popoverTi
                     <li><NavLink to={'/blog'} className={({ isActive }) => isActive ? "nav-link scrollto active" : ""}>Blog</NavLink></li>
                     {!isLoggedIn && <li><Link to={'/login'} className="nav-link scrollto">Login</Link></li>}
                 </ul>
-                {isLoggedIn && (
-                    <div>
-                        <Popover
-                            title={popoverTitle}
-                            content={content}
-                            placement="bottom"
-                            trigger="hover"
-                            mouseEnterDelay={0.12}
-                            overlayClassName="header-user-popover"
-                        >
-                            <div className="profileImage" role="button" tabIndex={0} aria-haspopup="true">
-                                <img
-                                    src={data?.img ? data.img : avatar}
-                                    alt=""
-                                    className="profileImage shadow img-fluid"
-                                />
-                            </div>
-                        </Popover>
-                    </div>
-                )}
                 <FaBars className='mobile-nav-toggle' onClick={showDrawer} />
             </nav>
             <Drawer
