@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   FaHeart, FaPlay, FaChevronRight, FaUserMd, FaCalendarAlt,
   FaStethoscope, FaShieldAlt, FaFlask, FaClock, FaTooth,
   FaBrain, FaEye, FaBone, FaSyringe, FaMapMarkerAlt,
-  FaArrowRight, FaCheck, FaStar
+  FaArrowRight, FaCheck, FaStar, FaCamera, FaBell
 } from 'react-icons/fa';
+import CqHero from '../Home/HeroSection/CqHero';
+import CqFooter from '../Shared/CqFooter/CqFooter';
+import { getBaseUrl } from '../../helpers/config/envConfig';
 import './Landing.css';
 
 /* ── small reusable icon-bubble ── */
@@ -18,149 +21,118 @@ const Bubble = ({ icon: Icon, bg, color, size = 48 }) => (
   </div>
 );
 
+/* Counters read from the live database. An em dash while loading is honest —
+   a hardcoded number that never moves is not. */
+const fmt = (n) => {
+  if (n === null || n === undefined) return '—';
+  if (n >= 1000) return `${(n / 1000).toFixed(n % 1000 === 0 ? 0 : 1)}k`;
+  return String(n);
+};
+
 export default function LandingPage() {
+  // Fetched directly rather than through RTK Query: this counter is public,
+  // needs no auth header and no cache invalidation, and the shared axios
+  // baseQuery was leaving the request stuck in `pending` on this route.
+  const [stats, setStats] = useState({});
+  useEffect(() => {
+    let alive = true;
+    fetch(`${getBaseUrl()}/doctor/stats`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => { if (alive && j?.data) setStats(j.data); })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
   return (
     <div className="landing">
 
-      {/* ══════════════ NAVBAR ══════════════ */}
-      <nav className="nav">
-        <Link to="/" className="nav-logo">
-          <div className="nav-logo-icon">
-            <FaHeart />
-          </div>
-          <span className="nav-logo-text">Clinnic</span>
-        </Link>
-
-        <ul className="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Cardiology</a></li>
-          <li><a href="#cases">Cases</a></li>
-          <li><a href="#careers">Careers</a></li>
-        </ul>
-
-        <Link to="/appointment" className="btn-primary">
-          Book Appointment
-        </Link>
-      </nav>
+      {/* Navigation lives inside the hero bar — see CqHero. */}
 
       {/* ══════════════ HERO ══════════════ */}
-      <section className="hero" id="home">
-        <div className="hero-left">
-          <div className="hero-badge">
-            <FaCheck size={10} />
-            Trusted by 50,000+ patients
-          </div>
+      <CqHero />
 
-          <h1 className="hero-title">
-            Your health is<br />
-            <span>our priority</span>
-          </h1>
-
-          <p className="hero-sub">
-            Access world-class care from certified specialists. Book appointments,
-            track your health, and get prescriptions — all in one place.
-          </p>
-
-          <div className="hero-actions">
-            <Link to="/appointment" className="btn-primary">
-              Book Appointment <FaArrowRight size={12} />
-            </Link>
-            <button className="btn-secondary">
-              <span className="hero-play-icon"><FaPlay size={10} /></span>
-              See how it works
-            </button>
-          </div>
-
-          <div className="hero-stats">
-            <div className="hero-stat">
-              <span className="hero-stat-num">200+</span>
-              <span className="hero-stat-label">Specialists</span>
-            </div>
-            <div className="hero-stat">
-              <span className="hero-stat-num">50k+</span>
-              <span className="hero-stat-label">Patients</span>
-            </div>
-            <div className="hero-stat">
-              <span className="hero-stat-num">4.9★</span>
-              <span className="hero-stat-label">Rating</span>
-            </div>
-          </div>
+      {/* ══════════════ TRUST STRIP ══════════════ */}
+      <section className="cq-trust" id="trust">
+        <div className="cq-trust__item">
+          <span className="cq-trust__num">{fmt(stats.doctors)}</span>
+          <span className="cq-trust__label">Specialists</span>
         </div>
-
-        <div className="hero-right">
-          <div className="hero-blob" />
-          <div className="hero-blob-2" />
-
-          <div className="hero-img-wrap">
-            <div className="hero-img-placeholder">
-              <FaUserMd style={{ width: 110, height: 110, opacity: 0.35 }} />
-            </div>
-          </div>
-
-          {/* floating badge bottom-left */}
-          <div className="hero-badge-float">
-            <div className="hero-badge-float-icon"><FaCalendarAlt /></div>
-            <div className="hero-badge-float-text">
-              <strong>Next Available</strong>
-              <span>Today, 2:30 PM</span>
-            </div>
-          </div>
-
-          {/* floating badge top-right */}
-          <div className="hero-badge-float-2">
-            <div className="hero-badge-float-2-icon"><FaCheck /></div>
-            <div style={{ fontSize: 12, fontWeight: 600, color: '#1a1d3b' }}>Verified Doctor</div>
-          </div>
+        <div className="cq-trust__item">
+          <span className="cq-trust__num">{fmt(stats.patients)}</span>
+          <span className="cq-trust__label">Patients</span>
+        </div>
+        <div className="cq-trust__item">
+          <span className="cq-trust__num">
+            {stats.avgRating ? <>{stats.avgRating}<FaStar size={14} /></> : '—'}
+          </span>
+          <span className="cq-trust__label">
+            {stats.reviews ? `Rating · ${stats.reviews} review${stats.reviews === 1 ? '' : 's'}` : 'Rating'}
+          </span>
+        </div>
+        <div className="cq-trust__item">
+          <span className="cq-trust__num">{fmt(stats.specialities)}</span>
+          <span className="cq-trust__label">Specialities</span>
         </div>
       </section>
 
       {/* ══════════════ FEATURE ROW ══════════════ */}
       <section className="section" id="about">
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <p className="section-label">Why choose us</p>
-          <h2 className="section-title">Healthcare built around you</h2>
+          <p className="section-label">How Cliniq works</p>
+          <h2 className="section-title">From a pile of paperwork to a plan</h2>
         </div>
 
         <div className="cards-row">
 
-          {/* Card 1 — doctor photo */}
-          <div className="card feat-card-photo">
-            <div className="feat-card-badge"><FaUserMd /></div>
-            <div className="feat-card-photo-inner">
-              <FaUserMd />
+          <article className="cq-panel cq-panel--ink">
+            <div className="cq-panel__head">
+              <span className="cq-panel__label">Step 01 · Capture</span>
             </div>
-          </div>
+            <div className="cq-panel__value">Photograph your documents</div>
+            <p className="cq-panel__body">
+              Point your phone camera at a prescription, lab report or discharge
+              summary. Photos and PDFs both work — no scanner, no typing.
+            </p>
+            <hr className="cq-panel__rule" />
+            <div className="cq-panel__foot">
+              <span className="cq-panel__pill">Phone camera</span>
+              <span className="cq-panel__pill">PDF</span>
+            </div>
+          </article>
 
-          {/* Card 2 — text */}
-          <div className="card feat-card-text">
-            <div>
-              <h3>Your Health is Our Core Focus</h3>
-              <p style={{ marginTop: 12 }}>
-                We combine experienced specialists with modern technology to deliver
-                personalised care. Our doctors collaborate to provide holistic
-                treatment plans tailored to your needs.
-              </p>
+          <article className="cq-panel cq-panel--accent">
+            <div className="cq-panel__head">
+              <span className="cq-panel__label">Step 02 · Analyse</span>
             </div>
-            <div>
-              <Link to="/doctors" className="btn-mint">
-                Our Specialists <FaArrowRight size={11} />
+            <div className="cq-panel__value">AI reads every value</div>
+            <p className="cq-panel__body">
+              Each document is analysed on upload. Measurements are extracted with
+              their reference ranges, and anything outside normal is flagged.
+            </p>
+            <hr className="cq-panel__rule" />
+            <div className="cq-panel__foot">
+              <span className="cq-panel__pill">Lab values</span>
+              <span className="cq-panel__pill">Medicines</span>
+            </div>
+          </article>
+
+          <article className="cq-panel cq-panel--greige">
+            <div className="cq-panel__head">
+              <span className="cq-panel__label">Step 03 · Act</span>
+            </div>
+            <div className="cq-panel__value">Reminders, then the right doctor</div>
+            <p className="cq-panel__body">
+              A course of medication becomes a daily reminder; a recheck in three
+              months becomes a dated one. When a report points to a speciality,
+              book a verified doctor and share those records in one tap.
+            </p>
+            <hr className="cq-panel__rule" />
+            <div className="cq-panel__foot">
+              <Link to="/login" className="cq-panel__link">
+                Sign in to start <FaArrowRight size={11} />
               </Link>
             </div>
-          </div>
-
-          {/* Card 3 — icon grid */}
-          <div className="card feat-card-icons">
-            <h4>Our Services</h4>
-            <div className="icon-grid">
-              <Bubble icon={FaHeart}       bg="#eef0ff" color="#4F5FFF" />
-              <Bubble icon={FaBrain}       bg="#fef3f2" color="#f04438" />
-              <Bubble icon={FaStethoscope} bg="#e8faf3" color="#3ecf8e" />
-              <Bubble icon={FaEye}         bg="#fff8e6" color="#f79009" />
-              <Bubble icon={FaTooth}       bg="#f4f0ff" color="#9b8afb" />
-              <Bubble icon={FaBone}        bg="#fef0e6" color="#f97316" />
-            </div>
-          </div>
+          </article>
         </div>
       </section>
 
@@ -173,199 +145,88 @@ export default function LandingPage() {
 
         <div className="cards-row">
 
-          {/* Service Card 1 */}
-          <div className="service-card">
-            <div className="service-card-avatar" style={{ background: '#eef0ff' }}>
-              <FaShieldAlt style={{ color: '#4F5FFF' }} />
+          <article className="cq-panel cq-panel--cream">
+            <div className="cq-panel__head">
+              <span className="cq-panel__label">Credentials</span>
             </div>
-            <h3>Credentials</h3>
-            <h2>Doctor Credentials</h2>
-            <p>
+            <div className="cq-panel__value">Doctor Credentials</div>
+            <p className="cq-panel__body">
               Every specialist on our platform is board-certified and verified.
               View degrees, experience, and patient ratings before booking.
             </p>
-            <div className="service-tags">
-              <span className="tag tag-blue">Verified</span>
-              <span className="tag tag-mint">Board Certified</span>
+            <hr className="cq-panel__rule" />
+            <div className="cq-panel__foot">
+              <span className="cq-panel__pill">Verified</span>
+              <span className="cq-panel__pill">Board Certified</span>
             </div>
-          </div>
+          </article>
 
-          {/* Service Card 2 */}
-          <div className="service-card">
-            <div className="service-card-avatar" style={{ background: '#e8faf3' }}>
-              <FaClock style={{ color: '#3ecf8e' }} />
+          <article className="cq-panel cq-panel--ink">
+            <div className="cq-panel__head">
+              <span className="cq-panel__label">Scheduling</span>
             </div>
-            <h3>Scheduling</h3>
-            <h2>Flexible Scheduling</h2>
-            <p>
+            <div className="cq-panel__value">Flexible Scheduling</div>
+            <p className="cq-panel__body">
               Book same-day or plan weeks ahead. Choose your preferred time slot
               and receive instant confirmation with reminders.
             </p>
-            <div className="service-tags">
-              <span className="tag tag-mint">Same-Day</span>
-              <span className="tag tag-lavender">Reminders</span>
+            <hr className="cq-panel__rule" />
+            <div className="cq-panel__foot">
+              <span className="cq-panel__pill">Same-Day</span>
+              <span className="cq-panel__pill">Reminders</span>
             </div>
-          </div>
+          </article>
 
-          {/* Service Card 3 */}
-          <div className="service-card">
-            <div className="service-card-avatar" style={{ background: '#fef3f2' }}>
-              <FaFlask style={{ color: '#f04438' }} />
+          <article className="cq-panel cq-panel--accent">
+            <div className="cq-panel__head">
+              <span className="cq-panel__label">Diagnostics</span>
             </div>
-            <h3>Diagnostics</h3>
-            <h2>Modern Diagnostics</h2>
-            <p>
+            <div className="cq-panel__value">Modern Diagnostics</div>
+            <p className="cq-panel__body">
               Access lab results, imaging, and diagnostic reports directly in your
               patient dashboard — shared securely by your care team.
             </p>
-            <div className="service-tags">
-              <span className="tag tag-blue">Lab Results</span>
-              <span className="tag tag-lavender">Imaging</span>
+            <hr className="cq-panel__rule" />
+            <div className="cq-panel__foot">
+              <span className="cq-panel__pill">Lab Results</span>
+              <span className="cq-panel__pill">Imaging</span>
             </div>
-          </div>
+          </article>
         </div>
       </section>
 
-      {/* ══════════════ INFO + TESTIMONIALS ══════════════ */}
-      <section className="section" id="cases">
-        <div className="two-col">
-
-          {/* Left — lavender info block */}
-          <div className="info-block">
-            <p className="section-label" style={{ marginBottom: 0 }}>Patient stories</p>
-            <h2>Real care, real results</h2>
-            <p>
-              Our patients are at the heart of everything we do. From routine
-              check-ups to complex treatments, we are committed to outcomes that
-              make a genuine difference in everyday life.
+      {/* ══════════════ CLOSING CTA ══════════════ */}
+      <section className="section" id="get-started">
+        <div className="cq-close">
+          <div className="cq-close__text">
+            <p className="cq-eyebrow" style={{ color: 'var(--d-text-faint)' }}>Get started</p>
+            <h2 className="cq-close__title">Start with the report in your hand</h2>
+            <p className="cq-close__sub">
+              Photograph it, and Cliniq reads the values, explains what they mean and
+              schedules whatever needs following up. Free to try, in Urdu or English.
             </p>
-            <p>
-              Join thousands of satisfied patients who trust Clinnic for their
-              family's health journey.
-            </p>
-            <div style={{ marginTop: 8 }}>
-              <Link to="/doctors" className="btn-outline">
-                <FaArrowRight size={12} /> Meet our doctors
+            <div className="cq-close__actions">
+              <Link to="/login" className="cq-cta">
+                Upload a report
+                <span className="cq-cta__well" aria-hidden>↙</span>
+              </Link>
+              <Link to="/login" className="cq-close__link">
+                Already have an account? Sign in <FaArrowRight size={11} />
               </Link>
             </div>
           </div>
 
-          {/* Right — two testimonial cards */}
-          <div className="testimonials-col">
-            <div className="testimonial-card">
-              <div className="testimonial-avatar blue">P</div>
-              <div className="testimonial-content">
-                <h4>Priya Sharma</h4>
-                <span>Cardiology Patient</span>
-                <p>
-                  "The booking process was incredibly smooth and the cardiologist
-                  was thorough and reassuring. I felt genuinely cared for throughout."
-                </p>
-                <div style={{ display: 'flex', gap: 3, marginTop: 8, color: '#f79009' }}>
-                  {[...Array(5)].map((_, i) => <FaStar key={i} size={12} />)}
-                </div>
-              </div>
-            </div>
-
-            <div className="testimonial-card">
-              <div className="testimonial-avatar green">M</div>
-              <div className="testimonial-content">
-                <h4>Marcus Lee</h4>
-                <span>General Practice</span>
-                <p>
-                  "Having my prescription and appointment history in one place
-                  saves so much time. The reminder system is a game-changer."
-                </p>
-                <div style={{ display: 'flex', gap: 3, marginTop: 8, color: '#f79009' }}>
-                  {[...Array(5)].map((_, i) => <FaStar key={i} size={12} />)}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════ APPOINTMENT BOOKING ══════════════ */}
-      <section className="section section-bg" id="booking">
-        <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <p className="section-label">Get started</p>
-          <h2 className="section-title">Book your appointment</h2>
-          <p className="section-sub" style={{ margin: '12px auto 0' }}>
-            Fast, simple, and secure. Choose your doctor, pick a time, and confirm in seconds.
-          </p>
-        </div>
-
-        <div className="booking-row">
-          {/* Doctor image placeholder */}
-          <div className="booking-img">
-            <FaUserMd />
-          </div>
-
-          {/* Booking card */}
-          <div className="booking-card">
-            <h2>Appointment Booking</h2>
-            <p>Fill in the details below to reserve your slot</p>
-
-            <div className="booking-inputs">
-              <div className="booking-input-row">
-                <div className="booking-input-left">
-                  <div className="booking-input-icon"><FaUserMd /></div>
-                  <div className="booking-input-text">
-                    <label>Specialist</label>
-                    <span>Select Doctor</span>
-                  </div>
-                </div>
-                <FaChevronRight className="booking-input-chevron" />
-              </div>
-
-              <div className="booking-input-row">
-                <div className="booking-input-left">
-                  <div className="booking-input-icon"><FaCalendarAlt /></div>
-                  <div className="booking-input-text">
-                    <label>Date</label>
-                    <span>Add Appointment Date</span>
-                  </div>
-                </div>
-                <FaChevronRight className="booking-input-chevron" />
-              </div>
-
-              <div className="booking-input-row">
-                <div className="booking-input-left">
-                  <div className="booking-input-icon"><FaMapMarkerAlt /></div>
-                  <div className="booking-input-text">
-                    <label>Location</label>
-                    <span>Choose Clinic</span>
-                  </div>
-                </div>
-                <FaChevronRight className="booking-input-chevron" />
-              </div>
-            </div>
-
-            <Link to="/appointment">
-              <button className="btn-primary-full">Book Appointment</button>
-            </Link>
-
-            <p style={{ fontSize: 12, color: '#8b8fa8', textAlign: 'center', marginTop: 14 }}>
-              <FaShieldAlt size={10} style={{ marginRight: 4 }} />
-              Your data is secure and private
-            </p>
-          </div>
+          <ul className="cq-close__list">
+            <li><FaCheck size={11} /> Photos and PDFs, no scanner needed</li>
+            <li><FaCheck size={11} /> Values checked against reference ranges</li>
+            <li><FaCheck size={11} /> Reminders created from your own reports</li>
+            <li><FaCheck size={11} /> Records shared per appointment, not wholesale</li>
+          </ul>
         </div>
       </section>
 
       {/* ══════════════ FOOTER ══════════════ */}
-      <footer className="footer">
-        <div className="footer-logo">
-          <FaHeart style={{ color: '#4F5FFF' }} />
-          Clinnic
-        </div>
-        <span>© {new Date().getFullYear()} Clinnic. All rights reserved.</span>
-        <div style={{ display: 'flex', gap: 20 }}>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <Link to="/contact" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Contact</Link>
-        </div>
-      </footer>
+      <CqFooter />
 
     </div>
   );

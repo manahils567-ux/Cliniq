@@ -1,6 +1,6 @@
 .dash-card-icon{
 	text-align: center;
-    border: 6px solid #1977cc;
+    border: 6px solid var(--c-action);
     border-radius: 50%;
     height: 75px;
     width: 75px;
@@ -13,5 +13,5 @@
 	font-size: 2.5rem;
 }
 .dash-card{
-	border-right: 1px solid #c0bebe;
+	border-right: 1px solid var(--n-300);
 }

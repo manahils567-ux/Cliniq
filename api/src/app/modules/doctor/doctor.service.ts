@@ -109,12 +109,14 @@ const getAllDoctors = async (filters: IDoctorFilters, options: IOption): Promise
     }
 
     if (specialist) {
+        // The Specialty filter sends the value from Doctor.specialization, but
+        // this only ever matched Doctor.services — so picking a speciality
+        // always returned nothing. Match either column, case-insensitively.
         andCondition.push({
-            AND: ({
-                services: {
-                    contains: specialist
-                }
-            })
+            OR: [
+                { specialization: { contains: specialist, mode: 'insensitive' as const } },
+                { services: { contains: specialist, mode: 'insensitive' as const } },
+            ]
         })
     }
 
@@ -181,10 +183,64 @@ const updateDoctor = async (req: Request): Promise<Doctor> => {
     return result;
 }
 
+/**
+ * Public counters for the landing page trust strip.
+ * `star` is stored as a String, so the average is computed in JS rather than
+ * with an aggregate — the column cannot be averaged in SQL as-is.
+ */
+const getPlatformStats = async () => {
+    const [doctors, patients, specialisations, reviews] = await Promise.all([
+        prisma.doctor.count(),
+        prisma.patient.count(),
+        prisma.doctor.findMany({
+            where: { specialization: { not: null } },
+            select: { specialization: true },
+            distinct: ['specialization'],
+        }),
+        prisma.reviews.findMany({ select: { star: true } }),
+    ]);
+
+    const stars = reviews
+        .map((r) => Number(r.star))
+        .filter((n) => Number.isFinite(n) && n > 0);
+
+    const avgRating = stars.length
+        ? Number((stars.reduce((a, b) => a + b, 0) / stars.length).toFixed(1))
+        : null;
+
+    return {
+        doctors,
+        patients,
+        specialities: specialisations.filter((s) => (s.specialization || '').trim()).length,
+        avgRating,
+        reviews: stars.length,
+    };
+};
+
+/**
+ * Distinct specialities with a doctor count, for the services page.
+ * Returns [] when no doctor has one set — the UI says so rather than
+ * inventing a list.
+ */
+const getSpecialities = async () => {
+    const grouped = await prisma.doctor.groupBy({
+        by: ['specialization'],
+        where: { specialization: { not: null } },
+        _count: { _all: true },
+    });
+
+    return grouped
+        .map((g) => ({ name: (g.specialization || '').trim(), doctors: g._count._all }))
+        .filter((s) => s.name.length > 0)
+        .sort((a, b) => b.doctors - a.doctors || a.name.localeCompare(b.name));
+};
+
 export const DoctorService = {
     create,
     updateDoctor,
     deleteDoctor,
     getAllDoctors,
-    getDoctor
+    getDoctor,
+    getPlatformStats,
+    getSpecialities
 }

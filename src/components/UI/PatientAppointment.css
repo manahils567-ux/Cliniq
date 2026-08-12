@@ -4,7 +4,7 @@
 .appointment-tab .nav-tabs {
     background-color: #fff;
     padding: 1.5rem;
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--c-border-subtle);
     border-radius: .25rem 0.25rem 0 0 !important;
 	border-bottom: 0;
 }
@@ -32,7 +32,7 @@
     padding-right: 1.5rem;
 }
 .card-table .table td, .card-table .table th {
-    border-top: 1px solid #e2e5e8;
+    border-top: 1px solid var(--n-100);
     padding: 1rem 0.75rem;
     white-space: nowrap;
 }

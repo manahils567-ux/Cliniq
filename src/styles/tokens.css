@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Cliniq — Design Tokens v2
+   Monochrome editorial. Near-black public surfaces, light app surfaces,
+   one shared type scale and geometry so it reads as a single product.
+
+   Nothing else in the app may declare :root.
+   Must load BEFORE bootstrap and before every component stylesheet.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap');
+
+:root {
+  /* ---- Warm neutral ramp ----------------------------------------------
+     Twelve steps anchored on the brand palette:
+       n-100  Alabaster Cream  #F1ECE6
+       n-200  Warm Greige      #DDD5CD
+       n-800  Charcoal Espresso #2E2E2E
+     The in-between steps interpolate along the same warm axis, so nothing
+     in the interface can drift cool.
+     -------------------------------------------------------------------- */
+  --n-000: #FFFFFF;
+  --n-050: #FAF8F5;
+  --n-100: #F1ECE6;  /* Alabaster Cream */
+  --n-200: #DDD5CD;  /* Warm Greige     */
+  --n-300: #C7BDB3;
+  /* 400 and 500 are darker than a pure interpolation would put them:
+     muted and faint text must clear WCAG AA on BOTH white cards and the
+     cream page ground, and cream is the harder background. */
+  --n-400: #90867C;
+  --n-500: #736A61;
+  --n-600: #635B54;
+  --n-700: #47413C;
+  --n-800: #2E2E2E;  /* Charcoal Espresso */
+  --n-900: #232322;
+  --n-950: #191918;
+
+  /* ---- Brand ----------------------------------------------------------
+     Vintage Rosewood is the only chromatic colour in the system. It marks
+     the primary action and nothing else, so a rosewood element always
+     means "this is the thing to press".
+     -------------------------------------------------------------------- */
+  --c-accent:       #7D4047;  /* Vintage Rosewood */
+  --c-accent-hover: #663339;
+  --c-accent-wash:  #F5EBEC;
+  --c-accent-line:  #E2CBCE;
+
+  /* ---- Signal ---------------------------------------------------------
+     Ochre means "this needs you" — a due reminder, an expiring
+     prescription. Warmed from the original amber so it sits inside the
+     palette rather than on top of it.
+     -------------------------------------------------------------------- */
+  --c-signal:        #C08A2E;
+  --c-signal-dim:    #8F6620;
+  --c-signal-wash:   #F9F1E3;
+  --c-signal-line:   #E8D5B0;
+
+  /* Danger is deliberately brighter and more saturated than rosewood —
+     the two must never be mistaken for each other. */
+  --c-danger:        #B3261E;
+  --c-danger-wash:   #FBEAE8;
+  --c-positive:      #2F6B4F;
+  --c-positive-wash: #E8F1EC;
+
+  /* ---- Semantic: light surfaces (dashboard, admin, forms) -------------
+     Cream is the ground, white is the raised surface. Cards read as paper
+     lifted off a warm desk rather than white-on-white. */
+  --c-bg:            var(--n-100);
+  --c-bg-alt:        var(--n-200);
+  --c-surface:       var(--n-000);
+  --c-border:        var(--n-200);
+  --c-border-subtle: var(--n-100);
+  --c-ink:           var(--n-900);
+  --c-text:          var(--n-700);
+  --c-text-muted:    var(--n-500);
+  --c-text-faint:    var(--n-400);
+
+  /* Primary action = Vintage Rosewood. White on rosewood clears 8:1. */
+  --c-action:        var(--c-accent);
+  --c-action-hover:  var(--c-accent-hover);
+  --c-action-text:   var(--n-000);
+
+  /* ---- Semantic: dark surfaces (landing, hero, footer, login) ---------
+     Charcoal Espresso is the dark ground, cream the text on it. */
+  /* Black is the dark ground across the app. Espresso stays in the ramp for
+     borders, icons and text; it is no longer the dark surface itself. */
+  --d-bg:            #0A0A0A;
+  --d-surface:       #141414;
+  --d-surface-alt:   #1F1F1F;
+  --d-border:        rgba(241, 236, 230, 0.14);
+  --d-border-strong: rgba(241, 236, 230, 0.30);
+  --d-text:          var(--n-100);
+  --d-text-muted:    rgba(241, 236, 230, 0.64);
+  --d-text-faint:    rgba(241, 236, 230, 0.40);
+  --d-action:        var(--n-100);
+  --d-action-hover:  var(--n-200);
+  --d-action-text:   #0A0A0A;
+
+  /* ---- Type -----------------------------------------------------------
+     Inter Tight for display — tight apertures, near-Helvetica skeleton,
+     holds together at 88px where Inter proper starts to feel loose.
+     Inter for body. Nastaliq for Urdu.
+     -------------------------------------------------------------------- */
+  --font-display: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-ui:      'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-urdu:    'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+  --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --fs-xs:   0.6875rem;  /* 11 — eyebrows, meta. Small on purpose. */
+  --fs-sm:   0.8125rem;  /* 13 — labels, table cells              */
+  --fs-base: 0.9375rem;  /* 15 — body                             */
+  --fs-md:   1.0625rem;  /* 17 — card titles                      */
+  --fs-lg:   1.375rem;   /* 22 — section headings                 */
+  --fs-xl:   2rem;       /* 32 — page titles                      */
+  --fs-2xl:  3.25rem;    /* 52 — feature headline                 */
+  --fs-3xl:  5.5rem;     /* 88 — hero. Deliberately enormous.     */
+
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semi:   600;
+  --fw-bold:   700;
+
+  --lh-hero:   0.92;     /* display type sets tighter than it looks */
+  --lh-tight:  1.1;
+  --lh-snug:   1.35;
+  --lh-normal: 1.55;
+  --lh-urdu:   2.1;      /* Nastaliq descenders collide below ~2.0  */
+
+  --tr-hero:  -0.045em;  /* the reference's signature — very tight  */
+  --tr-tight: -0.02em;
+  --tr-none:   0;
+  --tr-wide:   0.09em;   /* eyebrows and small caps only            */
+
+  /* ---- Space — 4px base ----------------------------------------------- */
+  --sp-1: 0.25rem;  --sp-2: 0.5rem;  --sp-3: 0.75rem;  --sp-4: 1rem;
+  --sp-5: 1.5rem;   --sp-6: 2rem;    --sp-7: 3rem;     --sp-8: 5rem;
+
+  /* ---- Radius ----------------------------------------------------------
+     The reference is nearly square except for full pills. Four steps.
+     -------------------------------------------------------------------- */
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   14px;
+  --r-full: 999px;
+
+  /* ---- Elevation --------------------------------------------------------
+     Restrained. Monochrome design separates surfaces with borders and
+     value, not shadow.
+     ---------------------------------------------------------------------- */
+  /* Warm-tinted so shadows sit in the palette instead of greying it. */
+  --sh-sm: 0 1px 2px rgba(46, 46, 46, 0.06);
+  --sh-md: 0 2px 10px rgba(46, 46, 46, 0.08);
+  --sh-lg: 0 12px 32px rgba(46, 46, 46, 0.14);
+  --sh-xl: 0 24px 64px rgba(46, 46, 46, 0.26);
+
+  --ring:      0 0 0 3px rgba(125, 64, 71, 0.28);
+  --ring-dark: 0 0 0 3px rgba(241, 236, 230, 0.34);
+
+  /* ---- Motion ---------------------------------------------------------- */
+  --ease:     cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 140ms;
+  --dur:      280ms;
+  --dur-slow: 620ms;
+
+  --z-header: 100; --z-drawer: 200; --z-modal: 300;
+  --z-chat:   400; --z-toast:  500;
+}
+
+/* ---- Legacy aliases ---------------------------------------------------
+   Landing.css ships var(--primary), var(--text-dark) etc. These keep it
+   rendering during migration. Delete once it uses the new names.
+   ---------------------------------------------------------------------- */
+:root {
+  --primary:       var(--c-action);
+  --primary-light: var(--c-bg-alt);
+  --primary-hover: var(--c-action-hover);
+  --mint:          var(--c-positive);
+  --mint-light:    var(--c-positive-wash);
+  --lavender:      var(--n-100);
+  --lavender-mid:  var(--n-200);
+  --text-dark:     var(--c-ink);
+  --text-mid:      var(--c-text);
+  --text-light:    var(--c-text-muted);
+  --white:         var(--c-surface);
+  --border:        var(--c-border);
+  --shadow:        var(--sh-md);
+  --shadow-md:     var(--sh-lg);
+  --radius-sm:     var(--r-sm);
+  --radius-md:     var(--r-md);
+  --radius-lg:     var(--r-lg);
+  --radius-xl:     var(--r-lg);
+}

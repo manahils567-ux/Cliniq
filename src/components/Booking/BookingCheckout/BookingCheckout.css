@@ -6,13 +6,13 @@
     position: relative;
     font-size: 14px;
     font-weight: 500;
-    color: #272b41;
+    color: var(--c-ink);
     text-transform: capitalize;
     margin-bottom: 15px;
 }
 .booking-date li span {
     float: right;
-    color: #757575;
+    color: var(--n-600);
     font-weight: 400;
     font-size: 15px;
 }
@@ -20,18 +20,18 @@
     position: relative;
     font-size: 14px;
     font-weight: 500;
-    color: #272b41;
+    color: var(--c-ink);
     text-transform: capitalize;
     margin-bottom: 15px;
 }
 .booking-fee li span {
     float: right;
-    color: #757575;
+    color: var(--n-600);
     font-weight: 400;
     font-size: 15px;
 }
 .booking-total {
-    border-top: 1px solid #e4e4e4;
+    border-top: 1px solid var(--n-200);
     margin-top: 20px;
     padding-top: 20px;
 }
@@ -39,7 +39,7 @@
 .booking-total ul li span {
     font-size: 18px;
     font-weight: 600;
-    color: #272b41;
+    color: var(--c-ink);
 }
 .booking-total .total-cost {
     font-size: 16px;

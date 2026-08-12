@@ -10,31 +10,10 @@
   padding: 0;
 }
 
-:root {
-  --primary: #4F5FFF;
-  --primary-light: #eef0ff;
-  --primary-hover: #3a4be0;
-  --mint: #3ecf8e;
-  --mint-light: #e8faf3;
-  --lavender: #f0f1ff;
-  --lavender-mid: #e4e6fb;
-  --text-dark: #1a1d3b;
-  --text-mid: #4a4d6a;
-  --text-light: #8b8fa8;
-  --white: #ffffff;
-  --border: #e8eaff;
-  --shadow: 0 4px 24px rgba(79, 95, 255, 0.08);
-  --shadow-md: 0 8px 32px rgba(79, 95, 255, 0.13);
-  --radius-sm: 12px;
-  --radius-md: 18px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
-}
-
 .landing {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-ui);
   color: var(--text-dark);
-  background: var(--white);
+  background: var(--c-bg);
   overflow-x: hidden;
 }
 
@@ -62,7 +41,7 @@
   width: 36px;
   height: 36px;
   background: var(--primary);
-  border-radius: 10px;
+  border-radius: var(--r-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,12 +80,12 @@
   color: var(--white);
   border: none;
   padding: 12px 26px;
-  border-radius: 50px;
+  border-radius: var(--r-full);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, transform 0.15s;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-ui);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -124,11 +103,11 @@
   color: var(--text-mid);
   border: none;
   padding: 12px 20px;
-  border-radius: 50px;
+  border-radius: var(--r-full);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-ui);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -145,11 +124,11 @@
   color: var(--primary);
   border: 1.5px solid var(--primary);
   padding: 9px 20px;
-  border-radius: 50px;
+  border-radius: var(--r-full);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-ui);
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -167,11 +146,11 @@
   color: var(--mint);
   border: none;
   padding: 8px 18px;
-  border-radius: 50px;
+  border-radius: var(--r-full);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-ui);
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -184,7 +163,7 @@
   align-items: center;
   padding: 80px 60px 60px;
   gap: 60px;
-  background: linear-gradient(135deg, #fafbff 0%, #f4f5ff 100%);
+  background: linear-gradient(135deg, var(--n-050) 0%, var(--n-100) 100%);
   min-height: 88vh;
 }
 
@@ -200,7 +179,7 @@
   background: var(--primary-light);
   color: var(--primary);
   padding: 6px 14px;
-  border-radius: 50px;
+  border-radius: var(--r-full);
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 24px;
@@ -284,7 +263,7 @@
   width: 380px;
   height: 380px;
   border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
-  background: linear-gradient(135deg, #c7ceff 0%, #e8f9f0 100%);
+  background: linear-gradient(135deg, var(--n-200) 0%, var(--n-100) 100%);
   z-index: 0;
 }
 
@@ -293,7 +272,7 @@
   width: 260px;
   height: 260px;
   border-radius: 40% 60% 45% 55% / 60% 40% 55% 45%;
-  background: rgba(62, 207, 142, 0.15);
+  background: var(--c-accent-wash);
   top: 20px;
   right: 30px;
   z-index: 0;
@@ -307,7 +286,7 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-md);
-  background: linear-gradient(180deg, #c9ccff 0%, #e0e3ff 100%);
+  background: linear-gradient(180deg, var(--n-200) 0%, var(--n-100) 100%);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -456,7 +435,7 @@
   min-height: 260px;
   display: flex;
   align-items: flex-end;
-  background: linear-gradient(160deg, #c7ceff 0%, #e0e3ff 100%);
+  background: linear-gradient(160deg, var(--n-200) 0%, var(--n-100) 100%);
 }
 
 .feat-card-photo-inner {
@@ -610,7 +589,7 @@
 
 .tag {
   padding: 5px 14px;
-  border-radius: 50px;
+  border-radius: var(--r-full);
   font-size: 12px;
   font-weight: 500;
 }
@@ -690,8 +669,8 @@
   color: white;
 }
 
-.testimonial-avatar.blue { background: linear-gradient(135deg, #4F5FFF, #8b96ff); }
-.testimonial-avatar.green { background: linear-gradient(135deg, #3ecf8e, #67e2a8); }
+.testimonial-avatar.blue { background: linear-gradient(135deg, var(--c-action), #8b96ff); }
+.testimonial-avatar.green { background: linear-gradient(135deg, var(--c-positive), #67e2a8); }
 
 .testimonial-content h4 {
   font-size: 15px;
@@ -725,7 +704,7 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   height: 440px;
-  background: linear-gradient(160deg, #c7ceff 0%, #dde0ff 100%);
+  background: linear-gradient(160deg, var(--n-200) 0%, var(--n-100) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -785,13 +764,13 @@
   width: 36px;
   height: 36px;
   background: var(--white);
-  border-radius: 10px;
+  border-radius: var(--r-md);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--primary);
   font-size: 15px;
-  box-shadow: 0 2px 8px rgba(79,95,255,0.1);
+  box-shadow: 0 2px 8px rgba(125, 64, 71,0.1);
 }
 
 .booking-input-text label {
@@ -822,7 +801,7 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-ui);
   transition: background 0.2s, transform 0.15s;
 }
 
@@ -833,7 +812,7 @@
 
 /* ── FOOTER ── */
 .footer {
-  background: var(--text-dark);
+  background: var(--n-800);
   color: rgba(255,255,255,0.6);
   text-align: center;
   padding: 28px 60px;

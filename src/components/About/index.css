@@ -4,7 +4,7 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    background: #eff0f3;
+    background: var(--n-100);
     object-fit: cover;
     overflow: hidden;
     border-radius: 15px;

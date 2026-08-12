@@ -47,7 +47,7 @@ const SignIn = ({ setSignUp }) => {
         return (
             <>
                 <h2>Forgot Password</h2>
-                <p style={{ color: '#777', fontSize: '0.85rem', marginBottom: '1rem' }}>
+                <p style={{ color: 'var(--n-500)', fontSize: '0.85rem', marginBottom: '1rem' }}>
                     Enter your email and we'll send you a reset link.
                 </p>
                 <form onSubmit={onForgotSubmit} style={{ width: '100%' }}>

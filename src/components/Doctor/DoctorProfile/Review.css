@@ -24,7 +24,7 @@
 .reviews-list__title {
 	font-size: 1.35rem;
 	font-weight: 700;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin: 0;
 }
 
@@ -32,13 +32,13 @@
 .reviews-error {
 	text-align: center;
 	padding: 3rem 1rem;
-	color: #6c757d;
+	color: var(--c-text-muted);
 }
 
 /* Review Card */
 .review-card {
 	background: #fff;
-	border-radius: 16px;
+	border-radius: var(--r-lg);
 	padding: 1.75rem;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 	border: 1px solid rgba(0, 0, 0, 0.04);
@@ -46,7 +46,7 @@
 }
 
 .review-card:hover {
-	box-shadow: 0 8px 30px rgba(25, 119, 204, 0.1);
+	box-shadow: 0 8px 30px rgba(125, 64, 71, 0.1);
 }
 
 .review-card__header {
@@ -68,8 +68,8 @@
 	width: 48px;
 	height: 48px;
 	border-radius: 50%;
-	background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-	color: #1977cc;
+	background: linear-gradient(135deg, var(--n-100) 0%, var(--n-200) 100%);
+	color: var(--c-action);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -87,13 +87,13 @@
 .review-card__name {
 	font-size: 1rem;
 	font-weight: 600;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin: 0 0 0.25rem 0;
 }
 
 .review-card__date {
 	font-size: 0.85rem;
-	color: #6c757d;
+	color: var(--c-text-muted);
 	margin: 0;
 }
 
@@ -107,7 +107,7 @@
 .review-card__rating-text {
 	font-size: 0.9rem;
 	font-weight: 600;
-	color: #f4c150;
+	color: var(--c-signal);
 }
 
 .review-card__body {
@@ -119,7 +119,7 @@
 .review-card__text {
 	font-size: 0.95rem;
 	line-height: 1.65;
-	color: #374151;
+	color: var(--c-text);
 	margin: 0;
 }
 
@@ -130,24 +130,24 @@
 	font-size: 0.85rem;
 	font-weight: 600;
 	padding: 6px 14px;
-	border-radius: 20px;
+	border-radius: var(--r-lg);
 	align-self: flex-start;
 }
 
 .review-card__recommendation--yes {
-	background: #dcfce7;
+	background: var(--n-050);
 	color: #16a34a;
 }
 
 .review-card__recommendation--no {
-	background: #fee2e2;
-	color: #dc2626;
+	background: var(--n-100);
+	color: var(--c-danger);
 }
 
 /* Review Form */
 .review-form-card {
 	background: #fff;
-	border-radius: 16px;
+	border-radius: var(--r-lg);
 	padding: 1.75rem;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 	border: 1px solid rgba(0, 0, 0, 0.04);
@@ -159,7 +159,7 @@
 .review-form__title {
 	font-size: 1.2rem;
 	font-weight: 700;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin: 0 0 1.5rem 0;
 }
 
@@ -178,11 +178,11 @@
 .review-form__label {
 	font-size: 0.9rem;
 	font-weight: 600;
-	color: #374151;
+	color: var(--c-text);
 }
 
 .review-form__desc {
-	color: #1977cc;
+	color: var(--c-action);
 	margin-left: 8px;
 	text-transform: capitalize;
 }
@@ -203,18 +203,18 @@
 }
 
 .review-form__radio-icon--yes {
-	color: #22c55e;
+	color: var(--c-positive);
 }
 
 .review-form__radio-icon--no {
-	color: #dc2626;
+	color: var(--c-danger);
 }
 
 .review-form__textarea {
 	width: 100%;
 	padding: 12px;
-	border: 1px solid #e5e7eb;
-	border-radius: 10px;
+	border: 1px solid var(--n-100);
+	border-radius: var(--r-md);
 	font-size: 0.95rem;
 	font-family: inherit;
 	resize: vertical;
@@ -223,24 +223,24 @@
 
 .review-form__textarea:focus {
 	outline: none;
-	border-color: #1977cc;
-	box-shadow: 0 0 0 3px rgba(25, 119, 204, 0.1);
+	border-color: var(--c-action);
+	box-shadow: 0 0 0 3px rgba(125, 64, 71, 0.1);
 }
 
 .review-form__textarea::placeholder {
-	color: #9ca3af;
+	color: var(--n-400);
 }
 
 .review-form__submit.ant-btn-primary {
-	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
 	border: none;
 	height: 48px;
-	border-radius: 10px;
+	border-radius: var(--r-md);
 	font-weight: 600;
 }
 
 .review-form__submit.ant-btn-primary:hover {
-	background: #1565a0;
+	background: var(--c-action-hover);
 }
 
 @media (max-width: 991.98px) {

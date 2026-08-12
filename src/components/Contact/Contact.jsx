@@ -30,24 +30,19 @@ const Contact = () => {
 		{
 			icon: <FaMapMarkerAlt />,
 			title: 'Visit us',
-			content: '1212 Kazi Nazrul Avenue, Sylhet, Bangladesh 3214'
+			content: 'Korang Town, Sector O9, House No. 69, Street 44'
 		},
 		{
 			icon: <FaPhoneAlt />,
 			title: 'Call us',
-			content: '+1 (555) 123-4567',
-			link: 'tel:+1 (555) 123-4567'
+			content: '+92 310 8112860',
+			link: 'tel:+923108112860'
 		},
 		{
 			icon: <FaEnvelope />,
 			title: 'Email us',
-			content: 'ujjalzaman@gmail.com',
-			link: 'mailto:ujjalzaman@gmail.com'
-		},
-		{
-			icon: <FaClock />,
-			title: 'Working hours',
-			content: 'Mon - Sat: 9:00 AM - 6:00 PM'
+			content: 'contact@cliniq.app',
+			link: 'mailto:contact@cliniq.app'
 		}
 	];
 

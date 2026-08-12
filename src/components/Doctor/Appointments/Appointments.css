@@ -8,8 +8,8 @@
 .stat-mini-card {
   text-align: center;
   padding: 1.5rem;
-  border-radius: 12px;
-  border: 2px solid #e9ecef;
+  border-radius: var(--r-lg);
+  border: 2px solid var(--c-border-subtle);
   transition: all 0.3s;
 }
 
@@ -29,25 +29,25 @@
 }
 
 .stat-mini-card.stat-success {
-  border-color: #28a745;
+  border-color: var(--c-positive);
   background: rgba(40, 167, 69, 0.05);
 }
 
 .stat-value {
   font-size: 2.25rem;
   font-weight: 700;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 0.5rem;
 }
 
 .stat-label {
   font-size: 0.95rem;
-  color: #6c757d;
+  color: var(--c-text-muted);
   font-weight: 500;
 }
 
 .appointment-details-modal h4 {
-  color: #2c4964;
+  color: var(--c-ink);
   margin-top: 0.5rem;
   margin-bottom: 1rem;
   font-size: 1.1rem;
@@ -62,7 +62,7 @@
 }
 
 .text-muted {
-  color: #6c757d;
+  color: var(--c-text-muted);
 }
 
 .small {

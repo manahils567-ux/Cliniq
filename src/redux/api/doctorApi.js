@@ -5,6 +5,27 @@ const DOC_URL = '/doctor'
 
 export const doctorApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
+        getSpecialities: build.query({
+            query: () => ({
+                url: `${DOC_URL}/specialities`,
+                method: 'GET',
+            }),
+            transformResponse: (response) => (Array.isArray(response) ? response : response?.data ?? []),
+            providesTags: [tagTypes.doctor],
+        }),
+        getPlatformStats: build.query({
+            query: () => ({
+                url: `${DOC_URL}/stats`,
+                method: 'GET',
+            }),
+            // The axios interceptor already unwraps the envelope, so RTK hands
+            // us the payload itself. Tolerate both shapes rather than guessing.
+            transformResponse: (response) =>
+                (response && typeof response === 'object' && 'doctors' in response)
+                    ? response
+                    : (response?.data ?? response ?? {}),
+            providesTags: [tagTypes.doctor],
+        }),
         getDoctors: build.query({
             query: (arg) => ({
                 url: `${DOC_URL}`,
@@ -40,4 +61,10 @@ export const doctorApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetDoctorsQuery, useGetDoctorQuery, useUpdateDoctorMutation } = doctorApi
+export const {
+    useGetDoctorsQuery,
+    useGetDoctorQuery,
+    useUpdateDoctorMutation,
+    useGetPlatformStatsQuery,
+    useGetSpecialitiesQuery,
+} = doctorApi

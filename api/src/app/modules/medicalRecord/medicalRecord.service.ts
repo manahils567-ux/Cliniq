@@ -2,6 +2,7 @@ import prisma from '../../../shared/prisma';
 import { CloudinaryHelper } from '../../../helpers/uploadHelper';
 import { v2 as cloudinary } from 'cloudinary';
 import config from '../../../config';
+import { RecordAnalysisService } from './recordAnalysis.service';
 
 // Keep cloudinary configured (uploadHelper already does this, but ensure it's ready)
 cloudinary.config({
@@ -10,10 +11,12 @@ cloudinary.config({
     api_secret: config.cloudinary.secret,
 });
 
+const ANALYZABLE_MIME = /^(image\/|application\/pdf)/i;
+
 const uploadRecord = async (patientId: string, file: Express.Multer.File, payload: any) => {
     const uploaded = await CloudinaryHelper.uploadFile(file);
 
-    return prisma.medicalRecord.create({
+    const record = await prisma.medicalRecord.create({
         data: {
             patientId,
             title: payload.title || file.originalname,
@@ -22,19 +25,52 @@ const uploadRecord = async (patientId: string, file: Express.Multer.File, payloa
             category: payload.category || 'Other',
             fileUrl: uploaded.secure_url,
             publicId: uploaded.public_id,
+            analysisStatus: ANALYZABLE_MIME.test(file.mimetype) ? 'pending' : 'skipped',
         },
     });
+
+    // Analysis runs in the background: a Gemini round-trip takes many seconds and
+    // the client should get its record back immediately. The UI polls analysisStatus.
+    if (ANALYZABLE_MIME.test(file.mimetype)) {
+        RecordAnalysisService.analyzeAndPersist(record.id, patientId, file.buffer, file.mimetype).catch(
+            (err) => console.error('[MedicalRecord] Background analysis failed:', err?.message)
+        );
+    }
+
+    return record;
 };
 
 const getRecords = async (patientId: string) => {
     return prisma.medicalRecord.findMany({
         where: { patientId },
         orderBy: { createdAt: 'desc' },
+        include: {
+            analysis: {
+                select: {
+                    id: true,
+                    documentType: true,
+                    summary: true,
+                    plainSummary: true,
+                    status: true,
+                    _count: { select: { metrics: true, insights: true } },
+                },
+            },
+        },
     });
 };
 
 const getRecord = async (id: string, patientId: string) => {
-    return prisma.medicalRecord.findFirst({ where: { id, patientId } });
+    return prisma.medicalRecord.findFirst({
+        where: { id, patientId },
+        include: {
+            analysis: {
+                include: {
+                    metrics: { orderBy: { name: 'asc' } },
+                    insights: { orderBy: { createdAt: 'desc' } },
+                },
+            },
+        },
+    });
 };
 
 const deleteRecord = async (id: string, patientId: string) => {

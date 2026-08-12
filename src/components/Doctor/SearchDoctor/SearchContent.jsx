@@ -59,7 +59,7 @@ const SearchContent = ({ data, compact }) => {
 								<span className="doctor-card__score-num">{rating}.0</span>
 								<StarRatings
 									rating={rating}
-									starRatedColor="#f4c150"
+									starRatedColor="var(--c-signal)"
 									numberOfStars={5}
 									name="rating"
 									starDimension="14px"

@@ -6,7 +6,7 @@
 
 .stat-mini-card {
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: var(--r-lg);
     border: none;
     transition: all 0.3s ease;
     text-align: center;
@@ -17,14 +17,18 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.stat-mini-card-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+.stat-mini-card.stat-mini-card-primary .stat-mini-icon { color: var(--n-800); }
+.stat-mini-card.stat-mini-card-primary {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
 }
 
-.stat-mini-card-success {
-    background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
-    color: white;
+.stat-mini-card.stat-mini-card-success .stat-mini-icon { color: var(--c-accent); }
+.stat-mini-card.stat-mini-card-success {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
 }
 
 .stat-mini-details {
@@ -43,7 +47,7 @@
 }
 
 .blog-description {
-    color: #6c757d;
+    color: var(--c-text-muted);
     line-height: 1.5;
 }
 

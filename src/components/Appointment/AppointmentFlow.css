@@ -1,7 +1,7 @@
 /* Appointment flow – shared steps */
 .appointment-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f0f7ff 0%, #fff 20%);
+  background: linear-gradient(180deg, var(--n-050) 0%, #fff 20%);
 }
 
 .appointment-page .container-wrap {
@@ -17,13 +17,13 @@
 .appointment-step__title {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 0.35rem;
 }
 
 .appointment-step__subtitle {
   font-size: 0.95rem;
-  color: #6c757d;
+  color: var(--c-text-muted);
   margin-bottom: 1.5rem;
 }
 
@@ -37,37 +37,37 @@
 }
 
 .appointment-page .ant-steps-item-process .ant-steps-item-icon {
-  background: #1977cc !important;
-  border-color: #1977cc !important;
+  background: var(--c-action) !important;
+  border-color: var(--c-action) !important;
 }
 
 .appointment-page .ant-steps-item-finish .ant-steps-item-icon {
-  background: #1977cc !important;
-  border-color: #1977cc !important;
+  background: var(--c-action) !important;
+  border-color: var(--c-action) !important;
 }
 
 .appointment-page .ant-steps-item-finish .ant-steps-item-tail::after {
-  background: #1977cc !important;
+  background: var(--c-action) !important;
 }
 
 /* Select Doctor cards */
 .appointment-step--select-doctor .select-doctor-card {
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   overflow: hidden;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--c-border-subtle);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .select-doctor-card--selected {
-  border-color: #1977cc !important;
-  box-shadow: 0 4px 16px rgba(25, 119, 204, 0.2);
+  border-color: var(--c-action) !important;
+  box-shadow: 0 4px 16px rgba(125, 64, 71, 0.2);
 }
 
 .select-doctor-card__img-wrap {
   width: 100%;
   aspect-ratio: 1;
   overflow: hidden;
-  background: #f1f3f5;
+  background: var(--n-050);
 }
 
 .select-doctor-card__img {
@@ -83,25 +83,25 @@
   align-items: center;
   justify-content: center;
   font-size: 3rem;
-  color: #adb5bd;
+  color: var(--n-300);
 }
 
 .select-doctor-card__name {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #2c4964;
+  color: var(--c-ink);
   margin: 0.75rem 0 0.25rem;
 }
 
 .select-doctor-card__designation {
   font-size: 0.85rem;
-  color: #1977cc;
+  color: var(--c-action);
   margin: 0;
 }
 
 .select-doctor-card__specialization {
   font-size: 0.8rem;
-  color: #6c757d;
+  color: var(--c-text-muted);
   margin: 0.25rem 0 0;
 }
 
@@ -147,9 +147,9 @@
   min-width: 100px;
   height: 100px;
   aspect-ratio: 1;
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   overflow: hidden;
-  background: #f1f3f5;
+  background: var(--n-050);
 }
 
 .select-doctor-card--rich .select-doctor-card__img {
@@ -170,7 +170,7 @@
 
 .select-doctor-card--rich .select-doctor-card__meta {
   font-size: 0.85rem;
-  color: #495057;
+  color: var(--c-text-muted);
   margin: 0.25rem 0;
   display: flex;
   align-items: center;
@@ -178,18 +178,18 @@
 }
 
 .select-doctor-card--rich .select-doctor-card__meta-icon {
-  color: #1977cc;
+  color: var(--c-action);
   flex-shrink: 0;
   min-width: 1rem;
 }
 
 .select-doctor-card--rich .select-doctor-card__meta--specialty {
   font-weight: 600;
-  color: #2c4964;
+  color: var(--c-ink);
 }
 
 .select-doctor-card--rich .select-doctor-card__meta--muted {
-  color: #868e96;
+  color: var(--n-500);
   font-size: 0.8rem;
 }
 
@@ -214,9 +214,9 @@
 /* Select Date & Time */
 .appointment-step--datetime .datetime-summary {
   background: #fff;
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   padding: 1.25rem 1.5rem;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--c-border-subtle);
   margin-bottom: 1.5rem;
 }
 
@@ -226,23 +226,23 @@
   gap: 0.75rem;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
-  color: #495057;
+  color: var(--c-text-muted);
 }
 
 .datetime-summary__row .icon {
-  color: #1977cc;
+  color: var(--c-action);
   font-size: 1rem;
   flex-shrink: 0;
 }
 
 .datetime-summary__label {
   font-weight: 600;
-  color: #2c4964;
+  color: var(--c-ink);
   min-width: 5rem;
 }
 
 .datetime-summary__value {
-  color: #495057;
+  color: var(--c-text-muted);
 }
 
 .datetime-dates {
@@ -256,21 +256,21 @@
   flex: 1 1 120px;
   min-width: 100px;
   padding: 1rem;
-  border-radius: 12px;
-  border: 2px solid #e9ecef;
+  border-radius: var(--r-lg);
+  border: 2px solid var(--c-border-subtle);
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .datetime-date-card:hover {
-  border-color: #1977cc;
-  background: rgba(25, 119, 204, 0.06);
+  border-color: var(--c-action);
+  background: rgba(125, 64, 71, 0.06);
 }
 
 .datetime-date-card.datetime-date-card--active {
-  border-color: #1977cc;
-  background: #1977cc;
+  border-color: var(--c-action);
+  background: var(--c-action);
   color: #fff;
 }
 
@@ -303,7 +303,7 @@
 .datetime-times-section h4 {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 0.75rem;
 }
 
@@ -314,8 +314,8 @@
 /* Patient info form */
 .appointment-step--patient .patient-form-card {
   background: #fff;
-  border-radius: 12px;
-  border: 1px solid #e9ecef;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--c-border-subtle);
   padding: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -323,20 +323,20 @@
 .patient-form-card__title {
   font-size: 1rem;
   font-weight: 600;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--c-border-subtle);
 }
 
 .patient-form-card .ant-input,
 .patient-form-card .ant-select-selector {
-  border-radius: 8px;
+  border-radius: var(--r-md);
 }
 
 .patient-form-card .ant-form-item-label > label {
   font-weight: 500;
-  color: #495057;
+  color: var(--c-text-muted);
 }
 
 /* Payment / Checkout */
@@ -353,15 +353,15 @@
 
 .checkout-form-card {
   background: #fff;
-  border-radius: 12px;
-  border: 1px solid #e9ecef;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--c-border-subtle);
   padding: 1.5rem;
 }
 
 .checkout-form-card__title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 1rem;
 }
 
@@ -375,26 +375,26 @@
 .payment-method-option {
   flex: 1 1 140px;
   padding: 0.75rem 1rem;
-  border: 2px solid #e9ecef;
-  border-radius: 10px;
+  border: 2px solid var(--c-border-subtle);
+  border-radius: var(--r-md);
   cursor: pointer;
   text-align: center;
   transition: all 0.2s;
 }
 
 .payment-method-option:hover {
-  border-color: #1977cc;
+  border-color: var(--c-action);
 }
 
 .payment-method-option.payment-method-option--active {
-  border-color: #1977cc;
-  background: rgba(25, 119, 204, 0.08);
+  border-color: var(--c-action);
+  background: rgba(125, 64, 71, 0.08);
 }
 
 .order-summary-card {
   background: #fff;
-  border-radius: 12px;
-  border: 1px solid #e9ecef;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--c-border-subtle);
   padding: 1.5rem;
   height: fit-content;
 }
@@ -404,25 +404,25 @@
   justify-content: space-between;
   font-size: 0.9rem;
   margin-bottom: 0.75rem;
-  color: #495057;
+  color: var(--c-text-muted);
 }
 
 .order-summary-card .summary-row.summary-total {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #2c4964;
+  color: var(--c-ink);
   padding-top: 1rem;
   margin-top: 0.5rem;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid var(--c-border-subtle);
 }
 
 .order-summary-card .summary-total .amount {
-  color: #1977cc;
+  color: var(--c-action);
 }
 
 /* Success modal */
 .appointment-success-modal .ant-modal-content {
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   overflow: hidden;
 }
 
@@ -433,20 +433,20 @@
 
 .appointment-success-modal .success-icon-wrap .anticon {
   font-size: 4rem;
-  color: #52c41a;
+  color: var(--c-positive);
 }
 
 .appointment-success-modal .success-message {
   text-align: center;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 0.5rem;
 }
 
 .appointment-success-modal .success-sub {
   text-align: center;
-  color: #6c757d;
+  color: var(--c-text-muted);
   font-size: 0.9rem;
 }
 
@@ -454,7 +454,7 @@
 .appointment-actions {
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid var(--c-border-subtle);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -463,8 +463,8 @@
 }
 
 .appointment-actions .ant-btn-primary {
-  background: #1977cc;
-  border-color: #1977cc;
+  background: var(--c-action);
+  border-color: var(--c-action);
 }
 
 .appointment-actions .ant-btn-primary:hover {
@@ -473,5 +473,5 @@
 }
 
 .appointment-actions .ant-btn-default {
-  border-radius: 8px;
+  border-radius: var(--r-md);
 }

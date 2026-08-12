@@ -1,0 +1,107 @@
+/* Floating footer — inset card rather than a full-bleed bar, so it matches
+   the pill navbar and the closing CTA band. */
+
+.cqfoot {
+  margin: var(--sp-7) var(--sp-4) var(--sp-4);
+  padding: var(--sp-7) var(--sp-5) var(--sp-5);
+  background: var(--d-bg);
+  border: 1px solid var(--d-border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  text-align: center;
+}
+
+.cqfoot__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-6);
+  margin-bottom: var(--sp-6);
+}
+
+/* Children fade up in sequence once the footer scrolls into view. */
+.cqfoot__mark,
+.cqfoot__nav,
+.cqfoot__base {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 100ms);
+}
+.cqfoot.is-shown .cqfoot__mark,
+.cqfoot.is-shown .cqfoot__nav,
+.cqfoot.is-shown .cqfoot__base {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cqfoot__mark {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  color: var(--d-text);
+}
+.cqfoot__mark:hover { color: var(--d-text); opacity: 1; }
+
+.cqfoot__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-2) var(--sp-5);
+}
+
+/* the pill that scales in behind a link on hover */
+.cqfoot__link {
+  position: relative;
+  display: inline-block;
+  padding: 0.35em 0.9em;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  color: var(--d-text-muted);
+}
+.cqfoot__link:hover { color: var(--d-text); opacity: 1; }
+.cqfoot__link-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-md);
+  background: rgba(241, 236, 230, 0.10);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 260ms var(--ease-out), opacity 260ms var(--ease-out);
+}
+.cqfoot__link:hover .cqfoot__link-bg { transform: scale(1); opacity: 1; }
+.cqfoot__link-text { position: relative; z-index: 1; }
+
+/* diagonal hatched rule, drifting sideways */
+.cqfoot__divider {
+  width: 100%;
+  height: 44px;
+  border-top: 1px solid var(--d-border);
+  border-bottom: 1px solid var(--d-border);
+  opacity: 0.18;
+  background-image: repeating-linear-gradient(
+    315deg,
+    var(--n-100) 0,
+    var(--n-100) 1px,
+    transparent 0,
+    transparent 50%
+  );
+  background-size: 10px 10px;
+  animation: cqfoot-drift 20s linear infinite;
+}
+@keyframes cqfoot-drift {
+  from { background-position-x: 0; }
+  to   { background-position-x: 400px; }
+}
+
+.cqfoot__base {
+  margin-top: var(--sp-5);
+  font-size: var(--fs-sm);
+  color: var(--d-text-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cqfoot__divider { animation: none; }
+  .cqfoot__mark, .cqfoot__nav, .cqfoot__base { transition: none; opacity: 1; transform: none; }
+}

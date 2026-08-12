@@ -24,7 +24,7 @@ const SharedMedicalRecordsSection = ({ appointmentId }) => {
             <h5 className="mb-2">Explicitly Shared Medical Records ({records.length})</h5>
             <div className="d-flex flex-column gap-2">
                 {records.map((r) => (
-                    <Card key={r.id} size="small" style={{ backgroundColor: '#f6ffed', borderColor: '#b7eb8f' }}>
+                    <Card key={r.id} size="small" style={{ backgroundColor: 'var(--n-000)', borderColor: 'var(--n-200)' }}>
                         <div className="d-flex justify-content-between align-items-center">
                             <div>
                                 <strong>{r.title}</strong> <Tag color="blue">{r.category}</Tag>

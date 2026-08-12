@@ -19,7 +19,7 @@ const TreatmentOverview = ({ data, isAppointment = false }) => {
                                 <p><FaClock className='icon' /> {moment(data?.createdAt).format('LL')} </p>
                                 <p><FaLocationArrow className='icon' /> {data?.address + data?.city}</p>
                                 <p><FaEnvelope className='icon' /> {data?.patient?.email}</p>
-                                <p><FaPhoneAlt className='icon' /> {data?.patient?.contact ? data?.patient?.contact : '+1 (555) 123-4567'}</p>
+                                <p><FaPhoneAlt className='icon' /> {data?.patient?.contact ? data?.patient?.contact : '+92 310 8112860'}</p>
                             </div>
                         </div>
                     </div>
@@ -34,17 +34,17 @@ const TreatmentOverview = ({ data, isAppointment = false }) => {
                         <div className="text-start mt-3">
                             <h6>Patient Type : 
                                 <span className="btn-status btn-st-success">
-                                    <Tag color="#87d068" className='ms-2 text-uppercase'>{isAppointment ? data?.appointment?.patientType : data?.patientType}</Tag>
+                                    <Tag color="var(--c-positive)" className='ms-2 text-uppercase'>{isAppointment ? data?.appointment?.patientType : data?.patientType}</Tag>
                                 </span>
                             </h6>
                             <h6>Current Status : 
                                 <span className="btn-status btn-st-danger">
-                                    <Tag color="#f50" className='ms-2 text-uppercase'>{isAppointment ? data?.appointment?.status : data?.status}</Tag>
+                                    <Tag color="var(--c-danger)" className='ms-2 text-uppercase'>{isAppointment ? data?.appointment?.status : data?.status}</Tag>
                                 </span>
                             </h6>
                             <h6>Payment Status : 
                                 <span className="btn-status btn-st-success">
-                                    <Tag color="#87d068" className='ms-2 text-uppercase'>{isAppointment ? data?.appointment?.paymentStatus : data?.paymentStatus}</Tag>
+                                    <Tag color="var(--c-positive)" className='ms-2 text-uppercase'>{isAppointment ? data?.appointment?.paymentStatus : data?.paymentStatus}</Tag>
                                 </span>
                             </h6>
                             <h6>Prescription Status : 

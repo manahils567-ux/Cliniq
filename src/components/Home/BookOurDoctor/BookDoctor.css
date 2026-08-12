@@ -1,5 +1,5 @@
 .section-doctor {
-	background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+	background: linear-gradient(180deg, var(--c-bg) 0%, #fff 100%);
 	padding: 5rem 0;
 }
 
@@ -13,27 +13,27 @@
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
-	color: #1977cc;
+	color: var(--c-action);
 	margin-bottom: 0.5rem;
 }
 
 .section-doctor-intro h2 {
 	font-size: 1.75rem;
 	font-weight: 700;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin-bottom: 0.75rem;
 }
 
 .section-doctor-lead {
 	font-size: 1rem;
-	color: #5a6c7d;
+	color: var(--c-text-muted);
 	line-height: 1.55;
 	margin-bottom: 0.75rem;
 }
 
 .section-doctor-text {
 	font-size: 0.9rem;
-	color: #6c757d;
+	color: var(--c-text-muted);
 	line-height: 1.6;
 	margin-bottom: 1.5rem;
 }
@@ -41,19 +41,19 @@
 .section-doctor-cta {
 	display: inline-block;
 	font-weight: 600;
-	color: #1977cc;
+	color: var(--c-action);
 	text-decoration: none;
 	transition: color 0.2s;
 }
 
 .section-doctor-cta:hover {
-	color: #1565a0;
+	color: var(--c-action-hover);
 }
 
 /* Card */
 .book-doctor-card {
 	background: #fff;
-	border-radius: 16px;
+	border-radius: var(--r-lg);
 	overflow: hidden;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 	border: 2px solid transparent;
@@ -67,20 +67,20 @@
 }
 
 .book-doctor-card:hover {
-	box-shadow: 0 12px 40px rgba(25, 119, 204, 0.15);
+	box-shadow: 0 12px 40px rgba(125, 64, 71, 0.15);
 	transform: translateY(-4px);
 }
 
 .book-doctor-card--featured {
-	border-color: rgba(25, 119, 204, 0.2);
-	box-shadow: 0 4px 24px rgba(25, 119, 204, 0.12);
+	border-color: rgba(125, 64, 71, 0.2);
+	box-shadow: 0 4px 24px rgba(125, 64, 71, 0.12);
 }
 
 .book-doctor-card--selected {
-	border-color: #1977cc;
+	border-color: var(--c-action);
 	box-shadow:
-		0 0 0 4px rgba(25, 119, 204, 0.14),
-		0 12px 40px rgba(25, 119, 204, 0.22);
+		0 0 0 4px rgba(125, 64, 71, 0.14),
+		0 12px 40px rgba(125, 64, 71, 0.22);
 	transform: translateY(-4px);
 }
 
@@ -89,7 +89,7 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: linear-gradient(90deg, #1565a0 0%, #1977cc 60%, #3291e6 100%);
+	background: linear-gradient(90deg, var(--c-action-hover) 0%, var(--c-action) 60%, var(--n-600) 100%);
 	color: #fff;
 	font-size: 0.72rem;
 	font-weight: 700;
@@ -109,15 +109,15 @@
 	top: 12px;
 	left: 12px;
 	z-index: 2;
-	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
 	color: #fff;
 	font-size: 0.7rem;
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
 	padding: 4px 10px;
-	border-radius: 20px;
-	box-shadow: 0 2px 8px rgba(25, 119, 204, 0.4);
+	border-radius: var(--r-lg);
+	box-shadow: 0 2px 8px rgba(125, 64, 71, 0.4);
 }
 
 .book-doctor-card__photo-link {
@@ -128,7 +128,7 @@
 .book-doctor-card__photo {
 	position: relative;
 	height: 200px;
-	background: #e9ecef;
+	background: var(--c-border-subtle);
 	overflow: hidden;
 }
 
@@ -150,8 +150,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-	color: #1977cc;
+	background: linear-gradient(135deg, var(--n-100) 0%, var(--n-200) 100%);
+	color: var(--c-action);
 	font-size: 3rem;
 }
 
@@ -166,7 +166,7 @@
 	background: #fff;
 	border: none;
 	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
-	color: #6c757d;
+	color: var(--c-text-muted);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -175,7 +175,7 @@
 }
 
 .book-doctor-card__favourite:hover {
-	color: #dc3545;
+	color: var(--c-danger);
 	background: #fff;
 	transform: scale(1.08);
 }
@@ -195,7 +195,7 @@
 }
 
 .book-doctor-card__title a {
-	color: #1a1a2e;
+	color: var(--c-ink);
 	text-decoration: none;
 	display: inline-flex;
 	align-items: center;
@@ -203,18 +203,18 @@
 }
 
 .book-doctor-card__title a:hover {
-	color: #1977cc;
+	color: var(--c-action);
 }
 
 .book-doctor-card__verified {
-	color: #22c55e;
+	color: var(--c-positive);
 	font-size: 1rem;
 	flex-shrink: 0;
 }
 
 .book-doctor-card__speciality {
 	font-size: 0.85rem;
-	color: #6c757d;
+	color: var(--c-text-muted);
 	margin: 0 0 0.5rem 0;
 	line-height: 1.4;
 	min-height: 2.4em;
@@ -229,7 +229,7 @@
 
 .book-doctor-card__reviews {
 	font-size: 0.8rem;
-	color: #6c757d;
+	color: var(--c-text-muted);
 }
 
 .book-doctor-card__info {
@@ -237,7 +237,7 @@
 	padding: 0;
 	margin: 0 0 1rem 0;
 	font-size: 0.85rem;
-	color: #5a6c7d;
+	color: var(--c-text-muted);
 	line-height: 1.6;
 }
 
@@ -250,7 +250,7 @@
 
 .book-doctor-card__info li svg {
 	flex-shrink: 0;
-	color: #1977cc;
+	color: var(--c-action);
 	width: 14px;
 }
 
@@ -271,37 +271,37 @@
 	padding: 10px 14px;
 	font-size: 0.9rem;
 	font-weight: 600;
-	border-radius: 10px;
+	border-radius: var(--r-md);
 	text-decoration: none;
 	transition: all 0.2s;
 }
 
 .book-doctor-card__btn--outline {
 	background: #fff;
-	color: #1977cc;
-	border: 2px solid #1977cc;
+	color: var(--c-action);
+	border: 2px solid var(--c-action);
 }
 
 .book-doctor-card__btn--outline:hover {
-	background: #1977cc;
+	background: var(--c-action);
 	color: #fff;
 }
 
 .book-doctor-card__btn--primary {
-	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
 	color: #fff;
 	border: 2px solid transparent;
 }
 
 .book-doctor-card__btn--primary:hover {
-	background: #1565a0;
+	background: var(--c-action-hover);
 	color: #fff;
-	box-shadow: 0 4px 14px rgba(25, 119, 204, 0.4);
+	box-shadow: 0 4px 14px rgba(125, 64, 71, 0.4);
 }
 
 /* Skeleton */
 .book-doctor-card--skeleton .book-doctor-card__photo {
-	background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+	background: linear-gradient(90deg, var(--c-border-subtle) 25%, var(--c-border) 50%, var(--c-border-subtle) 75%);
 	background-size: 200% 100%;
 	animation: skeleton 1.2s ease-in-out infinite;
 }
@@ -310,9 +310,9 @@
 .book-doctor-card--skeleton .book-doctor-card__meta,
 .book-doctor-card--skeleton .book-doctor-card__actions {
 	height: 20px;
-	background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+	background: linear-gradient(90deg, var(--c-border-subtle) 25%, var(--c-border) 50%, var(--c-border-subtle) 75%);
 	background-size: 200% 100%;
-	border-radius: 4px;
+	border-radius: var(--r-sm);
 	animation: skeleton 1.2s ease-in-out infinite;
 }
 
@@ -336,7 +336,7 @@
 .book-doctor-empty {
 	text-align: center;
 	padding: 3rem 1rem;
-	color: #6c757d;
+	color: var(--c-text-muted);
 }
 
 .book-doctor-swiper-wrap {
@@ -349,7 +349,7 @@
 
 .book-doctor-swiper .swiper-button-prev,
 .book-doctor-swiper .swiper-button-next {
-	color: #1977cc;
+	color: var(--c-action);
 }
 
 .book-doctor-swiper .swiper-button-prev::after,

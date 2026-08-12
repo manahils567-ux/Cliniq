@@ -6,7 +6,7 @@
 
 .stat-mini-card {
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: var(--r-lg);
     border: none;
     transition: all 0.3s ease;
 }
@@ -16,19 +16,25 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.stat-mini-card-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+.stat-mini-card.stat-mini-card-primary .stat-mini-icon { color: var(--n-800); }
+.stat-mini-card.stat-mini-card-primary {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
 }
 
-.stat-mini-card-warning {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    color: white;
+.stat-mini-card.stat-mini-card-warning .stat-mini-icon { color: var(--c-signal); }
+.stat-mini-card.stat-mini-card-warning {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
 }
 
-.stat-mini-card-success {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    color: white;
+.stat-mini-card.stat-mini-card-success .stat-mini-icon { color: var(--c-accent); }
+.stat-mini-card.stat-mini-card-success {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
 }
 
 .stat-mini-details {
@@ -60,7 +66,7 @@
 .rating-bar {
     flex: 1;
     height: 10px;
-    background: #e0e0e0;
+    background: var(--c-border);
     border-radius: 5px;
     overflow: hidden;
 }
@@ -85,13 +91,13 @@
 
 .review-card {
     padding: 1.5rem;
-    background: #f8f9fa;
-    border-radius: 12px;
+    background: var(--c-bg);
+    border-radius: var(--r-lg);
     transition: all 0.3s ease;
 }
 
 .review-card:hover {
-    background: #f0f2f5;
+    background: var(--n-050);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
@@ -101,11 +107,11 @@
     align-items: flex-start;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--c-border);
 }
 
 .review-body {
-    color: #495057;
+    color: var(--c-text-muted);
     line-height: 1.6;
 }
 

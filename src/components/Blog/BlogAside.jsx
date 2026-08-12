@@ -53,7 +53,7 @@ const BlogAside = ({ setSearchTerm }) => {
 
 
     return (
-        <div className='p-3' style={{ background: '#f8f9fa' }}>
+        <div className='p-3' style={{ background: 'var(--c-bg)' }}>
 
             <div className="mb-4">
                 <h5 className="blog-title">SEARCH</h5>
@@ -81,7 +81,7 @@ const BlogAside = ({ setSearchTerm }) => {
                 <div className="d-flex flex-wrap gap-3">
                     {
                         Array(6).fill(null).map((_item, index) => (
-                            <button key={index + 2} className="btn text-black px-3 py-1 btn-sm" style={{ background: '#e5e5e5' }}>{'tags' + index}</button>
+                            <button key={index + 2} className="btn text-black px-3 py-1 btn-sm" style={{ background: 'var(--n-100)' }}>{'tags' + index}</button>
 
                         ))
                     }

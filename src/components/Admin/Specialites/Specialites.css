@@ -6,7 +6,7 @@
 }
 
 .specialty-icon {
-  color: #1977cc;
+  color: var(--c-action);
   font-size: 1.1rem;
 }
 

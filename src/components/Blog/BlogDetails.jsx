@@ -27,7 +27,7 @@ const BlogDetails = () => {
 
             <div className="card-body p-0">
                 <div className="p-2 my-2">
-                    <h5 className="text-start mb-1" style={{ color: '#05335c' }}>{data?.title}</h5>
+                    <h5 className="text-start mb-1" style={{ color: 'var(--n-950)' }}>{data?.title}</h5>
                     <div className="d-flex text-start gap-2">
                         <div className="d-flex gap-1 text-muted align-items-center justify-content-center">
                             <FaRegUser className='form-text' />

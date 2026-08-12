@@ -78,7 +78,7 @@ const DashboardPage = () => {
             width: 100,
             render: function (data) {
                 return (
-                    <Tag color="#87d068" className='text-uppercase'>{data?.status}</Tag>
+                    <Tag color="var(--c-positive)" className='text-uppercase'>{data?.status}</Tag>
                 )
             }
         },

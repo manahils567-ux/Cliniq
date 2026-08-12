@@ -8,18 +8,18 @@
 .tracking-id {
   font-family: 'Courier New', monospace;
   font-weight: 600;
-  color: #667eea;
+  color: var(--n-700);
 }
 
 .patient-name {
   font-weight: 600;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 0.25rem;
 }
 
 .patient-email {
   font-size: 0.85rem;
-  color: #6c757d;
+  color: var(--c-text-muted);
 }
 
 .appointment-date,
@@ -32,7 +32,7 @@
 }
 
 .icon-inline {
-  color: #1977cc;
+  color: var(--c-action);
   font-size: 0.85rem;
 }
 
@@ -43,8 +43,8 @@
 .stats-mini-card {
   text-align: center;
   padding: 1rem;
-  border-radius: 12px;
-  border: 2px solid #e9ecef;
+  border-radius: var(--r-lg);
+  border: 2px solid var(--c-border-subtle);
   transition: all 0.3s;
 }
 
@@ -59,25 +59,25 @@
 }
 
 .stats-mini-card--success {
-  border-color: #28a745;
+  border-color: var(--c-positive);
   background: rgba(40, 167, 69, 0.05);
 }
 
 .stats-mini-card--danger {
-  border-color: #dc3545;
+  border-color: var(--c-danger);
   background: rgba(220, 53, 69, 0.05);
 }
 
 .stats-mini-value {
   font-size: 2rem;
   font-weight: 700;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 0.25rem;
 }
 
 .stats-mini-label {
   font-size: 0.9rem;
-  color: #6c757d;
+  color: var(--c-text-muted);
   font-weight: 500;
 }
 

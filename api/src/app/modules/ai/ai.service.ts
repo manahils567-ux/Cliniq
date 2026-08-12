@@ -378,4 +378,262 @@ Rules:
     }
 };
 
-export const AiService = { chat, generateMedicalHistory, scanPrescription };
+// ── Full Medical Document Analysis (Gemini Vision) ───────────────────────
+export type ExtractedMetric = {
+    key: string;
+    name: string;
+    value: string;
+    numericValue?: number | null;
+    unit?: string | null;
+    referenceRange?: string | null;
+    status: 'normal' | 'low' | 'high' | 'critical' | 'unknown';
+};
+
+export type SuggestedReminderSpec = {
+    type: string;
+    title: string;
+    description?: string | null;
+    frequency: 'once' | 'daily' | 'weekly' | 'monthly';
+    startOffsetDays?: number;
+    endOffsetDays?: number | null;
+};
+
+export type InsightSpec = {
+    type: 'alert' | 'suggestion' | 'followup' | 'reminder';
+    severity: 'info' | 'low' | 'moderate' | 'high' | 'critical';
+    title: string;
+    message: string;
+    category?: string | null;
+    suggestedReminder?: SuggestedReminderSpec | null;
+};
+
+export type DocumentAnalysis = {
+    documentType: string;
+    documentDate?: string | null;
+    summary: string;
+    plainSummary: string;
+    findings: string[];
+    concerns: string[];
+    suggestions: string[];
+    metrics: ExtractedMetric[];
+    insights: InsightSpec[];
+    rawText: string;
+    error?: string;
+};
+
+const EMPTY_ANALYSIS = (error: string): DocumentAnalysis => ({
+    documentType: 'other',
+    summary: '',
+    plainSummary: '',
+    findings: [],
+    concerns: [],
+    suggestions: [],
+    metrics: [],
+    insights: [],
+    rawText: '',
+    error,
+});
+
+/** Normalise a metric name into a stable key so the same value trends across reports. */
+const metricKey = (name: string): string =>
+    String(name || '')
+        .toLowerCase()
+        .replace(/\([^)]*\)/g, '')
+        .replace(/[^a-z0-9]+/g, '_')
+        .replace(/^_+|_+$/g, '');
+
+const ALLOWED_METRIC_STATUS = ['normal', 'low', 'high', 'critical', 'unknown'];
+const ALLOWED_INSIGHT_TYPE = ['alert', 'suggestion', 'followup', 'reminder'];
+const ALLOWED_SEVERITY = ['info', 'low', 'moderate', 'high', 'critical'];
+const ALLOWED_FREQUENCY = ['once', 'daily', 'weekly', 'monthly'];
+
+const toStringArray = (v: any): string[] =>
+    Array.isArray(v) ? v.filter((x) => typeof x === 'string' && x.trim()).map((x) => x.trim()) : [];
+
+/** The model is untrusted input — coerce everything into the shapes the DB expects. */
+const sanitizeAnalysis = (parsed: any, raw: string): DocumentAnalysis => {
+    const metrics: ExtractedMetric[] = Array.isArray(parsed?.metrics)
+        ? parsed.metrics
+              .filter((m: any) => m && typeof m.name === 'string' && m.name.trim())
+              .map((m: any) => {
+                  const num = Number(m.numericValue ?? m.value);
+                  return {
+                      key: metricKey(m.name),
+                      name: String(m.name).trim(),
+                      value: String(m.value ?? '').trim(),
+                      numericValue: Number.isFinite(num) ? num : null,
+                      unit: m.unit ? String(m.unit).trim() : null,
+                      referenceRange: m.referenceRange ? String(m.referenceRange).trim() : null,
+                      status: ALLOWED_METRIC_STATUS.includes(m.status) ? m.status : 'unknown',
+                  };
+              })
+              .filter((m: ExtractedMetric) => m.key && m.value)
+        : [];
+
+    const insights: InsightSpec[] = Array.isArray(parsed?.insights)
+        ? parsed.insights
+              .filter((i: any) => i && typeof i.title === 'string' && typeof i.message === 'string')
+              .map((i: any) => {
+                  const sr = i.suggestedReminder;
+                  let validReminder: SuggestedReminderSpec | null = null;
+                  if (sr && typeof sr.title === 'string' && sr.title.trim()) {
+                      const startOffsetDays = Number.isFinite(Number(sr.startOffsetDays))
+                          ? Math.max(0, Math.trunc(Number(sr.startOffsetDays)))
+                          : 1;
+                      // The model often returns 0 for "no end date". An end date at or
+                      // before the start would make the scheduler deactivate the
+                      // reminder before it ever fires, so only keep a genuine end.
+                      const rawEnd = Number(sr.endOffsetDays);
+                      const endOffsetDays =
+                          Number.isFinite(rawEnd) && Math.trunc(rawEnd) > startOffsetDays
+                              ? Math.trunc(rawEnd)
+                              : null;
+
+                      validReminder = {
+                          type: typeof sr.type === 'string' && sr.type.trim() ? sr.type.trim() : 'checkup',
+                          title: String(sr.title).trim(),
+                          description: sr.description ? String(sr.description).trim() : null,
+                          frequency: ALLOWED_FREQUENCY.includes(sr.frequency) ? sr.frequency : 'once',
+                          startOffsetDays,
+                          endOffsetDays,
+                      };
+                  }
+
+                  return {
+                      type: ALLOWED_INSIGHT_TYPE.includes(i.type) ? i.type : 'suggestion',
+                      severity: ALLOWED_SEVERITY.includes(i.severity) ? i.severity : 'info',
+                      title: String(i.title).trim().slice(0, 200),
+                      message: String(i.message).trim(),
+                      category: i.category ? String(i.category).trim() : null,
+                      suggestedReminder: validReminder,
+                  };
+              })
+        : [];
+
+    return {
+        documentType: typeof parsed?.documentType === 'string' ? parsed.documentType : 'other',
+        documentDate: parsed?.documentDate ? String(parsed.documentDate) : null,
+        summary: String(parsed?.summary ?? '').trim(),
+        plainSummary: String(parsed?.plainSummary ?? '').trim(),
+        findings: toStringArray(parsed?.findings),
+        concerns: toStringArray(parsed?.concerns),
+        suggestions: toStringArray(parsed?.suggestions),
+        metrics,
+        insights,
+        rawText: String(parsed?.rawText ?? raw ?? ''),
+    };
+};
+
+const buildAnalysisPrompt = (patient: any): string => {
+    const ctx = patient
+        ? `\nPatient context (use it to personalise, never contradict the document):
+- Name: ${patient.firstName ?? ''} ${patient.lastName ?? ''}
+- Gender: ${patient.gender ?? 'unknown'}
+- Blood group: ${patient.bloodGroup ?? 'unknown'}
+- Recent prescriptions: ${
+              patient.Prescription?.length
+                  ? patient.Prescription.map((p: any) => p.disease || p.daignosis).filter(Boolean).join('; ') ||
+                    'none recorded'
+                  : 'none recorded'
+          }
+`
+        : '';
+
+    return `You are a careful clinical document analyst for a patient health app. Analyse the attached medical document (it may be a lab report, prescription, imaging/radiology report, discharge summary, vaccination card, or something else).
+${ctx}
+Return a JSON object with this EXACT structure (raw JSON only, no markdown, no code fences):
+{
+  "documentType": "lab_report | prescription | imaging | discharge_summary | vaccination | other",
+  "documentDate": "ISO date of the report if visible, else null",
+  "summary": "3-5 sentence clinical summary of what this document contains",
+  "plainSummary": "the same thing explained to the patient in simple, calm, non-alarming language",
+  "findings": ["notable objective findings stated in the document"],
+  "concerns": ["values or statements that are outside normal range or warrant attention"],
+  "suggestions": ["practical follow-up, lifestyle or monitoring suggestions"],
+  "metrics": [
+    {
+      "name": "Hemoglobin",
+      "value": "11.2",
+      "numericValue": 11.2,
+      "unit": "g/dL",
+      "referenceRange": "13.0-17.0",
+      "status": "normal | low | high | critical | unknown"
+    }
+  ],
+  "insights": [
+    {
+      "type": "alert | suggestion | followup | reminder",
+      "severity": "info | low | moderate | high | critical",
+      "title": "short headline",
+      "message": "what the patient should understand and do",
+      "category": "e.g. anemia, diabetes, cardiac, kidney, or null",
+      "suggestedReminder": {
+        "type": "medicine | checkup | appointment | test",
+        "title": "Recheck hemoglobin",
+        "description": "why",
+        "frequency": "once | daily | weekly | monthly",
+        "startOffsetDays": 30,
+        "endOffsetDays": null
+      }
+    }
+  ],
+  "rawText": "full text extracted from the document"
+}
+
+Rules:
+- Extract EVERY measurable value you can see into "metrics", with its reference range when printed.
+- Set metric "status" by comparing the value to its printed reference range. Use "critical" only for dangerously abnormal values.
+- Create an "insights" entry for each abnormal or borderline metric, and for any explicit follow-up the document requests.
+- Attach "suggestedReminder" ONLY where a concrete future action has a sensible date (medication course, recheck, follow-up visit). Otherwise set it to null.
+- If a medication course is prescribed, add a reminder insight with frequency "daily" and endOffsetDays matching the course duration.
+- NEVER state a definitive diagnosis. Describe what the values indicate and advise confirming with a doctor.
+- If the image is unreadable or is not a medical document, set documentType "other", summary explaining that, and return empty arrays.
+- All arrays must be present (use [] when empty). Return ONLY the JSON.`;
+};
+
+const analyzeDocument = async (
+    fileBase64: string,
+    mimeType: string,
+    patientId?: string
+): Promise<DocumentAnalysis> => {
+    const client = initGemini();
+    if (!client) return EMPTY_ANALYSIS('SERVICE_UNAVAILABLE');
+
+    let patient: any = null;
+    if (patientId) {
+        patient = await getPatientContext(patientId);
+    }
+
+    try {
+        const result = await client.models.generateContent({
+            model: 'gemini-3.5-flash',
+            contents: [
+                {
+                    role: 'user',
+                    parts: [
+                        { inlineData: { mimeType, data: fileBase64 } },
+                        { text: buildAnalysisPrompt(patient) },
+                    ],
+                },
+            ],
+        });
+
+        const raw = result.text ?? '';
+        const cleaned = raw
+            .replace(/```json\n?/gi, '')
+            .replace(/```\n?/gi, '')
+            .trim();
+
+        try {
+            return sanitizeAnalysis(JSON.parse(cleaned), raw);
+        } catch {
+            console.error('[AI] Document analysis: could not parse model output as JSON.');
+            return { ...EMPTY_ANALYSIS('PARSE_ERROR'), rawText: raw };
+        }
+    } catch (error: any) {
+        console.error('[AI] Document analysis error:', error?.message);
+        return EMPTY_ANALYSIS('API_ERROR');
+    }
+};
+
+export const AiService = { chat, generateMedicalHistory, scanPrescription, analyzeDocument };

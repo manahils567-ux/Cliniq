@@ -4,21 +4,21 @@
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
-	color: #1977cc;
+	color: var(--c-action);
 	margin-bottom: 0.75rem;
 }
 
 .about-heading {
 	font-size: 2.25rem;
 	font-weight: 700;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin-bottom: 1.25rem;
 	line-height: 1.3;
 }
 
 .about-lead {
 	font-size: 1.05rem;
-	color: #5a6c7d;
+	color: var(--c-text-muted);
 	margin: 0;
 	line-height: 1.6;
 }
@@ -26,7 +26,7 @@
 .about-text {
 	font-size: 1rem;
 	line-height: 1.75;
-	color: #5a6c7d;
+	color: var(--c-text-muted);
 	margin-bottom: 1.25rem;
 }
 
@@ -48,12 +48,12 @@
 	align-items: center;
 	gap: 10px;
 	font-size: 0.95rem;
-	color: #374151;
+	color: var(--c-text);
 	font-weight: 500;
 }
 
 .about-feature-icon {
-	color: #22c55e;
+	color: var(--c-positive);
 	font-size: 1.1rem;
 	flex-shrink: 0;
 }
@@ -65,7 +65,7 @@
 }
 
 .about-image-main {
-	border-radius: 20px;
+	border-radius: var(--r-lg);
 	overflow: hidden;
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
@@ -87,14 +87,14 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	border-radius: 16px;
+	border-radius: var(--r-lg);
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Stats Section */
 .about-stats {
 	padding: 5rem 0;
-	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
 	color: #fff;
 }
 
@@ -102,7 +102,7 @@
 	text-align: center;
 	padding: 2rem 1.5rem;
 	background: rgba(255, 255, 255, 0.1);
-	border-radius: 16px;
+	border-radius: var(--r-lg);
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	transition: transform 0.3s, background 0.3s;
@@ -135,12 +135,12 @@
 /* Values Section */
 .about-values {
 	padding: 5rem 0;
-	background: #f8fafc;
+	background: var(--c-bg);
 }
 
 .about-value-card {
 	background: #fff;
-	border-radius: 20px;
+	border-radius: var(--r-lg);
 	padding: 2.5rem;
 	height: 100%;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -149,16 +149,16 @@
 }
 
 .about-value-card:hover {
-	box-shadow: 0 12px 40px rgba(25, 119, 204, 0.12);
+	box-shadow: 0 12px 40px rgba(125, 64, 71, 0.12);
 	transform: translateY(-4px);
 }
 
 .about-value-icon {
 	width: 64px;
 	height: 64px;
-	border-radius: 16px;
-	background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-	color: #1977cc;
+	border-radius: var(--r-lg);
+	background: linear-gradient(135deg, var(--n-100) 0%, var(--n-200) 100%);
+	color: var(--c-action);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -169,21 +169,21 @@
 .about-value-card h4 {
 	font-size: 1.35rem;
 	font-weight: 700;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin-bottom: 1rem;
 }
 
 .about-value-card p {
 	font-size: 0.95rem;
 	line-height: 1.7;
-	color: #5a6c7d;
+	color: var(--c-text-muted);
 	margin: 0;
 }
 
 /* Team Section — editorial cards */
 .about-team {
 	padding: 5rem 0;
-	background: linear-gradient(180deg, #f8fafc 0%, #fff 45%);
+	background: linear-gradient(180deg, var(--c-bg) 0%, #fff 45%);
 }
 
 .about-doctor-card {
@@ -203,8 +203,8 @@
 .about-doctor-card:hover {
 	transform: translateY(-6px);
 	box-shadow:
-		0 4px 12px rgba(25, 119, 204, 0.08),
-		0 28px 56px -16px rgba(25, 119, 204, 0.18);
+		0 4px 12px rgba(125, 64, 71, 0.08),
+		0 28px 56px -16px rgba(125, 64, 71, 0.18);
 }
 
 .about-doctor-card__media {
@@ -218,7 +218,7 @@
 	position: relative;
 	aspect-ratio: 4/5;
 	overflow: hidden;
-	background: linear-gradient(145deg, #e8f4fc 0%, #cfe8f9 100%);
+	background: linear-gradient(145deg, var(--n-050) 0%, var(--n-200) 100%);
 }
 
 .about-doctor-card__photo img {
@@ -255,7 +255,7 @@
 	align-items: center;
 	gap: 6px;
 	padding: 6px 12px;
-	border-radius: 999px;
+	border-radius: var(--r-full);
 	font-size: 0.68rem;
 	font-weight: 700;
 	letter-spacing: 0.06em;
@@ -277,7 +277,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: #1977cc;
+	color: var(--c-action);
 	font-size: 3.25rem;
 }
 
@@ -292,7 +292,7 @@
 .about-doctor-card__name {
 	font-size: 1.1rem;
 	font-weight: 700;
-	color: #0f172a;
+	color: var(--c-ink);
 	margin: 0 0 0.35rem;
 	letter-spacing: -0.02em;
 	line-height: 1.25;
@@ -303,13 +303,13 @@
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
-	color: #1977cc;
+	color: var(--c-action);
 	margin: 0 0 0.4rem;
 }
 
 .about-doctor-card__specialization {
 	font-size: 0.88rem;
-	color: #64748b;
+	color: var(--c-text-muted);
 	line-height: 1.45;
 	margin: 0 0 0.85rem;
 	display: -webkit-box;
@@ -324,7 +324,7 @@
 	align-items: center;
 	gap: 0.35rem 0.5rem;
 	font-size: 0.78rem;
-	color: #94a3b8;
+	color: var(--n-400);
 	margin-bottom: 1rem;
 	margin-top: auto;
 }
@@ -333,7 +333,7 @@
 	width: 4px;
 	height: 4px;
 	border-radius: 50%;
-	background: #cbd5e1;
+	background: var(--n-200);
 }
 
 .about-doctor-card__cta {
@@ -343,20 +343,20 @@
 	gap: 8px;
 	width: 100%;
 	padding: 10px 14px;
-	border-radius: 12px;
+	border-radius: var(--r-lg);
 	font-size: 0.88rem;
 	font-weight: 600;
 	text-decoration: none;
 	color: #fff;
-	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
-	box-shadow: 0 8px 20px rgba(25, 119, 204, 0.28);
+	background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
+	box-shadow: 0 8px 20px rgba(125, 64, 71, 0.28);
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .about-doctor-card__cta:hover {
 	color: #fff;
 	transform: translateY(-1px);
-	box-shadow: 0 10px 26px rgba(25, 119, 204, 0.38);
+	box-shadow: 0 10px 26px rgba(125, 64, 71, 0.38);
 }
 
 .about-doctor-card__cta svg {
@@ -367,18 +367,18 @@
 .about-cta-btn {
 	display: inline-block;
 	padding: 14px 32px;
-	background: linear-gradient(135deg, #1977cc 0%, #1565a0 100%);
+	background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
 	color: #fff;
 	font-weight: 600;
 	border-radius: 30px;
 	text-decoration: none;
-	box-shadow: 0 8px 20px rgba(25, 119, 204, 0.3);
+	box-shadow: 0 8px 20px rgba(125, 64, 71, 0.3);
 	transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .about-cta-btn:hover {
 	color: #fff;
-	box-shadow: 0 12px 30px rgba(25, 119, 204, 0.4);
+	box-shadow: 0 12px 30px rgba(125, 64, 71, 0.4);
 	transform: translateY(-2px);
 }
 

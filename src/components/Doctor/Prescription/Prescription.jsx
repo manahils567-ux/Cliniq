@@ -43,7 +43,7 @@ const DoctorPrescriptions = () => {
 			title: 'Appointment ID',
 			key: 'appointmentId',
 			width: 150,
-			render: (_, record) => <Tag color="#667eea">{record?.appointment?.trackingId || 'N/A'}</Tag>,
+			render: (_, record) => <Tag color="var(--n-700)">{record?.appointment?.trackingId || 'N/A'}</Tag>,
 		},
 		{
 			title: 'Patient / Case',
@@ -71,7 +71,7 @@ const DoctorPrescriptions = () => {
 			key: 'status',
 			width: 120,
 			render: (_, record) => (
-				<Tag color={record?.isArchived ? '#f50' : '#52c41a'}>{record?.isArchived ? 'Archived' : 'Active'}</Tag>
+				<Tag color={record?.isArchived ? 'var(--c-danger)' : 'var(--c-positive)'}>{record?.isArchived ? 'Archived' : 'Active'}</Tag>
 			),
 		},
 		{

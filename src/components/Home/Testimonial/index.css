@@ -1,6 +1,6 @@
 .testimonial-section {
 	padding: 5rem 0;
-	background: #f8fafc;
+	background: var(--c-bg);
 }
 
 .testimonial-section__header {
@@ -13,20 +13,20 @@
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
-	color: #1977cc;
+	color: var(--c-action);
 	margin-bottom: 0.5rem;
 }
 
 .testimonial-section__header h2 {
 	font-size: 2.25rem;
 	font-weight: 700;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin-bottom: 0.5rem;
 }
 
 .testimonial-section__lead {
 	font-size: 1rem;
-	color: #5a6c7d;
+	color: var(--c-text-muted);
 	margin: 0;
 	line-height: 1.6;
 }
@@ -41,12 +41,12 @@
 
 .testimonial-swiper .swiper-button-prev,
 .testimonial-swiper .swiper-button-next {
-	color: #1977cc;
+	color: var(--c-action);
 }
 
 .testimonial-card {
 	background: #fff;
-	border-radius: 16px;
+	border-radius: var(--r-lg);
 	padding: 1.75rem;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 	border: 1px solid rgba(0, 0, 0, 0.04);
@@ -56,7 +56,7 @@
 }
 
 .testimonial-card:hover {
-	box-shadow: 0 12px 40px rgba(25, 119, 204, 0.1);
+	box-shadow: 0 12px 40px rgba(125, 64, 71, 0.1);
 	transform: translateY(-2px);
 }
 
@@ -72,7 +72,7 @@
 	height: 52px;
 	border-radius: 50%;
 	overflow: hidden;
-	background: #f0f4f8;
+	background: var(--n-050);
 	flex-shrink: 0;
 }
 
@@ -88,21 +88,21 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: #e3f2fd;
-	color: #1977cc;
+	background: var(--n-100);
+	color: var(--c-action);
 	font-size: 1.25rem;
 }
 
 .testimonial-card__name {
 	font-size: 1.05rem;
 	font-weight: 700;
-	color: #1a1a2e;
+	color: var(--c-ink);
 	margin: 0 0 0.25rem 0;
 }
 
 .testimonial-card__badge {
 	font-size: 0.8rem;
-	color: #22c55e;
+	color: var(--c-positive);
 	margin: 0;
 	display: flex;
 	align-items: center;
@@ -111,7 +111,7 @@
 
 .testimonial-card__text {
 	font-size: 0.95rem;
-	color: #5a6c7d;
+	color: var(--c-text-muted);
 	line-height: 1.6;
 	margin: 0 0 1rem 0;
 	min-height: 4em;
@@ -124,7 +124,7 @@
 
 /* Skeleton */
 .testimonial-card--skeleton .testimonial-card__avatar {
-	background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+	background: linear-gradient(90deg, var(--c-border-subtle) 25%, var(--c-border) 50%, var(--c-border-subtle) 75%);
 	background-size: 200% 100%;
 	animation: testimonialSkeleton 1.2s ease-in-out infinite;
 }
@@ -132,9 +132,9 @@
 .testimonial-card--skeleton .testimonial-card__meta-skeleton,
 .testimonial-card--skeleton .testimonial-card__text-skeleton {
 	height: 16px;
-	background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+	background: linear-gradient(90deg, var(--c-border-subtle) 25%, var(--c-border) 50%, var(--c-border-subtle) 75%);
 	background-size: 200% 100%;
-	border-radius: 4px;
+	border-radius: var(--r-sm);
 	animation: testimonialSkeleton 1.2s ease-in-out infinite;
 }
 
@@ -156,7 +156,7 @@
 
 .testimonial-error,
 .testimonial-empty {
-	color: #6c757d;
+	color: var(--c-text-muted);
 	margin: 0;
 }
 

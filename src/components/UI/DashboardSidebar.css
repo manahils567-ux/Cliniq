@@ -1,9 +1,10 @@
 /* Modern Dashboard Sidebar */
 .dashboard-sidebar {
   position: sticky;
-  top: 100px;
+  top: 88px;
+  margin-top: -76px;
   background: #fff;
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
@@ -11,7 +12,7 @@
 .dashboard-profile-header {
   padding: 2rem 1.5rem;
   text-align: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--n-700) 0%, var(--n-800) 100%);
   color: #fff;
 }
 
@@ -41,7 +42,7 @@
   display: inline-block;
   padding: 0.25rem 0.75rem;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
+  border-radius: var(--r-lg);
   font-size: 0.85rem;
   font-weight: 500;
   margin-top: 0.5rem;
@@ -65,7 +66,7 @@
   display: flex;
   align-items: center;
   padding: 0.875rem 1.5rem;
-  color: #495057;
+  color: var(--c-text-muted);
   text-decoration: none;
   transition: all 0.2s ease;
   border-left: 3px solid transparent;
@@ -76,29 +77,29 @@
 .dashboard-nav a .icon {
   margin-right: 0.875rem;
   font-size: 1.1rem;
-  color: #6c757d;
+  color: var(--c-text-muted);
   transition: color 0.2s;
 }
 
 .dashboard-nav a:hover {
-  background: rgba(25, 119, 204, 0.06);
-  color: #1977cc;
-  border-left-color: #1977cc;
+  background: rgba(125, 64, 71, 0.06);
+  color: var(--c-action);
+  border-left-color: var(--c-action);
 }
 
 .dashboard-nav a:hover .icon {
-  color: #1977cc;
+  color: var(--c-action);
 }
 
 .dashboard-nav a.active {
-  background: rgba(25, 119, 204, 0.1);
-  color: #1977cc;
-  border-left-color: #1977cc;
+  background: rgba(125, 64, 71, 0.1);
+  color: var(--c-action);
+  border-left-color: var(--c-action);
   font-weight: 600;
 }
 
 .dashboard-nav a.active .icon {
-  color: #1977cc;
+  color: var(--c-action);
 }
 
 .dashboard-nav-logout {
@@ -109,7 +110,7 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  color: #c0392b;
+  color: var(--c-danger);
   font-size: 0.95rem;
   font-weight: 500;
   font-family: inherit;
@@ -125,12 +126,12 @@
 
 .dashboard-nav-logout:hover {
   background: rgba(192, 57, 43, 0.08);
-  border-left-color: #c0392b;
+  border-left-color: var(--c-danger);
 }
 
 .dashboard-nav-divider {
   height: 1px;
-  background: #e9ecef;
+  background: var(--c-border-subtle);
   margin: 0.5rem 0;
 }
 
@@ -157,4 +158,129 @@
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
   }
+}
+
+/* ==========================================================================
+   Rail mode — a hover sidebar in the manner of Supabase's.
+   Collapsed to an icon rail; hovering (or focusing a link inside) expands it
+   over the content rather than pushing it, so the layout never reflows.
+   ========================================================================== */
+
+.dashboard-sidebar--rail {
+  --rail-w: 72px;
+  --rail-open-w: 296px;
+
+  width: var(--rail-w);
+  min-width: var(--rail-w);
+  position: relative;
+  z-index: 20;
+  /* Children are laid out at the open width so nothing reflows while the rail
+     animates — they must be clipped to the current width or the profile block
+     and the active row bleed past the rail. */
+  overflow: hidden;
+  transition: width 260ms cubic-bezier(0.16, 1, 0.3, 1),
+              min-width 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dashboard-sidebar--rail:hover,
+.dashboard-sidebar--rail:focus-within {
+  width: var(--rail-open-w);
+  min-width: var(--rail-open-w);
+  box-shadow: var(--sh-lg);
+}
+
+.dashboard-sidebar--rail > * { width: 100%; }
+
+/* Labels fade and slide in; icons stay put so nothing jumps. */
+.dashboard-sidebar--rail .label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transform: translateX(-6px);
+  white-space: nowrap;
+  transition: opacity 180ms var(--ease), transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dashboard-sidebar--rail:hover .label,
+.dashboard-sidebar--rail:focus-within .label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Profile block collapses to just the avatar. */
+.dashboard-sidebar--rail .dashboard-profile-name,
+.dashboard-sidebar--rail .dashboard-profile-meta,
+.dashboard-sidebar--rail .dashboard-profile-role {
+  opacity: 0;
+  transition: opacity 160ms var(--ease);
+  white-space: nowrap;
+}
+.dashboard-sidebar--rail:hover .dashboard-profile-name,
+.dashboard-sidebar--rail:hover .dashboard-profile-meta,
+.dashboard-sidebar--rail:hover .dashboard-profile-role,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-name,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-meta,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-role { opacity: 1; }
+
+.dashboard-sidebar--rail .dashboard-profile-header {
+  padding: var(--sp-4) 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+}
+/* Collapsed: the text takes no height at all, so the block hugs the avatar
+   instead of leaving a tall empty panel. */
+.dashboard-sidebar--rail .dashboard-profile-name,
+.dashboard-sidebar--rail .dashboard-profile-meta,
+.dashboard-sidebar--rail .dashboard-profile-role {
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  transition: height 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 160ms var(--ease);
+}
+.dashboard-sidebar--rail:hover .dashboard-profile-name,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-name { height: 26px; }
+.dashboard-sidebar--rail:hover .dashboard-profile-meta,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-meta { height: 22px; }
+.dashboard-sidebar--rail:hover .dashboard-profile-role,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-role { height: 30px; }
+.dashboard-sidebar--rail .dashboard-profile-avatar {
+  width: 44px;
+  height: 44px;
+  transition: width 260ms cubic-bezier(0.16, 1, 0.3, 1), height 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dashboard-sidebar--rail:hover .dashboard-profile-avatar,
+.dashboard-sidebar--rail:focus-within .dashboard-profile-avatar { width: 96px; height: 96px; }
+
+/* Nav rows: icon centred in the rail, then left-aligned once open. */
+.dashboard-sidebar--rail .dashboard-nav a,
+.dashboard-sidebar--rail .dashboard-nav-logout {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-left: 26px;
+  overflow: hidden;
+}
+.dashboard-sidebar--rail .dashboard-nav .icon {
+  flex: none;
+  width: 20px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+@media (max-width: 992px) {
+  /* No hover on touch — stay expanded rather than trapping labels. */
+  .dashboard-sidebar--rail { width: 100%; min-width: 0; }
+  .dashboard-sidebar--rail > * { width: 100%; max-width: none; }
+  .dashboard-sidebar--rail .label,
+  .dashboard-sidebar--rail .dashboard-profile-name,
+  .dashboard-sidebar--rail .dashboard-profile-meta,
+  .dashboard-sidebar--rail .dashboard-profile-role { opacity: 1; transform: none; }
+  .dashboard-sidebar--rail .dashboard-profile-avatar { width: 96px; height: 96px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-sidebar--rail,
+  .dashboard-sidebar--rail .label,
+  .dashboard-sidebar--rail .dashboard-profile-avatar { transition: none; }
 }

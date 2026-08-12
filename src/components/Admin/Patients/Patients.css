@@ -15,13 +15,13 @@
 
 .patient-name {
   font-weight: 600;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 0.25rem;
 }
 
 .patient-email {
   font-size: 0.85rem;
-  color: #6c757d;
+  color: var(--c-text-muted);
 }
 
 .patient-details-modal p {
@@ -30,6 +30,6 @@
 }
 
 .patient-details-modal strong {
-  color: #2c4964;
+  color: var(--c-ink);
   margin-right: 0.5rem;
 }

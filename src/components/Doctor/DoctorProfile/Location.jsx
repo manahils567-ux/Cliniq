@@ -8,7 +8,7 @@ const locations = [
 		name: 'Metropolitan Medical Center',
 		specialty: 'Cardiology Department',
 		address: '2286 Sundown Lane, Austin, Texas 78749, USA',
-		phone: '+1 (555) 123-4567',
+		phone: '+92 310 8112860',
 		schedule: [
 			{ days: 'Mon - Fri', times: ['9:00 AM - 1:00 PM', '3:00 PM - 7:00 PM'] },
 			{ days: 'Saturday', times: ['10:00 AM - 2:00 PM'] },

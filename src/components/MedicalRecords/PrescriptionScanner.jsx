@@ -78,7 +78,7 @@ const PrescriptionScanner = () => {
             title: 'Medicine',
             dataIndex: 'name',
             key: 'name',
-            render: (v) => <Text strong style={{ color: '#1677ff' }}>{v || '—'}</Text>,
+            render: (v) => <Text strong style={{ color: 'var(--c-accent)' }}>{v || '—'}</Text>,
         },
         {
             title: 'Dosage',
@@ -110,7 +110,7 @@ const PrescriptionScanner = () => {
         <div>
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <Title level={5} style={{ margin: 0 }}>
-                    <ScanOutlined className="me-2" style={{ color: '#722ed1' }} />
+                    <ScanOutlined className="me-2" style={{ color: 'var(--c-accent)' }} />
                     AI Prescription Scanner
                 </Title>
                 <Tag color="purple">Powered by Gemini Vision</Tag>
@@ -126,12 +126,12 @@ const PrescriptionScanner = () => {
             {/* Upload area */}
             <Card
                 style={{
-                    border: '2px dashed #d9d9d9',
+                    border: '2px dashed var(--c-border)',
                     borderRadius: 12,
                     textAlign: 'center',
                     marginBottom: 20,
                     cursor: 'pointer',
-                    background: '#fafafa',
+                    background: 'var(--c-bg)',
                 }}
                 onClick={() => !scanning && fileInputRef.current?.click()}
             >
@@ -145,7 +145,7 @@ const PrescriptionScanner = () => {
                 {scanning ? (
                     <div className="py-4">
                         <Spin size="large" />
-                        <p className="mt-3" style={{ color: '#722ed1', fontWeight: 500 }}>
+                        <p className="mt-3" style={{ color: 'var(--c-accent)', fontWeight: 500 }}>
                             🔍 Gemini is reading your prescription...
                         </p>
                     </div>
@@ -156,15 +156,15 @@ const PrescriptionScanner = () => {
                             alt="prescription preview"
                             style={{ maxHeight: 220, maxWidth: '100%', borderRadius: 8, marginBottom: 12 }}
                         />
-                        <p style={{ color: '#666', fontSize: 13 }}>
+                        <p style={{ color: 'var(--n-600)', fontSize: 13 }}>
                             <UploadOutlined /> Click to scan a different prescription
                         </p>
                     </div>
                 ) : (
                     <div className="py-4">
-                        <ScanOutlined style={{ fontSize: 48, color: '#722ed1', marginBottom: 12, display: 'block' }} />
+                        <ScanOutlined style={{ fontSize: 48, color: 'var(--c-accent)', marginBottom: 12, display: 'block' }} />
                         <Text strong style={{ fontSize: 16 }}>Click to upload prescription</Text>
-                        <p style={{ color: '#999', marginTop: 4, fontSize: 13 }}>
+                        <p style={{ color: 'var(--n-400)', marginTop: 4, fontSize: 13 }}>
                             JPG, PNG or WEBP — photo of a handwritten or printed prescription
                         </p>
                         <Button type="primary" icon={<UploadOutlined />} style={{ marginTop: 8 }}>
@@ -183,32 +183,32 @@ const PrescriptionScanner = () => {
             {result && (
                 <div>
                     {/* Prescription meta info */}
-                    <Card size="small" style={{ marginBottom: 16, background: '#f9f0ff', border: '1px solid #d3adf7' }}>
+                    <Card size="small" style={{ marginBottom: 16, background: 'var(--c-accent-wash)', border: '1px solid var(--c-accent-line)' }}>
                         <div className="d-flex flex-wrap gap-3">
                             {result.doctorName && (
                                 <div>
-                                    <UserOutlined style={{ color: '#722ed1', marginRight: 6 }} />
+                                    <UserOutlined style={{ color: 'var(--c-accent)', marginRight: 6 }} />
                                     <Text strong>Doctor: </Text>
                                     <Text>{result.doctorName}</Text>
                                 </div>
                             )}
                             {result.patientName && (
                                 <div>
-                                    <UserOutlined style={{ color: '#1677ff', marginRight: 6 }} />
+                                    <UserOutlined style={{ color: 'var(--c-accent)', marginRight: 6 }} />
                                     <Text strong>Patient: </Text>
                                     <Text>{result.patientName}</Text>
                                 </div>
                             )}
                             {result.date && (
                                 <div>
-                                    <CalendarOutlined style={{ color: '#52c41a', marginRight: 6 }} />
+                                    <CalendarOutlined style={{ color: 'var(--c-positive)', marginRight: 6 }} />
                                     <Text strong>Date: </Text>
                                     <Text>{result.date}</Text>
                                 </div>
                             )}
                             {result.diagnosis && (
                                 <div>
-                                    <MedicineBoxOutlined style={{ color: '#fa8c16', marginRight: 6 }} />
+                                    <MedicineBoxOutlined style={{ color: 'var(--c-signal)', marginRight: 6 }} />
                                     <Text strong>Diagnosis: </Text>
                                     <Text>{result.diagnosis}</Text>
                                 </div>
@@ -218,7 +218,7 @@ const PrescriptionScanner = () => {
 
                     {/* Medicines table */}
                     <Title level={5}>
-                        <MedicineBoxOutlined style={{ color: '#52c41a', marginRight: 8 }} />
+                        <MedicineBoxOutlined style={{ color: 'var(--c-positive)', marginRight: 8 }} />
                         Extracted Medicines ({result.medicines?.length || 0})
                     </Title>
 
@@ -240,8 +240,8 @@ const PrescriptionScanner = () => {
                             <Divider />
                             <div>
                                 <Text strong><FileTextOutlined className="me-2" />Raw Extracted Text</Text>
-                                <Card size="small" style={{ marginTop: 8, background: '#f5f5f5' }}>
-                                    <Paragraph style={{ whiteSpace: 'pre-wrap', fontSize: 12, margin: 0, color: '#555' }}>
+                                <Card size="small" style={{ marginTop: 8, background: 'var(--c-bg-alt)' }}>
+                                    <Paragraph style={{ whiteSpace: 'pre-wrap', fontSize: 12, margin: 0, color: 'var(--n-700)' }}>
                                         {result.rawText}
                                     </Paragraph>
                                 </Card>

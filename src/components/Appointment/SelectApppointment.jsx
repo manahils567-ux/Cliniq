@@ -36,7 +36,7 @@ const SelectApppointment = ({ selectedDate, handleDateChange, selectTime, setSel
         <div className="datetime-summary__row">
           <FaLocationArrow className="icon" />
           <span className="datetime-summary__label">Location</span>
-          <span className="datetime-summary__value">Sylhet, Bangladesh · Zoom Meeting</span>
+          <span className="datetime-summary__value">Korang Town, Sector O9 · Zoom Meeting</span>
         </div>
         {(selectedDate || selectTime) && (
           <div className="datetime-summary__row">

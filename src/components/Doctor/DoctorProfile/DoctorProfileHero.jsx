@@ -47,7 +47,7 @@ const DoctorProfileHero = ({ data }) => {
 								<div className="doctor-hero__rating-number">{rating}</div>
 								<StarRatings
 									rating={rating}
-									starRatedColor="#f4c150"
+									starRatedColor="var(--c-signal)"
 									numberOfStars={5}
 									name="rating"
 									starDimension="16px"
@@ -84,7 +84,7 @@ const DoctorProfileHero = ({ data }) => {
 								<FaMapMarkerAlt /> {address}
 							</div>
 							<div className="doctor-hero__contact-item">
-								<FaPhoneAlt /> +1 (555) 123-4567
+								<FaPhoneAlt /> +92 310 8112860
 							</div>
 							<div className="doctor-hero__contact-item">
 								<FaEnvelope /> {data.email || 'contact@doctor.com'}

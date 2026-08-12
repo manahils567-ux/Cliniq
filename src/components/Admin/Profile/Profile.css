@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--c-border-subtle);
   margin-bottom: 1.5rem;
 }
 
@@ -18,7 +18,7 @@
 .profile-info-section h3 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2c4964;
+  color: var(--c-ink);
   margin-bottom: 0.5rem;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .text-muted {
-  color: #6c757d;
+  color: var(--c-text-muted);
 }
 
 .mt-3 {

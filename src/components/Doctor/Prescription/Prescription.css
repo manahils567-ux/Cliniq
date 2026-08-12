@@ -6,7 +6,7 @@
 
 .stat-mini-card {
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: var(--r-lg);
     border: none;
     transition: all 0.3s ease;
     text-align: center;
@@ -17,19 +17,25 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.stat-mini-card-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+.stat-mini-card.stat-mini-card-primary .stat-mini-icon { color: var(--n-800); }
+.stat-mini-card.stat-mini-card-primary {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
 }
 
-.stat-mini-card-success {
-    background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
-    color: white;
+.stat-mini-card.stat-mini-card-success .stat-mini-icon { color: var(--c-accent); }
+.stat-mini-card.stat-mini-card-success {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
 }
 
-.stat-mini-card-warning {
-    background: linear-gradient(135deg, #fa8c16 0%, #d46b08 100%);
-    color: white;
+.stat-mini-card.stat-mini-card-warning .stat-mini-icon { color: var(--c-signal); }
+.stat-mini-card.stat-mini-card-warning {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
 }
 
 .stat-mini-details {
@@ -54,8 +60,8 @@
 }
 
 .prescription-page .prescription-table-card {
-    border-radius: 14px;
-    border: 1px solid #eef2f6;
+    border-radius: var(--r-lg);
+    border: 1px solid var(--n-050);
 }
 
 .prescription-expand {
@@ -71,7 +77,7 @@
 .prescription-meds-list {
     margin: 0.5rem 0 0;
     padding-left: 1.1rem;
-    color: #475569;
+    color: var(--n-700);
 }
 
 .prescription-meds-list li {

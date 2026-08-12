@@ -19,8 +19,8 @@ const SubHeader = ({title, subtitle}) => {
         right: '0',
         width: '100%',
         height: '100%',
-        opacity: '0.9',
-        background: '#223a66',
+        opacity: '0.92',
+        background: 'var(--n-800)',
     };
 
     return (

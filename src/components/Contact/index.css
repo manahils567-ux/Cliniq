@@ -1,20 +1,20 @@
 .info .icon {
     margin-top: 2px;
     font-size: 22px;
-    color: #1977cc;
+    color: var(--c-action);
     padding: 5px;
-    background: #d6e9fa;
+    background: var(--n-100);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50px;
+    border-radius: var(--r-full);
     transition: all 0.3s ease-in-out;
 }
 .contact .info h4 {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 5px;
-    color: #2c4964;
+    color: var(--c-ink);
 }
 .contact .info p {
     font-size: 14px;

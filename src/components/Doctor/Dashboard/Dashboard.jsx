@@ -27,6 +27,7 @@ import './DashboardHome.css';
 import MedicalRecords from '../../MedicalRecords/MedicalRecords';
 import Reminders from '../../Reminders/Reminders';
 import NearbyHospitals from '../../NearbyHospitals/NearbyHospitals';
+import PrescriptionScanner from '../../MedicalRecords/PrescriptionScanner';
 
 const { Text } = Typography;
 
@@ -139,9 +140,6 @@ const DoctorDashboard = () => {
 
 			<div className="dashboard-stats-grid">
 				<div className="dashboard-stat-card stat-card--primary">
-					<div className="dashboard-stat-icon">
-						<FaCalendarCheck />
-					</div>
 					<div className="dashboard-stat-value">{stats.totalAppointments}</div>
 					<div className="dashboard-stat-label">Total Appointments</div>
 					<div className="dashboard-stat-trend">
@@ -150,25 +148,16 @@ const DoctorDashboard = () => {
 				</div>
 
 				<div className="dashboard-stat-card stat-card--success">
-					<div className="dashboard-stat-icon">
-						<FaUserInjured />
-					</div>
 					<div className="dashboard-stat-value">{stats.totalPatients}</div>
 					<div className="dashboard-stat-label">Total Patients</div>
 				</div>
 
 				<div className="dashboard-stat-card stat-card--warning">
-					<div className="dashboard-stat-icon">
-						<FaClock />
-					</div>
 					<div className="dashboard-stat-value">{stats.pendingAppointments}</div>
 					<div className="dashboard-stat-label">Pending Appointments</div>
 				</div>
 
 				<div className="dashboard-stat-card stat-card--info">
-					<div className="dashboard-stat-icon">
-						<FaDollarSign />
-					</div>
 					<div className="dashboard-stat-value">${stats.totalRevenue.toFixed(0)}</div>
 					<div className="dashboard-stat-label">Total Revenue</div>
 				</div>
@@ -185,7 +174,7 @@ const DoctorDashboard = () => {
 						<YAxis />
 						<Tooltip />
 						<Legend />
-						<Bar dataKey="appointments" fill="#667eea" radius={[6, 6, 0, 0]} />
+						<Bar dataKey="appointments" fill="var(--n-700)" radius={[6, 6, 0, 0]} />
 					</BarChart>
 				</ResponsiveContainer>
 			</div>
@@ -380,33 +369,21 @@ const PatientDashboard = () => {
 
 			<div className="dashboard-stats-grid">
 				<div className="dashboard-stat-card stat-card--primary">
-					<div className="dashboard-stat-icon">
-						<FaCalendarCheck />
-					</div>
 					<div className="dashboard-stat-value">{stats.totalAppointments}</div>
 					<div className="dashboard-stat-label">Total Appointments</div>
 				</div>
 
 				<div className="dashboard-stat-card stat-card--success">
-					<div className="dashboard-stat-icon">
-						<FaClock />
-					</div>
 					<div className="dashboard-stat-value">{stats.upcomingAppointments}</div>
 					<div className="dashboard-stat-label">Upcoming</div>
 				</div>
 
 				<div className="dashboard-stat-card stat-card--warning">
-					<div className="dashboard-stat-icon">
-						<FaStar />
-					</div>
 					<div className="dashboard-stat-value">{stats.completedAppointments}</div>
 					<div className="dashboard-stat-label">Completed</div>
 				</div>
 
 				<div className="dashboard-stat-card stat-card--info">
-					<div className="dashboard-stat-icon">
-						<FaDollarSign />
-					</div>
 					<div className="dashboard-stat-value">${stats.totalSpent.toFixed(0)}</div>
 					<div className="dashboard-stat-label">Total Spent</div>
 				</div>
@@ -428,10 +405,22 @@ const PatientDashboard = () => {
 		{ key: '1', label: 'Overview',          children: overviewContent },
 		{ key: '2', label: 'Medical Records',   children: <MedicalRecords /> },
 		{ key: '3', label: 'Reminders',         children: <Reminders /> },
-		{ key: '4', label: '📍 Nearby',         children: <NearbyHospitals /> },
+		{ key: '4', label: 'Prescription Scanner', children: <PrescriptionScanner /> },
+		{ key: '5', label: 'Nearby',            children: <NearbyHospitals /> },
 	];
 
-	return <Tabs defaultActiveKey="1" items={tabItems} />;
+	return (
+		<Tabs
+			defaultActiveKey="1"
+			items={tabItems}
+			className="dashboard-tabs"
+			renderTabBar={(props, DefaultTabBar) => (
+				<div className="dashboard-tabbar">
+					<DefaultTabBar {...props} />
+				</div>
+			)}
+		/>
+	);
 };
 
 export default Dashboard;

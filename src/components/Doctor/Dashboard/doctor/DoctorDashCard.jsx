@@ -23,7 +23,7 @@ const DoctorDashCard = () => {
     ]
     return (
 
-        <div className="row mb-4 p-3 rounded" style={{ background: '#f8f9fa' }}>
+        <div className="row mb-4 p-3 rounded" style={{ background: 'var(--c-bg)' }}>
             {
                 cardData.map((item, index) => (
                     <div className="col-md-12 col-lg-4" key={index + 8}>
