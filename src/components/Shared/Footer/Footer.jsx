@@ -49,7 +49,7 @@ const Footer = () => {
 								<h3 className="footer-title">Contact us</h3>
 								<div className="footer-contact__item">
 									<FaMapMarkerAlt className="footer-contact__icon" />
-									<p>121, Mirzapur Union Office,<br />Sylhet, Bangladesh 3100</p>
+									<p>Korang Town, Sector O9,<br />House No. 69, Street 44</p>
 								</div>
 								<div className="footer-contact__item">
 									<FaPhoneAlt className="footer-contact__icon" />

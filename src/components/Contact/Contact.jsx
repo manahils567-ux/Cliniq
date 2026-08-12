@@ -30,7 +30,7 @@ const Contact = () => {
 		{
 			icon: <FaMapMarkerAlt />,
 			title: 'Visit us',
-			content: '1212 Kazi Nazrul Avenue, Sylhet, Bangladesh 3214'
+			content: 'Korang Town, Sector O9, House No. 69, Street 44'
 		},
 		{
 			icon: <FaPhoneAlt />,

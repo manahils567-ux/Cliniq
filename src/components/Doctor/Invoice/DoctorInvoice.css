@@ -18,23 +18,35 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
+.stat-mini-card-primary .stat-mini-icon { color: var(--n-800); }
 .stat-mini-card-primary {
-    background: linear-gradient(135deg, var(--n-700) 0%, var(--n-800) 100%);
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
     color: white;
 }
 
+.stat-mini-card-success .stat-mini-icon { color: var(--c-accent); }
 .stat-mini-card-success {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
     color: white;
 }
 
+.stat-mini-card-info .stat-mini-icon { color: var(--c-positive); }
 .stat-mini-card-info {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
     color: white;
 }
 
+.stat-mini-card-warning .stat-mini-icon { color: var(--c-signal); }
 .stat-mini-card-warning {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-ink);
     color: white;
 }
 

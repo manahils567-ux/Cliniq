@@ -895,3 +895,21 @@ a:hover { opacity: 0.62; color: inherit; }
   color: var(--n-800);
   opacity: 1;
 }
+
+/* AntD Search with a large enterButton: the input keeps its default height so
+   the placeholder sits above centre next to the taller button. Match them. */
+.ant-input-search-large .ant-input-affix-wrapper,
+.ant-input-search-large > .ant-input-group > .ant-input {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+}
+.ant-input-search-large .ant-input { line-height: 1.4; }
+.ant-input-search-large .ant-input-group-addon .ant-btn { height: 48px; }
+
+/* Footer base row: keep the copyright and policy links on one baseline. */
+.footer-bottom .row { align-items: center; row-gap: var(--sp-3); }
+.footer-copyright { white-space: nowrap; }
+@media (max-width: 767.98px) {
+  .footer-copyright { white-space: normal; text-align: center; }
+}
