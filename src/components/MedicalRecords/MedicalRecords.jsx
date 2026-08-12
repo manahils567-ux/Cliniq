@@ -465,11 +465,6 @@ const MedicalRecords = () => {
             ),
             children: <HealthInsights />,
         },
-        {
-            key: 'scanner',
-            label: <span><ScanOutlined /> Prescription Scanner</span>,
-            children: <PrescriptionScanner />,
-        },
     ];
 
     return (

@@ -27,6 +27,7 @@ import './DashboardHome.css';
 import MedicalRecords from '../../MedicalRecords/MedicalRecords';
 import Reminders from '../../Reminders/Reminders';
 import NearbyHospitals from '../../NearbyHospitals/NearbyHospitals';
+import PrescriptionScanner from '../../MedicalRecords/PrescriptionScanner';
 
 const { Text } = Typography;
 
@@ -428,7 +429,8 @@ const PatientDashboard = () => {
 		{ key: '1', label: 'Overview',          children: overviewContent },
 		{ key: '2', label: 'Medical Records',   children: <MedicalRecords /> },
 		{ key: '3', label: 'Reminders',         children: <Reminders /> },
-		{ key: '4', label: '📍 Nearby',         children: <NearbyHospitals /> },
+		{ key: '4', label: 'Prescription Scanner', children: <PrescriptionScanner /> },
+		{ key: '5', label: '📍 Nearby',         children: <NearbyHospitals /> },
 	];
 
 	return (
