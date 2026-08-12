@@ -57,14 +57,14 @@ function App() {
           <Route path='/dashboard/reviews' element={<Reviews />} />
           <Route path='/dashboard/schedule' element={<Schedule />} />
           <Route path='/dashboard/appointments' element={<Appointments />} />
-          <Route path='/dashboard/appointments/:id' element={<ViewAppointment />} />
+          <Route path='/dashboard/appointments/:id' element={<DashboardLayout><ViewAppointment /></DashboardLayout>} />
           <Route path='/dashboard/prescription' element={<Prescription />} />
-          <Route path='/dashboard/prescription/:id' element={<PrescriptionView />} />
+          <Route path='/dashboard/prescription/:id' element={<DashboardLayout><PrescriptionView /></DashboardLayout>} />
           <Route path='/dashboard/appointment/treatment/:id' element={<Treatment />} />
           <Route path='/dashboard/appointment/treatment/edit/:id' element={<TreatmentEdit />} />
           <Route path='/dashboard/change-password' element={<ChangePassword />} />
           <Route path='/dashboard/profile-setting' element={<ProfileSetting />} />
-          <Route path='/dashboard/documents' element={<MedicalRecords />} />
+          <Route path='/dashboard/documents' element={<DashboardLayout><MedicalRecords /></DashboardLayout>} />
           <Route path='/dashboard/track' element={<DashboardLayout><TrackAppointment embedded /></DashboardLayout>} />
           <Route path='/dashboard/favourite' element={<PatientFavouriteDoctor />} />
           <Route path='/dashboard/invoices' element={<DoctorInvoice />} />
