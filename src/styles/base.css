@@ -1,0 +1,732 @@
+/* ==========================================================================
+   Cliniq — Base Layer v2
+   Loads AFTER tokens.css and AFTER bootstrap.min.css.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  color: var(--c-text);
+  background-color: var(--c-bg);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv05' 1, 'ss03' 1;   /* Inter's single-storey g, rounded quotes */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--c-ink);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight);
+  font-weight: var(--fw-bold);
+}
+h1, .h1 { font-size: var(--fs-2xl); line-height: var(--lh-hero); letter-spacing: var(--tr-hero); }
+h2, .h2 { font-size: var(--fs-xl); }
+h3, .h3 { font-size: var(--fs-lg); }
+h4, .h4 { font-size: var(--fs-md);  font-weight: var(--fw-semi); letter-spacing: var(--tr-none); }
+h5, .h5 { font-size: var(--fs-base);font-weight: var(--fw-semi); letter-spacing: var(--tr-none); }
+h6, .h6 { font-size: var(--fs-sm);  font-weight: var(--fw-semi); letter-spacing: var(--tr-none); }
+
+a { color: inherit; text-decoration: none; transition: opacity var(--dur-fast) var(--ease); }
+a:hover { opacity: 0.62; color: inherit; }
+
+:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r-sm); }
+.cq-dark :focus-visible, .cq-hero :focus-visible { box-shadow: var(--ring-dark); }
+
+::selection { background: var(--c-ink); color: var(--n-000); }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--c-bg-alt); }
+::-webkit-scrollbar-thumb { background: var(--n-300); border-radius: var(--r-full); border: 2px solid var(--c-bg-alt); }
+::-webkit-scrollbar-thumb:hover { background: var(--n-400); }
+
+
+/* ==========================================================================
+   Urdu
+   Nastaliq has deep descenders and a diagonal baseline. At Latin
+   line-heights the script overlaps itself. Applied via [lang] so the chat
+   widget can switch a single message.
+   ========================================================================== */
+
+[lang="ur"], .urdu {
+  font-family: var(--font-urdu);
+  line-height: var(--lh-urdu);
+  direction: rtl;
+  text-align: right;
+  font-size: 1.05em;
+  letter-spacing: 0;              /* never track Nastaliq — breaks ligatures */
+  font-weight: var(--fw-normal);
+}
+[lang="ur"] .ant-btn, [lang="ur"] input, [lang="ur"] textarea {
+  font-family: var(--font-urdu); line-height: var(--lh-urdu);
+}
+.urdu-inline { font-family: var(--font-urdu); direction: rtl; unicode-bidi: isolate; }
+
+
+/* ==========================================================================
+   DARK SURFACES
+   Add .cq-dark to any section, header or page shell. Everything inside
+   inverts. This is how the landing treatment stays scoped instead of
+   fighting 40 stylesheets that assume a white background.
+   ========================================================================== */
+
+.cq-dark {
+  background: var(--d-bg);
+  color: var(--d-text-muted);
+  --c-surface:       var(--d-surface);
+  --c-bg:            var(--d-bg);
+  --c-bg-alt:        var(--d-surface-alt);
+  --c-border:        var(--d-border);
+  --c-border-subtle: var(--d-border);
+  --c-ink:           var(--d-text);
+  --c-text:          var(--d-text-muted);
+  --c-text-muted:    var(--d-text-muted);
+  --c-text-faint:    var(--d-text-faint);
+  --c-action:        var(--d-action);
+  --c-action-hover:  var(--d-action-hover);
+  --c-action-text:   var(--d-action-text);
+}
+.cq-dark h1, .cq-dark h2, .cq-dark h3, .cq-dark h4, .cq-dark h5, .cq-dark h6 { color: var(--d-text); }
+
+
+/* ==========================================================================
+   HERO — the signature
+   Full-bleed monochrome photograph, hairline inset frame, display type
+   set at 88px with -0.045em tracking. Text sits above the image on a
+   directional scrim so it stays legible whatever photo is used.
+   ========================================================================== */
+
+.cq-hero {
+  position: relative;
+  min-height: min(84vh, 760px);
+  display: flex;
+  flex-direction: column;
+  background: var(--d-bg);
+  color: var(--d-text);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* the photograph */
+.cq-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center 28%;
+}
+/* Ambient background video. Filtered rather than the parent so the scrim
+   in ::after stays unfiltered and keeps its full density. */
+.cq-hero__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  /* Authored in-palette, so it is NOT greyscaled the way a photograph is —
+     only lightly lifted so the motion reads through the scrim. */
+  filter: contrast(1.06) brightness(1.06);
+}
+/* A photographic still, if one is supplied, still gets the mono treatment. */
+.cq-hero__media[style*="background-image"] {
+  filter: grayscale(1) contrast(1.08) brightness(0.94);
+}
+
+/* directional scrim — dark at left where the headline sits */
+.cq-hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, var(--n-800) 8%, rgba(46,46,46,0.90) 26%, rgba(46,46,46,0.34) 48%, rgba(46,46,46,0.06) 100%),
+    linear-gradient(to top, rgba(46,46,46,0.58) 0%, transparent 34%);
+}
+
+/* hairline inset frame — the detail that makes it read as designed */
+/* Floating bar. Rides transparently over the hero, then picks up a blurred
+   espresso ground once it scrolls onto the light page below it. */
+.cq-hero__bar {
+  position: fixed;
+  top: var(--sp-4);
+  left: var(--sp-4);
+  right: var(--sp-4);
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  padding: var(--sp-3) var(--sp-5);
+  border: 1px solid transparent;
+  border-radius: var(--r-full);
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease),
+              transform var(--dur) var(--ease-out),
+              opacity var(--dur-fast) var(--ease);
+}
+.cq-hero__bar.is-stuck {
+  background: rgba(35, 35, 34, 0.82);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  backdrop-filter: saturate(140%) blur(14px);
+  border-color: var(--d-border);
+  box-shadow: var(--sh-lg);
+}
+/* Scrolling down retracts it past the top edge; scrolling up brings it back. */
+.cq-hero__bar.is-hidden {
+  transform: translateY(calc(-100% - var(--sp-5)));
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cq-hero__bar { transition: none; }
+}
+.cq-hero__mark {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--tr-tight);
+  color: var(--d-text);
+}
+.cq-hero__tel {
+  margin-left: auto;
+  font-size: var(--fs-sm);
+  color: var(--d-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.cq-hero__body {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* the bar is fixed and out of flow — reserve its height here */
+  padding: calc(var(--sp-8) + var(--sp-5)) var(--sp-7) var(--sp-5);
+}
+
+.cq-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7.4vw, var(--fs-3xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--tr-hero);
+  color: var(--d-text);
+  max-width: 15ch;
+  text-wrap: balance;
+}
+
+.cq-hero__lede {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
+  color: var(--d-text-muted);
+  max-width: 34ch;
+  margin-top: var(--sp-5);
+}
+
+/* baseline strip — working hours / location, as in the reference */
+.cq-hero__foot {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-7);
+  flex-wrap: wrap;
+  padding: var(--sp-6) var(--sp-7);
+}
+.cq-fact__label {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--d-text-faint);
+}
+.cq-fact__value {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  color: var(--d-text);
+  margin-top: var(--sp-1);
+  font-variant-numeric: tabular-nums;
+}
+
+/* corner tick — bottom-left registration mark from the reference */
+.cq-tick {
+  width: 22px; height: 22px;
+  border-left: 1px solid var(--d-border-strong);
+  border-bottom: 1px solid var(--d-border-strong);
+  flex: none;
+  align-self: flex-end;
+}
+
+/* pill CTA with circular icon well */
+.cq-cta {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+  background: var(--n-100);
+  color: var(--n-800);
+  border: none;
+  border-radius: var(--r-full);
+  padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-6);
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease-out), background var(--dur) var(--ease);
+}
+.cq-cta:hover { transform: translateY(-2px); background: var(--n-100); }
+.cq-cta__well {
+  width: 40px; height: 40px;
+  border-radius: var(--r-full);
+  background: var(--n-950);
+  color: var(--n-000);
+  display: grid; place-items: center;
+  font-size: 1rem;
+  transition: transform var(--dur) var(--ease-out);
+}
+.cq-cta:hover .cq-cta__well { transform: rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .cq-hero { min-height: 92vh; }
+  .cq-hero__bar, .cq-hero__body, .cq-hero__foot { padding-left: var(--sp-5); padding-right: var(--sp-5); }
+  .cq-hero__media { background-position: 62% 22%; }
+  .cq-hero__media::after { background: linear-gradient(to top, var(--n-950) 22%, rgba(5,5,5,0.55) 60%, rgba(5,5,5,0.7) 100%); }
+  .cq-hero__title { max-width: none; }
+  .cq-hero__foot { gap: var(--sp-4); }
+  .cq-cta { margin-left: 0; width: 100%; justify-content: space-between; }
+  .cq-tick { display: none; }
+}
+
+
+/* ==========================================================================
+   Bootstrap 5 overrides
+   ========================================================================== */
+
+.btn {
+  font-family: var(--font-ui);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-base);
+  border-radius: var(--r-full);
+  padding: 0.6rem 1.4rem;
+  border: 1px solid transparent;
+  transition: all var(--dur) var(--ease);
+}
+.btn:focus, .btn:active:focus { box-shadow: var(--ring); }
+
+.btn-primary {
+  background-color: var(--c-action);
+  border-color: var(--c-action);
+  color: var(--c-action-text);
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background-color: var(--c-action-hover) !important;
+  border-color: var(--c-action-hover) !important;
+  color: var(--c-action-text) !important;
+}
+
+.btn-outline-primary {
+  color: var(--c-ink);
+  border-color: var(--c-border);
+  background: transparent;
+}
+.btn-outline-primary:hover {
+  background-color: var(--c-ink) !important;
+  border-color: var(--c-ink) !important;
+  color: var(--c-surface) !important;
+}
+
+.btn-secondary {
+  background-color: var(--c-bg-alt);
+  border-color: transparent;
+  color: var(--c-text);
+}
+.btn-secondary:hover { background-color: var(--c-border) !important; color: var(--c-ink) !important; }
+
+.btn-danger  { background-color: var(--c-danger);   border-color: var(--c-danger); }
+.btn-success { background-color: var(--c-positive); border-color: var(--c-positive); }
+.btn-warning { background-color: var(--c-signal);   border-color: var(--c-signal); color: var(--n-950); }
+
+.card {
+  border: 1px solid var(--c-border-subtle);
+  border-radius: var(--r-lg);
+  background: var(--c-surface);
+  box-shadow: none;
+}
+
+.form-control, .form-select {
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: 0.6rem 0.9rem;
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  color: var(--c-text);
+  background: var(--c-surface);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.form-control:focus, .form-select:focus { border-color: var(--c-ink); box-shadow: var(--ring); }
+.form-control::placeholder { color: var(--c-text-faint); }
+
+.badge { border-radius: var(--r-full); font-weight: var(--fw-medium); padding: 0.35em 0.8em; }
+.text-primary { color: var(--c-ink) !important; }
+.text-muted   { color: var(--c-text-muted) !important; }
+.bg-primary   { background-color: var(--c-ink) !important; }
+.bg-light     { background-color: var(--c-bg-alt) !important; }
+.border       { border-color: var(--c-border) !important; }
+.table > :not(caption) > * > * { border-color: var(--c-border-subtle); }
+
+
+/* ==========================================================================
+   Ant Design 5 overrides
+   Most theming happens in ConfigProvider (theme.js). These are the
+   leftovers where AntD hardcodes what the token API does not expose.
+   ========================================================================== */
+
+.ant-btn { font-family: var(--font-ui); font-weight: var(--fw-medium); }
+.ant-card { box-shadow: none; border-color: var(--c-border-subtle); }
+.ant-card-head { border-bottom-color: var(--c-border-subtle); }
+.ant-modal-content { box-shadow: var(--sh-xl); }
+.ant-modal-header { border-bottom: 1px solid var(--c-border-subtle); padding-bottom: var(--sp-3); }
+.ant-table-thead > tr > th {
+  background: var(--c-bg-alt) !important;
+  color: var(--c-text-muted) !important;
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--c-border) !important;
+}
+.ant-table-tbody > tr:hover > td { background: var(--c-bg-alt) !important; }
+.ant-tag { border-radius: var(--r-full); font-weight: var(--fw-medium); border: none; padding: 0.15em 0.7em; }
+.ant-empty-description { color: var(--c-text-muted); }
+.ant-picker, .ant-select-selector, .ant-input { font-family: var(--font-ui) !important; }
+
+/* Bootstrap's negative .row gutter breaks AntD Modal padding */
+.ant-modal-body > .row, .ant-drawer-body > .row { margin-left: 0; margin-right: 0; }
+
+
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+
+.cq-page       { padding: var(--sp-6) var(--sp-5); max-width: 1280px; margin: 0 auto; }
+.cq-page-head  { margin-bottom: var(--sp-6); }
+.cq-page-title { font-family: var(--font-display); font-size: var(--fs-xl);
+                 font-weight: var(--fw-bold); letter-spacing: var(--tr-tight); color: var(--c-ink); }
+.cq-page-sub   { color: var(--c-text-muted); font-size: var(--fs-sm); margin-top: var(--sp-2); }
+
+.cq-eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--c-text-faint);
+}
+
+.cq-surface {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-subtle);
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
+}
+
+.cq-rule { height: 1px; background: var(--c-border); border: none; }
+
+
+/* ==========================================================================
+   Document slip — medical reports
+   Monochrome card with an amber binding rule. Amber appears only where
+   something is due, so a wall of slips reads at a glance.
+   ========================================================================== */
+
+.cq-slip {
+  position: relative;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-subtle);
+  border-left: 2px solid var(--c-ink);
+  border-radius: 2px var(--r-lg) var(--r-lg) 2px;
+  padding: var(--sp-5) var(--sp-4) var(--sp-4);
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease);
+}
+.cq-slip:hover { transform: translateY(-2px); border-color: var(--c-border); border-left-color: var(--c-ink); }
+.cq-slip--due { border-left-color: var(--c-signal); }
+
+.cq-slip__type {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--c-text-faint);
+}
+.cq-slip__title { font-family: var(--font-display); font-size: var(--fs-md);
+                  font-weight: var(--fw-semi); color: var(--c-ink); margin-top: var(--sp-2);
+                  letter-spacing: var(--tr-tight); }
+.cq-slip__meta  { font-size: var(--fs-sm); color: var(--c-text-muted); margin-top: var(--sp-2);
+                  font-variant-numeric: tabular-nums; }
+
+.cq-due {
+  display: inline-flex; align-items: center; gap: var(--sp-1);
+  background: var(--c-signal-wash);
+  border: 1px solid var(--c-signal-line);
+  color: var(--c-signal-dim);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  padding: 0.25em 0.7em;
+  border-radius: var(--r-full);
+}
+
+
+/* ==========================================================================
+   Empty and loading states
+   ========================================================================== */
+
+.cq-empty { text-align: center; padding: var(--sp-8) var(--sp-4); }
+.cq-empty__title { font-family: var(--font-display); font-size: var(--fs-lg);
+                   font-weight: var(--fw-bold); color: var(--c-ink); letter-spacing: var(--tr-tight); }
+.cq-empty__body  { color: var(--c-text-muted); font-size: var(--fs-sm);
+                   margin: var(--sp-3) auto var(--sp-5); max-width: 36ch; }
+
+.cq-skeleton {
+  background: linear-gradient(90deg, var(--c-bg-alt) 25%, var(--c-border-subtle) 50%, var(--c-bg-alt) 75%);
+  background-size: 200% 100%;
+  animation: cq-shimmer 1.4s infinite;
+  border-radius: var(--r-sm);
+}
+@keyframes cq-shimmer { to { background-position: -200% 0; } }
+
+
+/* ==========================================================================
+   Accessibility floor
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  :root { --fs-xl: 1.625rem; --fs-2xl: 2.25rem; --sp-7: 2rem; --sp-8: 3rem; }
+  .cq-page { padding: var(--sp-4) var(--sp-3); }
+  .cq-surface { padding: var(--sp-4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Hero navigation + trust strip
+   The hero carries the site nav on the landing page, so there is no second
+   header competing with it.
+   ========================================================================== */
+
+.cq-hero__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  margin-left: var(--sp-7);
+}
+.cq-hero__nav a {
+  color: var(--d-text-muted);
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tr-wide);
+  transition: color var(--dur) var(--ease);
+}
+.cq-hero__nav a:hover { color: var(--d-text); }
+
+@media (max-width: 860px) {
+  .cq-hero__nav { display: none; }
+}
+
+.cq-trust {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-4);
+  padding: var(--sp-6) var(--sp-7);
+  background: var(--c-bg);
+  border-bottom: 1px solid var(--c-border);
+}
+.cq-trust__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+.cq-trust__num {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em;
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  color: var(--c-ink);
+  font-variant-numeric: tabular-nums;
+}
+.cq-trust__label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--c-text-faint);
+}
+
+@media (max-width: 700px) {
+  .cq-trust { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ==========================================================================
+   Filled panels
+   Solid colour blocks with a fixed rhythm: eyebrow, statement, hairline,
+   footer. Colour carries the hierarchy instead of borders and shadows, so a
+   row of them reads as one composition. Four fills, all from the palette.
+   ========================================================================== */
+
+.cq-panel {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
+  min-height: 260px;
+  border: 1px solid transparent;
+  /* Transform only — animating box-shadow repaints every frame, and scaling
+     resamples the text, which is what made the lift feel rough. The shadow
+     lives on its own layer below and only fades its opacity. */
+  transition: transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+.cq-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: var(--sh-lg);
+  opacity: 0;
+  transition: opacity 460ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.cq-panel:hover        { transform: translate3d(0, -14px, 0); }
+.cq-panel:hover::before { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cq-panel, .cq-panel::before { transition: none; }
+  .cq-panel:hover { transform: none; }
+}
+
+.cq-panel--ink    { background: var(--n-800); color: rgba(241,236,230,0.78); }
+.cq-panel--accent { background: var(--c-accent); color: rgba(241,236,230,0.82); }
+.cq-panel--greige { background: var(--n-200); color: var(--n-600); }
+.cq-panel--cream  { background: var(--n-000); color: var(--c-text); border-color: var(--c-border); }
+
+.cq-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+.cq-panel__label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.cq-panel__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: var(--r-full);
+  background: rgba(241,236,230,0.14);
+  font-size: 15px;
+  flex: none;
+}
+.cq-panel--greige .cq-panel__glyph,
+.cq-panel--cream  .cq-panel__glyph { background: rgba(46,46,46,0.08); }
+
+.cq-panel__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  line-height: var(--lh-tight);
+  margin-top: var(--sp-5);
+}
+.cq-panel--ink .cq-panel__value,
+.cq-panel--accent .cq-panel__value { color: var(--n-100); }
+.cq-panel--greige .cq-panel__value,
+.cq-panel--cream  .cq-panel__value { color: var(--n-900); }
+
+.cq-panel__body {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  margin-top: var(--sp-3);
+}
+.cq-panel__rule {
+  height: 1px;
+  border: none;
+  margin: var(--sp-5) 0 var(--sp-3);
+  background: rgba(241,236,230,0.20);
+}
+.cq-panel--greige .cq-panel__rule,
+.cq-panel--cream  .cq-panel__rule { background: rgba(46,46,46,0.14); }
+
+.cq-panel__foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+}
+.cq-panel__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.28em 0.8em;
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  background: rgba(241,236,230,0.16);
+  color: inherit;
+}
+.cq-panel--greige .cq-panel__pill,
+.cq-panel--cream  .cq-panel__pill { background: rgba(46,46,46,0.08); }
+
+.cq-panel__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-sm);
+}
+.cq-panel--ink .cq-panel__link,
+.cq-panel--accent .cq-panel__link { color: var(--n-100); }
+.cq-panel--greige .cq-panel__link,
+.cq-panel--cream  .cq-panel__link { color: var(--c-accent); }
+
+.cq-panel__icons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+  margin-top: var(--sp-5);
+}
+
+/* Four-step feature row */
+.cards-row--4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-4);
+}
+@media (max-width: 1180px) { .cards-row--4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .cards-row--4 { grid-template-columns: 1fr; } }

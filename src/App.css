@@ -1,84 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900');
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-a {
-    color: #05335c;
-    text-decoration: none !important;
-}
-
-a:hover {
-    color: rgb(20, 104, 177);
-    text-decoration: none;
-}
-
-body {
-    overflow-x: hidden;
-    font-family: 'Poppins', sans-serif;
-    height: 100%;
-    color: #272b41;
-    background-color: #f8f9fa;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: #272b41;
-    font-weight: 500;
-}
-
-.h1,
-h1 {
-    font-size: 2.25rem;
-}
-
-.h2,
-h2 {
-    font-size: 1.875rem;
-}
-
-.h3,
-h3 {
-    font-size: 1.5rem;
-}
-
-.h4,
-h4 {
-    font-size: 1.125rem;
-}
-
-.h5,
-h5 {
-    font-size: 1rem;
-}
-
-.h6,
-h6 {
-    font-size: 0.875rem;
-}
-
-a {
-    color: #2E3842;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #09dca4;
-}
-
-a:hover,
-a:active,
-a:focus {
-    outline: none;
-    text-decoration: none;
-}
+/* App-specific styles.
+ *
+ * The reset, font import, link colours and heading scale that used to live
+ * here now come from styles/tokens.css + styles/base.css — keeping both
+ * meant two resets fighting.
+ *
+ * Everything below is still referenced by components and has no equivalent
+ * in base.css, so it stays. Colours are tokenised by scripts/migrate-theme.js.
+ */
 
 .ant-radio-group {
     display: flex !important;
@@ -86,8 +14,8 @@ a:focus {
 }
 
 .card-label>label {
-    background-color: #f8f9fa;
-    color: #959595;
+    background-color: var(--c-bg);
+    color: var(--c-text-faint);
     display: inline-block;
     font-size: 13px;
     font-weight: 500;
@@ -97,8 +25,8 @@ a:focus {
 
 .card-label>input {
     background-color: #fff;
-    border: 1px solid #dbdbdb;
-    border-radius: 4px;
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-sm);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .05);
     display: block;
     height: 50px;
@@ -109,7 +37,7 @@ a:focus {
 }
 
 .btn-get-started {
-    font-family: "Raleway", sans-serif;
+    font-family: var(--font-ui);
     text-transform: uppercase;
     font-weight: 500;
     font-size: 14px;
@@ -117,14 +45,14 @@ a:focus {
     display: inline-block;
     padding: 12px 35px;
     margin-top: 30px;
-    border-radius: 50px;
+    border-radius: var(--r-full);
     transition: 0.5s;
     color: #fff;
-    background: #1977cc;
+    background: var(--c-action);
 }
 
 .btn-get-started:hover {
-    background: #3291e6;
+    background: var(--n-600);
 }
 
 .section-title h2 {
@@ -133,7 +61,7 @@ a:focus {
     font-weight: bold;
     padding-bottom: 20px;
     position: relative;
-    color: #2c4964;
+    color: var(--c-ink);
 }
 
 .section-title h2::before {
@@ -142,7 +70,7 @@ a:focus {
     display: block;
     width: 120px;
     height: 1px;
-    background: #ddd;
+    background: var(--c-border);
     bottom: 1px;
     left: calc(50% - 60px);
 }
@@ -153,17 +81,17 @@ a:focus {
     display: block;
     width: 40px;
     height: 3px;
-    background: #1977cc;
+    background: var(--c-action);
     bottom: 0;
     left: calc(50% - 20px);
 }
 
 .more-btn {
     display: inline-block;
-    border: 1px solid #3291e6;
+    border: 1px solid var(--n-600);
     padding: 6px 30px 8px 30px;
-    color: #3291e6;
-    border-radius: 50px;
+    color: var(--n-600);
+    border-radius: var(--r-full);
     transition: all ease-in-out 0.4s;
 }
 
@@ -173,7 +101,7 @@ a:focus {
 
 .more-btn:hover {
     color: #fff;
-    background: #3291e6;
+    background: var(--n-600);
 }
 
 .custom-blog-card:hover {
@@ -190,12 +118,12 @@ a:focus {
     font-size: 20px;
     font-weight: 600;
     text-transform: uppercase;
-    color: #2c4964;
+    color: var(--c-ink);
 }
 
 .change-photo-btn {
-    background-color: #1977cc;
-    border-radius: 50px;
+    background-color: var(--c-action);
+    border-radius: var(--r-full);
     color: #fff;
     cursor: pointer;
     display: block;
@@ -209,8 +137,8 @@ a:focus {
 }
 
 .change-photo-btn:hover {
-    background-color: #094b85;
-    border-radius: 50px;
+    background-color: var(--n-950);
+    border-radius: var(--r-full);
     color: #fff;
 }
 
