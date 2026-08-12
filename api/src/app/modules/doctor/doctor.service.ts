@@ -109,12 +109,14 @@ const getAllDoctors = async (filters: IDoctorFilters, options: IOption): Promise
     }
 
     if (specialist) {
+        // The Specialty filter sends the value from Doctor.specialization, but
+        // this only ever matched Doctor.services — so picking a speciality
+        // always returned nothing. Match either column, case-insensitively.
         andCondition.push({
-            AND: ({
-                services: {
-                    contains: specialist
-                }
-            })
+            OR: [
+                { specialization: { contains: specialist, mode: 'insensitive' as const } },
+                { services: { contains: specialist, mode: 'insensitive' as const } },
+            ]
         })
     }
 
@@ -215,11 +217,30 @@ const getPlatformStats = async () => {
     };
 };
 
+/**
+ * Distinct specialities with a doctor count, for the services page.
+ * Returns [] when no doctor has one set — the UI says so rather than
+ * inventing a list.
+ */
+const getSpecialities = async () => {
+    const grouped = await prisma.doctor.groupBy({
+        by: ['specialization'],
+        where: { specialization: { not: null } },
+        _count: { _all: true },
+    });
+
+    return grouped
+        .map((g) => ({ name: (g.specialization || '').trim(), doctors: g._count._all }))
+        .filter((s) => s.name.length > 0)
+        .sort((a, b) => b.doctors - a.doctors || a.name.localeCompare(b.name));
+};
+
 export const DoctorService = {
     create,
     updateDoctor,
     deleteDoctor,
     getAllDoctors,
     getDoctor,
-    getPlatformStats
+    getPlatformStats,
+    getSpecialities
 }

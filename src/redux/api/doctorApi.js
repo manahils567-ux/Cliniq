@@ -5,6 +5,14 @@ const DOC_URL = '/doctor'
 
 export const doctorApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
+        getSpecialities: build.query({
+            query: () => ({
+                url: `${DOC_URL}/specialities`,
+                method: 'GET',
+            }),
+            transformResponse: (response) => (Array.isArray(response) ? response : response?.data ?? []),
+            providesTags: [tagTypes.doctor],
+        }),
         getPlatformStats: build.query({
             query: () => ({
                 url: `${DOC_URL}/stats`,
@@ -58,4 +66,5 @@ export const {
     useGetDoctorQuery,
     useUpdateDoctorMutation,
     useGetPlatformStatsQuery,
+    useGetSpecialitiesQuery,
 } = doctorApi

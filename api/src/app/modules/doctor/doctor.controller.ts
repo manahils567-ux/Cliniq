@@ -68,11 +68,22 @@ const getPlatformStats = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+const getSpecialities = catchAsync(async (req: Request, res: Response) => {
+    const result = await DoctorService.getSpecialities();
+    sendResponse(res, {
+        statusCode: 200,
+        message: 'Successfully Retrieved Specialities !!',
+        success: true,
+        data: result,
+    })
+})
+
 export const DoctorController = {
     createDoctor,
     updateDoctor,
     deleteDoctor,
     getAllDoctors,
     getDoctor,
-    getPlatformStats
+    getPlatformStats,
+    getSpecialities
 }
