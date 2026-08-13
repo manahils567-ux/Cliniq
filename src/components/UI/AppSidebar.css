@@ -1,14 +1,18 @@
 /* Global nav rail. Fixed to the viewport so it survives every page's own
    layout, and it reserves its own width via a body padding rule below. */
 
+/* Vertically centred on the viewport rather than pinned under the header and
+   stretched to the floor. The panel is now a fixed height, so anchoring it
+   top-and-bottom left it floating against the top with dead space below;
+   centring sits it against the optical middle of the page instead. */
 .app-sidebar {
   position: fixed;
-  top: 96px;
+  top: 50%;
   left: var(--sp-4);
-  bottom: var(--sp-4);
+  transform: translateY(-50%);
   z-index: 90;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   pointer-events: none;          /* only the rail itself is interactive */
 }
 .app-sidebar > * { pointer-events: auto; }
@@ -18,7 +22,9 @@
 .app-sidebar .dashboard-sidebar {
   position: static;
   margin-top: 0;
-  max-height: calc(100vh - 120px);
+  /* Room for the floating header and an equal gap at the foot, so a tall
+     nav still scrolls rather than running off either edge. */
+  max-height: calc(100vh - 140px);
   overflow-y: auto;
   overflow-x: hidden;
 }

@@ -73,7 +73,6 @@ const DashboardSidebar = () => {
                                 end={item.exact}
                                 className={({ isActive }) => isActive ? 'active' : ''}
                             >
-                                <span className="icon">{item.icon}</span>
                                 <span className="label">{item.label}</span>
                             </NavLink>
                         </li>
@@ -83,19 +82,16 @@ const DashboardSidebar = () => {
                     
                     <li>
                         <NavLink to="/dashboard/profile-setting">
-                            <span className="icon"><FaUserCog /></span>
                             <span className="label">Profile Settings</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/dashboard/change-password">
-                            <span className="icon"><FaLock /></span>
                             <span className="label">Change Password</span>
                         </NavLink>
                     </li>
                     <li>
                         <button type="button" className="dashboard-nav-logout" onClick={handleLogout}>
-                            <span className="icon"><FaSignOutAlt /></span>
                             <span className="label">Logout</span>
                         </button>
                     </li>
