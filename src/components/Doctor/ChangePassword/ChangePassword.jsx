@@ -32,7 +32,6 @@ const Field = ({ label, value, onChange, placeholder, autoComplete }) => (
             onChange={(e) => onChange(e.target.value)}
             placeholder={placeholder}
             autoComplete={autoComplete}
-            size="large"
         />
     </div>
 );
