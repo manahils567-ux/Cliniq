@@ -37,18 +37,19 @@
    no transition to match. Keep this in step with --rail-open-w in
    DashboardSidebar.css — the coupling is across files and silent if it
    drifts. */
-body:has(.app-sidebar) .dashboard-wrapper,
-body:has(.app-sidebar) .track-page,
-body:has(.app-sidebar) > #root > .about-us,
-body:has(.app-sidebar) .search-doctor-page,
-body:has(.app-sidebar) .cq-page {
+/* Applied once at the root rather than to a list of page wrappers. The
+   allowlist approach enumerated five classes — dashboard-wrapper,
+   track-page, about-us, search-doctor-page, cq-page — so any screen whose
+   wrapper was not among them got no gutter and ran under the sidebar. There
+   is no way to notice that except by opening every page.
+
+   #root is safe to pad: the sidebar and the floating nav are both
+   position: fixed, so neither is displaced by it. */
+body:has(.app-sidebar) #root {
   padding-left: 226px;
 }
 
 @media (max-width: 992px) {
   .app-sidebar { display: none; }
-  body:has(.app-sidebar) .dashboard-wrapper,
-  body:has(.app-sidebar) .track-page,
-  body:has(.app-sidebar) .search-doctor-page,
-  body:has(.app-sidebar) .cq-page { padding-left: 0; }
+  body:has(.app-sidebar) #root { padding-left: 0; }
 }
