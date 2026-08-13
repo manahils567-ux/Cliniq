@@ -14,7 +14,10 @@
     align-items: center;
     gap: 10px;
     background: var(--c-action);
-    color: #fff;
+    /* Paired with --c-action, not hardcoded. This was #fff, which was right
+       while --c-action was rosewood; once it became the cream action colour
+       the label went white-on-cream and disappeared. */
+    color: var(--c-action-text);
     border: none;
     border-radius: var(--r-full);
     padding: 13px 22px;
@@ -22,13 +25,13 @@
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 6px 24px rgba(125, 64, 71, 0.35);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .cw-toggle:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(125, 64, 71, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     background: var(--c-action-hover);
 }
 
@@ -44,9 +47,9 @@
     z-index: 9100;
     width: 360px;
     height: 520px;
-    background: #fff;
+    background: var(--c-surface);
     border-radius: var(--r-lg);
-    box-shadow: 0 16px 56px rgba(125, 64, 71, 0.18);
+    box-shadow: 0 16px 56px rgba(0, 0, 0, 0.18);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -130,7 +133,7 @@
 }
 
 .cw-lang-btn.active {
-    background: #fff;
+    background: var(--c-surface);
     color: var(--c-action);
 }
 
@@ -162,7 +165,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background: var(--n-050);
+    background: var(--c-surface);
 }
 
 .cw-messages::-webkit-scrollbar {
@@ -194,7 +197,7 @@
 .cw-msg-avatar {
     width: 26px;
     height: 26px;
-    background: var(--n-050);
+    background: var(--c-surface);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -227,14 +230,14 @@
 }
 
 .cw-msg--bot .cw-msg-text {
-    background: #fff;
+    background: var(--c-surface);
     color: var(--c-ink);
     border-bottom-left-radius: 4px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.07);
 }
 
 .cw-msg--error .cw-msg-text {
-    background: var(--n-050);
+    background: var(--c-surface);
     color: #b91c1c;
     border: 1px solid var(--n-200);
 }
@@ -252,7 +255,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    background: #fff;
+    background: var(--c-surface);
     padding: 12px 16px;
     border-radius: var(--r-lg);
     border-bottom-left-radius: 4px;
@@ -282,15 +285,15 @@
     align-items: center;
     gap: 8px;
     padding: 12px 14px;
-    border-top: 1px solid var(--n-050);
-    background: #fff;
+    border-top: 1px solid transparent;
+    background: var(--c-surface);
     flex-shrink: 0;
 }
 
 .cw-input {
     flex: 1;
-    background: var(--n-050);
-    border: 1.5px solid var(--n-100);
+    background: var(--c-surface);
+    border: 1.5px solid transparent;
     border-radius: var(--r-lg);
     padding: 10px 14px;
     font-size: 13px;
@@ -302,8 +305,8 @@
 
 .cw-input:focus {
     border-color: var(--c-action);
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(125, 64, 71, 0.1);
+    background: var(--c-surface);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .cw-input::placeholder { color: var(--n-400); }
@@ -312,7 +315,10 @@
     width: 40px;
     height: 40px;
     background: var(--c-action);
-    color: #fff;
+    /* Paired with --c-action, not hardcoded. This was #fff, which was right
+       while --c-action was rosewood; once it became the cream action colour
+       the label went white-on-cream and disappeared. */
+    color: var(--c-action-text);
     border: none;
     border-radius: var(--r-lg);
     display: flex;

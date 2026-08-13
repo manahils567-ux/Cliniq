@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Footer from '../Shared/Footer/Footer';
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import { useGetAllBlogsQuery } from '../../redux/api/blogApi';
 import { useDebounced } from '../../redux/hooks';
 import { Empty, Pagination, Spin, Input } from 'antd';
@@ -130,7 +130,7 @@ const Blog = () => {
 				</div>
 			</section>
 
-			<Footer />
+			<CqSiteFooter />
 		</>
 	);
 };

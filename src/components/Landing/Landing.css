@@ -2,7 +2,8 @@
    LANDING PAGE — Clinnic
    =========================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Poppins import removed — no rule ever set it as a family, so it was a
+   render-blocking request for a font the page never drew with. */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -11,10 +12,27 @@
 }
 
 .landing {
+  /* Rosewood is retired globally — see the note in tokens.css — but the
+     landing page keeps it. Scoped here rather than restored in tokens so it
+     cannot leak back into the app: everything inside .landing inherits these
+     and nothing outside it can. The fill/text split is preserved exactly as
+     tokens.css describes it: --c-accent is a dark fill with cream on top,
+     --c-accent-line is light text on the dark ground. */
+  --c-accent:       #7D4047;
+  --c-accent-hover: #663339;
+  --c-accent-line:  #E2CBCE;
+
   font-family: var(--font-ui);
   color: var(--text-dark);
   background: var(--c-bg);
-  overflow-x: hidden;
+  /* clip, not hidden. overflow-x: hidden makes this a scroll container, and a
+     sticky descendant then resolves against it rather than the viewport — the
+     capability rail's pinned stage scrolled away instead of holding. clip
+     suppresses the horizontal overflow without creating that container.
+     overflow-y must stay visible: paired with auto or scroll, clip computes
+     back to hidden and the bug returns. */
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 /* ── NAVBAR ── */
@@ -163,7 +181,7 @@
   align-items: center;
   padding: 80px 60px 60px;
   gap: 60px;
-  background: linear-gradient(135deg, var(--n-050) 0%, var(--n-100) 100%);
+  background: linear-gradient(135deg, var(--c-surface) 0%, var(--n-100) 100%);
   min-height: 88vh;
 }
 
@@ -378,6 +396,16 @@
 /* ── FEATURE ROW ── */
 .section {
   padding: 72px 60px;
+}
+
+/* The closing CTA and the footer are the page's two floating dark cards and
+   sit directly above one another, so they need a shared inset. The 60px above
+   left the CTA 88px narrower than the footer, which uses --sp-4. Defined here
+   rather than in base.css because Landing.css loads after it — at equal
+   specificity the .section rule above would otherwise win. */
+.section--card-flush {
+  padding-left: var(--sp-4);
+  padding-right: var(--sp-4);
 }
 
 .section-bg {
@@ -770,7 +798,7 @@
   justify-content: center;
   color: var(--primary);
   font-size: 15px;
-  box-shadow: 0 2px 8px rgba(125, 64, 71,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .booking-input-text label {

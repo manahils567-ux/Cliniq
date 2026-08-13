@@ -1,4 +1,4 @@
-import Footer from '../Shared/Footer/Footer';
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import Header from '../Shared/Header/Header';
 import SubHeader from '../Shared/SubHeader';
 import './index.css';
@@ -197,8 +197,14 @@ const TrackAppointment = ({ embedded = false }) => {
 												</div>
 											)}
 
+											{/* Vertical label placement: inline titles sit beside each dot
+											    and share the row's width, so in this column they clipped to
+											    "Confirme…" / "See your do…". Stacking them under the dot
+											    gives each step the full column. */}
 											<Steps
 												className="track-page__steps"
+												labelPlacement="vertical"
+												responsive={false}
 												current={-1}
 												items={[
 													{ title: 'Booked', description: 'Confirmation sent' },
@@ -414,7 +420,7 @@ const TrackAppointment = ({ embedded = false }) => {
 				)}
 			</div>
 
-			{!embedded && <Footer />}
+			{!embedded && <CqSiteFooter />}
 		</>
 	);
 };

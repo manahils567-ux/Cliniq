@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Footer from '../../Shared/Footer/Footer';
+import CqSiteFooter from '../../Shared/CqSiteFooter/CqSiteFooter';
 import SearchSidebar from './SearchSidebar';
 import SearchContent from './SearchContent';
 import { useDebounced } from '../../../utils/hooks/useDebounced';
@@ -143,7 +143,7 @@ const SearchDoctor = () => {
 					</div>
 				</div>
 			</div>
-			<Footer />
+			<CqSiteFooter />
 		</div>
 	);
 };

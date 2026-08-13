@@ -61,6 +61,13 @@ export const authApi = baseApi.injectEndpoints({
                 } catch {}
             },
         }),
+        changePassword: build.mutation({
+            query: (data) => ({
+                url: `${AUTH_URL}/change-password`,
+                method: 'PATCH',
+                data,
+            }),
+        }),
     })
 })
 
@@ -70,5 +77,6 @@ export const {
     usePatientSignUpMutation,
     useResetPasswordMutation, 
     useResetConfirmMutation,
-    useGoogleLoginMutation
+    useGoogleLoginMutation,
+    useChangePasswordMutation
 } = authApi

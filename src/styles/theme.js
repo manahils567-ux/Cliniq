@@ -1,9 +1,11 @@
 /**
  * Cliniq — Ant Design themes
  *
- * Two configs. `cliniqTheme` for app surfaces (dashboard, admin, forms).
- * `cliniqDarkTheme` for anything rendered inside a .cq-dark shell —
- * wrap that subtree in its own <ConfigProvider>.
+ * Two configs. `cliniqDarkTheme` is the app default — the whole site runs on
+ * the dark ground now, so antd has to match or every dropdown, modal and
+ * picker arrives as a white panel over a dark page. `cliniqTheme` is the
+ * original light config, kept so the change is reversible and so any subtree
+ * that needs a light shell can wrap itself in its own <ConfigProvider>.
  *
  * Values MUST stay in sync with styles/tokens.css. AntD generates CSS at
  * runtime and cannot read var(--n-950), so the hexes are duplicated here.
@@ -17,8 +19,11 @@ export const mono = {
   n300: '#C7BDB3', n400: '#90867C', n500: '#736A61', n600: '#635B54',
   n700: '#47413C', n800: '#2E2E2E', n900: '#232322', n950: '#191918',
   accent: '#7D4047', accentHover: '#663339', accentWash: '#F5EBEC',
+  /* Rosewood is ~1.5:1 on the dark ground; this is the readable stand-in
+     for anything drawing text or links in the accent. */
+  accentLine: '#E2CBCE',
   signal: '#C08A2E', danger: '#B3261E', positive: '#2F6B4F',
-  fontUI: "'Inter', 'Segoe UI', system-ui, sans-serif",
+  fontUI: "'Manrope', 'Segoe UI', system-ui, sans-serif",
 };
 
 /* Shared across both modes — geometry and type never change with theme. */
@@ -107,13 +112,49 @@ export const cliniqDarkTheme = {
 
     colorBorder:          'rgba(241, 236, 230, 0.14)',
     colorBorderSecondary: 'rgba(241, 236, 230, 0.09)',
+
+    colorTextDescription: 'rgba(241, 236, 230, 0.64)',
+    /* 0.40 put placeholder text at roughly 3.3:1 on the control fill, which
+       reads as a disabled field — a search box next to two populated selects
+       looked switched off. 0.55 is about 5.2:1, clear of the 4.5:1 line and
+       still plainly subordinate to a real value at 0.88. */
+    colorTextPlaceholder: 'rgba(241, 236, 230, 0.55)',
+
+    colorLink:      mono.accentLine,
+    colorLinkHover: mono.n100,
+
+    /* Shadows on a near-black ground have to be darker than the surface,
+       not a tinted version of it, or they read as a glow. */
+    boxShadow:          '0 2px 10px rgba(0, 0, 0, 0.45)',
+    boxShadowSecondary: '0 12px 32px rgba(0, 0, 0, 0.55)',
   },
   components: {
     ...sharedComponents,
     Button: { ...sharedComponents.Button, primaryColor: '#0A0A0A' },
-    Table:  { headerBg: '#141414', rowHoverBg: '#141414', borderColor: 'rgba(241,236,230,0.09)' },
+    /* borderColor draws the rule under the header and between rows;
+       headerSplitColor draws the little vertical ticks between column
+       headings. Both were visible lines on the dark ground — the header's
+       own uppercase labels already separate it from the body. */
+    Table:  {
+      headerBg: 'transparent',
+      rowHoverBg: '#1F1F1F',
+      borderColor: 'transparent',
+      headerSplitColor: 'transparent',
+    },
     Input:  { paddingBlock: 9, activeShadow: '0 0 0 3px rgba(241, 236, 230, 0.34)' },
     Segmented: { itemSelectedBg: mono.n100, itemSelectedColor: '#0A0A0A' },
+    /* The light config sets these; without dark counterparts the dropdowns,
+       tags and pickers keep antd's own surfaces and show up as white panels
+       over a dark page. */
+    Tag:        { ...sharedComponents.Tag, defaultBg: '#1F1F1F', defaultColor: 'rgba(241, 236, 230, 0.88)' },
+    Select:     { optionSelectedBg: '#1F1F1F', optionSelectedColor: mono.n100 },
+    DatePicker: { activeShadow: '0 0 0 3px rgba(241, 236, 230, 0.34)', cellHoverBg: '#1F1F1F' },
+    Menu:       { ...sharedComponents.Menu, itemSelectedBg: '#1F1F1F', itemSelectedColor: mono.n100, itemHoverBg: '#141414' },
+    Dropdown:   { colorBgElevated: '#1F1F1F' },
+    Modal:      { ...sharedComponents.Modal, contentBg: '#141414', headerBg: '#141414' },
+    Tooltip:    { colorBgSpotlight: '#1F1F1F', colorTextLightSolid: mono.n100 },
+    Message:    { contentBg: '#1F1F1F' },
+    Notification: { colorBgElevated: '#1F1F1F' },
   },
 };
 

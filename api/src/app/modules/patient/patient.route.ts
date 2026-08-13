@@ -6,10 +6,10 @@ import { CloudinaryHelper } from '../../../helpers/uploadHelper';
 
 const router = express.Router();
 
-router.get('/', PatientController.getAllPatients);
+router.get('/', auth(AuthUser.ADMIN, AuthUser.SUPER_ADMIN), PatientController.getAllPatients);
 router.post('/', PatientController.createPatient);
-router.get('/:id', PatientController.getPatient);
-router.delete('/:id', PatientController.deletePatient);
+router.get('/:id', auth(AuthUser.PATIENT, AuthUser.DOCTOR, AuthUser.ADMIN, AuthUser.SUPER_ADMIN), PatientController.getPatient);
+router.delete('/:id', auth(AuthUser.ADMIN, AuthUser.SUPER_ADMIN), PatientController.deletePatient);
 router.patch('/:id',
     CloudinaryHelper.upload.single('file'),
     auth(AuthUser.PATIENT),

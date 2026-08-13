@@ -53,19 +53,18 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Same Bootstrap hues as the doctor-side tiles, same problem on dark: the
+   5% tints go olive and swamp. State rides the border instead. */
 .stats-mini-card--warning {
-  border-color: #ffc107;
-  background: rgba(255, 193, 7, 0.05);
+  border-color: var(--c-signal);
 }
 
 .stats-mini-card--success {
   border-color: var(--c-positive);
-  background: rgba(40, 167, 69, 0.05);
 }
 
 .stats-mini-card--danger {
   border-color: var(--c-danger);
-  background: rgba(220, 53, 69, 0.05);
 }
 
 .stats-mini-value {

@@ -1,0 +1,204 @@
+/* Showcase panel for the sign-up split screen.
+   Ported from a Tailwind reference to plain CSS on the --d-* tokens, since
+   this app has no Tailwind. */
+
+.shx {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: var(--d-surface);
+  border: 1px solid var(--d-border);
+  color: var(--d-text);
+  padding: 3rem 1.75rem;
+}
+
+.shx-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.shx-brand {
+  font-size: 1.125rem;
+  font-weight: var(--fw-semi);
+  letter-spacing: -0.01em;
+  color: var(--d-text);
+}
+
+/* ── Image collage ────────────────────────────────────────────────────── */
+.shx-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.shx-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.shx-fade--top {
+  top: 0;
+  height: 5rem;
+  background: linear-gradient(to bottom, var(--d-surface), transparent);
+}
+
+.shx-fade--bottom {
+  bottom: 0;
+  height: 6rem;
+  background: linear-gradient(to top, var(--d-surface), transparent);
+}
+
+.shx-tile {
+  position: relative;
+  border-radius: var(--r-md);
+  z-index: 0;
+}
+
+.shx-tile.is-active { z-index: 10; }
+
+.shx-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  opacity: 0.4;
+  transition: opacity 700ms var(--ease);
+}
+
+.shx-tile.is-active img { opacity: 1; }
+
+.shx-tile--tall { grid-row: span 2; height: 250px; }
+.shx-tile--sm   { height: 121px; }
+.shx-tile--wide { grid-column: span 2; height: 120px; }
+
+/* Corner brackets that snap in around the active tile. */
+.shx-corner {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-color: rgba(241, 236, 230, 0.6);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 500ms var(--ease-out), opacity 500ms var(--ease-out);
+}
+
+.shx-corner.is-on { opacity: 1; transform: translate(0, 0); }
+
+.shx-corner--tl {
+  top: -0.5rem; left: -0.5rem;
+  border-top-width: 1px; border-left-width: 1px;
+  transform: translate(-0.5rem, -0.5rem);
+}
+.shx-corner--tr {
+  top: -0.5rem; right: -0.5rem;
+  border-top-width: 1px; border-right-width: 1px;
+  transform: translate(0.5rem, -0.5rem);
+}
+.shx-corner--bl {
+  bottom: -0.5rem; left: -0.5rem;
+  border-bottom-width: 1px; border-left-width: 1px;
+  transform: translate(-0.5rem, 0.5rem);
+}
+.shx-corner--br {
+  bottom: -0.5rem; right: -0.5rem;
+  border-bottom-width: 1px; border-right-width: 1px;
+  transform: translate(0.5rem, 0.5rem);
+}
+
+/* ── Caption card ─────────────────────────────────────────────────────── */
+.shx-caption {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px dashed var(--d-border-strong);
+  border-radius: 10px;
+}
+
+.shx-caption p {
+  flex: 1;
+  margin: 0;
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--d-text-muted);
+  min-height: 3.6em;
+}
+
+.shx-caption__eyebrow {
+  font-weight: var(--fw-semi);
+  color: var(--d-text);
+}
+
+.shx-caption__next {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: var(--r-full);
+  background: rgba(241, 236, 230, 0.2);
+  color: var(--d-text);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.shx-caption__next:hover { background: rgba(241, 236, 230, 0.3); }
+
+/* ── Tagline + pager ──────────────────────────────────────────────────── */
+.shx-tagline {
+  max-width: 280px;
+  margin: 1.75rem 0 0;
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: var(--lh-tight);
+  color: var(--d-text);
+}
+
+.shx-dots {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 2rem 0 0.5rem;
+}
+
+.shx-dot {
+  height: 4px;
+  width: 1rem;
+  border: none;
+  padding: 0;
+  border-radius: var(--r-full);
+  background: rgba(241, 236, 230, 0.35);
+  cursor: pointer;
+  transition: width var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.shx-dot.is-active {
+  width: 2.5rem;
+  background: var(--d-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shx-tile img,
+  .shx-corner,
+  .shx-dot { transition: none; }
+}
+
+/* Panel is decorative — drop it before the form gets cramped. */
+@media (max-width: 900px) {
+  .shx { display: none; }
+}

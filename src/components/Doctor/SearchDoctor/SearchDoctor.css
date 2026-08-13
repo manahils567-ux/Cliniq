@@ -3,7 +3,7 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	background: var(--n-050);
+	background: var(--c-surface);
 }
 
 .search-doctor-layout {
@@ -56,7 +56,7 @@
 
 /* Sidebar */
 .search-sidebar {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 	border: 1px solid rgba(0, 0, 0, 0.04);
@@ -105,14 +105,14 @@
 
 .search-sidebar__input.ant-input-affix-wrapper {
 	border-radius: var(--r-md);
-	border-color: var(--n-100);
+	border-color: transparent;
 	padding: 8px 12px;
 }
 
 .search-sidebar__input.ant-input-affix-wrapper:hover,
 .search-sidebar__input.ant-input-affix-wrapper:focus-within {
 	border-color: var(--c-action);
-	box-shadow: 0 0 0 2px rgba(125, 64, 71, 0.1);
+	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .search-sidebar__input-icon {
@@ -126,7 +126,7 @@
 
 .search-sidebar__select.ant-select .ant-select-selector {
 	border-radius: var(--r-md);
-	border-color: var(--n-100);
+	border-color: transparent;
 	min-height: 40px;
 	align-items: center;
 }
@@ -159,7 +159,7 @@
 
 /* Doctor card — full-width horizontal layout */
 .doctor-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	box-shadow:
 		0 1px 3px rgba(15, 23, 42, 0.06),
@@ -171,8 +171,8 @@
 
 .doctor-card:hover {
 	box-shadow:
-		0 4px 12px rgba(125, 64, 71, 0.1),
-		0 24px 48px -12px rgba(125, 64, 71, 0.14);
+		0 4px 12px rgba(0, 0, 0, 0.1),
+		0 24px 48px -12px rgba(241, 236, 230, 0.14);
 	transform: translateY(-3px);
 }
 
@@ -186,12 +186,12 @@
 .doctor-card__visual {
 	position: relative;
 	padding: 1.5rem 1rem 1.5rem 1.5rem;
-	background: linear-gradient(165deg, var(--n-050) 0%, var(--n-100) 55%, var(--n-100) 100%);
+	background: linear-gradient(165deg, var(--c-surface) 0%, var(--n-100) 55%, var(--n-100) 100%);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-	border-right: 1px solid rgba(125, 64, 71, 0.08);
+	border-right: 1px solid rgba(241, 236, 230, 0.08);
 }
 
 .doctor-card__photo-wrap {
@@ -206,7 +206,7 @@
 	aspect-ratio: 1;
 	border-radius: 18px;
 	overflow: hidden;
-	background: #fff;
+	background: var(--c-surface);
 	box-shadow:
 		0 8px 24px rgba(15, 23, 42, 0.1),
 		inset 0 1px 0 rgba(255, 255, 255, 0.9);
@@ -216,7 +216,7 @@
 	position: absolute;
 	inset: -4px;
 	border-radius: 22px;
-	border: 1px solid rgba(125, 64, 71, 0.15);
+	border: 1px solid rgba(241, 236, 230, 0.15);
 	pointer-events: none;
 }
 
@@ -252,8 +252,8 @@
 	gap: 2px 6px;
 	padding: 8px 14px;
 	border-radius: var(--r-full);
-	background: #fff;
-	border: 1px solid rgba(125, 64, 71, 0.12);
+	background: var(--c-surface);
+	border: 1px solid rgba(241, 236, 230, 0.12);
 	box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
 	font-weight: 700;
 	font-size: 1.05rem;
@@ -359,7 +359,7 @@
 	gap: 4px;
 	padding: 10px 14px;
 	border-radius: var(--r-lg);
-	background: linear-gradient(145deg, var(--n-000) 0%, var(--c-bg-alt) 100%);
+	background: linear-gradient(145deg, var(--c-surface) 0%, var(--c-bg-alt) 100%);
 	border: 1px solid rgba(15, 23, 42, 0.06);
 	min-width: 140px;
 }
@@ -432,11 +432,11 @@
 	display: inline-block;
 	font-size: 0.72rem;
 	padding: 5px 11px;
-	background: rgba(125, 64, 71, 0.08);
+	background: rgba(241, 236, 230, 0.08);
 	color: var(--c-action-hover);
 	border-radius: var(--r-full);
 	font-weight: 600;
-	border: 1px solid rgba(125, 64, 71, 0.12);
+	border: 1px solid rgba(241, 236, 230, 0.12);
 }
 
 .doctor-card__tag--more {
@@ -469,13 +469,13 @@
 }
 
 .doctor-card__btn--outline {
-	background: #fff;
+	background: var(--c-surface);
 	color: var(--c-action);
 	border: 2px solid var(--c-action);
 }
 
 .doctor-card__btn--outline:hover {
-	background: rgba(125, 64, 71, 0.06);
+	background: rgba(241, 236, 230, 0.06);
 	color: var(--c-action-hover);
 }
 
@@ -487,7 +487,7 @@
 
 .doctor-card__btn--primary:hover {
 	color: #fff;
-	box-shadow: 0 6px 20px rgba(125, 64, 71, 0.35);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 /* Compact (profile embed) */
@@ -522,7 +522,7 @@
 		gap: 1rem;
 		padding: 1.25rem;
 		border-right: none;
-		border-bottom: 1px solid rgba(125, 64, 71, 0.08);
+		border-bottom: 1px solid rgba(241, 236, 230, 0.08);
 	}
 	.doctor-card__photo-wrap {
 		max-width: 120px;

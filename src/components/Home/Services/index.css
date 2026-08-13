@@ -1,6 +1,6 @@
 .services-section {
 	padding: 5rem 0;
-	background: #fff;
+	background: var(--c-surface);
 }
 
 .services-header {
@@ -69,8 +69,8 @@
 }
 
 .service-content-card {
-	background: linear-gradient(180deg, var(--n-000) 0%, #fff 100%);
-	border: 1px solid rgba(125, 64, 71, 0.1);
+	background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-surface) 100%);
+	border: 1px solid rgba(241, 236, 230, 0.1);
 	border-radius: var(--r-lg);
 	padding: 2rem;
 	height: 100%;
@@ -83,7 +83,7 @@
 	width: 56px;
 	height: 56px;
 	border-radius: var(--r-lg);
-	background: rgba(125, 64, 71, 0.12);
+	background: rgba(241, 236, 230, 0.12);
 	color: var(--c-action);
 	display: flex;
 	align-items: center;

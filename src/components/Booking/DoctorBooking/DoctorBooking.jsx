@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Footer from '../../Shared/Footer/Footer'
+import CqSiteFooter from '../../Shared/CqSiteFooter/CqSiteFooter'
 import img from '../../../images/doc/doctor 3.jpg'
 import './index.css';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -191,7 +191,7 @@ const DoctorBooking = () => {
                     {current > 0 && (<Button style={{ margin: '0 8px', }} onClick={() => prev()} >Previous</Button>)}
                 </div>
             </div>
-            <Footer />
+            <CqSiteFooter />
         </>
     )
 }

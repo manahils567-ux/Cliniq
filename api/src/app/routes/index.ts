@@ -16,6 +16,7 @@ import { AiRouter } from '../modules/ai/ai.route';
 import { ReminderRouter } from '../modules/reminder/reminder.route';
 import { MedicalRecordRouter } from '../modules/medicalRecord/medicalRecord.route';
 import { NearbyRouter } from '../modules/nearby/nearby.route';
+import { NewsletterRouter } from '../modules/newsletter/newsletter.route';
 
 const router = express.Router();
 
@@ -81,6 +82,10 @@ const moduleRoutes = [
     {
         path: '/nearby',
         route: NearbyRouter
+    },
+    {
+        path: '/newsletter',
+        route: NewsletterRouter
     }
 ]
 moduleRoutes.forEach((route) => router.use(route.path, route.route));

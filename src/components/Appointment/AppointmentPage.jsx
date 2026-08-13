@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Footer from '../Shared/Footer/Footer';
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import Header from '../Shared/Header/Header';
 import CheckoutPage from '../Booking/BookingCheckout/CheckoutPage';
 import PersonalInformation from '../Booking/PersonalInformation';
@@ -225,7 +225,7 @@ const AppointmentPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <CqSiteFooter />
     </>
   );
 };

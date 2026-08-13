@@ -145,6 +145,12 @@ a:hover { opacity: 0.62; color: inherit; }
   position: absolute;
   inset: 0;
   background:
+    /* Topmost layer: settles the whole width onto --d-bg at the bottom edge.
+       The directional layer below is opaque --n-800 at the left and nearly
+       clear at the right, so the hero used to meet the trust strip at a
+       different tone on each side — no flat colour on the strip could match
+       it, and the join read as a line. Landing both on --d-bg removes it. */
+    linear-gradient(to top, var(--d-bg) 0%, rgba(10,10,10,0.86) 7%, transparent 24%),
     linear-gradient(100deg, var(--n-800) 8%, rgba(46,46,46,0.90) 26%, rgba(46,46,46,0.34) 48%, rgba(46,46,46,0.06) 100%),
     linear-gradient(to top, rgba(46,46,46,0.58) 0%, transparent 34%);
 }
@@ -213,12 +219,20 @@ a:hover { opacity: 0.62; color: inherit; }
 
 .cq-hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 7.4vw, var(--fs-3xl));
+  /* 7.4vw was sized for Inter Tight. Montserrat's geometric forms are
+     appreciably wider at the same size, and inside the 42vw measure the
+     headline broke to four lines and pushed into the lede. */
+  font-size: clamp(2.25rem, 6.1vw, 4.75rem);
   font-weight: var(--fw-bold);
   line-height: var(--lh-hero);
   letter-spacing: var(--tr-hero);
   color: var(--d-text);
-  max-width: 15ch;
+  /* 15ch sets the measure at small sizes; the vw cap keeps the headline out of
+     the right half of the frame, where hero.mp4's cards sit. Without it the
+     "Low haemoglobin" card slides under the last line at desktop widths — the
+     video is full-bleed with no horizontal crop, so its cards always land at
+     ~50% of the viewport regardless of size. */
+  max-width: min(15ch, 42vw);
   text-wrap: balance;
 }
 
@@ -387,23 +401,72 @@ a:hover { opacity: 0.62; color: inherit; }
    leftovers where AntD hardcodes what the token API does not expose.
    ========================================================================== */
 
+/* Bootstrap gutter rows escaping their container.
+   .g-4/.g-5 set --bs-gutter-x on the ROW, so its negative margins grow to
+   -24px, but .container's padding is computed from its own gutter variable
+   and stays at 12px. The row then overhangs by the difference on each side —
+   measured at 1300px inside a 1276px container on /about and /contact, which
+   put a horizontal scrollbar on the document. Zeroing the margin keeps the
+   columns' own gutter padding and stops the overhang; content sits inset
+   rather than flush, which is the lesser of the two. */
+.container > .row[class*="g-"],
+.container-fluid > .row[class*="g-"] { margin-inline: 0; }
+
 .ant-btn { font-family: var(--font-ui); font-weight: var(--fw-medium); }
-.ant-card { box-shadow: none; border-color: var(--c-border-subtle); }
-.ant-card-head { border-bottom-color: var(--c-border-subtle); }
+.ant-card { box-shadow: none; border-color: transparent; }
+.ant-card-head { border-bottom-color: transparent; }
 .ant-modal-content { box-shadow: var(--sh-xl); }
 .ant-modal-header { border-bottom: 1px solid var(--c-border-subtle); padding-bottom: var(--sp-3); }
 .ant-table-thead > tr > th {
-  background: var(--c-bg-alt) !important;
+  background: transparent !important;
   color: var(--c-text-muted) !important;
   font-weight: var(--fw-semi);
   font-size: var(--fs-xs);
   letter-spacing: var(--tr-wide);
   text-transform: uppercase;
-  border-bottom: 1px solid var(--c-border) !important;
+  /* No rule under the header. The uppercase, letterspaced labels already
+     separate it from the body. */
+  border-bottom: none !important;
 }
-.ant-table-tbody > tr:hover > td { background: var(--c-bg-alt) !important; }
+.ant-table-tbody > tr:hover > td { background: var(--d-surface-alt) !important; }
+
+/* The rest of the table's chrome. Kept in this block deliberately: an earlier
+   attempt put the same rules higher up the file and they were silently
+   overridden by the .ant-table-thead rule above, which re-added the very
+   border they removed. One place only. */
+.ant-table,
+.ant-table-container,
+.ant-table-content { border: none !important; }
+.ant-table-tbody > tr > td { border-bottom: none !important; }
+/* The vertical tick between column labels. */
+.ant-table-thead > tr > th::before { display: none !important; }
+
+/* Controls lose the outline but gain a fill, so they still read as things you
+   can type into — no edge and no ground would make them invisible. */
+.ant-input-affix-wrapper,
+.ant-input,
+.ant-picker,
+.ant-select .ant-select-selector {
+  border-color: transparent !important;
+  background: var(--d-surface-alt) !important;
+}
+/* The wrapper measured 41px against the select's 40, so a filter row sat a
+   pixel out of line. Pinned so they share a baseline. */
+.ant-input-affix-wrapper,
+.ant-picker,
+.ant-select-single .ant-select-selector { min-height: 40px; }
+/* Focus keeps an edge; without it there is no keyboard focus cue at all. */
+.ant-input-affix-wrapper:focus-within,
+.ant-picker-focused,
+.ant-select-focused .ant-select-selector {
+  border-color: var(--d-border-strong) !important;
+}
 .ant-tag { border-radius: var(--r-full); font-weight: var(--fw-medium); border: none; padding: 0.15em 0.7em; }
 .ant-empty-description { color: var(--c-text-muted); }
+/* The tray illustration reads as a broken image on the dark ground and adds
+   nothing the words do not. The text carries the empty state on its own. */
+.ant-empty-image { display: none; }
+.ant-empty-normal { margin-block: var(--sp-7); }
 .ant-picker, .ant-select-selector, .ant-input { font-family: var(--font-ui) !important; }
 
 /* Bootstrap's negative .row gutter breaks AntD Modal padding */
@@ -549,10 +612,29 @@ a:hover { opacity: 0.62; color: inherit; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-4);
-  padding: var(--sp-6) var(--sp-7) var(--sp-7);
-  /* Continues the hero's dark block instead of cutting straight to cream —
-     the colour change then lands at the end of a band rather than mid-air. */
+  position: relative;
+  /* Bottom padding is the top padding plus the ramp's height, which lands the
+     figures in the middle of the solid dark zone instead of riding high above
+     the fade. */
+  padding: var(--sp-6) var(--sp-7) calc(var(--sp-6) + 88px);
   background: var(--d-bg);
+}
+
+/* Carries the strip down into the cream. This is a pseudo-element rather than
+   a gradient on the box itself: as a background it had to be sized as a
+   percentage of the strip, so keeping the labels clear of it meant padding the
+   bottom out and pushing the whole row upward. Pinned to the bottom edge at a
+   fixed height, it no longer dictates where the content sits. The hero handles
+   the matching fade on the strip's top edge. */
+.cq-trust::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 88px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--d-bg) 0%, var(--c-bg) 100%);
 }
 .cq-trust__item {
   display: flex;
@@ -627,7 +709,7 @@ a:hover { opacity: 0.62; color: inherit; }
 .cq-panel--ink    { background: var(--d-bg); color: rgba(241,236,230,0.78); }
 .cq-panel--accent { background: var(--c-accent); color: rgba(241,236,230,0.82); }
 .cq-panel--greige { background: var(--n-200); color: var(--n-600); }
-.cq-panel--cream  { background: var(--n-000); color: var(--c-text); border-color: var(--c-border); }
+.cq-panel--cream  { background: var(--c-surface); color: var(--c-text); border-color: var(--c-border); }
 
 .cq-panel__head {
   display: flex;

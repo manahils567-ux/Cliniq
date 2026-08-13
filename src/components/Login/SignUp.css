@@ -1,0 +1,221 @@
+/* Sign-up form — ported from a Tailwind reference to the --d-* tokens. */
+
+.su {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.su-title {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--d-text);
+  margin: 0;
+}
+
+.su-social { margin-top: 1.75rem; }
+
+/* The reference pairs Google with Apple; only Google is wired up here, so it
+   runs full width rather than shipping a button that does nothing. */
+.su-social .auth-social-btn {
+  width: 100%;
+  height: 2.5rem;
+}
+
+.su-or {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  font-size: var(--fs-sm);
+  color: var(--d-text-muted);
+}
+
+.su-or::before,
+.su-or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--d-border);
+}
+
+/* ── Fields ───────────────────────────────────────────────────────────── */
+.su-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.su-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.su-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid var(--d-border);
+  border-radius: 8px;
+  background: var(--d-bg);
+  cursor: text;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.su-box:focus-within { border-color: var(--d-border-strong); }
+
+.su-box input,
+.su-box select {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--d-text);
+  font-size: var(--fs-base);
+  font-family: inherit;
+}
+
+.su-box input::placeholder { color: var(--d-text-faint); }
+
+.su-box select {
+  cursor: pointer;
+  /* Native select popups render light; keep the options readable. */
+  color: var(--d-text);
+}
+
+.su-box select option {
+  background: var(--d-surface);
+  color: var(--d-text);
+}
+
+/* The label sits inside the field, right-aligned — the reference's signature
+   detail. It stays put while typing instead of vanishing. */
+.su-box__label {
+  flex-shrink: 0;
+  font-size: var(--fs-sm);
+  color: var(--d-text-muted);
+  pointer-events: none;
+}
+
+.su-box__eye {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--d-text-faint);
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.su-box__eye:hover { color: var(--d-text); }
+
+/* ── Fine print ───────────────────────────────────────────────────────── */
+.su-fine {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  color: var(--d-text-faint);
+}
+
+.su-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.su-check__box {
+  position: relative;
+  flex-shrink: 0;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-top: 0.15rem;
+}
+
+.su-check__box input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 1px solid var(--d-border-strong);
+  border-radius: 2px;
+  background: var(--d-bg);
+  cursor: pointer;
+}
+
+.su-check__box input:checked {
+  background: var(--d-text);
+  border-color: var(--d-text);
+}
+
+.su-check__box svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1px;
+  display: none;
+  pointer-events: none;
+  color: var(--d-bg);
+}
+
+.su-check__box input:checked + svg { display: block; }
+
+.su-terms { margin: 0; }
+
+.su-terms a {
+  font-weight: var(--fw-medium);
+  color: var(--d-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.su-terms a:hover { color: var(--d-text); }
+
+/* ── Submit ───────────────────────────────────────────────────────────── */
+.su-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 3rem;
+  margin-top: 0.75rem;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to bottom right, var(--c-surface), var(--n-200));
+  color: var(--n-900);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.su-submit:hover {
+  background: linear-gradient(to bottom right, var(--n-100), var(--n-300));
+}
+
+.su-submit:disabled {
+  background: var(--d-surface-alt);
+  color: var(--d-text-faint);
+  cursor: not-allowed;
+}
+
+@media (max-width: 560px) {
+  .su-title { font-size: 1.75rem; }
+  .su-row { grid-template-columns: 1fr; }
+}

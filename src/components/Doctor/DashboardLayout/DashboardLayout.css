@@ -1,6 +1,11 @@
 .dashboard-wrapper {
   min-height: 100vh;
-  background: linear-gradient(180deg, var(--n-050) 0%, #fff 15%);
+  /* No fill. This was linear-gradient(--c-surface 0%, --c-surface 15%) —
+     both stops the same colour, so a solid #141414 dressed as a gradient.
+     Against the #0A0A0A page it painted the content column a step lighter
+     than the sidebar gutter, which is the vertical seam. It also hid from
+     every backgroundColor probe, since a gradient lives in background-image.
+     The page ground is --c-bg; the wrapper does not need its own. */
   padding: 140px 0 4rem;
 }
 
@@ -9,7 +14,7 @@
 }
 
 .dashboard-card {
-  background: #fff;
+  background: var(--c-surface);
   border-radius: var(--r-lg);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   padding: 1.5rem;
@@ -27,7 +32,10 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid var(--c-border-subtle);
+  /* Was a 2px rule. The heading's size and weight already separate it from
+     the content below, and on the dark ground the line read as another
+     border rather than as structure. */
+  border-bottom: none;
 }
 
 .dashboard-card-title {
@@ -46,7 +54,9 @@
 
 .dashboard-stat-card {
   background: var(--c-surface);
-  border: 1px solid var(--c-border);
+  /* Borderless, matching the quick-link cards above them — the surface step
+     from --c-bg to --c-surface carries the edge on its own. */
+  border: 1px solid transparent;
   border-radius: var(--r-lg);
   padding: var(--sp-5);
   color: var(--c-ink);
@@ -71,7 +81,7 @@
 
 .dashboard-stat-card:hover {
   transform: translateY(-4px);
-  border-color: var(--c-accent);
+  background: var(--d-surface-alt);
   box-shadow: var(--sh-md);
 }
 
@@ -166,7 +176,10 @@
   margin: 0 0 var(--sp-5);
   padding: var(--sp-2) var(--sp-4);
   background: var(--c-bg);
-  border: 1px solid var(--c-border-subtle);
+  /* Borderless, like the cards below it. The pill outline drew a hard ring
+     around the whole tab strip; the active tab's own underline is what marks
+     position, so the ring was carrying no information. */
+  border: 1px solid transparent;
   border-radius: var(--r-full);
 }
 .dashboard-tabbar .ant-tabs-nav { margin: 0; }

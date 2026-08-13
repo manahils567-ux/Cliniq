@@ -1,7 +1,7 @@
 .booking-success-page {
 	min-height: calc(100vh - 200px);
 	padding: 6rem 0 4rem;
-	background: linear-gradient(180deg, var(--n-050) 0%, var(--c-bg) 45%, #fff 100%);
+	background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-bg) 45%, var(--c-surface) 100%);
 }
 
 .booking-success-inner {
@@ -10,12 +10,12 @@
 }
 
 .booking-success-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	border: 1px solid rgba(15, 23, 42, 0.06);
 	box-shadow:
 		0 1px 3px rgba(15, 23, 42, 0.04),
-		0 24px 48px -12px rgba(125, 64, 71, 0.12);
+		0 24px 48px -12px rgba(0, 0, 0, 0.12);
 	overflow: hidden;
 }
 
@@ -31,7 +31,7 @@
 	height: 72px;
 	margin: 0 auto 1.25rem;
 	border-radius: 50%;
-	background: linear-gradient(145deg, var(--n-050) 0%, var(--n-100) 100%);
+	background: linear-gradient(145deg, var(--c-surface) 0%, var(--n-100) 100%);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -66,8 +66,8 @@
 	font-size: 0.8rem;
 	font-weight: 600;
 	color: #15803d;
-	background: var(--n-000);
-	border: 1px solid var(--n-100);
+	background: var(--c-surface);
+	border: 1px solid transparent;
 }
 
 .booking-success-card__body {
@@ -122,15 +122,15 @@
 	gap: 0.85rem;
 	padding: 1rem 1.1rem;
 	border-radius: var(--r-lg);
-	background: var(--n-000);
+	background: var(--c-surface);
 	border: 1px solid var(--c-bg-alt);
 	text-align: left;
 	transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .booking-success-info:hover {
-	border-color: rgba(125, 64, 71, 0.2);
-	box-shadow: 0 4px 14px rgba(125, 64, 71, 0.06);
+	border-color: rgba(241, 236, 230, 0.2);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 .booking-success-info--wide {
@@ -141,7 +141,7 @@
 	width: 40px;
 	height: 40px;
 	border-radius: var(--r-lg);
-	background: rgba(125, 64, 71, 0.1);
+	background: rgba(241, 236, 230, 0.1);
 	color: var(--c-action);
 	display: flex;
 	align-items: center;
@@ -180,8 +180,8 @@
 	gap: 1rem;
 	padding: 1.1rem 1.15rem;
 	border-radius: var(--r-lg);
-	background: linear-gradient(135deg, var(--n-050) 0%, #fff 100%);
-	border: 1px solid rgba(125, 64, 71, 0.12);
+	background: linear-gradient(135deg, var(--c-surface) 0%, var(--c-surface) 100%);
+	border: 1px solid rgba(241, 236, 230, 0.12);
 	margin-bottom: 1.5rem;
 	text-align: left;
 }
@@ -194,7 +194,7 @@
 	object-position: top;
 	background: var(--c-border);
 	flex-shrink: 0;
-	border: 2px solid #fff;
+	border: 2px solid var(--c-border);
 	box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
 }
 
@@ -238,7 +238,7 @@
 	padding: 0 1.5rem;
 	border-radius: var(--r-lg);
 	font-weight: 600;
-	box-shadow: 0 8px 20px rgba(125, 64, 71, 0.25);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .booking-success-actions .ant-btn-default {
@@ -261,7 +261,7 @@
 }
 
 .booking-success-empty {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	border: 1px solid var(--c-bg-alt);
 	max-width: 480px;

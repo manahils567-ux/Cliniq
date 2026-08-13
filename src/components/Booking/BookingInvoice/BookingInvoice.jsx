@@ -1,4 +1,4 @@
-import Footer from '../../Shared/Footer/Footer';
+import CqSiteFooter from '../../Shared/CqSiteFooter/CqSiteFooter';
 import logo from '../../../images/logo.png';
 import './BookingInvoice.css';
 import { useParams } from 'react-router-dom';
@@ -152,7 +152,7 @@ const BookingInvoice = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <CqSiteFooter />
         </>
     )
 }

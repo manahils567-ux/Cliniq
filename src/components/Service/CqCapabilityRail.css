@@ -1,0 +1,139 @@
+/* Scroll-driven horizontal rail. The section is the runway; .cq-rail__sticky
+   pins to the viewport while the page scrolls through it. */
+
+.cq-rail {
+  position: relative;
+  background: var(--c-bg);
+}
+
+.cq-rail__sticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Heading sits in its own row above the track so a card can never ride over it. */
+.cq-rail__head {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto var(--sp-6);
+  padding: 0 var(--sp-6);
+  text-align: center;
+}
+
+.cq-rail__head .cq-page-sub {
+  max-width: 58ch;
+  margin: var(--sp-3) auto 0;
+}
+
+/* The stage owns the perspective, so card rotation reads as depth rather than
+   a flat skew. */
+.cq-rail__stage {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  width: 100%;
+}
+
+.cq-rail__track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--sp-5);
+  padding: var(--sp-5) var(--sp-6);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cq-rail__card {
+  flex-shrink: 0;
+  width: 360px;
+  min-height: 300px;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  /* Layered shadow — a tight contact shadow plus a wide ambient one. */
+  box-shadow:
+    0 2px 6px rgba(35, 35, 34, 0.10),
+    0 18px 48px rgba(35, 35, 34, 0.16);
+}
+
+/* ── Progress bar ─────────────────────────────────────────────────────── */
+.cq-rail__progress {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 1180px;
+  height: 3px;
+  margin: var(--sp-6) auto 0;
+  border-radius: var(--r-full);
+  background: rgba(35, 35, 34, 0.12);
+  overflow: hidden;
+}
+
+.cq-rail__progress-fill {
+  height: 100%;
+  border-radius: var(--r-full);
+  background: var(--c-accent);
+}
+
+/* ── Reduced motion / narrow screens: plain horizontal scroller ───────── */
+.cq-rail--static {
+  height: auto !important;
+  padding: var(--sp-7) 0;
+}
+
+.cq-rail__track--scroll {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cq-rail__track--scroll .cq-rail__card { scroll-snap-align: center; }
+
+/* ── Scroll cue ───────────────────────────────────────────────────────── */
+/* The rail turns vertical scroll into horizontal travel, which is not a
+   gesture anyone should have to guess at. Fades out as soon as the track
+   moves — see the `hint` transform. */
+.cq-rail__hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  margin: var(--sp-4) 0 0;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--c-text-muted, var(--n-600));
+}
+
+.cq-rail__hint-arrow {
+  display: inline-block;
+  font-size: 1.15em;
+  line-height: 1;
+  animation: cq-rail-nudge 1.8s var(--ease, ease-in-out) infinite;
+}
+
+@keyframes cq-rail-nudge {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50%      { transform: translateY(3px); opacity: 1; }
+}
+
+.cq-rail__hint--static .cq-rail__hint-arrow {
+  animation-name: cq-rail-nudge-x;
+}
+
+@keyframes cq-rail-nudge-x {
+  0%, 100% { transform: translateX(0); opacity: 0.55; }
+  50%      { transform: translateX(3px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cq-rail__hint-arrow { animation: none; opacity: 0.8; }
+}
+
+@media (max-width: 700px) {
+  .cq-rail__card { width: 280px; min-height: 260px; }
+}

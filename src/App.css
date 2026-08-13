@@ -24,7 +24,7 @@
 }
 
 .card-label>input {
-    background-color: #fff;
+    background-color: var(--c-surface);
     border: 1px solid var(--c-border);
     border-radius: var(--r-sm);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .05);

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Footer from '../Shared/Footer/Footer';
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import { useForm } from 'react-hook-form';
 import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt, FaClock, FaPaperPlane } from 'react-icons/fa';
 import Header from '../Shared/Header/Header';
@@ -183,7 +183,7 @@ const Contact = () => {
 				</div>
 			</section>
 
-			<Footer />
+			<CqSiteFooter />
 		</>
 	);
 };

@@ -5,7 +5,8 @@
   left: 0;
   width: 260px;
   height: 100vh;
-  background: linear-gradient(180deg, var(--c-accent-hover) 0%, var(--c-accent) 100%);
+  /* Was a full rosewood panel — the largest single block of red in the app. */
+  background: linear-gradient(180deg, var(--d-surface) 0%, var(--d-bg) 100%);
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   transition: all 0.3s ease;
@@ -97,7 +98,7 @@
 .sidebar-menu li.active a {
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
-  border-left-color: #fff;
+  border-left-color: var(--c-border);
   font-weight: 600;
 }
 

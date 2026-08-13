@@ -1,0 +1,181 @@
+/* Newsletter band — dark panel on the dark landing ground. */
+
+/* Nested inside the footer card, so it inherits that ground rather than
+   painting its own full-bleed band. */
+.cq-news {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 0 var(--sp-6);
+  border-bottom: 1px solid var(--d-border);
+}
+
+/* A band, not a panel. It used to be a bordered card sitting inside the
+   footer's bordered card — the nesting read as boxy and forced a tall block
+   of dead space under the short form. Now it shares the footer's ground and
+   is separated by a rule instead. */
+.cq-news__panel {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--sp-7);
+  align-items: start;
+  max-width: 1180px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* ── Copy ─────────────────────────────────────────────────────────────── */
+.cq-news__eyebrow {
+  margin: 0 0 var(--sp-4);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--tr-wide);
+  text-transform: uppercase;
+  color: var(--d-text-muted);
+}
+
+.cq-news__title {
+  margin: 0 0 var(--sp-4);
+  max-width: 18ch;
+  font-family: var(--font-display);
+  /* Was --fs-2xl, which competed with the page's own section headings. */
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  line-height: var(--lh-tight);
+  color: var(--d-text);
+}
+
+.cq-news__sub {
+  margin: 0;
+  max-width: 46ch;
+  font-size: var(--fs-md);
+  line-height: var(--lh-normal);
+  color: var(--d-text-muted);
+}
+
+/* ── Form ─────────────────────────────────────────────────────────────── */
+.cq-news__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.cq-news__row {
+  display: flex;
+  gap: var(--sp-3);
+}
+
+.cq-news__input {
+  flex: 1;
+  min-width: 0;
+  height: 3.25rem;
+  padding: 0 var(--sp-5);
+  border: 1px solid var(--d-border);
+  border-radius: var(--r-lg);
+  background: var(--d-bg);
+  color: var(--d-text);
+  font-size: var(--fs-md);
+  font-family: inherit;
+  outline: none;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.cq-news__input::placeholder { color: var(--d-text-faint); }
+.cq-news__input:focus { border-color: var(--d-border-strong); }
+
+/* Same autofill override as the auth form — Chrome would otherwise paint this
+   input opaque white. */
+.cq-news__input:-webkit-autofill,
+.cq-news__input:-webkit-autofill:hover,
+.cq-news__input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--d-text);
+  -webkit-box-shadow: 0 0 0 1000px var(--d-bg) inset;
+  caret-color: var(--d-text);
+  transition: background-color 9999s ease-out 0s;
+}
+
+.cq-news__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+  height: 3.25rem;
+  padding: 0 var(--sp-5);
+  border: none;
+  border-radius: var(--r-lg);
+  /* Stays on the cream ramp: this is the primary action on a dark ground,
+     not a surface. --n-050 here is deliberate, not a missed token. */
+  background: linear-gradient(to bottom right, var(--n-050), var(--n-200));
+  color: var(--n-900);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semi);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.cq-news__btn:hover:not(:disabled) {
+  background: linear-gradient(to bottom right, var(--n-100), var(--n-300));
+}
+
+/* Keep the cream ground when inactive. Swapping it for a dark fill made the
+   primary call to action read as broken on arrival — the form is disabled
+   until an address is typed and consent is ticked, which is its resting
+   state for every first-time visitor. */
+.cq-news__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Consent + fine print ─────────────────────────────────────────────── */
+.cq-news__check {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: var(--fs-base);
+  color: var(--d-text-muted);
+  cursor: pointer;
+}
+
+.cq-news__check input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0;
+  border: 1px solid var(--d-border-strong);
+  border-radius: var(--r-full);
+  background: transparent;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+
+.cq-news__check input:checked {
+  background: var(--d-text);
+  border-color: var(--d-text);
+}
+
+.cq-news__fine {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--d-text-faint);
+}
+
+@media (max-width: 900px) {
+  .cq-news__panel {
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+    padding: var(--sp-6) var(--sp-5);
+  }
+  .cq-news__title { font-size: var(--fs-xl); }
+}
+
+@media (max-width: 560px) {
+  .cq-news__row { flex-direction: column; }
+  .cq-news__btn { justify-content: center; }
+}

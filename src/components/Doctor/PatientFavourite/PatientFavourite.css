@@ -11,7 +11,7 @@
     margin-bottom: 1.75rem;
     padding: 1.5rem 1.75rem;
     border-radius: var(--r-lg);
-    background: linear-gradient(125deg, #0A0A0A 0%, #141414 55%, var(--c-accent-hover) 100%);
+    background: linear-gradient(125deg, #0A0A0A 0%, #141414 55%, var(--d-surface-alt) 100%);
     color: #fff;
     box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.4);
 }
@@ -56,13 +56,13 @@
     border-radius: 18px !important;
     overflow: hidden;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
-    border: 1px solid var(--n-050) !important;
+    border: 1px solid transparent !important;
     box-shadow: 0 8px 28px rgba(15, 23, 42, 0.07) !important;
 }
 
 .favourite-doctor-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 40px rgba(125, 64, 71, 0.15) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15) !important;
 }
 
 .favourite-doctor-card__top {
@@ -70,11 +70,11 @@
     display: flex;
     justify-content: center;
     padding: 1.5rem 1.25rem 0.5rem;
-    background: linear-gradient(180deg, var(--n-050) 0%, #fff 100%);
+    background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-surface) 100%);
 }
 
 .favourite-doctor-card__avatar {
-    border: 3px solid #fff;
+    border: 3px solid var(--c-border);
     box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
 }
 

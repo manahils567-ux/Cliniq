@@ -7,7 +7,10 @@
 	margin-bottom: 1.75rem;
 	padding: 1.5rem 1.75rem;
 	border-radius: var(--r-lg);
-	background: linear-gradient(125deg, #0A0A0A 0%, #141414 55%, var(--c-accent-hover) 100%);
+	/* The accent terminus made this band fade into a maroon wash across its
+	   right half. Ends on --d-surface-alt instead, matching the --doctor
+	   variant below, so the banner reads as a raised dark panel. */
+	background: linear-gradient(125deg, #0A0A0A 0%, #141414 55%, var(--d-surface-alt) 100%);
 	color: #fff;
 	box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.45);
 }
@@ -65,8 +68,11 @@
 	padding: 1rem 1.25rem;
 	height: 100%;
 	border-radius: var(--r-lg);
-	background: #fff;
-	border: 1px solid var(--c-border-subtle);
+	background: var(--c-surface);
+	/* No border. --c-surface already sits a step above --c-bg, so the card
+	   edge is legible without an outline, and at this card count the outlines
+	   read as a grid of boxes rather than as separate cards. */
+	border: 1px solid transparent;
 	text-decoration: none;
 	color: inherit;
 	box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
@@ -74,16 +80,11 @@
 }
 
 .dash-home__quick-card:hover {
-	border-color: rgba(125, 64, 71, 0.35);
-	box-shadow: 0 8px 24px rgba(125, 64, 71, 0.12);
+	/* Hover lifts the surface rather than drawing an edge. */
+	background: var(--d-surface-alt);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 	transform: translateY(-2px);
 	color: inherit;
-}
-
-.dash-home__quick-icon {
-	font-size: 1.35rem;
-	color: var(--c-action);
-	flex-shrink: 0;
 }
 
 .dash-home__quick-arrow {
@@ -94,11 +95,13 @@
 
 .dash-home__fav-card {
 	border-radius: 14px !important;
-	border: 1px solid var(--n-050) !important;
+	/* Was --n-050 (#FAF8F5) — a near-white hairline, which on the dark ground
+	   was the brightest thing on the page. */
+	border: 1px solid transparent !important;
 }
 
 .dash-home__treatment {
 	border-radius: 14px !important;
-	background: linear-gradient(180deg, var(--c-bg) 0%, #fff 100%) !important;
-	border: 1px solid var(--c-border-subtle) !important;
+	background: linear-gradient(180deg, var(--c-bg) 0%, var(--c-surface) 100%) !important;
+	border: 1px solid transparent !important;
 }

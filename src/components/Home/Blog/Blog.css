@@ -32,7 +32,7 @@
 }
 
 .blog-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	overflow: hidden;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -44,7 +44,7 @@
 }
 
 .blog-card:hover {
-	box-shadow: 0 12px 40px rgba(125, 64, 71, 0.12);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 	transform: translateY(-4px);
 }
 

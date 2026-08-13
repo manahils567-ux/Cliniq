@@ -11,8 +11,8 @@
 	position: absolute;
 	inset: 0;
 	background:
-		radial-gradient(ellipse 60% 40% at 20% 0%, rgba(125, 64, 71, 0.12), transparent 55%),
-		radial-gradient(ellipse 50% 35% at 85% 100%, rgba(125, 64, 71, 0.07), transparent 50%);
+		radial-gradient(ellipse 60% 40% at 20% 0%, rgba(241, 236, 230, 0.12), transparent 55%),
+		radial-gradient(ellipse 50% 35% at 85% 100%, rgba(241, 236, 230, 0.07), transparent 50%);
 	pointer-events: none;
 }
 
@@ -63,7 +63,7 @@
 
 /* ── Card ── */
 .our-doctor-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: 22px;
 	overflow: hidden;
 	height: 100%;
@@ -82,7 +82,7 @@
 	transform: translateY(-8px);
 	box-shadow:
 		0 8px 16px rgba(0, 0, 0, 0.2),
-		0 32px 64px rgba(125, 64, 71, 0.28);
+		0 32px 64px rgba(0, 0, 0, 0.28);
 }
 
 /* ── Photo ── */
@@ -175,7 +175,7 @@
 	text-transform: uppercase;
 	letter-spacing: 0.06em;
 	color: var(--c-action);
-	background: rgba(125, 64, 71, 0.09);
+	background: rgba(241, 236, 230, 0.09);
 	padding: 3px 10px;
 	border-radius: var(--r-lg);
 	margin-bottom: 0.55rem;
@@ -244,7 +244,7 @@
 .our-doctor-card__book:hover {
 	color: #fff;
 	background: linear-gradient(135deg, var(--c-action-hover) 0%, #0d4f84 100%);
-	box-shadow: 0 6px 18px rgba(125, 64, 71, 0.45);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
 	transform: translateY(-1px);
 }
 

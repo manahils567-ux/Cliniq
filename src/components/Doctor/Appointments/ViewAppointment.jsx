@@ -2,7 +2,7 @@ import React, { useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetSingleAppointmentQuery } from '../../../redux/api/appointmentApi';
 import Header from '../../Shared/Header/Header';
-import Footer from '../../Shared/Footer/Footer';
+import CqSiteFooter from '../../Shared/CqSiteFooter/CqSiteFooter';
 import moment from 'moment';
 import './index.css';
 import './ViewAppointment.css';
@@ -264,7 +264,7 @@ const ViewAppointment = () => {
 					<div ref={printRef}>{content}</div>
 				</div>
 			</div>
-			<Footer />
+			<CqSiteFooter />
 		</>
 	);
 };

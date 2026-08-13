@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useGetSingleBlogQuery } from '../../redux/api/blogApi';
 import { Empty, message } from 'antd';
 import BlogAside from './BlogAside';
-import Footer from '../Shared/Footer/Footer';
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import BlogComment from './BlogComment';
 import Header from '../Shared/Header/Header';
 import SubHeader from '../Shared/SubHeader';
@@ -85,7 +85,7 @@ const BlogDetails = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <CqSiteFooter />
         </>
     )
 }

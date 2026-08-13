@@ -9,7 +9,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import './styles/tokens.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/base.css';
-import cliniqTheme from './styles/theme';
+import { cliniqDarkTheme } from './styles/theme';
 
 import App from './App';
 import { store } from './redux/store';
@@ -20,7 +20,7 @@ root.render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <Provider store={store}>
-        <ConfigProvider theme={cliniqTheme}>
+        <ConfigProvider theme={cliniqDarkTheme}>
           <App />
         </ConfigProvider>
       </Provider>

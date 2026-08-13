@@ -1,0 +1,227 @@
+/* Site footer — floating dark card, columned content.
+   Replaces Shared/Footer (Bootstrap grid, centred) and Shared/CqFooter. */
+
+.cqfoot {
+  position: relative;
+  margin: var(--sp-7) var(--sp-4) var(--sp-4);
+  padding: var(--sp-7) var(--sp-6) var(--sp-5);
+  background: var(--d-bg);
+  border: 1px solid var(--d-border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  /* Explicit: the old footer inherited centring from an ancestor, which is what
+     made every link centre on its own line and the columns read as ragged. */
+  text-align: left;
+  color: var(--d-text);
+}
+
+/* Ramp so the page above does not cut straight to near-black. */
+.cqfoot::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 180px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--d-surface) 0%,
+    rgba(20, 20, 20, 0.55) 45%,
+    transparent 100%
+  );
+}
+
+.cqfoot > * { position: relative; z-index: 1; }
+
+/* Breathing room under the newsletter band when it is present. */
+.cq-news + .cqfoot__grid { margin-top: var(--sp-6); }
+
+/* ── Columns ──────────────────────────────────────────────────────────── */
+.cqfoot__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: var(--sp-6);
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Children fade up in sequence once the footer scrolls into view. */
+.cqfoot__col,
+.cqfoot__base {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+.cqfoot.is-shown .cqfoot__col,
+.cqfoot.is-shown .cqfoot__base {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cqfoot__col,
+  .cqfoot__base { transition: none; opacity: 1; transform: none; }
+}
+
+.cqfoot__mark {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-tight);
+  color: var(--d-text);
+  text-decoration: none;
+}
+
+.cqfoot__mark:hover { color: var(--d-text); opacity: 1; }
+
+.cqfoot__about {
+  margin: var(--sp-4) 0 0;
+  max-width: 34ch;
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  color: var(--d-text-muted);
+}
+
+/* ── Column headings — rule sits under the text, both flush left ──────── */
+.cqfoot__title {
+  position: relative;
+  margin: 0 0 var(--sp-5);
+  padding-bottom: var(--sp-3);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semi);
+  color: var(--d-text);
+}
+
+.cqfoot__title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 32px;
+  height: 2px;
+  border-radius: var(--r-sm);
+  background: var(--d-border-strong);
+}
+
+/* ── Link lists ───────────────────────────────────────────────────────── */
+.cqfoot__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cqfoot__list li { margin-bottom: var(--sp-3); }
+.cqfoot__list li:last-child { margin-bottom: 0; }
+
+.cqfoot__list a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-base);
+  color: var(--d-text-muted);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease);
+}
+
+.cqfoot__list a:hover {
+  color: var(--d-text);
+  transform: translateX(3px);
+}
+
+.cqfoot__chev {
+  flex-shrink: 0;
+  font-size: 0.65em;
+  opacity: 0.7;
+}
+
+/* ── Contact ──────────────────────────────────────────────────────────── */
+.cqfoot__contact {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+  font-size: var(--fs-base);
+  line-height: var(--lh-snug);
+  color: var(--d-text-muted);
+}
+
+.cqfoot__contact:last-child { margin-bottom: 0; }
+.cqfoot__contact p { margin: 0; }
+
+.cqfoot__cicon {
+  flex-shrink: 0;
+  margin-top: 0.2em;
+  font-size: 0.95em;
+  opacity: 0.75;
+}
+
+.cqfoot__contact a {
+  color: var(--d-text-muted);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.cqfoot__contact a:hover { color: var(--d-text); }
+
+/* ── Divider ──────────────────────────────────────────────────────────── */
+/* Was a 28px hatched band carried over from the floating footer. At this
+   width it read as texture competing with the columns rather than as a
+   separator, so it is a hairline now — the same rule the newsletter band
+   sits on, which keeps the three tiers on one system. */
+.cqfoot__divider {
+  max-width: 1180px;
+  height: 1px;
+  margin: var(--sp-6) auto;
+  background: var(--d-border);
+}
+
+/* ── Bottom bar ───────────────────────────────────────────────────────── */
+.cqfoot__base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3) var(--sp-5);
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.cqfoot__copy {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--d-text-faint);
+}
+
+.cqfoot__policy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-5);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cqfoot__policy a {
+  font-size: var(--fs-sm);
+  color: var(--d-text-faint);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.cqfoot__policy a:hover { color: var(--d-text); }
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .cqfoot__grid { grid-template-columns: 1fr 1fr; gap: var(--sp-5); }
+  .cqfoot__col--about { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  .cqfoot { padding: var(--sp-6) var(--sp-4) var(--sp-4); }
+  .cqfoot__grid { grid-template-columns: 1fr; }
+  .cqfoot__base { justify-content: flex-start; }
+}

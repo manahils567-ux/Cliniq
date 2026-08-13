@@ -1,19 +1,7 @@
 import React, { useMemo } from 'react';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import useAuthCheck from '../../../redux/hooks/useAuthCheck';
-import {
-	FaCalendarCheck,
-	FaUserInjured,
-	FaDollarSign,
-	FaStar,
-	FaArrowUp,
-	FaClock,
-	FaHeart,
-	FaPills,
-	FaSearch,
-	FaFileInvoiceDollar,
-	FaChevronRight,
-} from 'react-icons/fa';
+import { FaCalendarCheck, FaArrowUp, FaHeart, FaPills, FaChevronRight } from 'react-icons/fa';
 import { useGetDoctorAppointmentsQuery, useGetDoctorPatientsQuery, useGetDoctorInvoicesQuery } from '../../../redux/api/appointmentApi';
 import { useGetPatientAppointmentsQuery, useGetPatientInvoicesQuery } from '../../../redux/api/appointmentApi';
 import { useGetFavouriteQuery } from '../../../redux/api/favouriteApi';
@@ -279,7 +267,6 @@ const PatientDashboard = () => {
 			<div className="dash-home__quick row g-3 mb-4">
 				<div className="col-sm-6 col-lg-3">
 					<Link to="/track-appointment" className="dash-home__quick-card">
-						<FaSearch className="dash-home__quick-icon" />
 						<div>
 							<strong>Track visit</strong>
 							<Text type="secondary" className="d-block small mb-0">
@@ -291,7 +278,6 @@ const PatientDashboard = () => {
 				</div>
 				<div className="col-sm-6 col-lg-3">
 					<Link to="/dashboard/favourite" className="dash-home__quick-card">
-						<FaHeart className="dash-home__quick-icon" />
 						<div>
 							<strong>Favourites</strong>
 							<Text type="secondary" className="d-block small mb-0">
@@ -303,7 +289,6 @@ const PatientDashboard = () => {
 				</div>
 				<div className="col-sm-6 col-lg-3">
 					<Link to="/dashboard/prescription" className="dash-home__quick-card">
-						<FaPills className="dash-home__quick-icon" />
 						<div>
 							<strong>Medicines</strong>
 							<Text type="secondary" className="d-block small mb-0">
@@ -315,7 +300,6 @@ const PatientDashboard = () => {
 				</div>
 				<div className="col-sm-6 col-lg-3">
 					<Link to="/dashboard/invoices" className="dash-home__quick-card">
-						<FaFileInvoiceDollar className="dash-home__quick-icon" />
 						<div>
 							<strong>Invoices</strong>
 							<Text type="secondary" className="d-block small mb-0">

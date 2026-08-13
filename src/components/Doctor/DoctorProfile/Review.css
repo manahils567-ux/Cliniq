@@ -37,7 +37,7 @@
 
 /* Review Card */
 .review-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	padding: 1.75rem;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -46,7 +46,7 @@
 }
 
 .review-card:hover {
-	box-shadow: 0 8px 30px rgba(125, 64, 71, 0.1);
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
 .review-card__header {
@@ -135,7 +135,7 @@
 }
 
 .review-card__recommendation--yes {
-	background: var(--n-050);
+	background: var(--c-surface);
 	color: #16a34a;
 }
 
@@ -146,7 +146,7 @@
 
 /* Review Form */
 .review-form-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	padding: 1.75rem;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -213,7 +213,7 @@
 .review-form__textarea {
 	width: 100%;
 	padding: 12px;
-	border: 1px solid var(--n-100);
+	border: 1px solid transparent;
 	border-radius: var(--r-md);
 	font-size: 0.95rem;
 	font-family: inherit;
@@ -224,7 +224,7 @@
 .review-form__textarea:focus {
 	outline: none;
 	border-color: var(--c-action);
-	box-shadow: 0 0 0 3px rgba(125, 64, 71, 0.1);
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .review-form__textarea::placeholder {

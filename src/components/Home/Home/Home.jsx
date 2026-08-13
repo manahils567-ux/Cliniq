@@ -1,6 +1,6 @@
 import React from 'react';
 import Blog from '../Blog/Blog';
-import Footer from '../../Shared/Footer/Footer';
+import CqSiteFooter from '../../Shared/CqSiteFooter/CqSiteFooter';
 import Testimonial from '../Testimonial/Testimonial';
 import ClinicAndSpecialities from '../ClinicAndSpecialities/ClinicAndSpecialities';
 import BookDoctor from '../BookOurDoctor/BookDoctor';
@@ -26,7 +26,7 @@ const Home = () => {
             <OurDoctors/>
             <Testimonial />
             <Gallery/>
-            <Footer />
+            <CqSiteFooter />
         </>
     );
 };

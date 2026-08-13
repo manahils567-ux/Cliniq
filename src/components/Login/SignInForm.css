@@ -1,12 +1,38 @@
 /* ── Auth Page Layout ─────────────────────────────────────────────────── */
+/* Dark ground, per the --d-* block in tokens.css which names login as a
+   dark surface. Depth runs page → card → left panel: #0A0A0A, #141414, #1F1F1F. */
 .auth-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--c-border);
+  background: var(--d-bg);
   padding: 1rem;
   font-family: var(--font-ui);
+}
+
+/* Full-bleed split used by sign-up. Sign-in keeps .auth-card below. */
+.auth-split {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.94fr 1.06fr;
+  gap: 1.5rem;
+  min-height: 100vh;
+  padding: 0.75rem;
+  background: var(--d-bg);
+  color: var(--d-text);
+  font-family: var(--font-ui);
+}
+
+.auth-split__form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .auth-split { grid-template-columns: 1fr; }
 }
 
 .auth-card {
@@ -16,18 +42,20 @@
   min-height: 560px;
   border-radius: var(--r-lg);
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  background: #fff;
+  border: 1px solid var(--d-border);
+  box-shadow: var(--sh-xl);
+  background: var(--d-surface);
   position: relative;
 }
 
 /* ── Left panel ───────────────────────────────────────────────────────── */
 .auth-left {
   width: 38%;
-  background: linear-gradient(160deg, var(--n-200) 0%, var(--n-300) 100%);
+  background: linear-gradient(160deg, var(--d-surface-alt) 0%, var(--d-surface) 100%);
+  border-right: 1px solid var(--d-border);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: center;
   padding: 2.5rem 2rem;
   position: relative;
@@ -35,31 +63,19 @@
 }
 
 .auth-left-logo {
-  width: 48px;
-  height: 48px;
-  background: rgba(255,255,255,0.35);
-  border-radius: var(--r-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--d-text);
   margin-bottom: 1.5rem;
-  font-size: 1.4rem;
-  color: var(--c-accent);
 }
 
 .auth-left h2 {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--d-text);
   line-height: 1.4;
-  margin-bottom: 1rem;
-}
-
-.auth-left-img {
-  width: 100%;
-  max-width: 240px;
-  margin: 0 auto;
-  display: block;
+  margin-bottom: 0;
 }
 
 /* ── Right panel ──────────────────────────────────────────────────────── */
@@ -75,16 +91,19 @@
 
 .auth-lang {
   position: absolute;
-  top: 1rem;
-  right: 1.2rem;
+  /* Clears the 28px close button (right: .75rem) that was overlapping and
+     clipping this label to "English(U". */
+  top: 1.15rem;
+  right: 3.4rem;
   font-size: 0.75rem;
-  color: var(--n-500);
+  color: var(--d-text-faint);
+  white-space: nowrap;
 }
 
 .auth-right h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--c-ink);
+  color: var(--d-text);
   margin-bottom: 1.2rem;
 }
 
@@ -102,20 +121,20 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 0.55rem 0.5rem;
-  border: 1.5px solid var(--c-border);
+  border: 1px solid var(--d-border);
   border-radius: var(--r-md);
-  background: #fff;
+  background: var(--d-surface-alt);
   font-size: 0.82rem;
   font-weight: 500;
-  color: var(--c-text);
+  color: var(--d-text);
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
   white-space: nowrap;
 }
 
 .auth-social-btn:hover {
-  border-color: var(--c-accent);
-  background: var(--c-accent-wash);
+  border-color: var(--d-border-strong);
+  background: #262626;
 }
 
 .auth-social-btn:disabled {
@@ -129,7 +148,7 @@
   align-items: center;
   gap: 0.75rem;
   margin: 0.75rem 0;
-  color: var(--n-400);
+  color: var(--d-text-faint);
   font-size: 0.8rem;
 }
 
@@ -138,7 +157,7 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--c-border);
+  background: var(--d-border);
 }
 
 /* ── Form fields ──────────────────────────────────────────────────────── */
@@ -151,7 +170,7 @@
   display: block;
   font-size: 0.78rem;
   font-weight: 500;
-  color: var(--n-700);
+  color: var(--d-text-muted);
   margin-bottom: 0.3rem;
 }
 
@@ -159,18 +178,34 @@
 .auth-field select {
   width: 100%;
   padding: 0.6rem 0.85rem;
-  border: 1.5px solid var(--c-border);
+  border: 1px solid var(--d-border);
   border-radius: var(--r-md);
   font-size: 0.9rem;
-  color: var(--n-900);
-  background: #fff;
+  color: var(--d-text);
+  background: var(--d-bg);
   outline: none;
   transition: border-color 0.2s;
 }
 
+.auth-field input::placeholder {
+  color: var(--d-text-faint);
+}
+
 .auth-field input:focus,
 .auth-field select:focus {
-  border-color: var(--c-accent);
+  border-color: var(--d-border-strong);
+}
+
+/* Chrome paints autofilled inputs with an opaque light background and black
+   text, which would otherwise blow a hole in the dark form. The inset shadow
+   is the only way to override that background. */
+.auth-field input:-webkit-autofill,
+.auth-field input:-webkit-autofill:hover,
+.auth-field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--d-text);
+  -webkit-box-shadow: 0 0 0 1000px var(--d-bg) inset;
+  caret-color: var(--d-text);
+  transition: background-color 9999s ease-out 0s;
 }
 
 .auth-field-row {
@@ -196,31 +231,38 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  color: var(--n-400);
+  color: var(--d-text-faint);
   font-size: 1rem;
+  transition: color 0.2s;
 }
 
+.auth-eye:hover { color: var(--d-text); }
+
 /* ── Submit button ────────────────────────────────────────────────────── */
+/* Cream-on-black, matching .cqnav__btn--solid — the navbar's Sign up button
+   is visible on this same screen, so the primary action should read the same.
+   Rosewood would sit at roughly 1.5:1 against #141414. */
 .auth-submit-btn {
   width: 100%;
   padding: 0.75rem;
-  background: var(--c-accent);
-  color: #fff;
+  background: linear-gradient(to bottom right, var(--c-surface), var(--n-200));
+  color: var(--n-900);
   border: none;
   border-radius: var(--r-md);
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, opacity 0.2s;
   margin-top: 0.5rem;
 }
 
 .auth-submit-btn:hover {
-  background: var(--c-accent-hover);
+  background: linear-gradient(to bottom right, var(--n-100), var(--n-300));
 }
 
 .auth-submit-btn:disabled {
-  background: var(--c-text-faint);
+  background: var(--d-surface-alt);
+  color: var(--d-text-faint);
   cursor: not-allowed;
 }
 
@@ -229,12 +271,14 @@
   text-align: center;
   margin-top: 1rem;
   font-size: 0.82rem;
-  color: var(--n-500);
+  color: var(--d-text-muted);
 }
 
+/* --c-accent-line keeps the rosewood family but reads on black; --c-accent
+   itself lands at about 2.4:1 here. */
 .auth-footer a,
 .auth-footer span {
-  color: var(--c-accent);
+  color: var(--c-accent-line);
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
@@ -260,12 +304,12 @@
   gap: 0.25rem;
 }
 
-.auth-pass-hint.ok  { color: var(--c-positive); }
-.auth-pass-hint.bad { color: var(--c-danger); }
+.auth-pass-hint.ok  { color: var(--d-positive); }
+.auth-pass-hint.bad { color: var(--d-danger); }
 
 /* ── Error text ───────────────────────────────────────────────────────── */
 .auth-error {
-  color: var(--c-danger);
+  color: var(--d-danger);
   font-size: 0.8rem;
   margin: 0.25rem 0;
 }
@@ -273,7 +317,7 @@
 /* ── Forgot password link ─────────────────────────────────────────────── */
 .auth-forgot {
   font-size: 0.8rem;
-  color: var(--c-accent);
+  color: var(--c-accent-line);
   cursor: pointer;
   text-align: right;
   margin-bottom: 0.5rem;
@@ -287,8 +331,8 @@
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  background: var(--c-border-subtle);
-  border: 1px solid var(--c-border);
+  background: var(--d-surface-alt);
+  border: 1px solid var(--d-border);
   border-radius: 50%;
   width: 28px;
   height: 28px;
@@ -297,11 +341,15 @@
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  color: var(--n-700);
-  transition: background 0.2s;
+  color: var(--d-text-muted);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
-.auth-close:hover { background: var(--c-border); }
+.auth-close:hover {
+  background: #262626;
+  border-color: var(--d-border-strong);
+  color: var(--d-text);
+}
 
 /* ── Responsive ───────────────────────────────────────────────────────── */
 @media (max-width: 640px) {

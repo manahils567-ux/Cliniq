@@ -15,7 +15,7 @@
 
 .blog-search-input.ant-input-affix-wrapper {
 	border-radius: var(--r-full);
-	border: 2px solid var(--n-100);
+	border: 2px solid var(--c-border);
 	padding: 12px 24px;
 	font-size: 1rem;
 }
@@ -23,7 +23,7 @@
 .blog-search-input.ant-input-affix-wrapper:hover,
 .blog-search-input.ant-input-affix-wrapper-focused {
 	border-color: var(--c-action);
-	box-shadow: 0 0 0 3px rgba(125, 64, 71, 0.1);
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .blog-loading,
@@ -40,7 +40,7 @@
 
 /* Blog Card */
 .blog-post-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	overflow: hidden;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -52,7 +52,7 @@
 }
 
 .blog-post-card:hover {
-	box-shadow: 0 12px 40px rgba(125, 64, 71, 0.12);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 	transform: translateY(-6px);
 }
 
@@ -85,7 +85,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: linear-gradient(135deg, var(--n-100) 0%, var(--n-200) 100%);
+	/* Placeholder for posts with no image. Was the cream end of the ramp,
+	   which glared against the dark card it sits in. */
+	background: linear-gradient(135deg, var(--d-surface-alt) 0%, var(--d-surface) 100%);
 	color: var(--c-action);
 	font-weight: 600;
 	font-size: 1.2rem;

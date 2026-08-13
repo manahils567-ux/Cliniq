@@ -166,6 +166,11 @@ const deleteDoctor = async (id: string): Promise<any> => {
 const updateDoctor = async (req: Request): Promise<Doctor> => {
     const file = req.file as IUpload;
     const id = req.params.id as string;
+    // A doctor may only edit their own profile — the id in the URL must match the token.
+    const authUser = req.user as { userId?: string } | undefined;
+    if (authUser?.userId !== id) {
+        throw new ApiError(httpStatus.FORBIDDEN, 'You can only update your own profile !!');
+    }
     const user = JSON.parse(req.body.data);
 
     if (file) {

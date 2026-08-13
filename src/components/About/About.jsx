@@ -1,7 +1,7 @@
 import React from 'react';
 import './About.css';
 import Header from '../Shared/Header/Header';
-import Footer from '../Shared/Footer/Footer';
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import SubHeader from '../Shared/SubHeader';
 import { FaAward, FaUsers, FaHeart, FaStethoscope, FaCheckCircle, FaArrowRight, FaCertificate } from 'react-icons/fa';
 import { useGetDoctorsQuery } from '../../redux/api/doctorApi';
@@ -198,7 +198,7 @@ const About = () => {
 				</div>
 			</section>
 
-			<Footer />
+			<CqSiteFooter />
 		</>
 	);
 };

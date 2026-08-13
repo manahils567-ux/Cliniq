@@ -98,7 +98,7 @@
     color: var(--c-ink);
     white-space: nowrap;
     transition: 0.3s;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid var(--c-border);
     padding: 5px 2px;
 }
 
@@ -127,7 +127,7 @@
     z-index: 99;
     opacity: 0;
     visibility: hidden;
-    background: #fff;
+    background: var(--c-surface);
     box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     transition: 0.3s;
 }
@@ -252,15 +252,15 @@
 /* User menu popover (hover) — role + profile */
 .header-user-popover .ant-popover-inner {
     border-radius: var(--r-lg);
-    box-shadow: 0 12px 40px rgba(125, 64, 71, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
     overflow: hidden;
 }
 
 .header-user-popover .ant-popover-title {
     margin: 0;
     padding: 10px 14px;
-    border-bottom: 1px solid rgba(125, 64, 71, 0.12);
-    background: linear-gradient(135deg, var(--n-000) 0%, var(--n-050) 100%);
+    border-bottom: 1px solid rgba(241, 236, 230, 0.12);
+    background: linear-gradient(135deg, var(--c-surface) 0%, var(--c-surface) 100%);
 }
 
 .header-user-popover .ant-popover-inner-content {

@@ -1,6 +1,6 @@
 .available-section {
 	padding: 5rem 0;
-	background: #fff;
+	background: var(--c-surface);
 }
 
 .available-section__visual {
@@ -57,7 +57,7 @@
 }
 
 .available-service-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	padding: 1.25rem;
 	text-align: center;
@@ -68,7 +68,7 @@
 }
 
 .available-service-card:hover {
-	box-shadow: 0 12px 32px rgba(125, 64, 71, 0.15);
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 	transform: translateY(-4px);
 }
 

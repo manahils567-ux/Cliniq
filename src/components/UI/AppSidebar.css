@@ -1,14 +1,18 @@
 /* Global nav rail. Fixed to the viewport so it survives every page's own
    layout, and it reserves its own width via a body padding rule below. */
 
+/* Vertically centred on the viewport rather than pinned under the header and
+   stretched to the floor. The panel is now a fixed height, so anchoring it
+   top-and-bottom left it floating against the top with dead space below;
+   centring sits it against the optical middle of the page instead. */
 .app-sidebar {
   position: fixed;
-  top: 96px;
+  top: 50%;
   left: var(--sp-4);
-  bottom: var(--sp-4);
+  transform: translateY(-50%);
   z-index: 90;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   pointer-events: none;          /* only the rail itself is interactive */
 }
 .app-sidebar > * { pointer-events: auto; }
@@ -18,7 +22,9 @@
 .app-sidebar .dashboard-sidebar {
   position: static;
   margin-top: 0;
-  max-height: calc(100vh - 120px);
+  /* Room for the floating header and an equal gap at the foot, so a tall
+     nav still scrolls rather than running off either edge. */
+  max-height: calc(100vh - 140px);
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -26,18 +32,38 @@
 /* Give page content room for the collapsed rail. Scoped to top-level page
    wrappers only — .container is used nested throughout the app, so padding it
    compounds and squeezes tables until columns collide. */
-body:has(.app-sidebar) .dashboard-wrapper,
-body:has(.app-sidebar) .track-page,
-body:has(.app-sidebar) > #root > .about-us,
-body:has(.app-sidebar) .search-doctor-page,
-body:has(.app-sidebar) .cq-page {
-  padding-left: 88px;
+/* Constant gutter: --rail-open-w (210px) plus the --sp-4 the rail is inset
+   by. The sidebar no longer changes width, so there is nothing to track and
+   no transition to match. Keep this in step with --rail-open-w in
+   DashboardSidebar.css — the coupling is across files and silent if it
+   drifts. */
+/* Applied once at the root rather than to a list of page wrappers. The
+   allowlist approach enumerated five classes — dashboard-wrapper,
+   track-page, about-us, search-doctor-page, cq-page — so any screen whose
+   wrapper was not among them got no gutter and ran under the sidebar. There
+   is no way to notice that except by opening every page.
+
+   #root is safe to pad: the sidebar and the floating nav are both
+   position: fixed, so neither is displaced by it. */
+body:has(.app-sidebar) #root {
+  /* --rail-w (64px) + the --sp-4 inset. */
+  padding-left: 80px;
+  transition: padding-left 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Opening the rail widens the gutter: --rail-open-w (210px) + the same
+   inset. Same curve and duration as the rail's own width transition so the
+   content edge tracks it rather than lagging. */
+body:has(.app-sidebar .dashboard-sidebar--rail:hover) #root,
+body:has(.app-sidebar .dashboard-sidebar--rail:focus-within) #root {
+  padding-left: 226px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:has(.app-sidebar) #root { transition: none; }
 }
 
 @media (max-width: 992px) {
   .app-sidebar { display: none; }
-  body:has(.app-sidebar) .dashboard-wrapper,
-  body:has(.app-sidebar) .track-page,
-  body:has(.app-sidebar) .search-doctor-page,
-  body:has(.app-sidebar) .cq-page { padding-left: 0; }
+  body:has(.app-sidebar) #root { padding-left: 0; }
 }
