@@ -3,9 +3,15 @@
   position: sticky;
   top: 88px;
   margin-top: -76px;
-  background: var(--c-surface);
+  /* Transparent, not --c-surface. A #141414 panel on a #0A0A0A page drew a
+     hard vertical edge down the full height of the nav wherever it ended —
+     measured with elementsFromPoint: the panel was still the top of the
+     stack at x=70 and gone by x=120, which is exactly the seam. The rail
+     now shares the page's ground and only the active row carries a fill.
+     The shadow went with it: rgba(0,0,0,0.08) over near-black was invisible
+     anyway, and it was the other half of the edge. */
+  background: transparent;
   border-radius: var(--r-lg);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
