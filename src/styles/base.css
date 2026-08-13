@@ -560,19 +560,29 @@ a:hover { opacity: 0.62; color: inherit; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-4);
-  padding: var(--sp-6) var(--sp-7) calc(var(--sp-7) + var(--sp-6));
-  /* Carries the page from the hero down into the cream. Flat --d-bg left a
-     hard step on both edges: the hero ends near --n-800 and the section below
-     is --c-bg. The strip now starts on the hero's tone, settles to --d-bg
-     under the figures, and lifts to cream at its own bottom edge, so both
-     colour changes read as a fade rather than a cut. The extra bottom padding
-     keeps the labels off the ramp. */
-  background: linear-gradient(
-    to bottom,
-    var(--d-bg) 0%,
-    var(--d-bg) 62%,
-    var(--c-bg) 100%
-  );
+  position: relative;
+  /* Bottom padding is the top padding plus the ramp's height, which lands the
+     figures in the middle of the solid dark zone instead of riding high above
+     the fade. */
+  padding: var(--sp-6) var(--sp-7) calc(var(--sp-6) + 88px);
+  background: var(--d-bg);
+}
+
+/* Carries the strip down into the cream. This is a pseudo-element rather than
+   a gradient on the box itself: as a background it had to be sized as a
+   percentage of the strip, so keeping the labels clear of it meant padding the
+   bottom out and pushing the whole row upward. Pinned to the bottom edge at a
+   fixed height, it no longer dictates where the content sits. The hero handles
+   the matching fade on the strip's top edge. */
+.cq-trust::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 88px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--d-bg) 0%, var(--c-bg) 100%);
 }
 .cq-trust__item {
   display: flex;
