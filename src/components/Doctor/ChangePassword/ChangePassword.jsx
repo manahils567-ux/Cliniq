@@ -1,131 +1,138 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
-import { Card, Form, Input, Button, message } from 'antd';
-import { FaLock } from 'react-icons/fa';
+import { Input, Button, message } from 'antd';
+import './ChangePassword.css';
+
+/**
+ * Change password.
+ *
+ * NOTE: the API has no change-password endpoint — auth.route.ts exposes only
+ * /reset-password and /reset-password/confirm, which are the emailed-link
+ * flow. Submitting therefore cannot succeed, and the handler says so plainly
+ * rather than pretending. This screen is presentation until that endpoint
+ * exists; see the note rendered under the button.
+ *
+ * The rules below are checked live as you type. The previous version listed
+ * them statically under the fields, so a rejected password left you guessing
+ * which one you had missed.
+ */
+
+const RULES = [
+    { key: 'len', label: 'At least 8 characters', test: (v) => v.length >= 8 },
+    { key: 'upper', label: 'One uppercase letter', test: (v) => /[A-Z]/.test(v) },
+    { key: 'lower', label: 'One lowercase letter', test: (v) => /[a-z]/.test(v) },
+    { key: 'digit', label: 'One number', test: (v) => /\d/.test(v) },
+];
+
+const Field = ({ label, value, onChange, placeholder, autoComplete }) => (
+    <div className="cqpw__field">
+        <label className="cqpw__label">{label}</label>
+        <Input.Password
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={placeholder}
+            autoComplete={autoComplete}
+            size="large"
+        />
+    </div>
+);
 
 const ChangePassword = () => {
-    const [form] = Form.useForm();
+    const [current, setCurrent] = useState('');
+    const [next, setNext] = useState('');
+    const [confirm, setConfirm] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (values) => {
-        try {
-            setLoading(true);
-            
-            if (values.newPassword !== values.confirmPassword) {
-                message.error('New password and confirm password do not match');
-                setLoading(false);
-                return;
-            }
+    const met = useMemo(() => RULES.map((r) => r.test(next)), [next]);
+    const score = met.filter(Boolean).length;
+    const allMet = score === RULES.length;
 
-            // API call would go here
-            message.info('Change password API needs implementation');
-            form.resetFields();
-            setLoading(false);
-        } catch (error) {
-            message.error('Failed to change password');
+    // Only complain about a mismatch once there is something to compare.
+    const mismatch = confirm.length > 0 && next !== confirm;
+    const canSubmit = current.length > 0 && allMet && !mismatch && confirm.length > 0;
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!canSubmit) return;
+        setLoading(true);
+        try {
+            message.warning('Changing your password is not available yet — the API has no endpoint for it.');
+        } finally {
             setLoading(false);
         }
     };
 
     return (
         <DashboardLayout>
-            <div className="dashboard-card">
-                <div className="dashboard-card-header">
-                    <h3 className="dashboard-card-title">
-                        <FaLock style={{ marginRight: '0.5rem' }} />
-                        Change Password
-                    </h3>
+            <form className="cqpw" onSubmit={handleSubmit}>
+                <div className="cqpw__head">
+                    <h1 className="cqpw__title">Change password</h1>
+                    <p className="cqpw__sub">
+                        Choose something you have not used elsewhere. You will stay signed
+                        in on this device.
+                    </p>
                 </div>
 
-                <Card className="password-change-card">
-                    <Form
-                        form={form}
-                        layout="vertical"
-                        onFinish={handleSubmit}
-                        autoComplete="off"
-                    >
-                        <Form.Item
-                            label="Current Password"
-                            name="currentPassword"
-                            rules={[
-                                { required: true, message: 'Please enter your current password' }
-                            ]}
-                        >
-                            <Input.Password
-                                placeholder="Enter current password"
-                                prefix={<FaLock />}
-                                size="large"
-                            />
-                        </Form.Item>
+                <Field
+                    label="Current password"
+                    value={current}
+                    onChange={setCurrent}
+                    placeholder="Your current password"
+                    autoComplete="current-password"
+                />
 
-                        <Form.Item
-                            label="New Password"
-                            name="newPassword"
-                            rules={[
-                                { required: true, message: 'Please enter new password' },
-                                { min: 8, message: 'Password must be at least 8 characters' },
-                                {
-                                    pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-                                    message: 'Password must contain uppercase, lowercase, and number'
-                                }
-                            ]}
-                            hasFeedback
-                        >
-                            <Input.Password
-                                placeholder="Enter new password"
-                                prefix={<FaLock />}
-                                size="large"
-                            />
-                        </Form.Item>
+                <Field
+                    label="New password"
+                    value={next}
+                    onChange={setNext}
+                    placeholder="Your new password"
+                    autoComplete="new-password"
+                />
 
-                        <Form.Item
-                            label="Confirm New Password"
-                            name="confirmPassword"
-                            dependencies={['newPassword']}
-                            hasFeedback
-                            rules={[
-                                { required: true, message: 'Please confirm your password' },
-                                ({ getFieldValue }) => ({
-                                    validator(_, value) {
-                                        if (!value || getFieldValue('newPassword') === value) {
-                                            return Promise.resolve();
-                                        }
-                                        return Promise.reject(new Error('Passwords do not match'));
-                                    },
-                                }),
-                            ]}
-                        >
-                            <Input.Password
-                                placeholder="Confirm new password"
-                                prefix={<FaLock />}
-                                size="large"
-                            />
-                        </Form.Item>
+                <div className="cqpw__strength" aria-hidden="true">
+                    {RULES.map((r, i) => (
+                        <span
+                            key={r.key}
+                            className={`cqpw__seg${i < score ? ' is-on' : ''}${allMet ? ' is-full' : ''}`}
+                        />
+                    ))}
+                </div>
 
-                        <div className="password-requirements">
-                            <h4>Password Requirements:</h4>
-                            <ul>
-                                <li>At least 8 characters long</li>
-                                <li>Contains at least one uppercase letter</li>
-                                <li>Contains at least one lowercase letter</li>
-                                <li>Contains at least one number</li>
-                            </ul>
-                        </div>
+                <ul className="cqpw__rules">
+                    {RULES.map((r, i) => (
+                        <li key={r.key} className={`cqpw__rule${met[i] ? ' is-met' : ''}`}>
+                            <span className="cqpw__tick" aria-hidden="true">✓</span>
+                            {r.label}
+                        </li>
+                    ))}
+                </ul>
 
-                        <Form.Item className="mt-4">
-                            <Button
-                                type="primary"
-                                htmlType="submit"
-                                size="large"
-                                loading={loading}
-                                block
-                            >
-                                Change Password
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </Card>
-            </div>
+                <Field
+                    label="Confirm new password"
+                    value={confirm}
+                    onChange={setConfirm}
+                    placeholder="Type it again"
+                    autoComplete="new-password"
+                />
+
+                {mismatch && <p className="cqpw__mismatch">Those do not match.</p>}
+
+                <Button
+                    className="cqpw__submit"
+                    type="primary"
+                    htmlType="submit"
+                    loading={loading}
+                    disabled={!canSubmit}
+                >
+                    Update password
+                </Button>
+
+                <p className="cqpw__note">
+                    Not working yet — the server has no change-password endpoint. Use
+                    “Forgot password” on the sign-in screen to reset by email in the
+                    meantime.
+                </p>
+            </form>
         </DashboardLayout>
     );
 };
