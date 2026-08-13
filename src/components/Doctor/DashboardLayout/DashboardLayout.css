@@ -46,7 +46,9 @@
 
 .dashboard-stat-card {
   background: var(--c-surface);
-  border: 1px solid var(--c-border);
+  /* Borderless, matching the quick-link cards above them — the surface step
+     from --c-bg to --c-surface carries the edge on its own. */
+  border: 1px solid transparent;
   border-radius: var(--r-lg);
   padding: var(--sp-5);
   color: var(--c-ink);
@@ -71,7 +73,7 @@
 
 .dashboard-stat-card:hover {
   transform: translateY(-4px);
-  border-color: var(--c-accent);
+  background: var(--d-surface-alt);
   box-shadow: var(--sh-md);
 }
 
