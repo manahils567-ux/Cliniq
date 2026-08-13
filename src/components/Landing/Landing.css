@@ -14,7 +14,14 @@
   font-family: var(--font-ui);
   color: var(--text-dark);
   background: var(--c-bg);
-  overflow-x: hidden;
+  /* clip, not hidden. overflow-x: hidden makes this a scroll container, and a
+     sticky descendant then resolves against it rather than the viewport — the
+     capability rail's pinned stage scrolled away instead of holding. clip
+     suppresses the horizontal overflow without creating that container.
+     overflow-y must stay visible: paired with auto or scroll, clip computes
+     back to hidden and the bug returns. */
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 /* ── NAVBAR ── */
@@ -378,6 +385,16 @@
 /* ── FEATURE ROW ── */
 .section {
   padding: 72px 60px;
+}
+
+/* The closing CTA and the footer are the page's two floating dark cards and
+   sit directly above one another, so they need a shared inset. The 60px above
+   left the CTA 88px narrower than the footer, which uses --sp-4. Defined here
+   rather than in base.css because Landing.css loads after it — at equal
+   specificity the .section rule above would otherwise win. */
+.section--card-flush {
+  padding-left: var(--sp-4);
+  padding-right: var(--sp-4);
 }
 
 .section-bg {

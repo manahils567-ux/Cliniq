@@ -8,7 +8,64 @@ import {
 } from 'react-icons/fa';
 import CqHero from '../Home/HeroSection/CqHero';
 import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
+import CqCapabilityRail from '../Service/CqCapabilityRail';
 import './Landing.css';
+
+/* The two landing card rows are one scroll-down / swipe-left rail: the three
+   process steps, then the three capabilities behind them. Kept as a single
+   rail rather than two because consecutive runways leave a long blank stretch
+   between them, and six cards give the track enough to travel through at the
+   default card width. */
+const RAIL_ITEMS = [
+  {
+    key: 'capture',
+    tone: 'ink',
+    label: 'Step 01 · Capture',
+    title: 'Photograph your documents',
+    body: 'Point your phone camera at a prescription, lab report or discharge summary. Photos and PDFs both work — no scanner, no typing.',
+    tags: ['Phone camera', 'PDF'],
+  },
+  {
+    key: 'analyse',
+    tone: 'accent',
+    label: 'Step 02 · Analyse',
+    title: 'AI reads every value',
+    body: 'Each document is analysed on upload. Measurements are extracted with their reference ranges, and anything outside normal is flagged.',
+    tags: ['Lab values', 'Medicines'],
+  },
+  {
+    key: 'act',
+    tone: 'greige',
+    label: 'Step 03 · Act',
+    title: 'Reminders, then the right doctor',
+    body: 'A course of medication becomes a daily reminder; a recheck in three months becomes a dated one. When a report points to a speciality, book a verified doctor and share those records in one tap.',
+    link: { to: '/login', label: 'Sign in to start' },
+  },
+  {
+    key: 'credentials',
+    tone: 'cream',
+    label: 'Credentials',
+    title: 'Doctor Credentials',
+    body: 'Every specialist on our platform is board-certified and verified. View degrees, experience, and patient ratings before booking.',
+    tags: ['Verified', 'Board Certified'],
+  },
+  {
+    key: 'scheduling',
+    tone: 'ink',
+    label: 'Scheduling',
+    title: 'Flexible Scheduling',
+    body: 'Book same-day or plan weeks ahead. Choose your preferred time slot and receive instant confirmation with reminders.',
+    tags: ['Same-Day', 'Reminders'],
+  },
+  {
+    key: 'diagnostics',
+    tone: 'accent',
+    label: 'Diagnostics',
+    title: 'Modern Diagnostics',
+    body: 'Access lab results, imaging, and diagnostic reports directly in your patient dashboard — shared securely by your care team.',
+    tags: ['Lab Results', 'Imaging'],
+  },
+];
 
 /* ── small reusable icon-bubble ── */
 const Bubble = ({ icon: Icon, bg, color, size = 48 }) => (
@@ -51,128 +108,17 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ══════════════ FEATURE ROW ══════════════ */}
-      <section className="section" id="about">
-        <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <p className="section-label">How Cliniq works</p>
-          <h2 className="section-title">From a pile of paperwork to a plan</h2>
-        </div>
-
-        <div className="cards-row">
-
-          <article className="cq-panel cq-panel--ink">
-            <div className="cq-panel__head">
-              <span className="cq-panel__label">Step 01 · Capture</span>
-            </div>
-            <div className="cq-panel__value">Photograph your documents</div>
-            <p className="cq-panel__body">
-              Point your phone camera at a prescription, lab report or discharge
-              summary. Photos and PDFs both work — no scanner, no typing.
-            </p>
-            <hr className="cq-panel__rule" />
-            <div className="cq-panel__foot">
-              <span className="cq-panel__pill">Phone camera</span>
-              <span className="cq-panel__pill">PDF</span>
-            </div>
-          </article>
-
-          <article className="cq-panel cq-panel--accent">
-            <div className="cq-panel__head">
-              <span className="cq-panel__label">Step 02 · Analyse</span>
-            </div>
-            <div className="cq-panel__value">AI reads every value</div>
-            <p className="cq-panel__body">
-              Each document is analysed on upload. Measurements are extracted with
-              their reference ranges, and anything outside normal is flagged.
-            </p>
-            <hr className="cq-panel__rule" />
-            <div className="cq-panel__foot">
-              <span className="cq-panel__pill">Lab values</span>
-              <span className="cq-panel__pill">Medicines</span>
-            </div>
-          </article>
-
-          <article className="cq-panel cq-panel--greige">
-            <div className="cq-panel__head">
-              <span className="cq-panel__label">Step 03 · Act</span>
-            </div>
-            <div className="cq-panel__value">Reminders, then the right doctor</div>
-            <p className="cq-panel__body">
-              A course of medication becomes a daily reminder; a recheck in three
-              months becomes a dated one. When a report points to a speciality,
-              book a verified doctor and share those records in one tap.
-            </p>
-            <hr className="cq-panel__rule" />
-            <div className="cq-panel__foot">
-              <Link to="/login" className="cq-panel__link">
-                Sign in to start <FaArrowRight size={11} />
-              </Link>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      {/* ══════════════ SERVICES ROW ══════════════ */}
-      <section className="section section-bg" id="services">
-        <div className="services-header">
-          <p className="section-label">What we offer</p>
-          <h2 className="section-title">Designed for better care</h2>
-        </div>
-
-        <div className="cards-row">
-
-          <article className="cq-panel cq-panel--cream">
-            <div className="cq-panel__head">
-              <span className="cq-panel__label">Credentials</span>
-            </div>
-            <div className="cq-panel__value">Doctor Credentials</div>
-            <p className="cq-panel__body">
-              Every specialist on our platform is board-certified and verified.
-              View degrees, experience, and patient ratings before booking.
-            </p>
-            <hr className="cq-panel__rule" />
-            <div className="cq-panel__foot">
-              <span className="cq-panel__pill">Verified</span>
-              <span className="cq-panel__pill">Board Certified</span>
-            </div>
-          </article>
-
-          <article className="cq-panel cq-panel--ink">
-            <div className="cq-panel__head">
-              <span className="cq-panel__label">Scheduling</span>
-            </div>
-            <div className="cq-panel__value">Flexible Scheduling</div>
-            <p className="cq-panel__body">
-              Book same-day or plan weeks ahead. Choose your preferred time slot
-              and receive instant confirmation with reminders.
-            </p>
-            <hr className="cq-panel__rule" />
-            <div className="cq-panel__foot">
-              <span className="cq-panel__pill">Same-Day</span>
-              <span className="cq-panel__pill">Reminders</span>
-            </div>
-          </article>
-
-          <article className="cq-panel cq-panel--accent">
-            <div className="cq-panel__head">
-              <span className="cq-panel__label">Diagnostics</span>
-            </div>
-            <div className="cq-panel__value">Modern Diagnostics</div>
-            <p className="cq-panel__body">
-              Access lab results, imaging, and diagnostic reports directly in your
-              patient dashboard — shared securely by your care team.
-            </p>
-            <hr className="cq-panel__rule" />
-            <div className="cq-panel__foot">
-              <span className="cq-panel__pill">Lab Results</span>
-              <span className="cq-panel__pill">Imaging</span>
-            </div>
-          </article>
-        </div>
-      </section>
+      {/* ══════════════ CAPABILITY RAIL ══════════════ */}
+      <CqCapabilityRail
+        items={RAIL_ITEMS}
+        eyebrow="How Cliniq works"
+        title="From a pile of paperwork to a plan"
+        subtitle="Three steps, and the platform behind them."
+        runwayVh={260}
+      />
 
       {/* ══════════════ CLOSING CTA ══════════════ */}
-      <section className="section" id="get-started">
+      <section className="section section--card-flush" id="get-started">
         <div className="cq-close">
           <div className="cq-close__text">
             <p className="cq-eyebrow" style={{ color: 'var(--d-text-faint)' }}>Get started</p>

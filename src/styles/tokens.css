@@ -94,6 +94,10 @@
   --d-action:        var(--n-100);
   --d-action-hover:  var(--n-200);
   --d-action-text:   #0A0A0A;
+  /* Light-surface --c-danger/--c-positive sit at ~2.8:1 on the dark ground.
+     These are their readable counterparts, same warm family. */
+  --d-danger:        #F2B8B5;
+  --d-positive:      #9BD3B4;
 
   /* ---- Type -----------------------------------------------------------
      Inter Tight for display — tight apertures, near-Helvetica skeleton,

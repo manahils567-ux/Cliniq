@@ -17,8 +17,8 @@ import './CqHeroStage.css';
  * the depth the flat video could not.
  *
  * Motion: each slide swings in on its own Z axis inside a shared
- * perspective, so the deck reads as physical cards rather than a
- * crossfade. Springs rather than durations, deliberately slack.
+ * perspective, so the deck reads as physical cards rather than a crossfade.
+ * Springs rather than durations, tuned brisk — see the note on `spring`.
  */
 
 /* ── Visuals ──────────────────────────────────────────────────────────── */
@@ -148,11 +148,12 @@ const HOLD_MS = 4200;
 const FRONT = { opacity: 1, rotateY: 0, z: 0, scale: 1, y: 0 };
 const BACK = { opacity: 0, rotateY: 16, z: -170, scale: 0.88, y: 22 };
 
-/* Damping ratio just under 1 (~0.95): unhurried and soft at the finish, but
-   it actually arrives. The first pass at stiffness 58 / mass 1.15 was
-   overdamped at ~1.16 and took nearly three seconds to settle, which reads
-   as lag rather than weight. */
-const spring = { type: 'spring', stiffness: 92, damping: 18, mass: 1 };
+/* Fast. Every slide is mounted at once, so a slow swap means the outgoing and
+   incoming cards are both partly visible for as long as it takes — they read
+   as one smeared card rather than two. Natural frequency ~21 rad/s at a
+   damping ratio of ~1.04 settles in about 0.15s, which closes that window
+   almost entirely while keeping the arrival soft rather than abrupt. */
+const spring = { type: 'spring', stiffness: 260, damping: 26, mass: 0.6 };
 
 const CqHeroStage = () => {
     const [index, setIndex] = useState(0);
@@ -226,7 +227,7 @@ const CqHeroStage = () => {
                                 transition={
                                     reduced
                                         ? { duration: 0.25 }
-                                        : { ...spring, delay: active ? 0.09 : 0 }
+                                        : { ...spring, delay: active ? 0.04 : 0 }
                                 }
                             >
                                 <p className="cqstage__step">{s.step}</p>

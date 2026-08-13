@@ -9,6 +9,7 @@ import GoogleSignInButton from './GoogleSignInButton';
 const SignUp = ({ setSignUp }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [userType, setUserType] = useState('patient');
+    const [wantsUpdates, setWantsUpdates] = useState(false);
     const [user, setUser] = useState({ firstName: '', lastName: '', email: '', password: '' });
     const [passwordValidation, setPasswordValidation] = useState({
         carLength: false, specailChar: false, upperLowerCase: false, numeric: false,
@@ -69,36 +70,53 @@ const SignUp = ({ setSignUp }) => {
     ];
 
     return (
-        <>
-            <h2>Create Account</h2>
+        <div className="su">
+            <h1 className="su-title">Create an account</h1>
 
-            {/* Social buttons */}
-            <div className="auth-social-row">
+            <div className="su-social">
                 <GoogleSignInButton label="Sign up with Google" />
             </div>
 
-            <div className="auth-divider">–OR–</div>
+            <div className="su-or"><span>or</span></div>
 
-            <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-                <div className="auth-field-row">
-                    <div className="auth-field">
-                        <label>First Name</label>
-                        <input name="firstName" placeholder="John" value={user.firstName} onChange={handleChange} required />
-                    </div>
-                    <div className="auth-field">
-                        <label>Last Name</label>
-                        <input name="lastName" placeholder="Doe" value={user.lastName} onChange={handleChange} required />
-                    </div>
+            <form onSubmit={handleSubmit} className="su-form">
+                <div className="su-row">
+                    <label className="su-box">
+                        <input
+                            name="firstName"
+                            placeholder="John"
+                            value={user.firstName}
+                            onChange={handleChange}
+                            required
+                        />
+                        <span className="su-box__label">First Name</span>
+                    </label>
+                    <label className="su-box">
+                        <input
+                            name="lastName"
+                            placeholder="Doe"
+                            value={user.lastName}
+                            onChange={handleChange}
+                            required
+                        />
+                        <span className="su-box__label">Last Name</span>
+                    </label>
                 </div>
 
-                <div className="auth-field">
-                    <label>Email</label>
-                    <input name="email" type="email" placeholder="you@example.com" value={user.email} onChange={handleChange} required />
-                </div>
+                <label className="su-box">
+                    <input
+                        name="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        value={user.email}
+                        onChange={handleChange}
+                        required
+                    />
+                    <span className="su-box__label">Email</span>
+                </label>
 
-                <div className="auth-field">
-                    <label>Password</label>
-                    <div className="auth-input-wrap">
+                <div>
+                    <label className="su-box">
                         <input
                             name="password"
                             type={showPassword ? 'text' : 'password'}
@@ -107,11 +125,17 @@ const SignUp = ({ setSignUp }) => {
                             onChange={handleChange}
                             required
                         />
-                        <span className="auth-eye" onClick={() => setShowPassword(!showPassword)}>
+                        <span className="su-box__label">Password</span>
+                        <button
+                            type="button"
+                            className="su-box__eye"
+                            onClick={() => setShowPassword(!showPassword)}
+                            aria-label={showPassword ? 'Hide password' : 'Show password'}
+                        >
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
-                        </span>
-                    </div>
-                    {/* Password hints */}
+                        </button>
+                    </label>
+
                     {user.password.length > 0 && (
                         <div className="auth-pass-hints">
                             {hints.map(({ key, label }) => (
@@ -123,15 +147,36 @@ const SignUp = ({ setSignUp }) => {
                     )}
                 </div>
 
-                <div className="auth-field">
-                    <label>I am a</label>
+                <label className="su-box">
                     <select value={userType} onChange={(e) => setUserType(e.target.value)}>
                         <option value="patient">Patient</option>
                         <option value="doctor">Doctor</option>
                     </select>
+                    <span className="su-box__label">I am a</span>
+                </label>
+
+                <div className="su-fine">
+                    <label className="su-check">
+                        <span className="su-check__box">
+                            <input
+                                type="checkbox"
+                                checked={wantsUpdates}
+                                onChange={(e) => setWantsUpdates(e.target.checked)}
+                            />
+                            <svg viewBox="0 0 12 12" aria-hidden="true" fill="none">
+                                <path d="M3 6.2 5 8.1 9 3.9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </span>
+                        <span>Email me occasional product updates from Cliniq</span>
+                    </label>
+
+                    <p className="su-terms">
+                        By creating an account, you agree to our{' '}
+                        <a href="/about">Terms and Services</a> and <a href="/about">Privacy Policy</a>
+                    </p>
                 </div>
 
-                <button className="auth-submit-btn" type="submit" disabled={!isFormValid || isLoading}>
+                <button className="su-submit" type="submit" disabled={!isFormValid || isLoading}>
                     {isLoading ? <Spinner animation="border" size="sm" /> : 'Create Account'}
                 </button>
             </form>
@@ -140,7 +185,7 @@ const SignUp = ({ setSignUp }) => {
                 Already have an account?{' '}
                 <span onClick={() => setSignUp(false)}>Log in</span>
             </div>
-        </>
+        </div>
     );
 };
 
