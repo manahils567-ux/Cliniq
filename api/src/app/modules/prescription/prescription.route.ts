@@ -8,12 +8,12 @@ const router = express.Router();
 router.get('/doctor/prescription', auth(AuthUser.DOCTOR), PrescriptionController.getDoctorPrescriptionById);
 router.get('/patient/prescription', auth(AuthUser.PATIENT), PrescriptionController.getPatientPrescriptionById);
 
-router.get('/:id', PrescriptionController.getPrescriptionById);
-router.get('/', PrescriptionController.getAllPrescriptions);
+router.get('/:id', auth(AuthUser.DOCTOR, AuthUser.PATIENT, AuthUser.ADMIN, AuthUser.SUPER_ADMIN), PrescriptionController.getPrescriptionById);
+router.get('/', auth(AuthUser.DOCTOR, AuthUser.ADMIN, AuthUser.SUPER_ADMIN), PrescriptionController.getAllPrescriptions);
 
 router.post('/create', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.createPrescription);
 
-router.delete('/:', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.deletePrescription);
+router.delete('/:id', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.deletePrescription);
 router.patch('/', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.updatePrescription);
 router.patch('/update-prescription-appointment', auth(AuthUser.DOCTOR, AuthUser.ADMIN), PrescriptionController.updatePrescriptionAndAppointment);
 

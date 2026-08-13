@@ -5,7 +5,7 @@ import { AppointmentController } from './appointment.controller';
 
 const router = express.Router();
 
-router.get('/', AppointmentController.getAllAppointment);
+router.get('/', auth(AuthUser.ADMIN, AuthUser.SUPER_ADMIN), AppointmentController.getAllAppointment);
 
 router.get('/patient/appointments',auth(AuthUser.PATIENT), AppointmentController.getPatientAppointmentById);
 router.get('/patient/invoices',auth(AuthUser.PATIENT), AppointmentController.getPatientPaymentInfo);
@@ -22,7 +22,7 @@ router.post('/create-un-authenticate', AppointmentController.createAppointmentBy
 
 router.get('/:id', AppointmentController.getAppointment);
 
-router.delete('/:id', AppointmentController.deleteAppointment);
+router.delete('/:id', auth(AuthUser.ADMIN, AuthUser.SUPER_ADMIN), AppointmentController.deleteAppointment);
 router.patch('/:id', auth(AuthUser.ADMIN, AuthUser.DOCTOR, AuthUser.PATIENT),AppointmentController.updateAppointment);
 //doctor side
 router.patch('/doctor/update-appointment',auth(AuthUser.DOCTOR), AppointmentController.updateAppointmentByDoctor);

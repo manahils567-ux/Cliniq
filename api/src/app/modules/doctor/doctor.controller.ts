@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
+import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
+import ApiError from "../../../errors/apiError";
 import { Doctor } from "@prisma/client";
 import { DoctorService } from "./doctor.service";
 import pick from "../../../shared/pick";
@@ -39,6 +41,11 @@ const getDoctor = catchAsync(async (req: Request, res: Response) => {
 })
 
 const deleteDoctor = catchAsync(async (req: Request, res: Response) => {
+    // A doctor may only delete their own account; admins may delete any.
+    const authUser = req.user as { userId?: string; role?: string } | undefined;
+    if (authUser?.role === 'doctor' && authUser?.userId !== req.params.id) {
+        throw new ApiError(httpStatus.FORBIDDEN, 'You can only delete your own account !!');
+    }
     const result = await DoctorService.deleteDoctor(req.params.id);
     sendResponse<Doctor>(res, {
         statusCode: 200,
