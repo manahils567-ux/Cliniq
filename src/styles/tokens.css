@@ -86,9 +86,14 @@
      Charcoal Espresso is the dark ground, cream the text on it. */
   /* Black is the dark ground across the app. Espresso stays in the ramp for
      borders, icons and text; it is no longer the dark surface itself. */
-  --d-bg:            #0A0A0A;
-  --d-surface:       #141414;
-  --d-surface-alt:   #1F1F1F;
+  /* Warmed off pure grey and the ladder widened. These were #0A0A0A /
+     #141414 / #1F1F1F: achromatic, and only ~4% luminance apart, which left
+     a card barely separable from the page once the borders came off. The
+     tint is a few points toward the cream so the dark reads as the same
+     material as the type rather than grey with cream on it. */
+  --d-bg:            #0B0A09;
+  --d-surface:       #17130F;
+  --d-surface-alt:   #221E19;
   --d-border:        rgba(241, 236, 230, 0.14);
   --d-border-strong: rgba(241, 236, 230, 0.30);
   --d-text:          var(--n-100);
@@ -167,7 +172,10 @@
   --fw-normal: 400;
   --fw-medium: 500;
   --fw-semi:   600;
-  --fw-bold:   700;
+  /* 800, not 700. Manrope runs to 800 and the extra weight is where the
+     display/body contrast comes from; body stays at 400 because lighter
+     text on a near-black ground thins out rather than reading elegant. */
+  --fw-bold:   800;
 
   --lh-hero:   0.92;     /* display type sets tighter than it looks */
   --lh-tight:  1.1;
@@ -178,6 +186,14 @@
   /* Manrope is narrower and more closed than Montserrat, so it takes the
      tighter tracking the display sizes want without the letters colliding —
      part-way back toward the original Inter Tight values. */
+  /* Depth on a near-black ground comes from a lit top edge, not from a
+     shadow — a shadow over #0B0A09 is nearly invisible. The inset hairline
+     reads as light falling from above; the outer shadow only grounds it. */
+  --sh-raise: inset 0 1px 0 rgba(241, 236, 230, 0.06),
+              0 12px 32px rgba(0, 0, 0, 0.55);
+  --sh-raise-hi: inset 0 1px 0 rgba(241, 236, 230, 0.10),
+                 0 20px 48px rgba(0, 0, 0, 0.65);
+
   --tr-hero:  -0.038em;
   --tr-tight: -0.017em;
   --tr-none:   0;

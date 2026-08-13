@@ -402,7 +402,20 @@ a:hover { opacity: 0.62; color: inherit; }
    ========================================================================== */
 
 .ant-btn { font-family: var(--font-ui); font-weight: var(--fw-medium); }
-.ant-card { box-shadow: none; border-color: transparent; }
+/* Raised surfaces. The lit top edge is what carries depth here — see
+   --sh-raise. Applied at the shared level so cards, panels and the dashboard
+   surfaces all sit on the same elevation, rather than each file inventing a
+   shadow that does nothing over near-black. */
+.ant-card,
+.dashboard-card,
+.stat-mini-card,
+.dash-home__quick-card {
+  box-shadow: var(--sh-raise);
+  border-color: transparent;
+}
+
+.dashboard-card:hover,
+.dash-home__quick-card:hover { box-shadow: var(--sh-raise-hi); }
 .ant-card-head { border-bottom-color: transparent; }
 .ant-modal-content { box-shadow: var(--sh-xl); }
 .ant-modal-header { border-bottom: 1px solid var(--c-border-subtle); padding-bottom: var(--sp-3); }
