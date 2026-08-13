@@ -97,11 +97,24 @@ const VerficationExpired = catchAsync(async (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../../../../template/expiredVarification.html"))
 })
 
+/* userId comes off the verified token, not the body — see the note on
+   AuthService.changePassword. */
+const ChangePassword = catchAsync(async (req: Request & { user?: any }, res: Response) => {
+    const result = await AuthService.changePassword(req.user?.userId, req.body);
+    sendResponse(res, {
+        statusCode: 200,
+        message: 'Successfully Password Changed!!',
+        success: true,
+        data: result,
+    })
+})
+
 export const AuthController = {
     Login,
     VerifyUser,
     Verified,
     VerficationExpired,
     resetPassword,
-    PasswordResetConfirm
+    PasswordResetConfirm,
+    ChangePassword
 }

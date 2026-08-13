@@ -1,16 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import { Input, Button, message } from 'antd';
+import { useChangePasswordMutation } from '../../../redux/api/authApi';
 import './ChangePassword.css';
 
 /**
  * Change password.
  *
- * NOTE: the API has no change-password endpoint — auth.route.ts exposes only
- * /reset-password and /reset-password/confirm, which are the emailed-link
- * flow. Submitting therefore cannot succeed, and the handler says so plainly
- * rather than pretending. This screen is presentation until that endpoint
- * exists; see the note rendered under the button.
+ * Wired to PATCH /auth/change-password. That endpoint verifies the current
+ * password with bcrypt and scopes the update to the token's own user, so the
+ * id is never taken from the request body.
  *
  * The rules below are checked live as you type. The previous version listed
  * them statically under the fields, so a rejected password left you guessing
@@ -40,7 +39,7 @@ const ChangePassword = () => {
     const [current, setCurrent] = useState('');
     const [next, setNext] = useState('');
     const [confirm, setConfirm] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [changePassword, { isLoading }] = useChangePasswordMutation();
 
     const met = useMemo(() => RULES.map((r) => r.test(next)), [next]);
     const score = met.filter(Boolean).length;
@@ -53,11 +52,14 @@ const ChangePassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!canSubmit) return;
-        setLoading(true);
         try {
-            message.warning('Changing your password is not available yet — the API has no endpoint for it.');
-        } finally {
-            setLoading(false);
+            await changePassword({ currentPassword: current, newPassword: next }).unwrap();
+            message.success('Password changed.');
+            setCurrent(''); setNext(''); setConfirm('');
+        } catch (err) {
+            // The server distinguishes a wrong current password from a weak new
+            // one; surface whichever it sent rather than a generic failure.
+            message.error(err?.data?.message || 'Could not change your password.');
         }
     };
 
@@ -120,17 +122,12 @@ const ChangePassword = () => {
                     className="cqpw__submit"
                     type="primary"
                     htmlType="submit"
-                    loading={loading}
+                    loading={isLoading}
                     disabled={!canSubmit}
                 >
                     Update password
                 </Button>
 
-                <p className="cqpw__note">
-                    Not working yet — the server has no change-password endpoint. Use
-                    “Forgot password” on the sign-in screen to reset by email in the
-                    meantime.
-                </p>
             </form>
         </DashboardLayout>
     );

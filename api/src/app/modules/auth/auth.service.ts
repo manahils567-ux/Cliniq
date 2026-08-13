@@ -180,9 +180,55 @@ const PassworResetConfirm = async (payload: any): Promise<any> => {
     }
 }
 
+/**
+ * Change the password of the signed-in user.
+ *
+ * Distinct from resetPassword, which is the emailed-link flow for someone
+ * locked out. This one proves possession by checking the current password
+ * instead, so it needs no token and no email — which matters here, because
+ * outbound mail is the least reliable part of this system.
+ *
+ * The user id comes from the verified token, never from the request body:
+ * taking it from the payload would let any signed-in caller rewrite anyone
+ * else's password, which is the same IDOR class already fixed on the patient
+ * and doctor update routes.
+ */
+const changePassword = async (userId: string, payload: { currentPassword?: string; newPassword?: string }): Promise<{ message: string }> => {
+    const currentPassword = payload?.currentPassword ?? '';
+    const newPassword = payload?.newPassword ?? '';
+
+    if (!currentPassword || !newPassword) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Current and new password are both required !!");
+    }
+    if (newPassword.length < 8 || !/[A-Z]/.test(newPassword) || !/[a-z]/.test(newPassword) || !/\d/.test(newPassword)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "New password must be at least 8 characters and contain an uppercase letter, a lowercase letter and a number !!");
+    }
+    if (currentPassword === newPassword) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "New password must be different from the current one !!");
+    }
+
+    const isUserExist = await prisma.auth.findUnique({ where: { id: userId } });
+    if (!isUserExist) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User is not Exist !");
+    }
+
+    const matched = await bcrypt.compare(currentPassword, isUserExist.password);
+    if (!matched) {
+        throw new ApiError(httpStatus.UNAUTHORIZED, "Current password is incorrect !!");
+    }
+
+    await prisma.auth.update({
+        where: { id: userId },
+        data: { password: await bcrypt.hashSync(newPassword, 12) }
+    });
+
+    return { message: "Password Changed Successfully !!" };
+}
+
 export const AuthService = {
     loginUser,
     VerificationUser,
     resetPassword,
-    PassworResetConfirm
+    PassworResetConfirm,
+    changePassword
 }
