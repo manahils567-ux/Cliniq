@@ -99,6 +99,34 @@
   --d-danger:        #F2B8B5;
   --d-positive:      #9BD3B4;
 
+  /* ---- Dark app theme -------------------------------------------------
+     The landing runs on the --d-* ramp; these lines carry the same ground
+     to the rest of the site by repointing the --c-* semantic layer at it.
+     The light values above are left intact so this is one block to delete
+     to go back.
+
+     --c-accent is deliberately NOT repointed: it is used both as a fill
+     (rosewood cards, solid buttons, where cream text sits on it) and as a
+     text colour. #7D4047 on #0A0A0A is about 1.5:1, so anything drawing
+     text in it needs --c-accent-line instead — which is why that token
+     moves and this one does not. */
+  --c-bg:            var(--d-bg);
+  --c-bg-alt:        var(--d-surface);
+  --c-surface:       var(--d-surface);
+  --c-border:        var(--d-border);
+  --c-border-subtle: var(--d-border);
+  --c-ink:           var(--d-text);
+  --c-text:          var(--d-text-muted);
+  --c-text-muted:    var(--d-text-muted);
+  --c-text-faint:    var(--d-text-faint);
+  --c-accent-line:   #E2CBCE;
+  --c-accent-wash:   var(--d-surface-alt);
+  --c-signal-wash:   var(--d-surface-alt);
+  --c-danger:        var(--d-danger);
+  --c-danger-wash:   var(--d-surface-alt);
+  --c-positive:      var(--d-positive);
+  --c-positive-wash: var(--d-surface-alt);
+
   /* ---- Type -----------------------------------------------------------
      Inter Tight for display — tight apertures, near-Helvetica skeleton,
      holds together at 88px where Inter proper starts to feel loose.
