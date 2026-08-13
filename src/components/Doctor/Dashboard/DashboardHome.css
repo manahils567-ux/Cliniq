@@ -80,12 +80,6 @@
 	color: inherit;
 }
 
-.dash-home__quick-icon {
-	font-size: 1.35rem;
-	color: var(--c-action);
-	flex-shrink: 0;
-}
-
 .dash-home__quick-arrow {
 	margin-left: auto;
 	color: var(--n-400);
