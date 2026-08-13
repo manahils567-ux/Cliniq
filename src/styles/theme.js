@@ -127,7 +127,16 @@ export const cliniqDarkTheme = {
   components: {
     ...sharedComponents,
     Button: { ...sharedComponents.Button, primaryColor: '#0A0A0A' },
-    Table:  { headerBg: '#141414', rowHoverBg: '#141414', borderColor: 'rgba(241,236,230,0.09)' },
+    /* borderColor draws the rule under the header and between rows;
+       headerSplitColor draws the little vertical ticks between column
+       headings. Both were visible lines on the dark ground — the header's
+       own uppercase labels already separate it from the body. */
+    Table:  {
+      headerBg: 'transparent',
+      rowHoverBg: '#1F1F1F',
+      borderColor: 'transparent',
+      headerSplitColor: 'transparent',
+    },
     Input:  { paddingBlock: 9, activeShadow: '0 0 0 3px rgba(241, 236, 230, 0.34)' },
     Segmented: { itemSelectedBg: mono.n100, itemSelectedColor: '#0A0A0A' },
     /* The light config sets these; without dark counterparts the dropdowns,

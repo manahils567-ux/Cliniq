@@ -27,7 +27,10 @@
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid var(--c-border-subtle);
+  /* Was a 2px rule. The heading's size and weight already separate it from
+     the content below, and on the dark ground the line read as another
+     border rather than as structure. */
+  border-bottom: none;
 }
 
 .dashboard-card-title {
