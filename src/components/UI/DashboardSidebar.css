@@ -70,9 +70,10 @@
 .dashboard-nav a {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  margin: 1px var(--sp-3);
-  padding: 0.5rem 0.7rem;
+  /* 2px, not 1: with the icons gone the rows are pure text, and at 1px the
+     pills read as one continuous block rather than separate targets. */
+  margin: 2px var(--sp-3);
+  padding: 0.55rem 0.7rem;
   border-radius: var(--r-md);
   color: var(--c-text-muted);
   text-decoration: none;
@@ -129,10 +130,9 @@
   text-align: left;
   /* Matches the nav pills above — inset, rounded, no marker bar. */
   width: auto;
-  margin: 1px var(--sp-3);
-  padding: 0.5rem 0.7rem;
+  margin: 2px var(--sp-3);
+  padding: 0.55rem 0.7rem;
   border-radius: var(--r-md);
-  gap: 0.7rem;
   transition: background var(--dur-fast) var(--ease),
               color var(--dur-fast) var(--ease);
 }
@@ -298,7 +298,6 @@
 .dashboard-sidebar--rail .dashboard-nav-logout {
   display: flex;
   align-items: center;
-  gap: var(--sp-3);
   /* Derived, not hardcoded. This was a flat 26px, correct while the rail was
      72px wide; shrinking it to 64 left the icons pushed ~20px right of centre
      and clipping against the edge. Centre = (rail - icon) / 2, less the rail
