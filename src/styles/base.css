@@ -145,6 +145,12 @@ a:hover { opacity: 0.62; color: inherit; }
   position: absolute;
   inset: 0;
   background:
+    /* Topmost layer: settles the whole width onto --d-bg at the bottom edge.
+       The directional layer below is opaque --n-800 at the left and nearly
+       clear at the right, so the hero used to meet the trust strip at a
+       different tone on each side — no flat colour on the strip could match
+       it, and the join read as a line. Landing both on --d-bg removes it. */
+    linear-gradient(to top, var(--d-bg) 0%, rgba(10,10,10,0.86) 7%, transparent 24%),
     linear-gradient(100deg, var(--n-800) 8%, rgba(46,46,46,0.90) 26%, rgba(46,46,46,0.34) 48%, rgba(46,46,46,0.06) 100%),
     linear-gradient(to top, rgba(46,46,46,0.58) 0%, transparent 34%);
 }
@@ -554,10 +560,19 @@ a:hover { opacity: 0.62; color: inherit; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-4);
-  padding: var(--sp-6) var(--sp-7) var(--sp-7);
-  /* Continues the hero's dark block instead of cutting straight to cream —
-     the colour change then lands at the end of a band rather than mid-air. */
-  background: var(--d-bg);
+  padding: var(--sp-6) var(--sp-7) calc(var(--sp-7) + var(--sp-6));
+  /* Carries the page from the hero down into the cream. Flat --d-bg left a
+     hard step on both edges: the hero ends near --n-800 and the section below
+     is --c-bg. The strip now starts on the hero's tone, settles to --d-bg
+     under the figures, and lifts to cream at its own bottom edge, so both
+     colour changes read as a fade rather than a cut. The extra bottom padding
+     keeps the labels off the ramp. */
+  background: linear-gradient(
+    to bottom,
+    var(--d-bg) 0%,
+    var(--d-bg) 62%,
+    var(--c-bg) 100%
+  );
 }
 .cq-trust__item {
   display: flex;
