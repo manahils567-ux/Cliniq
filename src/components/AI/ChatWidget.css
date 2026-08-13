@@ -14,7 +14,10 @@
     align-items: center;
     gap: 10px;
     background: var(--c-action);
-    color: #fff;
+    /* Paired with --c-action, not hardcoded. This was #fff, which was right
+       while --c-action was rosewood; once it became the cream action colour
+       the label went white-on-cream and disappeared. */
+    color: var(--c-action-text);
     border: none;
     border-radius: var(--r-full);
     padding: 13px 22px;
@@ -312,7 +315,10 @@
     width: 40px;
     height: 40px;
     background: var(--c-action);
-    color: #fff;
+    /* Paired with --c-action, not hardcoded. This was #fff, which was right
+       while --c-action was rosewood; once it became the cream action colour
+       the label went white-on-cream and disappeared. */
+    color: var(--c-action-text);
     border: none;
     border-radius: var(--r-lg);
     display: flex;

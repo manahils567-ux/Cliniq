@@ -447,6 +447,10 @@ a:hover { opacity: 0.62; color: inherit; }
 }
 .ant-tag { border-radius: var(--r-full); font-weight: var(--fw-medium); border: none; padding: 0.15em 0.7em; }
 .ant-empty-description { color: var(--c-text-muted); }
+/* The tray illustration reads as a broken image on the dark ground and adds
+   nothing the words do not. The text carries the empty state on its own. */
+.ant-empty-image { display: none; }
+.ant-empty-normal { margin-block: var(--sp-7); }
 .ant-picker, .ant-select-selector, .ant-input { font-family: var(--font-ui) !important; }
 
 /* Bootstrap's negative .row gutter breaks AntD Modal padding */
