@@ -219,7 +219,10 @@ a:hover { opacity: 0.62; color: inherit; }
 
 .cq-hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 7.4vw, var(--fs-3xl));
+  /* 7.4vw was sized for Inter Tight. Montserrat's geometric forms are
+     appreciably wider at the same size, and inside the 42vw measure the
+     headline broke to four lines and pushed into the lede. */
+  font-size: clamp(2.25rem, 6.1vw, 4.75rem);
   font-weight: var(--fw-bold);
   line-height: var(--lh-hero);
   letter-spacing: var(--tr-hero);

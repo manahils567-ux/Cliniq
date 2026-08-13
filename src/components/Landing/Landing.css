@@ -2,7 +2,8 @@
    LANDING PAGE — Clinnic
    =========================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Poppins import removed — no rule ever set it as a family, so it was a
+   render-blocking request for a font the page never drew with. */
 
 *, *::before, *::after {
   box-sizing: border-box;

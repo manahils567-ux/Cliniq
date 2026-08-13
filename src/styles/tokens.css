@@ -7,7 +7,10 @@
    Must load BEFORE bootstrap and before every component stylesheet.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap');
+/* Montserrat as a variable font — one axis request covers every weight the
+   system uses, so this is a smaller download than the four static cuts it
+   replaces. Nastaliq stays: Montserrat has no Urdu coverage. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap');
 
 :root {
   /* ---- Warm neutral ramp ----------------------------------------------
@@ -128,12 +131,14 @@
   --c-positive-wash: var(--d-surface-alt);
 
   /* ---- Type -----------------------------------------------------------
-     Inter Tight for display — tight apertures, near-Helvetica skeleton,
-     holds together at 88px where Inter proper starts to feel loose.
-     Inter for body. Nastaliq for Urdu.
+     Montserrat for both display and body — one family across the site.
+     Nastaliq for Urdu, which Montserrat does not cover.
      -------------------------------------------------------------------- */
-  --font-display: 'Inter Tight', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-ui:      'Inter', 'Segoe UI', system-ui, sans-serif;
+  /* Montserrat throughout — display and UI both. Its geometric forms carry
+     the large headline sizes, and the tracking tokens below were set for
+     Inter's narrower shapes, so --tr-hero/--tr-tight are eased off. */
+  --font-display: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-ui:      'Montserrat', 'Segoe UI', system-ui, sans-serif;
   --font-urdu:    'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
   --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
@@ -157,8 +162,11 @@
   --lh-normal: 1.55;
   --lh-urdu:   2.1;      /* Nastaliq descenders collide below ~2.0  */
 
-  --tr-hero:  -0.045em;  /* the reference's signature — very tight  */
-  --tr-tight: -0.02em;
+  /* Eased from -0.045/-0.02, which were set for Inter Tight. Montserrat is
+     geometric and rounder — its o, e and c need more room between them, and
+     at the old values the 88px hero ran letters into each other. */
+  --tr-hero:  -0.028em;
+  --tr-tight: -0.012em;
   --tr-none:   0;
   --tr-wide:   0.09em;   /* eyebrows and small caps only            */
 
