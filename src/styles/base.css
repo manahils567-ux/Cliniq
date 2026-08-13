@@ -218,7 +218,12 @@ a:hover { opacity: 0.62; color: inherit; }
   line-height: var(--lh-hero);
   letter-spacing: var(--tr-hero);
   color: var(--d-text);
-  max-width: 15ch;
+  /* 15ch sets the measure at small sizes; the vw cap keeps the headline out of
+     the right half of the frame, where hero.mp4's cards sit. Without it the
+     "Low haemoglobin" card slides under the last line at desktop widths — the
+     video is full-bleed with no horizontal crop, so its cards always land at
+     ~50% of the viewport regardless of size. */
+  max-width: min(15ch, 42vw);
   text-wrap: balance;
 }
 
