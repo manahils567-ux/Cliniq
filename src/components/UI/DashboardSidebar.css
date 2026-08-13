@@ -226,10 +226,7 @@
 .dashboard-sidebar--rail { padding-inline: var(--sp-2); }
 
 .dashboard-sidebar--rail .dashboard-nav a,
-.dashboard-sidebar--rail .dashboard-nav-logout {
-  margin-inline: var(--sp-2);
-  padding-inline: 0.45rem;
-}
+.dashboard-sidebar--rail .dashboard-nav-logout { margin-inline: var(--sp-2); }
 
 .dashboard-sidebar--rail .dashboard-nav-divider { margin-inline: var(--sp-2); }
 
@@ -302,7 +299,11 @@
   display: flex;
   align-items: center;
   gap: var(--sp-3);
-  padding-left: 26px;
+  /* Derived, not hardcoded. This was a flat 26px, correct while the rail was
+     72px wide; shrinking it to 64 left the icons pushed ~20px right of centre
+     and clipping against the edge. Centre = (rail - icon) / 2, less the rail
+     padding and row margin that already sit outside this box. */
+  padding-left: calc((var(--rail-w) - 20px) / 2 - var(--sp-2) * 2);
   overflow: hidden;
 }
 .dashboard-sidebar--rail .dashboard-nav .icon {
