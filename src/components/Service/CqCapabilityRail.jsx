@@ -138,9 +138,11 @@ const CqCapabilityRail = ({
     const x = useTransform(smooth, [0, TRAVEL_SPAN], [0, maxX]);
     const bar = useTransform(smooth, [0, TRAVEL_SPAN], ['0%', '100%']);
 
-    /* The cue has done its job the moment the track starts moving, so it
-       clears early rather than lingering over the cards. */
-    const hint = useTransform(smooth, [0, 0.07], [1, 0]);
+    /* Held, not flashed. Clearing it at 7% meant it vanished the moment the
+       track moved — so anyone already scrolling never saw it, which is
+       exactly when knowing the gesture is useful. It now stays up while
+       there is travel left and fades as the last card arrives. */
+    const hint = useTransform(smooth, [TRAVEL_SPAN - 0.18, TRAVEL_SPAN], [1, 0]);
 
     // Reduced motion: fall back to a normal horizontal scroller, no pinning.
     if (reduce) {
