@@ -9,6 +9,7 @@ import {
 import CqHero from '../Home/HeroSection/CqHero';
 import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import CqCapabilityRail from '../Service/CqCapabilityRail';
+import useAuthCheck from '../../redux/hooks/useAuthCheck';
 import './Landing.css';
 
 /* The two landing card rows are one scroll-down / swipe-left rail: the three
@@ -16,7 +17,7 @@ import './Landing.css';
    rail rather than two because consecutive runways leave a long blank stretch
    between them, and six cards give the track enough to travel through at the
    default card width. */
-const RAIL_ITEMS = [
+const railItems = (signedIn) => [
   {
     key: 'capture',
     tone: 'ink',
@@ -39,7 +40,9 @@ const RAIL_ITEMS = [
     label: 'Step 03 · Act',
     title: 'Reminders, then the right doctor',
     body: 'A course of medication becomes a daily reminder; a recheck in three months becomes a dated one. When a report points to a speciality, book a verified doctor and share those records in one tap.',
-    link: { to: '/login', label: 'Sign in to start' },
+    link: signedIn
+      ? { to: '/dashboard/scanner', label: 'Scan a document' }
+      : { to: '/login', label: 'Sign in to start' },
   },
   {
     key: 'credentials',
@@ -78,6 +81,8 @@ const Bubble = ({ icon: Icon, bg, color, size = 48 }) => (
 );
 
 export default function LandingPage() {
+  const { authChecked, data: authUser } = useAuthCheck();
+  const signedIn = authChecked && !!authUser;
 
   return (
     <div className="landing">
@@ -110,7 +115,7 @@ export default function LandingPage() {
 
       {/* ══════════════ CAPABILITY RAIL ══════════════ */}
       <CqCapabilityRail
-        items={RAIL_ITEMS}
+        items={railItems(signedIn)}
         eyebrow="How Cliniq works"
         title="From a pile of paperwork to a plan"
         subtitle="Three steps, and the platform behind them."
@@ -128,13 +133,17 @@ export default function LandingPage() {
               schedules whatever needs following up. Free to try, in Urdu or English.
             </p>
             <div className="cq-close__actions">
-              <Link to="/login" className="cq-cta">
+              {/* Signed in, "sign in" is noise and the link is a dead end —
+                  send them straight to the scanner instead. */}
+              <Link to={signedIn ? '/dashboard/scanner' : '/login'} className="cq-cta">
                 Upload a report
                 <span className="cq-cta__well" aria-hidden>↙</span>
               </Link>
-              <Link to="/login" className="cq-close__link">
-                Already have an account? Sign in <FaArrowRight size={11} />
-              </Link>
+              {!signedIn && (
+                <Link to="/login" className="cq-close__link">
+                  Already have an account? Sign in <FaArrowRight size={11} />
+                </Link>
+              )}
             </div>
           </div>
 

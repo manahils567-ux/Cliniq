@@ -6,6 +6,7 @@ import Header from '../Shared/Header/Header';
 import SubHeader from '../Shared/SubHeader';
 import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import { useGetSpecialitiesQuery, useGetPlatformStatsQuery } from '../../redux/api/doctorApi';
+import useAuthCheck from '../../redux/hooks/useAuthCheck';
 import CqCapabilityRail from './CqCapabilityRail';
 
 /* Every entry here maps to something the product actually does today. */
@@ -78,6 +79,8 @@ const CAPABILITIES = [
 const Service = () => {
   const { data: specialities = [], isLoading: loadingSpecs } = useGetSpecialitiesQuery();
   const { data: stats = {} } = useGetPlatformStatsQuery();
+  const { authChecked, data: authUser } = useAuthCheck();
+  const signedIn = authChecked && !!authUser;
 
   return (
     <>
@@ -143,8 +146,14 @@ const Service = () => {
             It is analysed within seconds, and anything that needs following up becomes a reminder.
           </p>
         </div>
-        <Link to="/login" className="cq-cta">
-          Sign in to get started
+        {/* Signed-in visitors were still being told to sign in, and the link
+            sent them back to /login for an account they already have. Same
+            auth source the navbar uses, so the two can never disagree. */}
+        <Link
+          to={signedIn ? '/dashboard/scanner' : '/login'}
+          className="cq-cta"
+        >
+          {signedIn ? 'Upload a report' : 'Sign in to get started'}
           <span className="cq-cta__well" aria-hidden>↙</span>
         </Link>
       </section>

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaChevronRight } from 'react-icons/fa';
+import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import CqNewsletter from '../../Landing/CqNewsletter';
 import './CqSiteFooter.css';
 
@@ -20,12 +21,15 @@ import './CqSiteFooter.css';
  * should not carry a subscribe form.
  */
 
-const PATIENT_LINKS = [
+/* Login is dropped once you are signed in — the dashboard link above it
+   already covers where a signed-in visitor wants to go, and offering to log
+   in again is just wrong. */
+const patientLinks = (signedIn) => [
     { label: 'Find a doctor', to: '/doctors' },
     { label: 'Book appointment', to: '/doctors' },
     { label: 'Track appointment', to: '/track-appointment' },
     { label: 'Patient dashboard', to: '/dashboard' },
-    { label: 'Login', to: '/login' },
+    ...(signedIn ? [] : [{ label: 'Login', to: '/login' }]),
 ];
 
 /* No Login here — it is already the last item under For patients, and both
@@ -39,6 +43,8 @@ const DOCTOR_LINKS = [
 const CqSiteFooter = ({ newsletter = false }) => {
     const ref = useRef(null);
     const [shown, setShown] = useState(false);
+    const { authChecked, data: authUser } = useAuthCheck();
+    const PATIENT_LINKS = patientLinks(authChecked && !!authUser);
 
     useEffect(() => {
         const el = ref.current;
