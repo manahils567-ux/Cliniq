@@ -65,18 +65,18 @@
 .dashboard-nav a {
   display: flex;
   align-items: center;
-  padding: 0.875rem 1.5rem;
+  padding: 0.55rem 1.15rem;
   color: var(--c-text-muted);
   text-decoration: none;
   transition: all 0.2s ease;
   border-left: 3px solid transparent;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 500;
 }
 
 .dashboard-nav a .icon {
   margin-right: 0.875rem;
-  font-size: 1.1rem;
+  font-size: 0.98rem;
   color: var(--c-text-muted);
   transition: color 0.2s;
 }
@@ -106,12 +106,12 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0.875rem 1.5rem;
+  padding: 0.55rem 1.15rem;
   border: none;
   background: transparent;
   cursor: pointer;
   color: var(--c-danger);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 500;
   font-family: inherit;
   text-align: left;
@@ -121,7 +121,7 @@
 
 .dashboard-nav-logout .icon {
   margin-right: 0.875rem;
-  font-size: 1.1rem;
+  font-size: 0.98rem;
 }
 
 .dashboard-nav-logout:hover {
@@ -151,7 +151,7 @@
   }
   
   .dashboard-profile-name {
-    font-size: 1.1rem;
+    font-size: 0.98rem;
   }
   
   .dashboard-nav a {

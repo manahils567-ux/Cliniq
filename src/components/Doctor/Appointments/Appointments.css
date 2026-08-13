@@ -18,20 +18,25 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* These were Bootstrap's amber / cyan / green at 5% — hues that appear
+   nowhere else in the palette. Over cream they passed as faint tints; over
+   near-black they turn olive, navy and swamp. The ground stays the plain
+   card surface now and the state is carried by the border and the figure,
+   which is legible at any tint strength and stays in palette. */
 .stat-mini-card.stat-warning {
-  border-color: #ffc107;
-  background: rgba(255, 193, 7, 0.05);
+  border-color: var(--c-signal);
 }
+.stat-mini-card.stat-warning .stat-value { color: var(--c-signal); }
 
 .stat-mini-card.stat-info {
-  border-color: #17a2b8;
-  background: rgba(23, 162, 184, 0.05);
+  border-color: var(--c-accent-line);
 }
+.stat-mini-card.stat-info .stat-value { color: var(--c-accent-line); }
 
 .stat-mini-card.stat-success {
   border-color: var(--c-positive);
-  background: rgba(40, 167, 69, 0.05);
 }
+.stat-mini-card.stat-success .stat-value { color: var(--c-positive); }
 
 .stat-value {
   font-size: 2.25rem;
