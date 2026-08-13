@@ -22,7 +22,7 @@
 }
 
 .status-badge--pending {
-  background: var(--n-050);
+  background: var(--c-surface);
   color: #856404;
 }
 

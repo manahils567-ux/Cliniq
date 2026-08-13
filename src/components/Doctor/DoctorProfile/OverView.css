@@ -91,7 +91,7 @@
 	height: 12px;
 	border-radius: 50%;
 	background: var(--c-action);
-	border: 3px solid #fff;
+	border: 3px solid var(--c-border);
 	box-shadow: 0 0 0 3px rgba(125, 64, 71, 0.2);
 }
 
@@ -104,7 +104,7 @@
 }
 
 .timeline-content:hover {
-	background: #fff;
+	background: var(--c-surface);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 	transform: translateX(4px);
 }
@@ -157,7 +157,7 @@
 
 /* Sidebar Cards */
 .overview-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	padding: 1.5rem;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
@@ -268,7 +268,7 @@
 	display: inline-block;
 	font-size: 0.85rem;
 	padding: 6px 14px;
-	background: var(--n-050);
+	background: var(--c-surface);
 	color: var(--c-text);
 	border-radius: var(--r-lg);
 	font-weight: 500;

@@ -25,7 +25,7 @@
 
 .contact-section {
 	padding: 5rem 0;
-	background: #fff;
+	background: var(--c-surface);
 }
 
 /* Info Cards */
@@ -50,7 +50,7 @@
 }
 
 .contact-info-card:hover {
-	background: #fff;
+	background: var(--c-surface);
 	border-color: var(--c-action);
 	box-shadow: 0 8px 24px rgba(125, 64, 71, 0.12);
 	transform: translateY(-2px);
@@ -97,7 +97,7 @@
 
 /* Form */
 .contact-form-wrapper {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	padding: 2.5rem;
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
@@ -189,7 +189,7 @@
 /* Map */
 .contact-map {
 	padding: 0 0 5rem;
-	background: #fff;
+	background: var(--c-surface);
 }
 
 @media (max-width: 991.98px) {

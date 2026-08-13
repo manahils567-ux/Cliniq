@@ -373,7 +373,7 @@
 	border-radius: 12px !important;
 	overflow: hidden;
 	border: 1px solid var(--c-border-subtle) !important;
-	background: #fff;
+	background: var(--c-surface);
 }
 
 .track-page__collapse .ant-collapse-item {

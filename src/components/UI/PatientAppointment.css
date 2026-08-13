@@ -2,7 +2,7 @@
 	margin-bottom: 30px;
 }
 .appointment-tab .nav-tabs {
-    background-color: #fff;
+    background-color: var(--c-surface);
     padding: 1.5rem;
     border: 1px solid var(--c-border-subtle);
     border-radius: .25rem 0.25rem 0 0 !important;

@@ -3,7 +3,7 @@
   position: sticky;
   top: 88px;
   margin-top: -76px;
-  background: #fff;
+  background: var(--c-surface);
   border-radius: var(--r-lg);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;

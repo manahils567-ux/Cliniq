@@ -1,5 +1,5 @@
 .invoice-content {
-    background-color: #fff;
+    background-color: var(--c-surface);
 	border: 1px solid var(--c-border-subtle);
     border-radius: var(--r-sm);
     margin-bottom: 30px;

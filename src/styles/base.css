@@ -657,7 +657,7 @@ a:hover { opacity: 0.62; color: inherit; }
 .cq-panel--ink    { background: var(--d-bg); color: rgba(241,236,230,0.78); }
 .cq-panel--accent { background: var(--c-accent); color: rgba(241,236,230,0.82); }
 .cq-panel--greige { background: var(--n-200); color: var(--n-600); }
-.cq-panel--cream  { background: var(--n-000); color: var(--c-text); border-color: var(--c-border); }
+.cq-panel--cream  { background: var(--c-surface); color: var(--c-text); border-color: var(--c-border); }
 
 .cq-panel__head {
   display: flex;

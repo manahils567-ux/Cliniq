@@ -63,7 +63,7 @@
 
 /* ── Card ── */
 .our-doctor-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: 22px;
 	overflow: hidden;
 	height: 100%;

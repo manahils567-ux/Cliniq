@@ -94,7 +94,7 @@
 
 /* Schedule Card */
 .availability-schedule-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	padding: 1.75rem;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -128,7 +128,7 @@
 }
 
 .availability-item--today {
-	background: var(--n-050);
+	background: var(--c-surface);
 	padding: 1rem;
 	margin: 0 -1rem;
 	padding-left: 1rem;
@@ -192,7 +192,7 @@
 
 /* Note */
 .availability-note {
-	background: var(--n-000);
+	background: var(--c-surface);
 	border-left: 4px solid #f59e0b;
 	border-radius: var(--r-md);
 	padding: 1rem 1.25rem;

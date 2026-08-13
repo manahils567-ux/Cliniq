@@ -1,5 +1,5 @@
 .header {
-	background: #fff;
+	background: var(--c-surface);
 	border-bottom: 1px solid var(--c-border-subtle);
 	left: 0;
 	position: fixed;
@@ -175,7 +175,7 @@
 .app-dropdown-menu .app-item:focus,
 .app-dropdown-menu .app-item:active, 
 .app-dropdown-menu .app-item.active {
-	background-color: var(--n-050);
+	background-color: var(--c-surface);
 	border-color: var(--n-200);
 }
 .app-list > div + div {
@@ -190,7 +190,7 @@
 	padding-right: 5px;
 }
 .user-header {
-    background-color: var(--n-050);
+    background-color: var(--c-surface);
     display: flex;
     padding: 10px 15px;
 }

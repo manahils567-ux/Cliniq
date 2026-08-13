@@ -2,7 +2,7 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	background: var(--n-050);
+	background: var(--c-surface);
 }
 
 .profile-content {
@@ -57,9 +57,9 @@
 	height: 400px;
 	border-radius: var(--r-lg);
 	overflow: hidden;
-	background: #fff;
+	background: var(--c-surface);
 	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
-	border: 6px solid #fff;
+	border: 6px solid var(--c-border);
 }
 
 .doctor-hero__image {
@@ -102,7 +102,7 @@
 .doctor-hero__info-card {
 	flex: 1;
 	min-width: 0;
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	padding: 2.5rem;
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
@@ -271,13 +271,13 @@
 }
 
 .doctor-hero__chat-btn {
-	background: #fff;
+	background: var(--c-surface);
 	color: var(--c-action);
 	border: 2px solid var(--c-action);
 }
 
 .doctor-hero__chat-btn:hover {
-	background: var(--n-050);
+	background: var(--c-surface);
 }
 
 /* Tabs */
@@ -289,7 +289,7 @@
 }
 
 .profile-tabs-wrap .container {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 	border: 1px solid rgba(0, 0, 0, 0.04);

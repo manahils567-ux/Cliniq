@@ -1,5 +1,5 @@
 .section-doctor {
-	background: linear-gradient(180deg, var(--c-bg) 0%, #fff 100%);
+	background: linear-gradient(180deg, var(--c-bg) 0%, var(--c-surface) 100%);
 	padding: 5rem 0;
 }
 
@@ -52,7 +52,7 @@
 
 /* Card */
 .book-doctor-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	overflow: hidden;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -163,7 +163,7 @@
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
-	background: #fff;
+	background: var(--c-surface);
 	border: none;
 	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 	color: var(--c-text-muted);
@@ -176,7 +176,7 @@
 
 .book-doctor-card__favourite:hover {
 	color: var(--c-danger);
-	background: #fff;
+	background: var(--c-surface);
 	transform: scale(1.08);
 }
 
@@ -277,7 +277,7 @@
 }
 
 .book-doctor-card__btn--outline {
-	background: #fff;
+	background: var(--c-surface);
 	color: var(--c-action);
 	border: 2px solid var(--c-action);
 }

@@ -103,6 +103,8 @@
   padding: 0 var(--sp-5);
   border: none;
   border-radius: var(--r-lg);
+  /* Stays on the cream ramp: this is the primary action on a dark ground,
+     not a surface. --n-050 here is deliberate, not a missed token. */
   background: linear-gradient(to bottom right, var(--n-050), var(--n-200));
   color: var(--n-900);
   font-size: var(--fs-base);

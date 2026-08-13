@@ -4,7 +4,7 @@
 	padding: calc(2.5rem + var(--why-us-overlap) * 0.35) 0 4rem;
 	position: relative;
 	z-index: 2;
-	background: linear-gradient(180deg, var(--n-050) 0%, #fff 100%);
+	background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-surface) 100%);
 }
 
 .why-us-card {
@@ -71,7 +71,7 @@
 }
 
 .info-box {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: 18px;
 	padding: 1.75rem;
 	height: 100%;

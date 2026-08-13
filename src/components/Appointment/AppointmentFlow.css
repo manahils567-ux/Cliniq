@@ -1,7 +1,7 @@
 /* Appointment flow – shared steps */
 .appointment-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, var(--n-050) 0%, #fff 20%);
+  background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-surface) 20%);
 }
 
 .appointment-page .container-wrap {
@@ -67,7 +67,7 @@
   width: 100%;
   aspect-ratio: 1;
   overflow: hidden;
-  background: var(--n-050);
+  background: var(--c-surface);
 }
 
 .select-doctor-card__img {
@@ -149,7 +149,7 @@
   aspect-ratio: 1;
   border-radius: var(--r-lg);
   overflow: hidden;
-  background: var(--n-050);
+  background: var(--c-surface);
 }
 
 .select-doctor-card--rich .select-doctor-card__img {
@@ -213,7 +213,7 @@
 
 /* Select Date & Time */
 .appointment-step--datetime .datetime-summary {
-  background: #fff;
+  background: var(--c-surface);
   border-radius: var(--r-lg);
   padding: 1.25rem 1.5rem;
   border: 1px solid var(--c-border-subtle);
@@ -313,7 +313,7 @@
 
 /* Patient info form */
 .appointment-step--patient .patient-form-card {
-  background: #fff;
+  background: var(--c-surface);
   border-radius: var(--r-lg);
   border: 1px solid var(--c-border-subtle);
   padding: 1.5rem;
@@ -352,7 +352,7 @@
 }
 
 .checkout-form-card {
-  background: #fff;
+  background: var(--c-surface);
   border-radius: var(--r-lg);
   border: 1px solid var(--c-border-subtle);
   padding: 1.5rem;
@@ -392,7 +392,7 @@
 }
 
 .order-summary-card {
-  background: #fff;
+  background: var(--c-surface);
   border-radius: var(--r-lg);
   border: 1px solid var(--c-border-subtle);
   padding: 1.5rem;

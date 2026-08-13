@@ -33,7 +33,7 @@
 /* Mission Section */
 .about-mission {
 	padding: 5rem 0;
-	background: #fff;
+	background: var(--c-surface);
 }
 
 .about-features {
@@ -139,7 +139,7 @@
 }
 
 .about-value-card {
-	background: #fff;
+	background: var(--c-surface);
 	border-radius: var(--r-lg);
 	padding: 2.5rem;
 	height: 100%;
@@ -183,7 +183,7 @@
 /* Team Section — editorial cards */
 .about-team {
 	padding: 5rem 0;
-	background: linear-gradient(180deg, var(--c-bg) 0%, #fff 45%);
+	background: linear-gradient(180deg, var(--c-bg) 0%, var(--c-surface) 45%);
 }
 
 .about-doctor-card {
@@ -192,7 +192,7 @@
 	flex-direction: column;
 	border-radius: 22px;
 	overflow: hidden;
-	background: #fff;
+	background: var(--c-surface);
 	border: 1px solid rgba(15, 23, 42, 0.06);
 	box-shadow:
 		0 1px 2px rgba(15, 23, 42, 0.04),
@@ -218,7 +218,7 @@
 	position: relative;
 	aspect-ratio: 4/5;
 	overflow: hidden;
-	background: linear-gradient(145deg, var(--n-050) 0%, var(--n-200) 100%);
+	background: linear-gradient(145deg, var(--c-surface) 0%, var(--n-200) 100%);
 }
 
 .about-doctor-card__photo img {

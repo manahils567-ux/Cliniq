@@ -94,7 +94,7 @@
 .cqnav__btn--solid {
   position: relative;
   z-index: 1;
-  background: linear-gradient(to bottom right, var(--n-050), var(--n-200));
+  background: linear-gradient(to bottom right, var(--c-surface), var(--n-200));
   color: var(--n-900);
   font-weight: var(--fw-semi);
 }

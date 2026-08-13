@@ -197,7 +197,7 @@
   margin-top: 0.75rem;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(to bottom right, var(--n-050), var(--n-200));
+  background: linear-gradient(to bottom right, var(--c-surface), var(--n-200));
   color: var(--n-900);
   font-size: var(--fs-md);
   font-weight: var(--fw-medium);
