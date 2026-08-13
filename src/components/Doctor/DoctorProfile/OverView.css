@@ -272,7 +272,7 @@
 	color: var(--c-text);
 	border-radius: var(--r-lg);
 	font-weight: 500;
-	border: 1px solid var(--n-100);
+	border: 1px solid transparent;
 }
 
 @media (max-width: 767.98px) {

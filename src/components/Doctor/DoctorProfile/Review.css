@@ -213,7 +213,7 @@
 .review-form__textarea {
 	width: 100%;
 	padding: 12px;
-	border: 1px solid var(--n-100);
+	border: 1px solid transparent;
 	border-radius: var(--r-md);
 	font-size: 0.95rem;
 	font-family: inherit;

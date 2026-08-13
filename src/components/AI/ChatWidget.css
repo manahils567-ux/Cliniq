@@ -282,7 +282,7 @@
     align-items: center;
     gap: 8px;
     padding: 12px 14px;
-    border-top: 1px solid var(--n-050);
+    border-top: 1px solid transparent;
     background: var(--c-surface);
     flex-shrink: 0;
 }
@@ -290,7 +290,7 @@
 .cw-input {
     flex: 1;
     background: var(--c-surface);
-    border: 1.5px solid var(--n-100);
+    border: 1.5px solid transparent;
     border-radius: var(--r-lg);
     padding: 10px 14px;
     font-size: 13px;

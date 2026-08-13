@@ -67,7 +67,7 @@
 	font-weight: 600;
 	color: #15803d;
 	background: var(--c-surface);
-	border: 1px solid var(--n-100);
+	border: 1px solid transparent;
 }
 
 .booking-success-card__body {

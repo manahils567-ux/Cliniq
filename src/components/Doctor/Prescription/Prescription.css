@@ -61,7 +61,7 @@
 
 .prescription-page .prescription-table-card {
     border-radius: var(--r-lg);
-    border: 1px solid var(--n-050);
+    border: 1px solid transparent;
 }
 
 .prescription-expand {
