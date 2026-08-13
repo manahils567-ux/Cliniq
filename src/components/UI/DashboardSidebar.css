@@ -163,7 +163,9 @@
 /* ==========================================================================
    Rail mode — a hover sidebar in the manner of Supabase's.
    Collapsed to an icon rail; hovering (or focusing a link inside) expands it
-   over the content rather than pushing it, so the layout never reflows.
+   and the page gutter widens with it — see AppSidebar.css, which drives the
+   padding off this element's hover state so the content is pushed rather
+   than covered.
    ========================================================================== */
 
 .dashboard-sidebar--rail {
