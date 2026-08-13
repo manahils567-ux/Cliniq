@@ -26,15 +26,17 @@
 /* Give page content room for the collapsed rail. Scoped to top-level page
    wrappers only — .container is used nested throughout the app, so padding it
    compounds and squeezes tables until columns collide. */
-/* Constant gutter: --rail-open-w (244px) plus the --sp-4 the rail is inset
+/* Constant gutter: --rail-open-w (210px) plus the --sp-4 the rail is inset
    by. The sidebar no longer changes width, so there is nothing to track and
-   no transition to match. */
+   no transition to match. Keep this in step with --rail-open-w in
+   DashboardSidebar.css — the coupling is across files and silent if it
+   drifts. */
 body:has(.app-sidebar) .dashboard-wrapper,
 body:has(.app-sidebar) .track-page,
 body:has(.app-sidebar) > #root > .about-us,
 body:has(.app-sidebar) .search-doctor-page,
 body:has(.app-sidebar) .cq-page {
-  padding-left: 260px;
+  padding-left: 226px;
 }
 
 @media (max-width: 992px) {

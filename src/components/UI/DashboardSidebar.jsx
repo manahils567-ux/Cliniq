@@ -56,7 +56,7 @@ const DashboardSidebar = () => {
         { path: '/dashboard/documents', icon: <FaFolderOpen />, label: 'Documents' },
         { path: '/dashboard/favourite', icon: <FaHeart />, label: 'Favourite Doctors' },
         { path: '/dashboard/invoices', icon: <FaFileInvoiceDollar />, label: 'Invoices & payments' },
-        { path: '/dashboard/prescription', icon: <FaPills />, label: 'Prescriptions & medicines' },
+        { path: '/dashboard/prescription', icon: <FaPills />, label: 'Prescriptions' }  /* Shortened: the full 'Prescriptions & medicines' overruns the 210px rail and ellipsises */,
         { path: '/dashboard/track', icon: <FaSearch />, label: 'Track appointment' },
     ];
 

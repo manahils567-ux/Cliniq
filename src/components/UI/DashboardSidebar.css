@@ -195,7 +195,7 @@
 
 .dashboard-sidebar--rail {
   --rail-w: 64px;
-  --rail-open-w: 244px;
+  --rail-open-w: 210px;
 
   width: var(--rail-w);
   min-width: var(--rail-w);
