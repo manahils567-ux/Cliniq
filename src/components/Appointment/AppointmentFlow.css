@@ -1,7 +1,9 @@
 /* Appointment flow – shared steps */
 .appointment-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-surface) 20%);
+  /* Same fake gradient as .dashboard-wrapper: two identical stops, so a
+     solid --c-surface fill that painted this page a step lighter than the
+     sidebar gutter beside it. The page ground is --c-bg. */
 }
 
 .appointment-page .container-wrap {

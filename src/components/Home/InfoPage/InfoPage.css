@@ -4,7 +4,8 @@
 	padding: calc(2.5rem + var(--why-us-overlap) * 0.35) 0 4rem;
 	position: relative;
 	z-index: 2;
-	background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-surface) 100%);
+	/* Two identical stops — a solid fill, not a gradient. Removed so the
+	   section sits on the page ground. */
 }
 
 .why-us-card {

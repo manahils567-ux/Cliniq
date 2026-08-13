@@ -1,6 +1,11 @@
 .dashboard-wrapper {
   min-height: 100vh;
-  background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-surface) 15%);
+  /* No fill. This was linear-gradient(--c-surface 0%, --c-surface 15%) —
+     both stops the same colour, so a solid #141414 dressed as a gradient.
+     Against the #0A0A0A page it painted the content column a step lighter
+     than the sidebar gutter, which is the vertical seam. It also hid from
+     every backgroundColor probe, since a gradient lives in background-image.
+     The page ground is --c-bg; the wrapper does not need its own. */
   padding: 140px 0 4rem;
 }
 
