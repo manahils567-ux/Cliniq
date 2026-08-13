@@ -1,4 +1,4 @@
-import Footer from '../Shared/Footer/Footer';
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import Header from '../Shared/Header/Header';
 import SubHeader from '../Shared/SubHeader';
 import './index.css';
@@ -414,7 +414,7 @@ const TrackAppointment = ({ embedded = false }) => {
 				)}
 			</div>
 
-			{!embedded && <Footer />}
+			{!embedded && <CqSiteFooter />}
 		</>
 	);
 };

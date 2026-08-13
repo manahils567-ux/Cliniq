@@ -4,8 +4,9 @@ import { Spin } from 'antd';
 import { FaArrowRight, FaUserMd } from 'react-icons/fa';
 import Header from '../Shared/Header/Header';
 import SubHeader from '../Shared/SubHeader';
-import Footer from '../Shared/Footer/Footer';
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import { useGetSpecialitiesQuery, useGetPlatformStatsQuery } from '../../redux/api/doctorApi';
+import CqCapabilityRail from './CqCapabilityRail';
 
 /* Every entry here maps to something the product actually does today. */
 const CAPABILITIES = [
@@ -86,35 +87,13 @@ const Service = () => {
         subtitle="Your medical paperwork, read and organised — then turned into reminders, insights and the right appointment."
       />
 
-      {/* ── Capabilities ─────────────────────────────────────────────── */}
-      <section className="cq-page" style={{ padding: '72px 60px' }}>
-        <div className="cq-page-head" style={{ textAlign: 'center' }}>
-          <p className="cq-eyebrow">Services</p>
-          <h2 className="cq-page-title">Everything from one photograph</h2>
-          <p className="cq-page-sub" style={{ maxWidth: '58ch', margin: '12px auto 0' }}>
-            Cliniq is built around the pile of paper you walk out of a hospital with.
-            Capture it once, and the rest follows.
-          </p>
-        </div>
-
-        <div className="cq-service-grid">
-          {CAPABILITIES.map((c) => (
-            <article key={c.key} className={`cq-panel cq-panel--${c.tone}`}>
-              <div className="cq-panel__head">
-                <span className="cq-panel__label">{c.label}</span>
-              </div>
-              <div className="cq-panel__value">{c.title}</div>
-              <p className="cq-panel__body">{c.body}</p>
-              <hr className="cq-panel__rule" />
-              <div className="cq-panel__foot">
-                {c.tags.map((t) => (
-                  <span key={t} className="cq-panel__pill">{t}</span>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+      {/* ── Capabilities — scroll-driven horizontal rail ─────────────── */}
+      <CqCapabilityRail
+        items={CAPABILITIES}
+        eyebrow="Services"
+        title="Everything from one photograph"
+        subtitle="Cliniq is built around the pile of paper you walk out of a hospital with. Capture it once, and the rest follows."
+      />
 
       {/* ── Specialities, live from the database ─────────────────────── */}
       <section className="cq-page" style={{ padding: '0 60px 72px' }}>
@@ -170,7 +149,7 @@ const Service = () => {
         </Link>
       </section>
 
-      <Footer />
+      <CqSiteFooter />
     </>
   );
 };

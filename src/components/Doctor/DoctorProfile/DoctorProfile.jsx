@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Footer from '../../Shared/Footer/Footer';
+import CqSiteFooter from '../../Shared/CqSiteFooter/CqSiteFooter';
 import './index.css';
 import { useParams } from 'react-router-dom';
 import Header from '../../Shared/Header/Header';
@@ -63,7 +63,7 @@ const DoctorProfile = () => {
 			<div className="profile-content">
 				{content}
 			</div>
-			<Footer />
+			<CqSiteFooter />
 		</div>
 	);
 };

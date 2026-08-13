@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../Shared/Header/Header'
-import Footer from '../Shared/Footer/Footer'
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter'
 import { Button, Form, Input, message } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useResetConfirmMutation } from '../../redux/api/authApi';
@@ -62,7 +62,7 @@ const ForgotPassword = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <CqSiteFooter />
         </>
     )
 }

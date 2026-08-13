@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import logo from '../../../images/logo.png';
-import Footer from "../../Shared/Footer/Footer";
+import CqSiteFooter from "../../Shared/CqSiteFooter/CqSiteFooter";
 import Header from "../../Shared/Header/Header";
 import { useGetPrescriptionQuery } from "../../../redux/api/prescriptionApi";
 import moment from "moment";
@@ -163,7 +163,7 @@ const PrescriptionView = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            <CqSiteFooter />
         </>
     )
 }

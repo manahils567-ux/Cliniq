@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Footer from '../Shared/Footer/Footer';
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import {
 	FaCalendarCheck,
 	FaRegClock,
@@ -240,7 +240,7 @@ const BookingSuccess = () => {
 					<div className="booking-success-inner">{renderContent()}</div>
 				</div>
 			</div>
-			<Footer />
+			<CqSiteFooter />
 		</>
 	);
 };

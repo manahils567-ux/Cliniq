@@ -7,7 +7,7 @@ import {
   FaArrowRight, FaCheck, FaStar, FaCamera, FaBell
 } from 'react-icons/fa';
 import CqHero from '../Home/HeroSection/CqHero';
-import CqFooter from '../Shared/CqFooter/CqFooter';
+import CqSiteFooter from '../Shared/CqSiteFooter/CqSiteFooter';
 import './Landing.css';
 
 /* ── small reusable icon-bubble ── */
@@ -201,8 +201,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ══════════════ FOOTER ══════════════ */}
-      <CqFooter />
+      {/* ══════════════ FOOTER (includes the newsletter band) ══════════════ */}
+      <CqSiteFooter newsletter />
 
     </div>
   );
