@@ -217,6 +217,22 @@
 
 .dashboard-sidebar--rail > * { width: 100%; }
 
+/* Insets sized so the icon lands in the middle of the collapsed rail.
+   The defaults stacked up to 47.2px of left inset (24 rail padding + 12 pill
+   margin + 11.2 pill padding) before an 18.4px icon column, which ran to
+   ~65.6px inside a 64px rail — so every glyph was clipped down its right
+   edge. 8 + 8 + 7.2 = 23.2px puts the icon's centre at 32.4px, which is the
+   rail's midpoint. */
+.dashboard-sidebar--rail { padding-inline: var(--sp-2); }
+
+.dashboard-sidebar--rail .dashboard-nav a,
+.dashboard-sidebar--rail .dashboard-nav-logout {
+  margin-inline: var(--sp-2);
+  padding-inline: 0.45rem;
+}
+
+.dashboard-sidebar--rail .dashboard-nav-divider { margin-inline: var(--sp-2); }
+
 /* Labels fade and slide in; icons stay put so nothing jumps. */
 .dashboard-sidebar--rail .label {
   min-width: 0;
