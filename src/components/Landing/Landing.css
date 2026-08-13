@@ -12,6 +12,16 @@
 }
 
 .landing {
+  /* Rosewood is retired globally — see the note in tokens.css — but the
+     landing page keeps it. Scoped here rather than restored in tokens so it
+     cannot leak back into the app: everything inside .landing inherits these
+     and nothing outside it can. The fill/text split is preserved exactly as
+     tokens.css describes it: --c-accent is a dark fill with cream on top,
+     --c-accent-line is light text on the dark ground. */
+  --c-accent:       #7D4047;
+  --c-accent-hover: #663339;
+  --c-accent-line:  #E2CBCE;
+
   font-family: var(--font-ui);
   color: var(--text-dark);
   background: var(--c-bg);

@@ -7,10 +7,10 @@
    Must load BEFORE bootstrap and before every component stylesheet.
    ========================================================================== */
 
-/* Montserrat as a variable font — one axis request covers every weight the
-   system uses, so this is a smaller download than the four static cuts it
-   replaces. Nastaliq stays: Montserrat has no Urdu coverage. */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap');
+/* Manrope as a variable font — one axis request covers every weight the
+   system uses. Its range is 200..800, which still covers --fw-normal 400
+   through --fw-bold 700. Nastaliq stays: Manrope has no Urdu coverage. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap');
 
 :root {
   /* ---- Warm neutral ramp ----------------------------------------------
@@ -149,11 +149,9 @@
      Montserrat for both display and body — one family across the site.
      Nastaliq for Urdu, which Montserrat does not cover.
      -------------------------------------------------------------------- */
-  /* Montserrat throughout — display and UI both. Its geometric forms carry
-     the large headline sizes, and the tracking tokens below were set for
-     Inter's narrower shapes, so --tr-hero/--tr-tight are eased off. */
-  --font-display: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-ui:      'Montserrat', 'Segoe UI', system-ui, sans-serif;
+  /* Manrope throughout — display and UI both. */
+  --font-display: 'Manrope', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-ui:      'Manrope', 'Segoe UI', system-ui, sans-serif;
   --font-urdu:    'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
   --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
@@ -177,11 +175,11 @@
   --lh-normal: 1.55;
   --lh-urdu:   2.1;      /* Nastaliq descenders collide below ~2.0  */
 
-  /* Eased from -0.045/-0.02, which were set for Inter Tight. Montserrat is
-     geometric and rounder — its o, e and c need more room between them, and
-     at the old values the 88px hero ran letters into each other. */
-  --tr-hero:  -0.028em;
-  --tr-tight: -0.012em;
+  /* Manrope is narrower and more closed than Montserrat, so it takes the
+     tighter tracking the display sizes want without the letters colliding —
+     part-way back toward the original Inter Tight values. */
+  --tr-hero:  -0.038em;
+  --tr-tight: -0.017em;
   --tr-none:   0;
   --tr-wide:   0.09em;   /* eyebrows and small caps only            */
 

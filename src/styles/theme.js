@@ -23,7 +23,7 @@ export const mono = {
      for anything drawing text or links in the accent. */
   accentLine: '#E2CBCE',
   signal: '#C08A2E', danger: '#B3261E', positive: '#2F6B4F',
-  fontUI: "'Montserrat', 'Segoe UI', system-ui, sans-serif",
+  fontUI: "'Manrope', 'Segoe UI', system-ui, sans-serif",
 };
 
 /* Shared across both modes — geometry and type never change with theme. */
