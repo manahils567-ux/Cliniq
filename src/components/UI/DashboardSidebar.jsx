@@ -63,7 +63,7 @@ const DashboardSidebar = () => {
     const menuItems = role === 'doctor' ? doctorMenuItems : patientMenuItems;
 
     return (
-        <div className="dashboard-sidebar dashboard-sidebar--rail">
+        <div className="dashboard-sidebar dashboard-sidebar--rail dashboard-sidebar--static">
             <nav className="dashboard-nav">
                 <ul>
                     {menuItems.map((item, index) => (

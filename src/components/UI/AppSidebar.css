@@ -26,40 +26,15 @@
 /* Give page content room for the collapsed rail. Scoped to top-level page
    wrappers only — .container is used nested throughout the app, so padding it
    compounds and squeezes tables until columns collide. */
+/* Constant gutter: --rail-open-w (244px) plus the --sp-4 the rail is inset
+   by. The sidebar no longer changes width, so there is nothing to track and
+   no transition to match. */
 body:has(.app-sidebar) .dashboard-wrapper,
 body:has(.app-sidebar) .track-page,
 body:has(.app-sidebar) > #root > .about-us,
 body:has(.app-sidebar) .search-doctor-page,
 body:has(.app-sidebar) .cq-page {
-  /* --rail-w (64px) + the --sp-4 the rail is inset by. Keep both numbers
-     here in step with the rail widths in DashboardSidebar.css. */
-  padding-left: 80px;
-  /* Matches the rail's own width transition exactly, so the content edge
-     tracks the rail instead of lagging behind or racing it. */
-  transition: padding-left 260ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Opening the rail widens the gutter rather than covering the page.
-   --rail-open-w (244px) + the same inset. Driven off :has() on the rail's hover/focus state,
-   which is what actually opens it — there is no JS flag to read. */
-body:has(.app-sidebar .dashboard-sidebar--rail:hover) .dashboard-wrapper,
-body:has(.app-sidebar .dashboard-sidebar--rail:hover) .track-page,
-body:has(.app-sidebar .dashboard-sidebar--rail:hover) > #root > .about-us,
-body:has(.app-sidebar .dashboard-sidebar--rail:hover) .search-doctor-page,
-body:has(.app-sidebar .dashboard-sidebar--rail:hover) .cq-page,
-body:has(.app-sidebar .dashboard-sidebar--rail:focus-within) .dashboard-wrapper,
-body:has(.app-sidebar .dashboard-sidebar--rail:focus-within) .track-page,
-body:has(.app-sidebar .dashboard-sidebar--rail:focus-within) > #root > .about-us,
-body:has(.app-sidebar .dashboard-sidebar--rail:focus-within) .search-doctor-page,
-body:has(.app-sidebar .dashboard-sidebar--rail:focus-within) .cq-page {
   padding-left: 260px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body:has(.app-sidebar) .dashboard-wrapper,
-  body:has(.app-sidebar) .track-page,
-  body:has(.app-sidebar) .search-doctor-page,
-  body:has(.app-sidebar) .cq-page { transition: none; }
 }
 
 @media (max-width: 992px) {
