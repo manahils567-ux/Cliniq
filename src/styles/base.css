@@ -401,6 +401,17 @@ a:hover { opacity: 0.62; color: inherit; }
    leftovers where AntD hardcodes what the token API does not expose.
    ========================================================================== */
 
+/* Bootstrap gutter rows escaping their container.
+   .g-4/.g-5 set --bs-gutter-x on the ROW, so its negative margins grow to
+   -24px, but .container's padding is computed from its own gutter variable
+   and stays at 12px. The row then overhangs by the difference on each side —
+   measured at 1300px inside a 1276px container on /about and /contact, which
+   put a horizontal scrollbar on the document. Zeroing the margin keeps the
+   columns' own gutter padding and stops the overhang; content sits inset
+   rather than flush, which is the lesser of the two. */
+.container > .row[class*="g-"],
+.container-fluid > .row[class*="g-"] { margin-inline: 0; }
+
 .ant-btn { font-family: var(--font-ui); font-weight: var(--fw-medium); }
 .ant-card { box-shadow: none; border-color: transparent; }
 .ant-card-head { border-bottom-color: transparent; }
