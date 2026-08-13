@@ -315,7 +315,7 @@
 .appointment-step--patient .patient-form-card {
   background: var(--c-surface);
   border-radius: var(--r-lg);
-  border: 1px solid var(--c-border-subtle);
+  border: 1px solid transparent;
   padding: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -354,7 +354,7 @@
 .checkout-form-card {
   background: var(--c-surface);
   border-radius: var(--r-lg);
-  border: 1px solid var(--c-border-subtle);
+  border: 1px solid transparent;
   padding: 1.5rem;
 }
 
@@ -394,7 +394,7 @@
 .order-summary-card {
   background: var(--c-surface);
   border-radius: var(--r-lg);
-  border: 1px solid var(--c-border-subtle);
+  border: 1px solid transparent;
   padding: 1.5rem;
   height: fit-content;
 }

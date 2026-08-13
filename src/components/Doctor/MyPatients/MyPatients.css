@@ -21,21 +21,21 @@
 .stat-mini-card.stat-mini-card-primary .stat-mini-icon { color: var(--n-800); }
 .stat-mini-card.stat-mini-card-primary {
     background: var(--c-surface);
-    border: 1px solid var(--c-border);
+    border: 1px solid transparent;
     color: var(--c-ink);
 }
 
 .stat-mini-card.stat-mini-card-success .stat-mini-icon { color: var(--c-accent); }
 .stat-mini-card.stat-mini-card-success {
     background: var(--c-surface);
-    border: 1px solid var(--c-border);
+    border: 1px solid transparent;
     color: var(--c-ink);
 }
 
 .stat-mini-card.stat-mini-card-warning .stat-mini-icon { color: var(--c-signal); }
 .stat-mini-card.stat-mini-card-warning {
     background: var(--c-surface);
-    border: 1px solid var(--c-border);
+    border: 1px solid transparent;
     color: var(--c-ink);
 }
 
