@@ -7,7 +7,10 @@
 	margin-bottom: 1.75rem;
 	padding: 1.5rem 1.75rem;
 	border-radius: var(--r-lg);
-	background: linear-gradient(125deg, #0A0A0A 0%, #141414 55%, var(--c-accent-hover) 100%);
+	/* The accent terminus made this band fade into a maroon wash across its
+	   right half. Ends on --d-surface-alt instead, matching the --doctor
+	   variant below, so the banner reads as a raised dark panel. */
+	background: linear-gradient(125deg, #0A0A0A 0%, #141414 55%, var(--d-surface-alt) 100%);
 	color: #fff;
 	box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.45);
 }

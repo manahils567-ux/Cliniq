@@ -224,7 +224,7 @@
 .track-page__side-card {
 	height: 100%;
 	border-radius: 20px !important;
-	background: linear-gradient(165deg, var(--n-800) 0%, var(--n-900) 60%, var(--c-accent-hover) 100%) !important;
+	background: linear-gradient(165deg, var(--d-surface-alt) 0%, var(--d-surface) 60%, var(--d-bg) 100%) !important;
 	border: none !important;
 	color: #fff;
 	box-shadow: 0 20px 50px -20px rgba(15, 23, 42, 0.45) !important;
