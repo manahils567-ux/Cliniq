@@ -70,8 +70,7 @@
 .dashboard-nav a {
   display: flex;
   align-items: center;
-  /* 2px, not 1: with the icons gone the rows are pure text, and at 1px the
-     pills read as one continuous block rather than separate targets. */
+  gap: 0.7rem;
   margin: 2px var(--sp-3);
   padding: 0.55rem 0.7rem;
   border-radius: var(--r-md);
@@ -298,6 +297,7 @@
 .dashboard-sidebar--rail .dashboard-nav-logout {
   display: flex;
   align-items: center;
+  gap: var(--sp-3);
   /* Derived, not hardcoded. This was a flat 26px, correct while the rail was
      72px wide; shrinking it to 64 left the icons pushed ~20px right of centre
      and clipping against the edge. Centre = (rail - icon) / 2, less the rail
@@ -326,44 +326,4 @@
   .dashboard-sidebar--rail,
   .dashboard-sidebar--rail .label,
   .dashboard-sidebar--rail .dashboard-profile-avatar { transition: none; }
-}
-
-
-/* ==========================================================================
-   STATIC MODE
-   The rail expanded on hover, which meant the labels were only readable
-   while the pointer was over it — no use for keyboard or touch, and the
-   content reflowed every time the mouse passed through. Static keeps it at
-   the open width permanently: labels always legible, page gutter constant,
-   nothing moves.
-
-   Layered on --rail rather than replacing it so the profile block, icon
-   column and divider insets defined above still apply; only the collapse
-   is undone.
-   ========================================================================== */
-
-.dashboard-sidebar--static {
-  width: var(--rail-open-w);
-  min-width: var(--rail-open-w);
-  transition: none;
-}
-
-/* Labels are permanent, so none of the fade/slide machinery applies. */
-.dashboard-sidebar--static .label {
-  opacity: 1;
-  transform: none;
-  transition: none;
-}
-
-/* Rows take the open-state inset. The rail's derived padding centres an icon
-   in a 64px strip, which is wrong once the labels are always showing. */
-.dashboard-sidebar--static .dashboard-nav a,
-.dashboard-sidebar--static .dashboard-nav-logout {
-  padding-left: 0.7rem;
-}
-
-.dashboard-sidebar--static .dashboard-profile-avatar {
-  width: 96px;
-  height: 96px;
-  transition: none;
 }
