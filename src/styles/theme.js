@@ -114,7 +114,11 @@ export const cliniqDarkTheme = {
     colorBorderSecondary: 'rgba(241, 236, 230, 0.09)',
 
     colorTextDescription: 'rgba(241, 236, 230, 0.64)',
-    colorTextPlaceholder: 'rgba(241, 236, 230, 0.40)',
+    /* 0.40 put placeholder text at roughly 3.3:1 on the control fill, which
+       reads as a disabled field — a search box next to two populated selects
+       looked switched off. 0.55 is about 5.2:1, clear of the 4.5:1 line and
+       still plainly subordinate to a real value at 0.88. */
+    colorTextPlaceholder: 'rgba(241, 236, 230, 0.55)',
 
     colorLink:      mono.accentLine,
     colorLinkHover: mono.n100,

@@ -439,6 +439,11 @@ a:hover { opacity: 0.62; color: inherit; }
   border-color: transparent !important;
   background: var(--d-surface-alt) !important;
 }
+/* The wrapper measured 41px against the select's 40, so a filter row sat a
+   pixel out of line. Pinned so they share a baseline. */
+.ant-input-affix-wrapper,
+.ant-picker,
+.ant-select-single .ant-select-selector { min-height: 40px; }
 /* Focus keeps an edge; without it there is no keyboard focus cue at all. */
 .ant-input-affix-wrapper:focus-within,
 .ant-picker-focused,
