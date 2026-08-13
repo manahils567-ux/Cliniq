@@ -68,7 +68,7 @@
 }
 
 .available-service-card:hover {
-	box-shadow: 0 12px 32px rgba(125, 64, 71, 0.15);
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 	transform: translateY(-4px);
 }
 

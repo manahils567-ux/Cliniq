@@ -92,7 +92,7 @@
 	border-radius: 50%;
 	background: var(--c-action);
 	border: 3px solid var(--c-border);
-	box-shadow: 0 0 0 3px rgba(125, 64, 71, 0.2);
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
 .timeline-content {
@@ -129,7 +129,7 @@
 	font-size: 0.85rem;
 	font-weight: 600;
 	color: var(--c-action);
-	background: rgba(125, 64, 71, 0.1);
+	background: rgba(241, 236, 230, 0.1);
 	padding: 4px 12px;
 	border-radius: var(--r-lg);
 	white-space: nowrap;

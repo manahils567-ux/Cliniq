@@ -46,7 +46,7 @@
 }
 
 .review-card:hover {
-	box-shadow: 0 8px 30px rgba(125, 64, 71, 0.1);
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
 .review-card__header {
@@ -224,7 +224,7 @@
 .review-form__textarea:focus {
 	outline: none;
 	border-color: var(--c-action);
-	box-shadow: 0 0 0 3px rgba(125, 64, 71, 0.1);
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .review-form__textarea::placeholder {

@@ -62,7 +62,7 @@
 
 .favourite-doctor-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 40px rgba(125, 64, 71, 0.15) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15) !important;
 }
 
 .favourite-doctor-card__top {

@@ -18,7 +18,7 @@
 	border: 1px solid rgba(15, 23, 42, 0.06);
 	box-shadow:
 		0 1px 3px rgba(15, 23, 42, 0.04),
-		0 24px 48px -12px rgba(125, 64, 71, 0.1);
+		0 24px 48px -12px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
 }
 
@@ -99,7 +99,7 @@
 }
 
 .track-detail-person--doctor {
-	border-color: rgba(125, 64, 71, 0.2);
+	border-color: rgba(241, 236, 230, 0.2);
 	background: linear-gradient(180deg, var(--c-surface) 0%, var(--c-surface) 100%);
 }
 

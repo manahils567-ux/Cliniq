@@ -82,7 +82,8 @@
 }
 
 .dashboard-nav a:hover {
-  background: rgba(125, 64, 71, 0.06);
+  /* Was a rosewood tint; the hover state is a lift, not a brand moment. */
+  background: rgba(241, 236, 230, 0.05);
   color: var(--c-action);
   border-left-color: var(--c-action);
 }
@@ -92,7 +93,7 @@
 }
 
 .dashboard-nav a.active {
-  background: rgba(125, 64, 71, 0.1);
+  background: rgba(241, 236, 230, 0.08);
   color: var(--c-action);
   border-left-color: var(--c-action);
   font-weight: 600;
@@ -110,7 +111,9 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  color: var(--c-danger);
+  /* Neutral: signing out is an ordinary nav action, not an error, and it
+     was the last red item in the rail. */
+  color: var(--c-text-muted);
   font-size: 0.8125rem;
   font-weight: 500;
   font-family: inherit;
@@ -125,8 +128,9 @@
 }
 
 .dashboard-nav-logout:hover {
-  background: rgba(192, 57, 43, 0.08);
-  border-left-color: var(--c-danger);
+  background: rgba(241, 236, 230, 0.05);
+  color: var(--c-ink);
+  border-left-color: var(--c-border-strong, var(--d-border-strong));
 }
 
 .dashboard-nav-divider {

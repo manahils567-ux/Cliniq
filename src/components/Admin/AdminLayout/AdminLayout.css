@@ -110,7 +110,7 @@
 }
 
 .admin-quick-nav__link.is-active {
-  background: rgba(125, 64, 71, 0.1);
+  background: rgba(241, 236, 230, 0.1);
   color: var(--c-action);
 }
 
@@ -156,7 +156,7 @@
 .admin-quick-nav__btn--primary:hover {
   color: #fff;
   opacity: 0.95;
-  box-shadow: 0 4px 14px rgba(125, 64, 71, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
 .admin-quick-nav__btn--ghost {
@@ -210,14 +210,14 @@
   border-radius: var(--r-lg);
   padding: 1.5rem;
   color: #fff;
-  box-shadow: 0 4px 12px rgba(125, 64, 71, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .stats-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(125, 64, 71, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .stats-card.stats-card--primary {

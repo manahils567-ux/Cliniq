@@ -15,7 +15,7 @@
 	border: 1px solid rgba(15, 23, 42, 0.06);
 	box-shadow:
 		0 1px 3px rgba(15, 23, 42, 0.04),
-		0 24px 48px -12px rgba(125, 64, 71, 0.12);
+		0 24px 48px -12px rgba(0, 0, 0, 0.12);
 	overflow: hidden;
 }
 
@@ -129,8 +129,8 @@
 }
 
 .booking-success-info:hover {
-	border-color: rgba(125, 64, 71, 0.2);
-	box-shadow: 0 4px 14px rgba(125, 64, 71, 0.06);
+	border-color: rgba(241, 236, 230, 0.2);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 .booking-success-info--wide {
@@ -141,7 +141,7 @@
 	width: 40px;
 	height: 40px;
 	border-radius: var(--r-lg);
-	background: rgba(125, 64, 71, 0.1);
+	background: rgba(241, 236, 230, 0.1);
 	color: var(--c-action);
 	display: flex;
 	align-items: center;
@@ -181,7 +181,7 @@
 	padding: 1.1rem 1.15rem;
 	border-radius: var(--r-lg);
 	background: linear-gradient(135deg, var(--c-surface) 0%, var(--c-surface) 100%);
-	border: 1px solid rgba(125, 64, 71, 0.12);
+	border: 1px solid rgba(241, 236, 230, 0.12);
 	margin-bottom: 1.5rem;
 	text-align: left;
 }
@@ -238,7 +238,7 @@
 	padding: 0 1.5rem;
 	border-radius: var(--r-lg);
 	font-weight: 600;
-	box-shadow: 0 8px 20px rgba(125, 64, 71, 0.25);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .booking-success-actions .ant-btn-default {

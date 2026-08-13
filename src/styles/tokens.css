@@ -122,8 +122,23 @@
   --c-text:          var(--d-text-muted);
   --c-text-muted:    var(--d-text-muted);
   --c-text-faint:    var(--d-text-faint);
-  --c-accent-line:   #E2CBCE;
+  /* Rosewood is retired. It was the one chromatic colour in the system and
+     it surfaced everywhere the accent was used — active nav rows, icons,
+     button fills, link text — which read as red scattered across the UI.
+     The neutrals below keep the same fill-vs-text split the accent had:
+     --c-accent stays a DARK value because it is used as a fill with cream
+     text on top, and --c-accent-line stays LIGHT because it is used as
+     text on the dark ground. Swapping either role breaks the other. */
+  --c-accent:        var(--n-800);
+  --c-accent-hover:  var(--n-700);
+  --c-accent-line:   var(--n-200);
   --c-accent-wash:   var(--d-surface-alt);
+
+  /* The primary action follows the dark ramp now — cream fill, near-black
+     label — rather than staying rosewood. */
+  --c-action:        var(--d-action);
+  --c-action-hover:  var(--d-action-hover);
+  --c-action-text:   var(--d-action-text);
   --c-signal-wash:   var(--d-surface-alt);
   --c-danger:        var(--d-danger);
   --c-danger-wash:   var(--d-surface-alt);
@@ -192,7 +207,7 @@
   --sh-lg: 0 12px 32px rgba(46, 46, 46, 0.14);
   --sh-xl: 0 24px 64px rgba(46, 46, 46, 0.26);
 
-  --ring:      0 0 0 3px rgba(125, 64, 71, 0.28);
+  --ring:      0 0 0 3px rgba(241, 236, 230, 0.28);
   --ring-dark: 0 0 0 3px rgba(241, 236, 230, 0.34);
 
   /* ---- Motion ---------------------------------------------------------- */

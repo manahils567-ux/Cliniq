@@ -252,14 +252,14 @@
 /* User menu popover (hover) — role + profile */
 .header-user-popover .ant-popover-inner {
     border-radius: var(--r-lg);
-    box-shadow: 0 12px 40px rgba(125, 64, 71, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
     overflow: hidden;
 }
 
 .header-user-popover .ant-popover-title {
     margin: 0;
     padding: 10px 14px;
-    border-bottom: 1px solid rgba(125, 64, 71, 0.12);
+    border-bottom: 1px solid rgba(241, 236, 230, 0.12);
     background: linear-gradient(135deg, var(--c-surface) 0%, var(--c-surface) 100%);
 }
 

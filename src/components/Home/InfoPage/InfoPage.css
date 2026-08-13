@@ -15,7 +15,7 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	box-shadow: 0 20px 50px -12px rgba(125, 64, 71, 0.35);
+	box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.35);
 }
 
 .why-us-badge {
@@ -77,7 +77,7 @@
 	height: 100%;
 	box-shadow:
 		0 4px 6px -1px rgba(15, 23, 42, 0.06),
-		0 20px 40px -12px rgba(125, 64, 71, 0.12);
+		0 20px 40px -12px rgba(0, 0, 0, 0.12);
 	border: 1px solid rgba(255, 255, 255, 0.85);
 	transition: box-shadow 0.35s ease, transform 0.35s ease, border-color 0.35s ease;
 }
@@ -85,16 +85,16 @@
 .info-box:hover {
 	box-shadow:
 		0 8px 16px -4px rgba(15, 23, 42, 0.08),
-		0 24px 48px -16px rgba(125, 64, 71, 0.18);
+		0 24px 48px -16px rgba(0, 0, 0, 0.18);
 	transform: translateY(-4px);
-	border-color: rgba(125, 64, 71, 0.12);
+	border-color: rgba(241, 236, 230, 0.12);
 }
 
 .info-box-icon {
 	width: 52px;
 	height: 52px;
 	border-radius: var(--r-lg);
-	background: rgba(125, 64, 71, 0.12);
+	background: rgba(241, 236, 230, 0.12);
 	color: var(--c-action);
 	display: flex;
 	align-items: center;

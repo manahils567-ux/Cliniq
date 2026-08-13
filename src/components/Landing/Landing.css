@@ -788,7 +788,7 @@
   justify-content: center;
   color: var(--primary);
   font-size: 15px;
-  box-shadow: 0 2px 8px rgba(125, 64, 71,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .booking-input-text label {

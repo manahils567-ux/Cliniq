@@ -261,12 +261,12 @@
 .doctor-hero__book-btn {
 	background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
 	color: #fff;
-	box-shadow: 0 8px 20px rgba(125, 64, 71, 0.35);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .doctor-hero__book-btn:hover {
 	color: #fff;
-	box-shadow: 0 12px 30px rgba(125, 64, 71, 0.45);
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 	transform: translateY(-2px);
 }
 

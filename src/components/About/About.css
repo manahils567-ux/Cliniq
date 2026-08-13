@@ -149,7 +149,7 @@
 }
 
 .about-value-card:hover {
-	box-shadow: 0 12px 40px rgba(125, 64, 71, 0.12);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 	transform: translateY(-4px);
 }
 
@@ -203,8 +203,8 @@
 .about-doctor-card:hover {
 	transform: translateY(-6px);
 	box-shadow:
-		0 4px 12px rgba(125, 64, 71, 0.08),
-		0 28px 56px -16px rgba(125, 64, 71, 0.18);
+		0 4px 12px rgba(0, 0, 0, 0.08),
+		0 28px 56px -16px rgba(241, 236, 230, 0.18);
 }
 
 .about-doctor-card__media {
@@ -349,14 +349,14 @@
 	text-decoration: none;
 	color: #fff;
 	background: linear-gradient(135deg, var(--c-action) 0%, var(--c-action-hover) 100%);
-	box-shadow: 0 8px 20px rgba(125, 64, 71, 0.28);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .about-doctor-card__cta:hover {
 	color: #fff;
 	transform: translateY(-1px);
-	box-shadow: 0 10px 26px rgba(125, 64, 71, 0.38);
+	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.38);
 }
 
 .about-doctor-card__cta svg {
@@ -372,13 +372,13 @@
 	font-weight: 600;
 	border-radius: 30px;
 	text-decoration: none;
-	box-shadow: 0 8px 20px rgba(125, 64, 71, 0.3);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 	transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .about-cta-btn:hover {
 	color: #fff;
-	box-shadow: 0 12px 30px rgba(125, 64, 71, 0.4);
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 	transform: translateY(-2px);
 }
 
