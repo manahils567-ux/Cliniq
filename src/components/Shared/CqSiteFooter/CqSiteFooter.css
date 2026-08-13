@@ -32,6 +32,9 @@
 
 .cqfoot > * { position: relative; z-index: 1; }
 
+/* Breathing room under the newsletter band when it is present. */
+.cq-news + .cqfoot__grid { margin-top: var(--sp-6); }
+
 /* ── Columns ──────────────────────────────────────────────────────────── */
 .cqfoot__grid {
   display: grid;
@@ -163,17 +166,16 @@
 
 .cqfoot__contact a:hover { color: var(--d-text); }
 
-/* ── Hatched divider (carried over from the floating footer) ──────────── */
+/* ── Divider ──────────────────────────────────────────────────────────── */
+/* Was a 28px hatched band carried over from the floating footer. At this
+   width it read as texture competing with the columns rather than as a
+   separator, so it is a hairline now — the same rule the newsletter band
+   sits on, which keeps the three tiers on one system. */
 .cqfoot__divider {
   max-width: 1180px;
-  height: 28px;
+  height: 1px;
   margin: var(--sp-6) auto;
-  border-radius: var(--r-sm);
-  background-image: repeating-linear-gradient(
-    -45deg,
-    var(--d-border) 0 1px,
-    transparent 1px 9px
-  );
+  background: var(--d-border);
 }
 
 /* ── Bottom bar ───────────────────────────────────────────────────────── */

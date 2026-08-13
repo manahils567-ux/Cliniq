@@ -28,11 +28,12 @@ const PATIENT_LINKS = [
     { label: 'Login', to: '/login' },
 ];
 
+/* No Login here — it is already the last item under For patients, and both
+   pointed at the same route. */
 const DOCTOR_LINKS = [
     { label: 'Appointments', to: '/dashboard' },
     { label: 'Doctor dashboard', to: '/dashboard' },
     { label: 'Blog', to: '/blog' },
-    { label: 'Login', to: '/login' },
 ];
 
 const CqSiteFooter = ({ newsletter = false }) => {
