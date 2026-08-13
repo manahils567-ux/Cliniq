@@ -70,46 +70,6 @@ a:hover { opacity: 0.62; color: inherit; }
 
 
 /* ==========================================================================
-   ANTD CARD SURFACES
-   Cards are surfaces here, not outlined boxes — --c-surface already sits a
-   step above --c-bg, so the fill carries the edge. Done in CSS rather than
-   the theme because antd draws the card border from colorBorderSecondary,
-   which is shared with dividers and control outlines: retiring that token
-   would take the borders off inputs and selects too, and those need the
-   affordance. Scoped to .ant-card so form controls keep theirs.
-   ========================================================================== */
-
-.ant-card { border-color: transparent; }
-/* The inner head rule is the same decoration one level down. */
-.ant-card > .ant-card-head { border-bottom-color: transparent; }
-
-/* Table chrome. The Table theme tokens (borderColor, headerSplitColor) did
-   not clear all of these, so they are forced here — antd injects its own CSS
-   at runtime, which lands after this file, hence !important. The ::before on
-   a header cell is the vertical tick between column labels. */
-.ant-table,
-.ant-table-container,
-.ant-table-content { border: none !important; }
-.ant-table-thead > tr > th,
-.ant-table-tbody > tr > td { border-bottom: none !important; }
-.ant-table-thead > tr > th::before { display: none !important; }
-
-/* Controls lose the outline but gain a fill, so they still read as things
-   you can type into. A control with neither edge nor ground is invisible. */
-.ant-input-affix-wrapper,
-.ant-input,
-.ant-picker,
-.ant-select .ant-select-selector {
-  border-color: transparent !important;
-  background: var(--d-surface-alt) !important;
-}
-.ant-input-affix-wrapper:focus-within,
-.ant-picker-focused,
-.ant-select-focused .ant-select-selector {
-  border-color: var(--d-border-strong) !important;
-}
-
-/* ==========================================================================
    DARK SURFACES
    Add .cq-dark to any section, header or page shell. Everything inside
    inverts. This is how the landing treatment stays scoped instead of
@@ -442,20 +402,49 @@ a:hover { opacity: 0.62; color: inherit; }
    ========================================================================== */
 
 .ant-btn { font-family: var(--font-ui); font-weight: var(--fw-medium); }
-.ant-card { box-shadow: none; border-color: var(--c-border-subtle); }
-.ant-card-head { border-bottom-color: var(--c-border-subtle); }
+.ant-card { box-shadow: none; border-color: transparent; }
+.ant-card-head { border-bottom-color: transparent; }
 .ant-modal-content { box-shadow: var(--sh-xl); }
 .ant-modal-header { border-bottom: 1px solid var(--c-border-subtle); padding-bottom: var(--sp-3); }
 .ant-table-thead > tr > th {
-  background: var(--c-bg-alt) !important;
+  background: transparent !important;
   color: var(--c-text-muted) !important;
   font-weight: var(--fw-semi);
   font-size: var(--fs-xs);
   letter-spacing: var(--tr-wide);
   text-transform: uppercase;
-  border-bottom: 1px solid var(--c-border) !important;
+  /* No rule under the header. The uppercase, letterspaced labels already
+     separate it from the body. */
+  border-bottom: none !important;
 }
-.ant-table-tbody > tr:hover > td { background: var(--c-bg-alt) !important; }
+.ant-table-tbody > tr:hover > td { background: var(--d-surface-alt) !important; }
+
+/* The rest of the table's chrome. Kept in this block deliberately: an earlier
+   attempt put the same rules higher up the file and they were silently
+   overridden by the .ant-table-thead rule above, which re-added the very
+   border they removed. One place only. */
+.ant-table,
+.ant-table-container,
+.ant-table-content { border: none !important; }
+.ant-table-tbody > tr > td { border-bottom: none !important; }
+/* The vertical tick between column labels. */
+.ant-table-thead > tr > th::before { display: none !important; }
+
+/* Controls lose the outline but gain a fill, so they still read as things you
+   can type into — no edge and no ground would make them invisible. */
+.ant-input-affix-wrapper,
+.ant-input,
+.ant-picker,
+.ant-select .ant-select-selector {
+  border-color: transparent !important;
+  background: var(--d-surface-alt) !important;
+}
+/* Focus keeps an edge; without it there is no keyboard focus cue at all. */
+.ant-input-affix-wrapper:focus-within,
+.ant-picker-focused,
+.ant-select-focused .ant-select-selector {
+  border-color: var(--d-border-strong) !important;
+}
 .ant-tag { border-radius: var(--r-full); font-weight: var(--fw-medium); border: none; padding: 0.15em 0.7em; }
 .ant-empty-description { color: var(--c-text-muted); }
 .ant-picker, .ant-select-selector, .ant-input { font-family: var(--font-ui) !important; }

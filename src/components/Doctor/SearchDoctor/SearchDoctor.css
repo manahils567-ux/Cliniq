@@ -105,7 +105,7 @@
 
 .search-sidebar__input.ant-input-affix-wrapper {
 	border-radius: var(--r-md);
-	border-color: var(--n-100);
+	border-color: transparent;
 	padding: 8px 12px;
 }
 
@@ -126,7 +126,7 @@
 
 .search-sidebar__select.ant-select .ant-select-selector {
 	border-radius: var(--r-md);
-	border-color: var(--n-100);
+	border-color: transparent;
 	min-height: 40px;
 	align-items: center;
 }
