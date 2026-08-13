@@ -70,6 +70,20 @@ a:hover { opacity: 0.62; color: inherit; }
 
 
 /* ==========================================================================
+   ANTD CARD SURFACES
+   Cards are surfaces here, not outlined boxes — --c-surface already sits a
+   step above --c-bg, so the fill carries the edge. Done in CSS rather than
+   the theme because antd draws the card border from colorBorderSecondary,
+   which is shared with dividers and control outlines: retiring that token
+   would take the borders off inputs and selects too, and those need the
+   affordance. Scoped to .ant-card so form controls keep theirs.
+   ========================================================================== */
+
+.ant-card { border-color: transparent; }
+/* The inner head rule is the same decoration one level down. */
+.ant-card > .ant-card-head { border-bottom-color: transparent; }
+
+/* ==========================================================================
    DARK SURFACES
    Add .cq-dark to any section, header or page shell. Everything inside
    inverts. This is how the landing treatment stays scoped instead of
